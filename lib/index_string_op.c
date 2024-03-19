@@ -88,11 +88,16 @@ void free_index_string(struct index_string * root ){
 
 //返回char*字符串
 char * cat_string(struct index_string * root){
-	struct index_string * tmp =root;
-	char * s = malloc(100);
-	while(tmp){
-		strcat(s,tmp->s);
-		tmp=tmp->next;
+	struct index_string * tmp1,*tmp2 =root;
+	size_t size = 0 ;
+	while(tmp1){
+		size +=strlen(tmp1->s);
+		tmp1=tmp1->next;
+	}
+	char * s = malloc(size);
+	while(tmp2){
+		strcat(s,tmp2->s);
+		tmp2=tmp2->next;
 	}
 	return s;
 }

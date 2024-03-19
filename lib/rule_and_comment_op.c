@@ -27,11 +27,18 @@ struct comment * join_comment(struct index_string * c, int lineno ){
 
 void print_comment(struct comment * c){
 	char * str = cat_string(c->c);
-	printf("c:%s l:%d \n",str,c->lineno);
+	printf("node_type:COMMENT\n");
+	printf("lineno:%d\n",c->lineno);
+	printf("string:%s\n",str);
+
 }
 
 void  print_rule(struct rule * r){
 	char * src = cat_string(r->s);
 	char * dst = cat_string(r->d);
-	printf("s:%s d:%s l:%d p:%d \n",src,dst,r->lineno,r->priority);
+	printf("node_type:RULE\n");;
+	printf("source:%s\n",src);
+	printf("destination:%s\n",dst);
+	printf("lineno:%d\n",r->lineno);
+	printf("priority:%d\n",r->priority);
 }

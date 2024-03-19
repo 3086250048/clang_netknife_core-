@@ -64,9 +64,6 @@ struct rule_table * join_rule_table(struct rule * r){
 }
 
 
-
-
-
 //添加comment 到表中
 struct comment_table * join_comment_table(struct comment * c){
 	struct comment_table  * tmp =&comment_tab[index_string_hash(cat_string(c->c))%MAX_HASH];
@@ -89,6 +86,23 @@ struct comment_table * join_comment_table(struct comment * c){
 
 }
 
+
+//获取rule_table_entry
+struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab,struct index_string * s){
+	
+	struct rule_table  * tmp =&rule_tab[index_string_hash(cat_string(s))%MAX_HASH];
+	if(!tmp->r) return NULL;
+	return tmp;
+}
+
+
+//获取comment_table_entry
+struct comment_table * get_comment_table_entry(struct comment_table * comment_tab ,struct index_string * c){
+	
+	struct comment_table  * tmp =&comment_tab[index_string_hash(cat_string(c))%MAX_HASH];
+	if(!tmp->c) return NULL;
+	return tmp;
+}
 //获取rule_table地址,重新分配空间给rule_tab
 struct rule_table *  get_rule_table(){
 	 struct rule_table * tmp = rule_tab;
@@ -104,5 +118,30 @@ struct comment_table * get_comment_table(){
 	comment_tab = malloc(sizeof(struct comment_table)*MAX_HASH);
 	return tmp;
 }
+
+//打印rule_table表项
+void print_rule_table_entry(struct rule_table * rule_tab){
+	printf("node_type:RULE_TABLE\n");
+	while(rule_tab)	{
+		print_rule(rule_tab->r);
+		rule_tab=rule_tab->dup_r;
+	}	
+}
+
+
+//打印comment表项
+void print_comment_table_entry(struct comment_table * comment_tab){
+	printf("node_type:COMMENT_TABLE\n");
+	while(comment_tab)	{
+		print_comment(comment_tab->c);
+		comment_tab=comment_tab->dup_c;
+	}	
+}
+
+
+
+
+
+
 
 

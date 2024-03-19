@@ -83,17 +83,23 @@ struct comment_table{
 struct rule_table * join_rule_table(struct rule * r);
 //添加comment 到表中
 struct comment_table * join_comment_table(struct comment * c);
+//获取rule_table_entry
+struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab ,struct index_string * s);
+//获取comment_table_entry
+struct comment_table * get_comment_table_entry(struct comment_table * comment_tab ,struct index_string * c);
 //获取rule_table地址,重新分配空间给rule_tab
 struct rule_table *  get_rule_table();
 //获取comment_table地址,重新分配空间给comment_tab
 struct comment_table * get_comment_table();
-
-
+//打印rule_table 表项
+void print_rule_table_entry(struct rule_table * rule_tab);
+//打印comment表项
+void print_comment_table_entry(struct comment_table * comment_tab);
 
 
 struct regx {
 	int node_type;
-	char * exp ;
+	struct index_string * exp ;
 	struct regx * next;
 };
 
@@ -101,8 +107,8 @@ struct include {
 	int node_type;
 	int s_lineno ;
 	int d_lineno ;
-	char * s_comment;
-	char * d_comment;
+	struct index_string  * s_comment;
+	struct index_string  * d_comment;
 	struct include * next ;
 };
 
@@ -110,8 +116,8 @@ struct exclude {
 	int node_type ;
 	int s_lineno;
 	int d_lineno;
-	char * s_comment ;
-	char * d_comment ;
+	struct index_string * s_comment ;
+	struct index_string * d_comment ;
 	struct exclude * next;
 };
 
@@ -127,15 +133,15 @@ struct import_rule {
 
 
 //添加正则表达式
-struct regx * join_regx(char * exp);
+struct regx * join_regx(struct index_string * exp);
 //获取正则表达式链表根节点
 struct regx * get_regx();
 //添加include表达式
-struct include * join_include(int s_lineno ,int d_lineno ,char * s_comment ,char *d_comment);
+struct include * join_include(int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment);
 //获取include表达式根节点
 struct include * get_include();
 //添加exclude表达式
-struct exclude * join_exclude(int s_lineno,int d_lineno , char * s_comment , char * d_comment);
+struct exclude * join_exclude(int s_lineno,int d_lineno , struct index_string  * s_comment ,struct index_string * d_comment);
 //获取exclude表达式根节点
 struct exclude * get_exclude();
 //添加 import_rule
