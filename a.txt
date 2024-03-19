@@ -1,0 +1,23 @@
+"translation规则外注释测试"
+trans huawei_cisco(confilet_first_org,){
+
+"translation规则内 注释测试_1"
+
+display ;
+
+
+
+@STDIN include r"^正则测试",r"^jadkb$ ","import内注释测试1" to 213,1 to "import内 1"; 
+
+
+display => show;		"trans 规则内注释测试_2"
+show arp =12> arp -a; 	
+display ip table \n \ \n routing =>  show ip table ; 
+bgp (as_domain)  => route bgp (as_domain);					  
+ospf (process_id) => ospf 20 \n network (process_id) ;				
+network (peer_address) (mask) => network (peer_address) 0.0.0.0;
+
+
+
+
+} 
