@@ -4,23 +4,36 @@
 #include <stdio.h>
 
 
-#define MAX_HASH 9999
-struct rule_table  *rule_tab = malloc(sizeof(struct rule_table) * MAX_HASH);
-struct comment_table *comment_tab = malloc(sizeof(struct comment_table) *MAX_HASH);
+
+
 
 static void rule_reverse(struct rule_table * root){
 	if(!root->dup_r )  return ;
-	index_str * pre,* cur,* nex;
+	struct rule_table * pre,* cur,* nex;
 	pre=NULL;
 	cur=root;
 	while(cur!=NULL){
-		nex=cur->next;
-		cur->next = pre;
+		nex=cur->dup_r;
+		cur->dup_r = pre;
 		pre=cur;
 		cur=nex;
 	}
 	root = pre;
 }
+static void comment_reverse(struct comment_table * root){
+	if(!root->dup_c )  return ;
+	struct comment_table * pre,* cur,* nex;
+	pre=NULL;
+	cur=root;
+	while(cur!=NULL){
+		nex=cur->dup_c;
+		cur->dup_c = pre;
+		pre=cur;
+		cur=nex;
+	}
+	root = pre;
+}
+
 
 static unsigned int index_string_hash(char * index_string){
 	unsigned int hash = 0;
@@ -30,13 +43,13 @@ static unsigned int index_string_hash(char * index_string){
 }
 
 //添加rule到表中
-struct rule * join_rule_table(struct rule * r){
-	struct rule_table  * tmp = rule_tab[index_string_hash(r->s)%MAX_HASH];
+struct rule_table * join_rule_table(struct rule * r){
+	struct rule_table  * tmp = &rule_tab[index_string_hash(cat_string(r->s))%MAX_HASH];
 	    if(tmp->r){
 			struct rule_table * dup = malloc(sizeof(struct rule_table));
 			dup->node_type = RULE_TABLE;
-			dup ->  rule = r ;
-			dup -> dup_r  = tmp;
+			dup->r = r ;
+			dup->dup_r  = tmp;
 			tmp = dup ;
 			rule_reverse(tmp);		
 			return tmp;
@@ -52,23 +65,25 @@ struct rule * join_rule_table(struct rule * r){
 
 
 
+
+
 //添加comment 到表中
-struct comment * join_comment_table(struct comment * c){
-	struct comment_table  * tmp = comment_tab[index_string_hash(c->s)%MAX_HASH];
+struct comment_table * join_comment_table(struct comment * c){
+	struct comment_table  * tmp =&comment_tab[index_string_hash(cat_string(c->c))%MAX_HASH];
 			if(tmp->c){
 				struct comment_table * dup = malloc(sizeof(struct comment_table));
 				dup->node_type = COMMENT_TABLE;
-				dup ->  c = c ;
-				dup -> dup_c  = tmp;
+				dup->c = c ;
+				dup->dup_c  = tmp;
 				tmp = dup ;
-				reverse(tmp);		
+				comment_reverse(tmp);		
 				return tmp;
 			}
 
 			if(!tmp->c){
 				tmp->node_type =COMMENT_TABLE;
 				tmp->c = c;
-				tmp->dup_r = NULL;
+				tmp->dup_c = NULL;
 				return tmp;	
 			}
 
@@ -89,8 +104,5 @@ struct comment_table * get_comment_table(){
 	comment_tab = malloc(sizeof(struct comment_table)*MAX_HASH);
 	return tmp;
 }
-
-
-
 
 

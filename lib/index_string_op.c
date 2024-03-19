@@ -3,7 +3,7 @@
 #include "netknife.h"
 #include <stdio.h>
 
-static struct  index_str * index_str_root = NULL;
+static struct  index_string  * index_str_root = NULL;
 
 
 //反转
@@ -11,7 +11,7 @@ static  void reverse_index_string(){
 	//如果只存在一个节点则直接退出
 	if(!index_str_root->next) return ;
 
-	index_str * pre,* cur,* nex;
+	struct  index_string * pre,* cur,* nex;
 	pre=NULL;
 	cur=index_str_root;
 	while(cur!=NULL){
@@ -28,13 +28,13 @@ static void  drop_index_string_htempty(){
 		//如果只存在一个节点,则直接退出
 		if(!index_str_root->next  ) return ;
 
-		struct index_str * tmp = index_str_root ;
+		struct index_string * tmp = index_str_root ;
 		if(!(tmp->s) && tmp->next->s ){
 			index_str_root = tmp->next;
 			free(tmp);
-			struct index_str * tmp = index_str_root;
+			struct index_string * tmp = index_str_root;
 		}
-		index_str * prev ;
+		struct index_string * prev ;
 		while(tmp->next){
 			prev = tmp ;
 			tmp=tmp->next;
@@ -47,23 +47,18 @@ static void  drop_index_string_htempty(){
 }
 //添加字符到index_str 
 struct index_string * join_index_string(char * str){	
-   	struct index_str * tmp = malloc(sizeof(struct index_str)) ;
-	tmp->node_type=INDEX_STRIGN;
+   	struct index_string * tmp = malloc(sizeof(struct index_string)) ;
+	tmp->node_type=INDEX_STRING;
 	tmp->s=str;
 	tmp->next = index_str_root;
-	index_str_root = tmp ;
-
-	
-	reverse_index_string();
-	drop_index_string_htempty();
-	
+	index_str_root = tmp ;	
 	return tmp;
 }
 
 
 //打印ndex_string
 void print_index_string(){
-    struct index_str * tmp =index_str_root;
+    struct index_string * tmp =index_str_root;
 	while(tmp != NULL){
 		printf("%s",tmp->s);
 		tmp=tmp->next;
@@ -72,10 +67,14 @@ void print_index_string(){
 }
 //获取index_string,并让根指向NULL
 struct index_string * get_index_string( ){
+	reverse_index_string();
+	drop_index_string_htempty();
 	struct index_string * tmp = index_str_root;
 	index_str_root = NULL;
 	return tmp;
 }
+
+
 
 //释放index_string
 void free_index_string(struct index_string * root ){
@@ -84,6 +83,16 @@ void free_index_string(struct index_string * root ){
 		root=root->next;
 		free(tmp);
 	}
+	root=NULL;
 }
 
-
+//返回char*字符串
+char * cat_string(struct index_string * root){
+	struct index_string * tmp =root;
+	char * s = malloc(100);
+	while(tmp){
+		strcat(s,tmp->s);
+		tmp=tmp->next;
+	}
+	return s;
+}

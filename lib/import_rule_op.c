@@ -9,11 +9,9 @@ static struct include * include_root = NULL;
 static struct exclude * exclude_root = NULL;
 static struct import_rule * import_rule_root = NULL;
 
-
-
 struct regx * join_regx(char * exp){
 	struct regx * tmp = malloc(sizeof(struct regx));
-	tmp->nodetype = REGX;
+	tmp->node_type = REGX;
 	tmp->exp = exp ;
 	tmp->next = regx_root;
 	regx_root = tmp;
@@ -59,7 +57,7 @@ struct exclude * join_exclude(int s_lineno ,int d_lineno ,char * s_comment ,char
 }
 
 struct exclude * get_exclude(){
-	struct include * tmp = exclude_root ;
+	struct exclude * tmp = exclude_root ;
 	exclude_root = NULL;
 	return tmp ;
 }

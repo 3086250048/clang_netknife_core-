@@ -3,7 +3,6 @@
 #include "netknife.h"
 #include <stdio.h>
 
-static struct trans * trans_tab = malloc(sizeof(struct trans)*MAX_HASH);
 
 struct trans * join_trans(int lineno , char * trans_name , struct rule_table * rule_tab , struct comment_table * comment_tab ,struct import_rule * import_rule_chain ){
 	struct trans * tmp = malloc(sizeof(struct trans));
@@ -16,9 +15,6 @@ struct trans * join_trans(int lineno , char * trans_name , struct rule_table * r
 	return tmp;
 }
 
-
-
-
 static unsigned int trans_index_hash(char * trans_name,char * filename){
 	char *  trans_index = strcat(trans_name , filename);
 	unsigned int hash = 0;
@@ -29,7 +25,7 @@ static unsigned int trans_index_hash(char * trans_name,char * filename){
 
 //添加rule到表中
 struct trans  * join_trans_table(struct  trans * trans){
-	struct rule_table  * tmp = trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
+	struct trans  * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
 		if(!tmp->trans_name){
 			memcpy(tmp,trans,sizeof(struct trans));
 			free(trans);
