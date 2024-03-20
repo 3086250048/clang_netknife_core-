@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "netknife.h"
 
-
 int main(){
 	//初始化表
 	init();

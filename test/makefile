@@ -4,6 +4,7 @@ dst = $(patsubst %.c,%,$(src))
 
 ALL:$(dst)
 
-%:%.c 
-		gcc $< -L ../lib -lnetknife -I ../lib -o $@
+%:%.c
+	gcc  $<  -I ../lib -L ../lib -l netknife -o $@ 
+
 

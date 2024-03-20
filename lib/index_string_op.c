@@ -57,8 +57,8 @@ struct index_string * join_index_string(char * str){
 
 
 //打印ndex_string
-void print_index_string(){
-    struct index_string * tmp =index_str_root;
+void print_index_string(struct index_string * root){
+    struct index_string * tmp =root;
 	while(tmp != NULL){
 		printf("%s",tmp->s);
 		tmp=tmp->next;
@@ -86,18 +86,19 @@ void free_index_string(struct index_string * root ){
 	root=NULL;
 }
 
+
 //返回char*字符串
 char * cat_string(struct index_string * root){
-	struct index_string * tmp1,*tmp2 =root;
-	size_t size = 0 ;
-	while(tmp1){
-		size +=strlen(tmp1->s);
-		tmp1=tmp1->next;
-	}
+	struct index_string * tmp = root ;
+	int size=0;
+	while(tmp){
+		size+=strlen(tmp->s);
+		tmp=tmp->next; 
+	};
 	char * s = malloc(size);
-	while(tmp2){
-		strcat(s,tmp2->s);
-		tmp2=tmp2->next;
+	while(root){
+		strcat(s,root->s);
+		root=root->next;
 	}
 	return s;
 }

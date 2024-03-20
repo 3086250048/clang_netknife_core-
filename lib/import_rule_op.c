@@ -45,6 +45,7 @@ struct include * join_include(int s_lineno ,int d_lineno ,struct index_string * 
 	 tmp->s_comment = s_comment;
 	 tmp->d_comment = d_comment ;
 	 tmp->next = include_root ;
+	 include_root=tmp;
 	 return tmp ;
 }
 
@@ -79,6 +80,7 @@ struct exclude * join_exclude(int s_lineno ,int d_lineno ,struct index_string  *
 	 tmp->s_comment = s_comment;
 	 tmp->d_comment = d_comment;
 	 tmp->next = exclude_root ;
+	 exclude_root = tmp;
 	 return tmp ;
 }
 
@@ -105,6 +107,7 @@ struct  import_rule * join_import_rule(char * import_name , int lineno,struct re
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT;
 	tmp->lineno = lineno ;
+	tmp->import_name=import_name;
 	tmp->reg = reg ;
 	tmp->inc =inc;
 	tmp->exc = exc;
@@ -125,7 +128,7 @@ void print_import_rule(struct import_rule * import_rule_root){
 	struct import_rule * tmp = import_rule_root;
 	while(tmp){
 		printf("node_type:IMPORT\n");
-		printf("import_name:%d\n",tmp->import_name);
+		printf("import_name:%s\n",tmp->import_name);
 		printf("lineno:%d\n",tmp->lineno);
 		print_regx(tmp->reg);
 		print_include(tmp->inc);
@@ -133,5 +136,4 @@ void print_import_rule(struct import_rule * import_rule_root){
 		tmp = tmp->next;
 	}
 }
-
 

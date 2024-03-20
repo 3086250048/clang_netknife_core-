@@ -38,7 +38,7 @@ struct index_string * get_index_string();
 //释放索引字符串
 void free_index_string(struct index_string * index_str_root);
 //打印当前索引字符串
-void print_index_string();
+void print_index_string(struct index_string * index_str_root);
 //合并index_string 
 char * cat_string(struct index_string * root);
 
@@ -149,7 +149,14 @@ struct import_rule * join_import_rule(char * import_name ,int lineno ,struct reg
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
 
-
+//打印regx
+void print_regx(struct regx * regx_root);
+//打印include
+void print_include(struct include * include_root);
+//打印exclude
+void print_exclude(struct exclude * exclude_root);
+//打印import_rule
+void print_import_rule(struct import_rule * import_rule_root);
 
 
 struct trans {
