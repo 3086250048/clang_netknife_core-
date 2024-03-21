@@ -9,7 +9,7 @@ void init();
 #define MAX_HASH 9999
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
-extern struct trans * trans_tab ;
+extern struct trans_table * trans_tab ;
 
 enum node_type {
 	INDEX_STRING =1,
@@ -169,10 +169,15 @@ struct trans {
 	struct import_rule * import_rule_chain ;
 };
 
+struct trans_table{
+	struct trans * trans;
+};
+
 //添加trans
 struct trans * join_trans(
-	int lineno , 
+	char * filename ,
 	char * trans_name , 
+	int lineno , 
 	struct rule_table * rule_tab ,
 	struct comment_table * comment_tab ,
 	struct import_rule * import_rule_chain 
@@ -182,8 +187,13 @@ struct trans * join_trans(
 //添加到trans_table
 struct trans * join_trans_table(struct trans * trans);
 
+//获取trans_tabele 表项
+struct trans * get_trans_table_entry(struct trans_table * trans_tab,char * filename , char * trans_name);
 //获取trans_table
-struct trans * get_trans_table();
+struct trans_table * get_trans_table();
+//打印trans表项
+void print_trans_table_entry(struct trans * trans);
 
 #endif
+
 

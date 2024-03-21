@@ -50,6 +50,7 @@ int main(){
 
 	struct comment_table * comment_tab_entry_1 = get_comment_table_entry(comment_tab,str1);
 	struct comment_table * comment_tab_entry_2 = get_comment_table_entry(comment_tab,str2);
+
 	
 	//打印获取的表项
 	print_rule_table_entry(rule_tab_entry_1);
