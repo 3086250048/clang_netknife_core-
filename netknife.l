@@ -1,5 +1,4 @@
 %option  noyywrap  nodefault yylineno
-
 %{
 	#include <stdlib.h>
 	#include <string.h>
@@ -11,28 +10,25 @@
 %x TRANS_RULE TRANS_PRIORITY REGX TRANS_COMMENT TRANS_RULE_COMMENT TRANS_IMPORT_COMMENT TRANS_IMPORT
 %%
 trans { return TRANS;}
-\" { BEGIN TRANS_COMMENT ; return COMMENT_START;}
+\" { BEGIN TRANS_COMMENT ;}
 "{" {  BEGIN TRANS_RULE; return LBRACE;} 
 [\x80-\xFFa-zA-Z0-9_]+ { yylval.s=strdup(yytext ); return STRING;} 
 [ \t] {} 
-\n {}
-. {}
+.|\n {}
 
 
-<TRANS_COMMENT>\" { BEGIN 0;return COMMENT_END;}
-<TRANS_COMMENT>[ \t\n]+ {  yylval.s=NULL ;return EMPTY; }
-<TRANS_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ {  yylval.s=strdup(yytext) ;return STRING;} 
-<TRANS_COMMENT>. {}
+<TRANS_COMMENT>\" { BEGIN 0;}
+<TRANS_COMMENT>.|\n {}
 
 <TRANS_RULE_COMMENT>\" { BEGIN TRANS_RULE;return COMMENT_END;}
-<TRANS_RULE_COMMENT>[ \t\n]+ { yylval.s=NULL;return EMPTY; }
+<TRANS_RULE_COMMENT>[ \t]+ { yylval.s=NULL;return EMPTY; }
 <TRANS_RULE_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ { yylval.s=strdup(yytext) ;return STRING; } 
-<TRANS_RULE_COMMENT>. {}
+<TRANS_RULE_COMMENT>.|\n {}
 
 <TRANS_IMPORT_COMMENT>\" { BEGIN TRANS_IMPORT; return COMMENT_END;}
-<TRANS_IMPORT_COMMENT>[ \t\n]+ { yylval.s=NULL;return EMPTY;}
+<TRANS_IMPORT_COMMENT>[ \t]+ { yylval.s=NULL;return EMPTY;}
 <TRANS_IMPORT_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ { yylval.s= strdup(yytext) ;return STRING ; } 
-<TRANS_IMPORT_COMMENT>. {}
+<TRANS_IMPORT_COMMENT>.|\n {}
 
 <REGX>\" { BEGIN TRANS_IMPORT;return REGX_END;}
 <REGX>[^"\x0A]+ { yylval.s= strdup(yytext) ;return STRING ; }
