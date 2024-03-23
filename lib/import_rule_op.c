@@ -37,8 +37,9 @@ void print_regx(struct regx * regx_root){
 }
 
 
-struct include * join_include(int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment ){
+struct include * join_include(struct regx * regx , int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment ){
 	 struct include * tmp =  malloc(sizeof(struct include));
+	 tmp->regx =regx ;
 	 tmp->node_type = INCLUDE ;
 	 tmp->s_lineno = s_lineno;
 	 tmp->d_lineno = d_lineno ;
@@ -60,6 +61,7 @@ void print_include(struct include * include_root){
 	 struct include * tmp = include_root ;
 	 while(tmp){
 	 	printf("node_type:INCLUDE\n");
+		printf("regx:%s\n",tmp->regx);
 		printf("s_lineno:%d\n",tmp->s_lineno);
 		printf("d_lineno:%d\n",tmp->d_lineno);
 		printf("s_comment:%s\n",cat_string(tmp->s_comment));
@@ -72,8 +74,9 @@ void print_include(struct include * include_root){
 
 
 
-struct exclude * join_exclude(int s_lineno ,int d_lineno ,struct index_string  * s_comment ,struct index_string  * d_comment ){
+struct exclude * join_exclude(struct regx * regx ,int s_lineno ,int d_lineno ,struct index_string  * s_comment ,struct index_string  * d_comment ){
 	 struct exclude * tmp =  malloc(sizeof(struct exclude));
+	 tmp->regx =regx ;
 	 tmp->node_type = EXCLUDE ;
 	 tmp->s_lineno = s_lineno;
 	 tmp->d_lineno = d_lineno ;
@@ -94,6 +97,7 @@ void print_exclude(struct exclude * exclude_root){
 	 struct exclude * tmp = exclude_root ;
 	 while(tmp){
 	 	printf("node_type:EXCLUDE\n");
+		printf("regx:%s\n",tmp->regx);
 		printf("s_lineno:%d\n",tmp->s_lineno);
 		printf("d_lineno:%d\n",tmp->d_lineno);
 		printf("s_comment:%s\n",cat_string(tmp->s_comment));
@@ -103,14 +107,12 @@ void print_exclude(struct exclude * exclude_root){
 
 }
 
-struct  import_rule * join_import_rule(char * import_name , int lineno,struct regx * reg ,struct include * inc , struct exclude * exc){
+struct  import_rule * join_import_rule(char * import_name , int lineno,struct include * inc , struct exclude * exc){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT;
 	tmp->lineno = lineno ;
 	tmp->import_name=import_name;
-	tmp->reg = reg ;
 	tmp->inc =inc;
-	tmp->exc = exc;
 	tmp->next = import_rule_root ;
 	import_rule_root = tmp ;
 	return  tmp ;
@@ -130,7 +132,6 @@ void print_import_rule(struct import_rule * import_rule_root){
 		printf("node_type:IMPORT\n");
 		printf("import_name:%s\n",tmp->import_name);
 		printf("lineno:%d\n",tmp->lineno);
-		print_regx(tmp->reg);
 		print_include(tmp->inc);
 		print_exclude(tmp->exc);
 		tmp = tmp->next;

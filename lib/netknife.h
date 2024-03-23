@@ -109,6 +109,7 @@ struct include {
 	int d_lineno ;
 	struct index_string  * s_comment;
 	struct index_string  * d_comment;
+	struct regx * regx;
 	struct include * next ;
 };
 
@@ -118,6 +119,7 @@ struct exclude {
 	int d_lineno;
 	struct index_string * s_comment ;
 	struct index_string * d_comment ;
+	struct regx * regx ;
 	struct exclude * next;
 };
 
@@ -125,7 +127,6 @@ struct import_rule {
 	int node_type ;
 	char * import_name ;
 	int lineno;
-	struct regx * reg;
 	struct include * inc;
 	struct exclude * exc;
 	struct import_rule *  next ;
@@ -137,15 +138,15 @@ struct regx * join_regx(struct index_string * exp);
 //获取正则表达式链表根节点
 struct regx * get_regx();
 //添加include表达式
-struct include * join_include(int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment);
+struct include * join_include(struct regx * regx,int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment);
 //获取include表达式根节点
 struct include * get_include();
 //添加exclude表达式
-struct exclude * join_exclude(int s_lineno,int d_lineno , struct index_string  * s_comment ,struct index_string * d_comment);
+struct exclude * join_exclude(struct regx * regx ,int s_lineno,int d_lineno , struct index_string  * s_comment ,struct index_string * d_comment);
 //获取exclude表达式根节点
 struct exclude * get_exclude();
 //添加 import_rule
-struct import_rule * join_import_rule(char * import_name ,int lineno ,struct regx * reg ,struct include *inc ,struct exclude * exc);
+struct import_rule * join_import_rule(char * import_name ,int lineno  ,struct include *inc ,struct exclude * exc);
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
 

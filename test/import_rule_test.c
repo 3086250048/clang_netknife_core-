@@ -15,26 +15,27 @@ int main(){
 		struct regx * r =  get_regx();
 		print_regx(r);
 	//include 
-		join_include(100,200,NULL,NULL);
+	
+		join_include(r,100,200,NULL,NULL);
 		join_index_string("huawei_to_cisco");
 		struct index_string * s1 = get_index_string();
 		join_index_string("cisco_to_huawei");
 		struct index_string * s2 = get_index_string();
-		join_include(NULL,NULL,s1,s2);
+		join_include(r,NULL,NULL,s1,s2);
 		struct include * i = get_include();
 		print_include(i);
 	//exclude
-		join_exclude(100,200,NULL,NULL);
+		join_exclude(r,100,200,NULL,NULL);
 		join_index_string("huawei_to_exclude");
 		struct index_string * s3 = get_index_string();
 		join_index_string("cisco_to_exlcude");
 		struct index_string * s4 = get_index_string();
-		join_exclude(NULL,NULL,s1,s2);
+		join_exclude(r,NULL,NULL,s1,s2);
 		struct exclude * e = get_exclude();
 		print_exclude(e);
 	//import_rule 
-	    join_import_rule("CISCO_2730_TEST",100,r,i,e);
-	    join_import_rule("HUAWEI_2730_TEST",100,r,i,e);
+	    join_import_rule("CISCO_2730_TEST",100,i,e);
+	    join_import_rule("HUAWEI_2730_TEST",100,i,e);
 		struct import_rule * import_rule_root = get_import_rule();
 		print_import_rule(import_rule_root);
 
