@@ -74,7 +74,9 @@ extern int yydebug;
     EQ = 275,                      /* EQ  */
     GT = 276,                      /* GT  */
     SEM = 277,                     /* SEM  */
-    LINE_BREAK = 278               /* LINE_BREAK  */
+    LINE_BREAK = 278,              /* LINE_BREAK  */
+    TRANS_IMPORT_COMMENT_START = 279, /* TRANS_IMPORT_COMMENT_START  */
+    TRANS_IMPORT_COMMENT_END = 280 /* TRANS_IMPORT_COMMENT_END  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -87,9 +89,20 @@ union YYSTYPE
 
 	int d;
 	char * s;
-    ast * a;
+	struct index_string * str;
+	struct rule * r;
+	struct comment * c;
+	struct rule_table * rule_tab;
+	struct comment_table * comment_tab;	
+	struct regx * reg;
+	struct range * ran;
+	struct include * inc ;
+	struct exclude * exc ;
+	struct import_rule * import_rule_chain;
+	struct trans * trans;
+	struct trans_table * trans_tab ;					  
 
-#line 93 "netknife.tab.h"
+#line 106 "netknife.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

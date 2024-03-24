@@ -29,12 +29,12 @@ static unsigned int trans_index_hash(char * filename,char * trans_name){
 }
 
 //添加rule到表中
-struct trans  * join_trans_table(struct  trans * trans){	
+struct trans_table   * join_trans_table(struct  trans * trans){	
 	struct trans_table * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
 			
 		if(!tmp->trans){
 			tmp->trans = trans;
-			return trans;
+			return  tmp ;
 		}else{
 			printf("trans_table hash confilct\n");
 		}

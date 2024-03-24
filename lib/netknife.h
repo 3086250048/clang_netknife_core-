@@ -194,7 +194,7 @@ struct trans * join_trans(
 
 	
 //添加到trans_table
-struct trans * join_trans_table(struct trans * trans);
+struct trans_table * join_trans_table(struct trans * trans);
 
 //获取trans_tabele 表项
 struct trans * get_trans_table_entry(struct trans_table * trans_tab,char * filename , char * trans_name);

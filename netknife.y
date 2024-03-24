@@ -27,34 +27,38 @@
 %token <d> NUMBER 
 %token <s> STRING EMPTY
 %token TRANS IMPORT OUTPUT IN COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM LINE_BREAK TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END 
-%type <str> index_string_exp const_comment_exp;
-%type <rule_tab> rule_table_exp;
-%type <comment_tab> comment_table_exp;
-%type <reg> regx_exp;
-%type <ran> range_exp;
-%type <inc> include_exp;
-%type <exc> exclude_exp;
-%type <import_rule_chain> import_rule_chain_exp;
-%type <trans> trans_exp;
-%type <trans_tab> trans_table_exp;
+%type <str> index_string_exp const_comment_exp
+%type <rule_tab> rule_table_exp
+%type <comment_tab> comment_table_exp
+%type <reg> regx_exp
+%type <ran> range_exp
+%type <inc> include_exp
+%type <exc> exclude_exp
+%type <import_rule_chain> import_rule_chain_exp
+%type <trans> trans_exp trans_body_exp
+%type <trans_tab> trans_table_exp
 %%
 
 
-trans_exp : TRANS STRING SEM { join_trans("TEST",$2,yylineno,NULL,NULL,NULL);}
-		  | TRANS STRING LBRACE RBRACE SEM {join_trans("TEST",$2,yylineno,NULL,NULL,NULL);}
-		  | TRANS STRING LBRACE rule_table_exp RBRACE {join_trans("TEST",$2,yylineno,$4,NULL,NULL);}
-		  | TRANS STRING LBRACR comment_table_exp RBRACE {join_trans("TEST",$2,yylineno,NULL,$4,NULL);}
-	      | TRANS STRING LBRACE import_rule_exp  
+trans_table_exp : {$$=join_trans_table(NULL);}
+				| trans_table_exp trans_exp {$$=join_trans_table($1); print_trans_table_entry($$->trans);}
 
+trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans("TEST",$2,yylineno,NULL,NULL,NULL); }
+		  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans("TEST",$2,get_rule_table(),get_comment_table(),get_import_rule()) ;}
 
+trans_body_exp : rule_table_exp{$$=NULL;} 
+			   | comment_table_exp {$$=NULL;} 
+			   | import_rule_chain_exp{$$=NULL;}
+			   | trans_body_exp rule_table_exp {$$=NULL;} 
+			   | trans_body_exp comment_table_exp {$$=NULL;}
+			   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
+			   ;
 
-
-
-import_rule_chain_exp : IMPORT STRING SEM {  } 
-					  |	IMPORT STRING include_exp SEM {}
-					  | IMPORT STRING exclude_exp SEM {}
-					  | IMPORT STRING include_exp exclude_exp SEM {}
-					  | IMPORT STRING exclude_exp include_exp SEM {} 
+import_rule_chain_exp : IMPORT STRING SEM { $$=join_import_rule($2,yylineno,NULL,NULL);} 
+					  |	IMPORT STRING include_exp SEM {$$=join_import_rule($2,yylineno,$3,NULL);}
+					  | IMPORT STRING exclude_exp SEM {$$=join_import_rule($2,yylineno,NULL,$3);}
+					  | IMPORT STRING include_exp exclude_exp SEM {$$=join_import_rule($2,yylineno,$3,$4);}
+					  | IMPORT STRING exclude_exp include_exp SEM {$$=join_import_rule($2,yylineno,$4,$3);} 
 					  ;
 
 exclude_exp : EXCLUDE regx_exp   { $$=join_exclude($$,get_regx(),NULL);}
@@ -81,10 +85,10 @@ range_exp : NUMBER { $$=join_range($1); }
 		  | range_exp COMMA const_comment_exp TO const_comment_exp {$$=join_range(0,0,$3,$5);}
 
 
-regx_exp : REGX_START index_string REGX_END {
+regx_exp : REGX_START index_string_exp REGX_END {
 		   $$=join_regx(string($2));
 		 }
-		 | regx_exp REGX_START index_string REGX_END {
+		 | regx_exp REGX_START index_string_exp REGX_END {
 		   $$=join_regx(string($3));
 		 }
 
@@ -92,7 +96,7 @@ regx_exp : REGX_START index_string REGX_END {
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=string($2); }
 
 comment_table_exp : COMMENT_START index_string_exp COMMENT_END { 
-				  	 $$=join_comment_table(join_comment(string($1),yylineno));
+				  	 $$=join_comment_table(join_comment(string($2),yylineno));
 				  }
 				  ;
 
