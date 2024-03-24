@@ -5,8 +5,7 @@
 
 
 static struct regx * regx_root = NULL;
-static struct include * include_root = NULL;
-static struct exclude * exclude_root = NULL;
+static struct range * range_root = NULL;
 static struct import_rule * import_rule_root = NULL;
 
 struct regx * join_regx(struct index_string * exp){
@@ -37,31 +36,31 @@ void print_regx(struct regx * regx_root){
 }
 
 
-struct include * join_include(struct regx * regx , int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment ){
-	 struct include * tmp =  malloc(sizeof(struct include));
-	 tmp->regx =regx ;
-	 tmp->node_type = INCLUDE ;
-	 tmp->s_lineno = s_lineno;
-	 tmp->d_lineno = d_lineno ;
-	 tmp->s_comment = s_comment;
-	 tmp->d_comment = d_comment ;
-	 tmp->next = include_root ;
-	 include_root=tmp;
-	 return tmp ;
-}
-
-
-struct include * get_include(){
-	struct include * tmp = include_root ;
-	include_root = NULL;
+struct range * join_range(int s_lineno ,int d_lineno ,struct index_string * s_comment,struct index_string * d_comment )
+{
+	struct range * tmp = malloc(sizeof(struct range));
+	tmp->node_type = RANGE;
+	tmp->s_lineno = s_lineno;
+	tmp->d_lineno = d_lineno;
+	tmp->s_comment = s_comment;
+	tmp->d_comment = d_comment;
+	tmp->next = range_root;
+	range_root = tmp;
 	return tmp ;
 }
 
-void print_include(struct include * include_root){
-	 struct include * tmp = include_root ;
+
+struct range * get_range(){
+	struct range * tmp = range_root ;
+	range_root = NULL;
+	return tmp ;
+}
+
+
+void print_range(struct range * range_root){
+	 struct range * tmp = range_root ;
 	 while(tmp){
-	 	printf("node_type:INCLUDE\n");
-		print_regx(tmp->regx);
+	 	printf("node_type:RANGE\n");
 		printf("s_lineno:%d\n",tmp->s_lineno);
 		printf("d_lineno:%d\n",tmp->d_lineno);
 		printf("s_comment:%s\n",cat_string(tmp->s_comment));
@@ -72,38 +71,45 @@ void print_include(struct include * include_root){
 }
 
 
-
-
-struct exclude * join_exclude(struct regx * regx ,int s_lineno ,int d_lineno ,struct index_string  * s_comment ,struct index_string  * d_comment ){
-	 struct exclude * tmp =  malloc(sizeof(struct exclude));
-	 tmp->regx =regx ;
-	 tmp->node_type = EXCLUDE ;
-	 tmp->s_lineno = s_lineno;
-	 tmp->d_lineno = d_lineno ;
-	 tmp->s_comment = s_comment;
-	 tmp->d_comment = d_comment;
-	 tmp->next = exclude_root ;
-	 exclude_root = tmp;
-	 return tmp ;
+struct include * join_include(struct include *include , struct regx * regx , struct range * range ){
+	if(!include){
+	 	include  =  malloc(sizeof(struct include));
+	}
+	 include->node_type = INCLUDE ;
+	 include->regx =regx ;
+	 include->range =range;
+	 return include ;
 }
 
-struct exclude * get_exclude(){
-	struct exclude * tmp = exclude_root ;
-	exclude_root = NULL;
-	return tmp ;
+
+
+void print_include(struct include * include){
+	 struct include * tmp = include ;
+	 printf("node_type:INCLUDE\n");
+	 print_regx(tmp->regx);
+	 print_range(tmp->range);
+
 }
 
-void print_exclude(struct exclude * exclude_root){
-	 struct exclude * tmp = exclude_root ;
-	 while(tmp){
+
+
+
+struct exclude * join_exclude(struct exclude * exclude ,struct regx * regx ,struct range * range ){
+	 if(!exclude){
+   	 	exclude  =  malloc(sizeof(struct exclude));
+	 }
+	 exclude->node_type = EXCLUDE ;
+	 exclude->regx =regx ;
+	 exclude->range=range;
+	 return exclude ;
+}
+
+
+void print_exclude(struct exclude * exclude){
+	 struct exclude * tmp = exclude ;
 	 	printf("node_type:EXCLUDE\n");
 		print_regx(tmp->regx);
-		printf("s_lineno:%d\n",tmp->s_lineno);
-		printf("d_lineno:%d\n",tmp->d_lineno);
-		printf("s_comment:%s\n",cat_string(tmp->s_comment));
-		printf("d_comment:%s\n",cat_string(tmp->d_comment));
-		tmp=tmp->next;
-	 }
+		print_range(tmp->range);
 
 }
 
@@ -113,6 +119,7 @@ struct  import_rule * join_import_rule(char * import_name , int lineno,struct in
 	tmp->lineno = lineno ;
 	tmp->import_name=import_name;
 	tmp->inc =inc;
+	tmp->exc=exc;
 	tmp->next = import_rule_root ;
 	import_rule_root = tmp ;
 	return  tmp ;

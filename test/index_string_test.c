@@ -4,13 +4,9 @@
 
 
 int main(){
-	join_index_string("this is test1");
-	join_index_string("this is test5");
-	join_index_string("this is test6");
-	struct index_string * root = get_index_string();
-	printf("%s \n",cat_string(root));
-	join_index_string("this is test5");
-	join_index_string("this is test6");
-	root = get_index_string();
-	printf("%s \n",cat_string(root));
+    struct index_string * s=join_index_string(s,"this is test1");
+	s=join_index_string(s,"this is test5");
+	s=join_index_string(s,"this is test6");
+	s= string(s);
+	printf("%s \n",cat_string(s));
 }

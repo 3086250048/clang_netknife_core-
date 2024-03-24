@@ -17,6 +17,7 @@ enum node_type {
 	COMMENT,
 	IMPORT ,
 	REGX,
+	RANGE,
 	INCLUDE,
 	EXCLUDE,
 	RULE_TABLE,
@@ -32,9 +33,9 @@ struct index_string {
 
 
 //添加字符到索引字符串
-struct index_string * join_index_string(char * str);
-//获取索引字符串的根节点地址,并让原有根节点指向NULL
-struct index_string * get_index_string();
+struct index_string * join_index_string(struct index_string * root,char * str);
+//获取索引字符串的根节点地址,并作预处理
+struct index_string * string();
 //释放索引字符串
 void free_index_string(struct index_string * index_str_root);
 //打印当前索引字符串
@@ -103,24 +104,33 @@ struct regx {
 	struct regx * next;
 };
 
-struct include {
+struct range {
 	int node_type;
 	int s_lineno ;
 	int d_lineno ;
 	struct index_string  * s_comment;
 	struct index_string  * d_comment;
+	struct range * next ;
+};
+
+//添加range表达式
+struct range * join_range(int s_lineno ,int d_lineno , struct index_string * s_comment ,struct index_string * d_comment );
+//获取range的根
+struct range * get_range();
+//打印range
+void print_range(struct range * range_root);
+
+
+struct include {
+	int node_type;
 	struct regx * regx;
-	struct include * next ;
+	struct range * range;
 };
 
 struct exclude {
 	int node_type ;
-	int s_lineno;
-	int d_lineno;
-	struct index_string * s_comment ;
-	struct index_string * d_comment ;
 	struct regx * regx ;
-	struct exclude * next;
+	struct range * range ;
 };
 
 struct import_rule {	
@@ -137,14 +147,12 @@ struct import_rule {
 struct regx * join_regx(struct index_string * exp);
 //获取正则表达式链表根节点
 struct regx * get_regx();
+
+
 //添加include表达式
-struct include * join_include(struct regx * regx,int s_lineno ,int d_lineno ,struct index_string * s_comment ,struct index_string * d_comment);
-//获取include表达式根节点
-struct include * get_include();
+struct include * join_include(struct include * include , struct regx * regx,struct range * range );
 //添加exclude表达式
-struct exclude * join_exclude(struct regx * regx ,int s_lineno,int d_lineno , struct index_string  * s_comment ,struct index_string * d_comment);
-//获取exclude表达式根节点
-struct exclude * get_exclude();
+struct exclude * join_exclude(struct exclude *  exclude , struct regx * regx,struct range * range );
 //添加 import_rule
 struct import_rule * join_import_rule(char * import_name ,int lineno  ,struct include *inc ,struct exclude * exc);
 //获取import_rule表达式根节点

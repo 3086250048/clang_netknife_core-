@@ -3,36 +3,36 @@
 #include "netknife.h"
 #include <stdio.h>
 
-static struct  index_string  * index_str_root = NULL;
 
 
 //反转
-static  void reverse_index_string(){
+static struct index_string *  reverse_index_string(struct index_string * root){
 	//如果只存在一个节点则直接退出
-	if(!index_str_root->next) return ;
+	if(!root->next) return root;
 
 	struct  index_string * pre,* cur,* nex;
 	pre=NULL;
-	cur=index_str_root;
+	cur=root;
 	while(cur!=NULL){
 		nex=cur->next;
 		cur->next = pre;
 		pre=cur;
 		cur=nex;
 	}
-	index_str_root = pre;
+	root = pre;
+	return root;
 }
 
 //去除index_str两端空格
-static void  drop_index_string_htempty(){
+static void  drop_index_string_htempty(struct index_string * root ){
 		//如果只存在一个节点,则直接退出
-		if(!index_str_root->next  ) return ;
+		if(!root->next  ) return ;
 
-		struct index_string * tmp = index_str_root ;
+		struct index_string * tmp = root ;
 		if(!(tmp->s) && tmp->next->s ){
-			index_str_root = tmp->next;
+			root = tmp->next;
 			free(tmp);
-			struct index_string * tmp = index_str_root;
+			struct index_string * tmp = root;
 		}
 		struct index_string * prev ;
 		while(tmp->next){
@@ -46,13 +46,13 @@ static void  drop_index_string_htempty(){
 
 }
 //添加字符到index_str 
-struct index_string * join_index_string(char * str){	
+struct index_string * join_index_string(struct index_string * root, char * str){	
    	struct index_string * tmp = malloc(sizeof(struct index_string)) ;
 	tmp->node_type=INDEX_STRING;
 	tmp->s=str;
-	tmp->next = index_str_root;
-	index_str_root = tmp ;	
-	return tmp;
+	tmp->next = root;
+	root = tmp ;	
+	return root;
 }
 
 
@@ -65,13 +65,10 @@ void print_index_string(struct index_string * root){
 	}
 	printf("\n");
 }
-//获取index_string,并让根指向NULL
-struct index_string * get_index_string( ){
-	reverse_index_string();
-	drop_index_string_htempty();
-	struct index_string * tmp = index_str_root;
-	index_str_root = NULL;
-	return tmp;
+struct index_string * string(struct index_string * root ){
+	root = reverse_index_string(root);
+	drop_index_string_htempty(root);
+	return root;
 }
 
 

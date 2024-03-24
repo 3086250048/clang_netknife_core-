@@ -25,7 +25,7 @@ trans { return TRANS;}
 <TRANS_RULE_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ { yylval.s=strdup(yytext) ;return STRING; } 
 <TRANS_RULE_COMMENT>.|\n {}
 
-<TRANS_IMPORT_COMMENT>\" { BEGIN TRANS_IMPORT; return COMMENT_END;}
+<TRANS_IMPORT_COMMENT>\" { BEGIN TRANS_IMPORT; return TRANS_IMPORT_COMMENT_END;}
 <TRANS_IMPORT_COMMENT>[ \t]+ { yylval.s=NULL;return EMPTY;}
 <TRANS_IMPORT_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ { yylval.s= strdup(yytext) ;return STRING ; } 
 <TRANS_IMPORT_COMMENT>.|\n {}
@@ -39,7 +39,7 @@ trans { return TRANS;}
 <TRANS_IMPORT>[0-9]+ { yylval.d=atoi(yytext);return NUMBER;}
 <TRANS_IMPORT>to { return TO;}
 <TRANS_IMPORT>,   { return COMMA;}
-<TRANS_IMPORT>\" {  BEGIN TRANS_IMPORT_COMMENT;return COMMENT_START;}
+<TRANS_IMPORT>\" {  BEGIN TRANS_IMPORT_COMMENT;return  TRANS_IMPORT_COMMENT_START;}
 <TRANS_IMPORT>r\" { BEGIN REGX;return REGX_START;}
 <TRANS_IMPORT>; { BEGIN TRANS_RULE;return SEM;}
 <TRANS_IMPORT>[\x80-\xFFa-zA-Z0-9_]+ { yylval.s=strdup(yytext) ;return STRING ; } 
