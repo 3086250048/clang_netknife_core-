@@ -14,6 +14,7 @@ int main(){
 		join_regx(get_index_string());
 		struct regx * r =  get_regx();
 		print_regx(r);
+
 	//include 
 	
 		join_include(r,100,200,NULL,NULL);

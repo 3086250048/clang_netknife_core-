@@ -61,7 +61,7 @@ void print_include(struct include * include_root){
 	 struct include * tmp = include_root ;
 	 while(tmp){
 	 	printf("node_type:INCLUDE\n");
-		printf("regx:%s\n",tmp->regx);
+		print_regx(tmp->regx);
 		printf("s_lineno:%d\n",tmp->s_lineno);
 		printf("d_lineno:%d\n",tmp->d_lineno);
 		printf("s_comment:%s\n",cat_string(tmp->s_comment));
@@ -97,7 +97,7 @@ void print_exclude(struct exclude * exclude_root){
 	 struct exclude * tmp = exclude_root ;
 	 while(tmp){
 	 	printf("node_type:EXCLUDE\n");
-		printf("regx:%s\n",tmp->regx);
+		print_regx(tmp->regx);
 		printf("s_lineno:%d\n",tmp->s_lineno);
 		printf("d_lineno:%d\n",tmp->d_lineno);
 		printf("s_comment:%s\n",cat_string(tmp->s_comment));
