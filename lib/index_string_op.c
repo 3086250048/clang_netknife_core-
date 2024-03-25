@@ -48,7 +48,7 @@ static void  drop_index_string_htempty(struct index_string * root ){
 //添加字符到index_str 
 struct index_string * join_index_string(struct index_string * root, char * str){	
    	struct index_string * tmp = malloc(sizeof(struct index_string)) ;
-	tmp->node_type=INDEX_STRING;
+	tmp->node_type=INDEX_STRING_NODE;
 	tmp->s=str;
 	tmp->next = root;
 	root = tmp ;	

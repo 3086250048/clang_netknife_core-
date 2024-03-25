@@ -6,7 +6,7 @@
 
 struct rule * join_rule(struct index_string * s , struct index_string * d,int lineno , int priority ){
 	struct rule * tmp = malloc(sizeof(struct rule));
-	tmp->node_type = RULE;
+	tmp->node_type = RULE_NODE;
 	tmp->lineno=lineno;
 	tmp->priority=priority;
 	tmp->s=s;
@@ -17,7 +17,7 @@ struct rule * join_rule(struct index_string * s , struct index_string * d,int li
 
 struct comment * join_comment(struct index_string * c, int lineno ){
 	struct comment * tmp = malloc(sizeof(struct comment));
-	tmp->node_type = COMMENT;
+	tmp->node_type = COMMENT_NODE;
 	tmp->c = c;
 	tmp->lineno = lineno;
 	return tmp;

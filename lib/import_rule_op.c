@@ -10,7 +10,7 @@ static struct import_rule * import_rule_root = NULL;
 
 struct regx * join_regx(struct index_string * exp){
 	struct regx * tmp = malloc(sizeof(struct regx));
-	tmp->node_type = REGX;
+	tmp->node_type = REGX_NODE;
 	tmp->exp = exp ;
 	tmp->next = regx_root;
 	regx_root = tmp;
@@ -39,7 +39,7 @@ void print_regx(struct regx * regx_root){
 struct range * join_range(int s_lineno ,int d_lineno ,struct index_string * s_comment,struct index_string * d_comment )
 {
 	struct range * tmp = malloc(sizeof(struct range));
-	tmp->node_type = RANGE;
+	tmp->node_type = RANGE_NODE;
 	tmp->s_lineno = s_lineno;
 	tmp->d_lineno = d_lineno;
 	tmp->s_comment = s_comment;
@@ -75,7 +75,7 @@ struct include * join_include(struct include *include , struct regx * regx , str
 	if(!include){
 	 	include  =  malloc(sizeof(struct include));
 	}
-	 include->node_type = INCLUDE ;
+	 include->node_type = INCLUDE_NODE ;
 	 include->regx =regx ;
 	 include->range =range;
 	 return include ;
@@ -98,7 +98,7 @@ struct exclude * join_exclude(struct exclude * exclude ,struct regx * regx ,stru
 	 if(!exclude){
    	 	exclude  =  malloc(sizeof(struct exclude));
 	 }
-	 exclude->node_type = EXCLUDE ;
+	 exclude->node_type = EXCLUDE_NODE ;
 	 exclude->regx =regx ;
 	 exclude->range=range;
 	 return exclude ;
@@ -115,7 +115,7 @@ void print_exclude(struct exclude * exclude){
 
 struct  import_rule * join_import_rule(char * import_name , int lineno,struct include * inc , struct exclude * exc){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
-	tmp->node_type = IMPORT;
+	tmp->node_type = IMPORT_NODE;
 	tmp->lineno = lineno ;
 	tmp->import_name=import_name;
 	tmp->inc =inc;

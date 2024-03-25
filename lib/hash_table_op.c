@@ -47,7 +47,7 @@ struct rule_table * join_rule_table(struct rule * r){
 	struct rule_table  * tmp = &rule_tab[index_string_hash(cat_string(r->s))%MAX_HASH];
 	    if(tmp->r){
 			struct rule_table * dup = malloc(sizeof(struct rule_table));
-			dup->node_type = RULE_TABLE;
+			dup->node_type = RULE_TABLE_NODE;
 			dup->r = r ;
 			dup->dup_r  = tmp;
 			tmp = dup ;
@@ -56,7 +56,7 @@ struct rule_table * join_rule_table(struct rule * r){
 		}
 
 		if(!tmp->r){
-			tmp->node_type = RULE_TABLE;
+			tmp->node_type = RULE_TABLE_NODE;
 			tmp->r = r;
 		   	tmp->dup_r = NULL;
 			return tmp;	
@@ -69,7 +69,7 @@ struct comment_table * join_comment_table(struct comment * c){
 	struct comment_table  * tmp =&comment_tab[index_string_hash(cat_string(c->c))%MAX_HASH];
 			if(tmp->c){
 				struct comment_table * dup = malloc(sizeof(struct comment_table));
-				dup->node_type = COMMENT_TABLE;
+				dup->node_type = COMMENT_TABLE_NODE;
 				dup->c = c ;
 				dup->dup_c  = tmp;
 				tmp = dup ;
@@ -78,7 +78,7 @@ struct comment_table * join_comment_table(struct comment * c){
 			}
 
 			if(!tmp->c){
-				tmp->node_type =COMMENT_TABLE;
+				tmp->node_type =COMMENT_TABLE_NODE;
 				tmp->c = c;
 				tmp->dup_c = NULL;
 				return tmp;	

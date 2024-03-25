@@ -12,17 +12,18 @@ extern struct comment_table * comment_tab ;
 extern struct trans_table * trans_tab ;
 
 enum node_type {
-	INDEX_STRING =1,
-	RULE,
-	COMMENT,
-	IMPORT ,
-	REGX,
-	RANGE,
-	INCLUDE,
-	EXCLUDE,
-	RULE_TABLE,
-	COMMENT_TABLE,
-	TRANS,
+	INDEX_STRING_NODE =1,
+	RULE_NODE,
+	COMMENT_NODE,
+	IMPORT_NODE ,
+	REGX_NODE,
+	RANGE_NODE,
+	INCLUDE_NODE,
+	EXCLUDE_NODE,
+	RULE_TABLE_NODE,
+	COMMENT_TABLE_NODE,
+	TRANS_NODE,
+	TRANS_TABLE_NODE
 };
 
 struct index_string {
@@ -179,6 +180,7 @@ struct trans {
 };
 
 struct trans_table{
+	int node_type; 
 	struct trans * trans;
 };
 

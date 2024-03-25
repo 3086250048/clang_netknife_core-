@@ -6,7 +6,7 @@
 
 struct trans * join_trans(char * filename ,char * trans_name,int lineno , struct rule_table * rule_tab , struct comment_table * comment_tab ,struct import_rule * import_rule_chain ){
 	struct trans * tmp = malloc(sizeof(struct trans));
-	tmp->node_type = TRANS;
+	tmp->node_type = TRANS_NODE;
 	tmp->filename = filename ;
 	tmp->trans_name = trans_name ;
 	tmp->lineno=lineno;
@@ -33,6 +33,7 @@ struct trans_table   * join_trans_table(struct  trans * trans){
 	struct trans_table * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
 			
 		if(!tmp->trans){
+			tmp->node_type = TRANS_TABLE_NODE;
 			tmp->trans = trans;
 			return  tmp ;
 		}else{
