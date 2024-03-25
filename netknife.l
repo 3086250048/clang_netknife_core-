@@ -50,7 +50,7 @@ trans { return TRANS;}
 <TRANS_RULE>@ { BEGIN TRANS_IMPORT;return IMPORT;}
 <TRANS_RULE>; { return SEM;}
 <TRANS_RULE>\" { BEGIN TRANS_RULE_COMMENT;return COMMENT_START;}
-<TRANS_RULE>\\n { return LINE_BREAK;}
+<TRANS_RULE>\\n { yylval.s=strdup("\n"); return LINE_BREAK;}
 <TRANS_RULE>[ \t]+ { yylval.s=NULL;return EMPTY; }
 <TRANS_RULE>[^\"=>;}\n\t@ ]+ {  yylval.s=strdup(yytext) ;return STRING ; }
 <TRANS_RULE>"}" {  BEGIN 0;return RBRACE;}

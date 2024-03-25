@@ -25,8 +25,8 @@
 //声明记号
 
 %token <d> NUMBER 
-%token <s> STRING EMPTY
-%token TRANS IMPORT OUTPUT IN COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM LINE_BREAK TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END 
+%token <s> STRING EMPTY LINE_BREAK
+%token TRANS IMPORT COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END 
 %type <str> index_string_exp const_comment_exp
 %type <rule_tab> rule_table_exp
 %type <comment_tab> comment_table_exp
@@ -42,10 +42,10 @@
 
 trans_table_exp : {$$=join_trans_table(NULL);}
 				| trans_table_exp trans_exp {$$=join_trans_table($1); print_trans_table_entry($$->trans);}
-
+				;
 trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans("TEST",$2,yylineno,NULL,NULL,NULL); }
 		  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans("TEST",$2,get_rule_table(),get_comment_table(),get_import_rule()) ;}
-
+		  ;
 trans_body_exp : rule_table_exp{$$=NULL;} 
 			   | comment_table_exp {$$=NULL;} 
 			   | import_rule_chain_exp{$$=NULL;}
@@ -63,27 +63,29 @@ import_rule_chain_exp : IMPORT STRING SEM { $$=join_import_rule($2,yylineno,NULL
 
 exclude_exp : EXCLUDE regx_exp   { $$=join_exclude($$,get_regx(),NULL);}
 		   	| EXCLUDE  range_exp { $$=join_exclude($$,NULL,get_range()); }
-			| exclude_exp COMMA range_exp {$$=join_exclude($1,NULL,get_range());}
-			| exclude_exp COMMA regx_exp {$$=join_exclude($1,get_regx(),NULL);}
+			| EXCLUDE  regx_exp range_exp {$$=join_exclude($$,get_regx(),get_range());}
+			| EXCLUDE  range_exp regx_exp {$$=join_exclude($$,get_regx(),get_range());}
 			;
 
 include_exp : INCLUDE regx_exp   { $$=join_include($$,get_regx(),NULL);}
 		   	| INCLUDE range_exp { $$=join_include($$,NULL,get_range()); }
-			| include_exp COMMA range_exp {$$=join_include($1,NULL,get_range());}
-			| include_exp COMMA regx_exp {$$=join_include($1,get_regx(),NULL);}
+			| INCLUDE regx_exp range_exp {$$=join_include($$,get_regx(),get_range());}
+			| INCLUDE range_exp range_exp {$$=join_include($$,get_regx(),get_range());}
 			;
 
-range_exp : NUMBER { $$=join_range($1); }
+range_exp : NUMBER { $$=join_range($1,0,NULL,NULL); }
 		  | const_comment_exp  {$$ = join_range(0,0,$1,NULL); }
-		  | range_exp  TO NUMBER  {$$=join_range($1,$3,NULL,NULL);}
-		  | range_exp  TO const_comment_exp  {$$=join_range($1,0,NULL,$3);}
-		  | range_exp COMMA NUMBER  {$$=join_range($3,0,NULL,NULL);}
+		  | NUMBER  TO NUMBER  {$$=join_range($1,$3,NULL,NULL);}
+		  | const_comment_exp  TO const_comment_exp  {$$=join_range(0,0,$1,$3);}
+		  | NUMBER  TO const_comment_exp   {$$=join_range($3,0,NULL,NULL);}
+		  | const_comment_exp TO  NUMBER   {$$=join_range(0,$3,$1,NULL);}
 		  | range_exp COMMA const_comment_exp {$$=join_range(0,0,$3,NULL);}
+		  | range_exp COMMA NUMBER  {$$=join_range($3,0,NULL,NULL);}
 		  | range_exp COMMA NUMBER TO NUMBER { $$ = join_range($3,$5,NULL,NULL);}
 		  | range_exp COMMA NUMBER TO const_comment_exp {$$=join_range($3,0,NULL,$5);}
 		  | range_exp COMMA const_comment_exp TO NUMBER {$$=join_range(0,$5,$3,NULL);}
 		  | range_exp COMMA const_comment_exp TO const_comment_exp {$$=join_range(0,0,$3,$5);}
-
+		  ;
 
 regx_exp : REGX_START index_string_exp REGX_END {
 		   $$=join_regx(string($2));
@@ -91,7 +93,7 @@ regx_exp : REGX_START index_string_exp REGX_END {
 		 | regx_exp REGX_START index_string_exp REGX_END {
 		   $$=join_regx(string($3));
 		 }
-
+		 ;
 
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=string($2); }
 
@@ -108,8 +110,12 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
 				 }
 		 		;
 
-index_string_exp : STRING { $$=join_index_string($1);}
-				 | index_string_exp STRING { $$ =join_index_string($1,$2);}
+index_string_exp : STRING { $$=join_index_string($$,$1);}
+				 | LINE_BREAK { $$=join_index_string($$,$1);}
+				 | EMPTY  { $$=join_index_string($$,$1);}
+				 | index_string_exp STRING { $$=join_index_string($1,$2);}
+				 | index_string_exp EMPTY  { $$=join_index_string($1,$2);}
+				 | index_string_exp LINE_BREAK { $$=join_index_string($1,$2);}
 				 ;
 %%
 

@@ -1,5 +1,6 @@
+#line 2 "netknife.lex.c"
 
-#line 3 "lex.yy.c"
+#line 4 "netknife.lex.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -548,9 +549,9 @@ char *yytext;
 	#include "netknife.tab.h"
 	#include "netknife.h"
 
-#line 552 "lex.yy.c"
+#line 553 "netknife.lex.c"
 
-#line 554 "lex.yy.c"
+#line 555 "netknife.lex.c"
 
 #define INITIAL 0
 #define TRANS_RULE 1
@@ -776,7 +777,7 @@ YY_DECL
 	{
 #line 11 "netknife.l"
 
-#line 780 "lex.yy.c"
+#line 781 "netknife.lex.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1022,7 +1023,7 @@ YY_RULE_SETUP
 case 35:
 YY_RULE_SETUP
 #line 53 "netknife.l"
-{ return LINE_BREAK;}
+{ yylval.s=strdup("\n"); return LINE_BREAK;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
@@ -1066,7 +1067,7 @@ YY_RULE_SETUP
 #line 62 "netknife.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1070 "lex.yy.c"
+#line 1071 "netknife.lex.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(TRANS_RULE):
 case YY_STATE_EOF(TRANS_PRIORITY):

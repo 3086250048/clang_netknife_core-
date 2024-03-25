@@ -57,26 +57,24 @@ extern int yydebug;
     NUMBER = 258,                  /* NUMBER  */
     STRING = 259,                  /* STRING  */
     EMPTY = 260,                   /* EMPTY  */
-    TRANS = 261,                   /* TRANS  */
-    IMPORT = 262,                  /* IMPORT  */
-    OUTPUT = 263,                  /* OUTPUT  */
-    IN = 264,                      /* IN  */
-    COMMENT_START = 265,           /* COMMENT_START  */
-    COMMENT_END = 266,             /* COMMENT_END  */
-    INCLUDE = 267,                 /* INCLUDE  */
-    EXCLUDE = 268,                 /* EXCLUDE  */
-    TO = 269,                      /* TO  */
-    LBRACE = 270,                  /* LBRACE  */
-    RBRACE = 271,                  /* RBRACE  */
-    REGX_START = 272,              /* REGX_START  */
-    REGX_END = 273,                /* REGX_END  */
-    COMMA = 274,                   /* COMMA  */
-    EQ = 275,                      /* EQ  */
-    GT = 276,                      /* GT  */
-    SEM = 277,                     /* SEM  */
-    LINE_BREAK = 278,              /* LINE_BREAK  */
-    TRANS_IMPORT_COMMENT_START = 279, /* TRANS_IMPORT_COMMENT_START  */
-    TRANS_IMPORT_COMMENT_END = 280 /* TRANS_IMPORT_COMMENT_END  */
+    LINE_BREAK = 261,              /* LINE_BREAK  */
+    TRANS = 262,                   /* TRANS  */
+    IMPORT = 263,                  /* IMPORT  */
+    COMMENT_START = 264,           /* COMMENT_START  */
+    COMMENT_END = 265,             /* COMMENT_END  */
+    INCLUDE = 266,                 /* INCLUDE  */
+    EXCLUDE = 267,                 /* EXCLUDE  */
+    TO = 268,                      /* TO  */
+    LBRACE = 269,                  /* LBRACE  */
+    RBRACE = 270,                  /* RBRACE  */
+    REGX_START = 271,              /* REGX_START  */
+    REGX_END = 272,                /* REGX_END  */
+    COMMA = 273,                   /* COMMA  */
+    EQ = 274,                      /* EQ  */
+    GT = 275,                      /* GT  */
+    SEM = 276,                     /* SEM  */
+    TRANS_IMPORT_COMMENT_START = 277, /* TRANS_IMPORT_COMMENT_START  */
+    TRANS_IMPORT_COMMENT_END = 278 /* TRANS_IMPORT_COMMENT_END  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -102,7 +100,7 @@ union YYSTYPE
 	struct trans * trans;
 	struct trans_table * trans_tab ;					  
 
-#line 106 "netknife.tab.h"
+#line 104 "netknife.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
