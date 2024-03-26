@@ -41,10 +41,10 @@
 
 
 trans_table_exp : {$$=join_trans_table(NULL);}
-				| trans_table_exp trans_exp {$$=join_trans_table($1); print_trans_table_entry($$->trans);}
+				| trans_table_exp trans_exp {$$=join_trans_table($1->trans); print_trans_table_entry($$->trans);}
 				;
 trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans("TEST",$2,yylineno,NULL,NULL,NULL); }
-		  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans("TEST",$2,get_rule_table(),get_comment_table(),get_import_rule()) ;}
+		  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans("TEST",$2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
 		  ;
 trans_body_exp : rule_table_exp{$$=NULL;} 
 			   | comment_table_exp {$$=NULL;} 
@@ -77,7 +77,7 @@ range_exp : NUMBER { $$=join_range($1,0,NULL,NULL); }
 		  | const_comment_exp  {$$ = join_range(0,0,$1,NULL); }
 		  | NUMBER  TO NUMBER  {$$=join_range($1,$3,NULL,NULL);}
 		  | const_comment_exp  TO const_comment_exp  {$$=join_range(0,0,$1,$3);}
-		  | NUMBER  TO const_comment_exp   {$$=join_range($3,0,NULL,NULL);}
+		  | NUMBER  TO const_comment_exp   {$$=join_range($1,0,$3,NULL);}
 		  | const_comment_exp TO  NUMBER   {$$=join_range(0,$3,$1,NULL);}
 		  | range_exp COMMA const_comment_exp {$$=join_range(0,0,$3,NULL);}
 		  | range_exp COMMA NUMBER  {$$=join_range($3,0,NULL,NULL);}

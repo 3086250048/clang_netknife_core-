@@ -1153,7 +1153,7 @@ yyreduce:
 
   case 3: /* trans_table_exp: trans_table_exp trans_exp  */
 #line 44 "netknife.y"
-                                                            {(yyval.trans_tab)=join_trans_table((yyvsp[-1].trans_tab)); print_trans_table_entry((yyval.trans_tab)->trans);}
+                                                            {(yyval.trans_tab)=join_trans_table((yyvsp[-1].trans_tab)->trans); print_trans_table_entry((yyval.trans_tab)->trans);}
 #line 1158 "netknife.tab.c"
     break;
 
@@ -1165,7 +1165,7 @@ yyreduce:
 
   case 5: /* trans_exp: TRANS STRING LBRACE trans_body_exp RBRACE  */
 #line 47 "netknife.y"
-                                                              { (yyval.trans)=join_trans("TEST",(yyvsp[-3].s),get_rule_table(),get_comment_table(),get_import_rule()) ;}
+                                                              { (yyval.trans)=join_trans("TEST",(yyvsp[-3].s),yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
 #line 1170 "netknife.tab.c"
     break;
 
@@ -1309,7 +1309,7 @@ yyreduce:
 
   case 29: /* range_exp: NUMBER TO const_comment_exp  */
 #line 80 "netknife.y"
-                                                   {(yyval.ran)=join_range((yyvsp[0].str),0,NULL,NULL);}
+                                                   {(yyval.ran)=join_range((yyvsp[-2].d),0,(yyvsp[0].str),NULL);}
 #line 1314 "netknife.tab.c"
     break;
 
