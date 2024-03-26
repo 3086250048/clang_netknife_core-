@@ -29,10 +29,9 @@ static unsigned int trans_index_hash(char * filename,char * trans_name){
 }
 
 //添加rule到表中
-struct trans_table   * join_trans_table(struct  trans * trans){	
+struct trans_table * join_trans_table(struct  trans * trans){	
 	struct trans_table * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
-			
-		if(!tmp->trans){
+		if(tmp->trans==NULL){
 			tmp->node_type = TRANS_TABLE_NODE;
 			tmp->trans = trans;
 			return  tmp ;
@@ -66,16 +65,19 @@ void print_trans_table_entry(struct trans * trans){
 	printf("trans_name:%s\n",trans->trans_name);
 	printf("lineno:%d\n",trans->lineno);
 	int i;
+	if(trans->rule_tab)
 	for(i=0;i<MAX_HASH;i++){
 		if((trans->rule_tab)[i].r){
 			print_rule_table_entry(&(trans->rule_tab)[i]);
 		}
 	}
+	if(trans->comment_tab)
 	for(i=0;i<MAX_HASH;i++){
 		if((trans->comment_tab[i].c)){
 			print_comment_table_entry(&(trans->comment_tab)[i]);
 		}
 	}
+	if(trans->import_rule_chain)
 	print_import_rule(trans->import_rule_chain);
 }
 

@@ -39,12 +39,8 @@
 %type <trans_tab> trans_table_exp
 %%
 
-
-
-
-
 trans_table_exp : {$$=NULL;}
-				| trans_table_exp trans_exp {$$=join_trans_table($1->trans); print_trans_table_entry($$->trans);}
+				| trans_table_exp trans_exp {$$=join_trans_table($2); print_trans_table_entry($$->trans);}
 				;
 trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans("TEST",$2,yylineno,NULL,NULL,NULL); }
 		  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans("TEST",$2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
