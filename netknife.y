@@ -40,7 +40,10 @@
 %%
 
 
-trans_table_exp : {$$=join_trans_table(NULL);}
+
+
+
+trans_table_exp : {$$=NULL;}
 				| trans_table_exp trans_exp {$$=join_trans_table($1->trans); print_trans_table_entry($$->trans);}
 				;
 trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans("TEST",$2,yylineno,NULL,NULL,NULL); }
