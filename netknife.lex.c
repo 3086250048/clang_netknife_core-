@@ -894,7 +894,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 24 "netknife.l"
-{ yylval.s=NULL;return EMPTY; }
+{ yylval.s=strdup(" ");return EMPTY; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
@@ -915,7 +915,7 @@ YY_RULE_SETUP
 case 14:
 YY_RULE_SETUP
 #line 29 "netknife.l"
-{ yylval.s=NULL;return EMPTY;}
+{ yylval.s=strdup(" ");return EMPTY;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
@@ -1028,7 +1028,7 @@ YY_RULE_SETUP
 case 36:
 YY_RULE_SETUP
 #line 54 "netknife.l"
-{ yylval.s=NULL;return EMPTY; }
+{ yylval.s=strdup(" ");return EMPTY; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP

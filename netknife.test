@@ -1,1 +1,4 @@
-trans cisco_to_huawei {}
+trans cisco_to_huawei {
+display ip int b=>show ip int b;
+show ip int b=>display ip int b;
+}

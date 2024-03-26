@@ -29,7 +29,7 @@ static void  drop_index_string_htempty(struct index_string * root ){
 		if(!root->next  ) return ;
 
 		struct index_string * tmp = root ;
-		if(!(tmp->s) && tmp->next->s ){
+		if( !strcmp(tmp->s," ") && tmp->next->s ){
 			root = tmp->next;
 			free(tmp);
 			struct index_string * tmp = root;
@@ -39,7 +39,7 @@ static void  drop_index_string_htempty(struct index_string * root ){
 			prev = tmp ;
 			tmp=tmp->next;
 		}
-		if(!(tmp->s)){
+		if(!strcmp(tmp->s," ")){
 			prev->next=NULL;
 			free(tmp);
 		}
@@ -49,6 +49,7 @@ static void  drop_index_string_htempty(struct index_string * root ){
 struct index_string * join_index_string(struct index_string * root, char * str){	
    	struct index_string * tmp = malloc(sizeof(struct index_string)) ;
 	tmp->node_type=INDEX_STRING_NODE;
+	//printf("%s\n",tmp->s);
 	tmp->s=str;
 	tmp->next = root;
 	root = tmp ;	
@@ -88,10 +89,13 @@ void free_index_string(struct index_string * root ){
 char * cat_string(struct index_string * root){
 	struct index_string * tmp = root ;
 	int size=0;
+	printf("size_before\n");
 	while(tmp){
+		printf("%p\n",tmp->s);
 		size+=strlen(tmp->s);
 		tmp=tmp->next; 
 	};
+	printf("size_after\n");
 	char * s = malloc(size);
 	while(root){
 		strcat(s,root->s);
