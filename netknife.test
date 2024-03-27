@@ -1,6 +1,4 @@
 trans cisco_to_huawei {
-display ip \n int b=>show ip 
-
-int b;
+display ip int b=>show ip int b;
 show ip int b=>display ip int b;
 }

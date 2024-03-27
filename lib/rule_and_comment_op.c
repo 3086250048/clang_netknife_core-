@@ -35,10 +35,8 @@ void print_comment(struct comment * c){
 }
 
 void  print_rule(struct rule * r){
-	printf("cat_before\n");
 	char * src = cat_string(r->s);
 	char * dst = cat_string(r->d);
-	printf("cat_after\n");
 	printf("node_type:RULE\n");;
 	printf("source:%s\n",src);
 	printf("destination:%s\n",dst);

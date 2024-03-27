@@ -7,6 +7,9 @@ void cat_test(char * s1,char *s2){
 	printf("%s\n",s3);
 }
 
+
 int main(){
-	strlen("123");
+	char * s = "1";
+
+	strcmp(s," ");
 }

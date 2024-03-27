@@ -387,11 +387,11 @@ static const flex_int16_t yy_accept[91] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,   44,    6,    5,    2,
-        4,    4,    3,   37,   36,   39,   34,   33,   31,   32,
-       37,   38,   42,   40,   41,   18,   19,   17,    8,    7,
+        4,    4,    3,   38,   36,   39,   34,   33,   31,   32,
+       38,   37,   42,   40,   41,   18,   19,   17,    8,    7,
        12,   10,    9,   11,   16,   14,   13,   15,   30,   29,
        25,   24,   22,   27,   28,   28,   28,   28,   28,    4,
-        4,   37,   36,   35,   40,   18,   10,   11,   14,   15,
+        4,   38,   36,   35,   40,   18,   10,   11,   14,   15,
        22,   28,   28,   28,   26,   23,    4,   28,   28,    4,
        28,   28,    1,   28,   28,   28,   28,   21,   20,    0
     } ;
@@ -1033,12 +1033,12 @@ YY_RULE_SETUP
 case 37:
 YY_RULE_SETUP
 #line 55 "netknife.l"
-{  yylval.s=strdup(yytext) ;return STRING ; }
+{  BEGIN 0;return RBRACE;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 56 "netknife.l"
-{  BEGIN 0;return RBRACE;}
+{  yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
 case 39:
 /* rule 39 can match eol */

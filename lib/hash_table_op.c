@@ -44,10 +44,8 @@ static unsigned int index_string_hash(char * index_string){
 
 //添加rule到表中
 struct rule_table * join_rule_table(struct rule * r){
-	print_rule(r);
 	struct rule_table  * tmp = &rule_tab[index_string_hash(cat_string(r->s))%MAX_HASH];
 	    if(tmp->r != NULL){
-			printf("重复\n");
 			struct rule_table * dup = malloc(sizeof(struct rule_table));
 			dup->node_type = RULE_TABLE_NODE;
 			dup->r = r ;
@@ -57,7 +55,6 @@ struct rule_table * join_rule_table(struct rule * r){
 			return tmp;
 		}
 		if(tmp->r == NULL){
-			printf("first\n");
 			tmp->node_type = RULE_TABLE_NODE;
 			tmp->r = r;
 		   	tmp->dup_r = NULL;
