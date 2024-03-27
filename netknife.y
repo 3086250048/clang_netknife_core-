@@ -53,10 +53,15 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 			   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 			   ;
 
-import_rule_chain_exp : IMPORT STRING SEM { $$=join_import_rule($2,yylineno,NULL,NULL);} 
-					  |	IMPORT STRING include_exp SEM {$$=join_import_rule($2,yylineno,$3,NULL);}
+import_rule_chain_exp : EMPTY IMPORT STRING SEM { $$=join_import_rule($3,yylineno,NULL,NULL);} 
+					  | IMPORT STRING SEM { $$=join_import_rule($2,yylineno,NULL,NULL);} 
+					  | EMPTY IMPORT STRING include_exp SEM {$$=join_import_rule($3,yylineno,$4,NULL);}
+					  | IMPORT STRING include_exp SEM {$$=join_import_rule($2,yylineno,$3,NULL);}
+					  | EMPTY IMPORT STRING exclude_exp SEM {$$=join_import_rule($3,yylineno,NULL,$4);}
 					  | IMPORT STRING exclude_exp SEM {$$=join_import_rule($2,yylineno,NULL,$3);}
+					  | EMPTY IMPORT STRING include_exp exclude_exp SEM {$$=join_import_rule($3,yylineno,$4,$5);}
 					  | IMPORT STRING include_exp exclude_exp SEM {$$=join_import_rule($2,yylineno,$3,$4);}
+					  | EMPTY IMPORT STRING exclude_exp include_exp SEM {$$=join_import_rule($3,yylineno,$5,$4);} 
 					  | IMPORT STRING exclude_exp include_exp SEM {$$=join_import_rule($2,yylineno,$4,$3);} 
 					  ;
 

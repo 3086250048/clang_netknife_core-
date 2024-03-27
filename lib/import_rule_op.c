@@ -84,10 +84,12 @@ struct include * join_include(struct include *include , struct regx * regx , str
 
 
 void print_include(struct include * include){
-	 struct include * tmp = include ;
-	 printf("node_type:INCLUDE\n");
-	 print_regx(tmp->regx);
-	 print_range(tmp->range);
+	 if(include){
+	 	struct include * tmp = include ;
+	 	printf("node_type:INCLUDE\n");
+	 	print_regx(tmp->regx);
+	 	print_range(tmp->range);
+	 }
 
 }
 
@@ -106,10 +108,12 @@ struct exclude * join_exclude(struct exclude * exclude ,struct regx * regx ,stru
 
 
 void print_exclude(struct exclude * exclude){
-	 struct exclude * tmp = exclude ;
-	 	printf("node_type:EXCLUDE\n");
+	if(exclude){
+		struct exclude * tmp = exclude ;
+		printf("node_type:EXCLUDE\n");
 		print_regx(tmp->regx);
 		print_range(tmp->range);
+	}
 
 }
 
