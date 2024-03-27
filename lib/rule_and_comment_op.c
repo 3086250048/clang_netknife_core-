@@ -11,7 +11,6 @@ struct rule * join_rule(struct index_string * s , struct index_string * d,int li
 	tmp->priority=priority;
 	tmp->s=s;
 	tmp->d=d;
-	printf("join_rule_after\n");
 	return tmp;
 }
 

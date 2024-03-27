@@ -9,7 +9,6 @@
 static struct index_string *  reverse_index_string(struct index_string * root){
 	//如果只存在一个节点则直接退出
 	if(!root->next) return root;
-
 	struct  index_string * pre,* cur,* nex;
 	pre=NULL;
 	cur=root;
@@ -24,14 +23,13 @@ static struct index_string *  reverse_index_string(struct index_string * root){
 }
 
 //去除index_str两端空格
-static void  drop_index_string_htempty(struct index_string * root ){
+static struct index_string *  drop_index_string_htempty(struct index_string * root ){
 		//如果只存在一个节点,则直接退出
-		if(!root->next) return ;
-
+		if(!root->next) return  root;
+		if(root->s == NULL)root=root->next;
 		struct index_string * tmp = root ;
-
 		if(!strcmp(tmp->s," ") && tmp->next->s ){
-			root = tmp->next;
+			root = root->next;
 			free(tmp);
 			struct index_string * tmp = root;
 		}
@@ -44,6 +42,7 @@ static void  drop_index_string_htempty(struct index_string * root ){
 			prev->next=NULL;
 			free(tmp);
 		}
+		return root;
 }
 
 //添加字符到index_str 
@@ -59,7 +58,7 @@ struct index_string * join_index_string(struct index_string * root, char * str){
 
 //打印ndex_string
 void print_index_string(struct index_string * root){
-    struct index_string * tmp =root;
+    struct index_string * tmp =string(root);
 	while(tmp){
 		printf("%s",tmp->s);
 		tmp=tmp->next;
@@ -68,7 +67,7 @@ void print_index_string(struct index_string * root){
 }
 struct index_string * string(struct index_string * root ){
 	root = reverse_index_string(root);
-	drop_index_string_htempty(root);
+	root=drop_index_string_htempty(root);
 	return root;
 }
 
@@ -91,7 +90,7 @@ char * cat_string(struct index_string * root){
 		size+=strlen(tmp->s);
 		tmp=tmp->next; 
 	};
-	char * s = malloc(size);
+	char * s = calloc(size,sizeof(char));
 	while(root){
 		strcat(s,root->s);
 		root=root->next;

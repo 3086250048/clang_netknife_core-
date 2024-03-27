@@ -102,12 +102,14 @@ comment_table_exp : COMMENT_START index_string_exp COMMENT_END {
 				  ;
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
-			   	  $$=join_rule_table(join_rule(string($1),string($4),yylineno,0));
+				  $$=join_rule_table(join_rule(string($1),string($4),yylineno,0));
 				 }
 		 	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
 				  $$=join_rule_table(join_rule(string($1),string($5),yylineno,$3));
 				 }
 		 		;
+
+
 
 index_string_exp : STRING { $$=join_index_string($$,$1);}
 				 | LINE_BREAK { $$=join_index_string($$,$1);}
@@ -117,6 +119,7 @@ index_string_exp : STRING { $$=join_index_string($$,$1);}
 				 | index_string_exp LINE_BREAK { $$=join_index_string($1,$2);}
 				 ;
 %%
+
 
 
 

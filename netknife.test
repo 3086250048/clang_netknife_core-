@@ -1,4 +1,4 @@
 trans cisco_to_huawei {
-display ip int b=>show ip int b;
-show ip int b=>display ip int b;
+	display ip int b => show ip int b;	show ip \n int b => display ip int b;
+	ospf 200 => router ospf 200;
 }

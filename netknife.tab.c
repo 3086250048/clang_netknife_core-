@@ -529,7 +529,7 @@ static const yytype_int8 yyrline[] =
       52,    53,    56,    57,    58,    59,    60,    63,    64,    65,
       66,    69,    70,    71,    72,    75,    76,    77,    78,    79,
       80,    81,    82,    83,    84,    85,    86,    89,    92,    97,
-      99,   104,   107,   112,   113,   114,   115,   116,   117
+      99,   104,   107,   114,   115,   116,   117,   118,   119
 };
 #endif
 
@@ -1388,7 +1388,7 @@ yyreduce:
   case 41: /* rule_table_exp: index_string_exp EQ GT index_string_exp SEM  */
 #line 104 "netknife.y"
                                                               {
-			   	  (yyval.rule_tab)=join_rule_table(join_rule(string((yyvsp[-4].str)),string((yyvsp[-1].str)),yylineno,0));
+				  (yyval.rule_tab)=join_rule_table(join_rule(string((yyvsp[-4].str)),string((yyvsp[-1].str)),yylineno,0));
 				 }
 #line 1394 "netknife.tab.c"
     break;
@@ -1402,37 +1402,37 @@ yyreduce:
     break;
 
   case 43: /* index_string_exp: STRING  */
-#line 112 "netknife.y"
+#line 114 "netknife.y"
                           { (yyval.str)=join_index_string((yyval.str),(yyvsp[0].s));}
 #line 1408 "netknife.tab.c"
     break;
 
   case 44: /* index_string_exp: LINE_BREAK  */
-#line 113 "netknife.y"
+#line 115 "netknife.y"
                                               { (yyval.str)=join_index_string((yyval.str),(yyvsp[0].s));}
 #line 1414 "netknife.tab.c"
     break;
 
   case 45: /* index_string_exp: EMPTY  */
-#line 114 "netknife.y"
+#line 116 "netknife.y"
                                           {  (yyval.str)=join_index_string((yyval.str),(yyvsp[0].s));}
 #line 1420 "netknife.tab.c"
     break;
 
   case 46: /* index_string_exp: index_string_exp STRING  */
-#line 115 "netknife.y"
+#line 117 "netknife.y"
                                                            {  (yyval.str)=join_index_string((yyvsp[-1].str),(yyvsp[0].s));}
 #line 1426 "netknife.tab.c"
     break;
 
   case 47: /* index_string_exp: index_string_exp EMPTY  */
-#line 116 "netknife.y"
+#line 118 "netknife.y"
                                                            {  (yyval.str)=join_index_string((yyvsp[-1].str),(yyvsp[0].s));}
 #line 1432 "netknife.tab.c"
     break;
 
   case 48: /* index_string_exp: index_string_exp LINE_BREAK  */
-#line 117 "netknife.y"
+#line 119 "netknife.y"
                                                                { (yyval.str)=join_index_string((yyvsp[-1].str),(yyvsp[0].s));}
 #line 1438 "netknife.tab.c"
     break;
@@ -1631,7 +1631,8 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 119 "netknife.y"
+#line 121 "netknife.y"
+
 
 
 
