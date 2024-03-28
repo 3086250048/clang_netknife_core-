@@ -35,11 +35,11 @@
 %type <ran> range_exp
 %type <inc> include_exp
 %type <exc> exclude_exp
-%type <reduce> clude_exp trans_body_exp
 %type <import_rule_chain> import_rule_chain_exp
-%type <trans> trans_exp 
+%type <trans> trans_exp trans_body_exp  
 %type <trans_tab> trans_table_exp
 %%
+
 
 trans_table_exp : {$$=NULL;}
 				| trans_table_exp trans_exp {$$=join_trans_table($2); print_trans_table_entry($$->trans);}
@@ -79,10 +79,6 @@ include_exp : INCLUDE regx_exp   { $$=join_include($$,get_regx(),NULL);}
 			| INCLUDE range_exp COMMA  range_exp {$$=join_include($$,get_regx(),get_range());}
 			;
 
-clude_exp : regx_exp {$$=NULL}
-		  | range_exp {$$=NULL}
-		  | clude_exp COMMA regx_exp {$$=NULL}
-		  | clude_exp COMMA range_exp {$$=NULL}
 
 range_exp : NUMBER { $$=join_range($1,0,NULL,NULL); }
 		  | const_comment_exp  {$$ = join_range(0,0,$1,NULL); }
@@ -101,8 +97,8 @@ range_exp : NUMBER { $$=join_range($1,0,NULL,NULL); }
 regx_exp : REGX_START index_string_exp REGX_END {
 		   $$=join_regx(string($2));
 		 }
-		 | regx_exp REGX_START index_string_exp REGX_END {
-		   $$=join_regx(string($3));
+		 | regx_exp COMMA  REGX_START index_string_exp REGX_END {
+		   $$=join_regx(string($4));
 		 }
 		 ;
 

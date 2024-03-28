@@ -85,6 +85,7 @@ union YYSTYPE
 {
 #line 8 "netknife.y"
 
+	void * reduce;
 	int d;
 	char * s;
 	struct index_string * str;
@@ -100,7 +101,7 @@ union YYSTYPE
 	struct trans * trans;
 	struct trans_table * trans_tab ;					  
 
-#line 104 "netknife.tab.h"
+#line 105 "netknife.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
