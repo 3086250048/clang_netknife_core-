@@ -114,13 +114,6 @@ struct range {
 	struct range * next ;
 };
 
-//添加range表达式
-struct range * join_range(int s_lineno ,int d_lineno , struct index_string * s_comment ,struct index_string * d_comment );
-//获取range的根
-struct range * get_range();
-//打印range
-void print_range(struct range * range_root);
-
 
 struct include {
 	int node_type;
@@ -149,6 +142,12 @@ struct regx * join_regx(struct index_string * exp);
 //获取正则表达式链表根节点
 struct regx * get_regx();
 
+//添加range表达式
+struct range * join_range( int s_lineno ,int d_lineno , struct index_string * s_comment ,struct index_string * d_comment );
+//获取range的根
+struct range * get_range();
+//打印range
+void print_range(struct range * range_root);
 
 //添加include表达式
 struct include * join_include(struct include * include , struct regx * regx,struct range * range );

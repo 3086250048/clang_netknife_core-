@@ -1,5 +1,5 @@
 trans cisco_to_huawei {
-	@huawei include 22 to "d"  ; 
+	@huawei include "test",r"^ddkad",22 to "d"  ; 
 	display ip int b =99> show ip int b;	
 	show ip \n int b =100> display ip int b;
 	ospf 200 =100> router ospf 200;

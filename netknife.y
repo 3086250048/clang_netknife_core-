@@ -6,6 +6,7 @@
 
 
 %union {
+	void * reduce;
 	int d;
 	char * s;
 	struct index_string * str;
@@ -34,8 +35,9 @@
 %type <ran> range_exp
 %type <inc> include_exp
 %type <exc> exclude_exp
+%type <reduce> clude_exp trans_body_exp
 %type <import_rule_chain> import_rule_chain_exp
-%type <trans> trans_exp trans_body_exp
+%type <trans> trans_exp 
 %type <trans_tab> trans_table_exp
 %%
 
@@ -67,15 +69,20 @@ import_rule_chain_exp : EMPTY IMPORT STRING SEM { $$=join_import_rule($3,yylinen
 
 exclude_exp : EXCLUDE regx_exp   { $$=join_exclude($$,get_regx(),NULL);}
 		   	| EXCLUDE  range_exp { $$=join_exclude($$,NULL,get_range()); }
-			| EXCLUDE  regx_exp range_exp {$$=join_exclude($$,get_regx(),get_range());}
-			| EXCLUDE  range_exp regx_exp {$$=join_exclude($$,get_regx(),get_range());}
+			| EXCLUDE  regx_exp COMMA range_exp {$$=join_exclude($$,get_regx(),get_range());}
+			| EXCLUDE  range_exp COMMA regx_exp {$$=join_exclude($$,get_regx(),get_range());}
 			;
 
 include_exp : INCLUDE regx_exp   { $$=join_include($$,get_regx(),NULL);}
 		   	| INCLUDE range_exp { $$=join_include($$,NULL,get_range()); }
-			| INCLUDE regx_exp range_exp {$$=join_include($$,get_regx(),get_range());}
-			| INCLUDE range_exp range_exp {$$=join_include($$,get_regx(),get_range());}
+			| INCLUDE regx_exp  COMMA range_exp {$$=join_include($$,get_regx(),get_range());}
+			| INCLUDE range_exp COMMA  range_exp {$$=join_include($$,get_regx(),get_range());}
 			;
+
+clude_exp : regx_exp {$$=NULL}
+		  | range_exp {$$=NULL}
+		  | clude_exp COMMA regx_exp {$$=NULL}
+		  | clude_exp COMMA range_exp {$$=NULL}
 
 range_exp : NUMBER { $$=join_range($1,0,NULL,NULL); }
 		  | const_comment_exp  {$$ = join_range(0,0,$1,NULL); }
