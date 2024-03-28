@@ -936,7 +936,7 @@ YY_RULE_SETUP
 case 18:
 YY_RULE_SETUP
 #line 34 "netknife.l"
-{ yylval.s= strdup(yytext) ;return STRING ; }
+{ yylval.s= strdup(yytext);return STRING ; }
 	YY_BREAK
 case 19:
 /* rule 19 can match eol */

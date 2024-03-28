@@ -31,7 +31,7 @@ trans { return TRANS;}
 <TRANS_IMPORT_COMMENT>.|\n {}
 
 <REGX>\" { BEGIN TRANS_IMPORT;return REGX_END;}
-<REGX>[^"\x0A]+ { yylval.s= strdup(yytext) ;return STRING ; }
+<REGX>[^"\x0A]+ { yylval.s= strdup(yytext);return STRING ; }
 <REGX>\n {}
 
 <TRANS_IMPORT>include { return INCLUDE;}
