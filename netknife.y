@@ -69,14 +69,14 @@ import_rule_chain_exp : EMPTY IMPORT STRING SEM { $$=join_import_rule($3,yylinen
 
 exclude_exp : EXCLUDE regx_exp   { $$=join_exclude($$,get_regx(),NULL);}
 		   	| EXCLUDE  range_exp { $$=join_exclude($$,NULL,get_range()); }
-			| EXCLUDE  regx_exp range_exp {$$=join_exclude($$,get_regx(),get_range());}
-			| EXCLUDE  range_exp regx_exp {$$=join_exclude($$,get_regx(),get_range());}
+			| EXCLUDE  regx_exp COMMA range_exp {$$=join_exclude($$,get_regx(),get_range());}
+			| EXCLUDE  range_exp COMMA regx_exp {$$=join_exclude($$,get_regx(),get_range());}
 			;
 
 include_exp : INCLUDE regx_exp   { $$=join_include($$,get_regx(),NULL);}
 		   	| INCLUDE range_exp { $$=join_include($$,NULL,get_range()); }
-			| INCLUDE regx_exp    range_exp {$$=join_include($$,get_regx(),get_range());}
-			| INCLUDE range_exp   range_exp {$$=join_include($$,get_regx(),get_range());}
+			| INCLUDE regx_exp  COMMA  range_exp {$$=join_include($$,get_regx(),get_range());}
+			| INCLUDE range_exp COMMA  regx_exp {$$=join_include($$,get_regx(),get_range());}
 			;
 
 
