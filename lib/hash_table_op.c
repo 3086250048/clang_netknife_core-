@@ -66,7 +66,7 @@ struct rule_table * join_rule_table(struct rule * r){
 //添加comment 到表中
 struct comment_table * join_comment_table(struct comment * c){
 	struct comment_table  * tmp =&comment_tab[index_string_hash(cat_string(c->c))%MAX_HASH];
-			if(tmp->c){
+			if(tmp->c !=NULL ){
 				struct comment_table * dup = malloc(sizeof(struct comment_table));
 				dup->node_type = COMMENT_TABLE_NODE;
 				dup->c = c ;
@@ -75,13 +75,14 @@ struct comment_table * join_comment_table(struct comment * c){
 				comment_reverse(tmp);		
 				return tmp;
 			}
-
-			if(!tmp->c){
+			printf("2222\n");
+			if(tmp->c==NULL){
 				tmp->node_type =COMMENT_TABLE_NODE;
 				tmp->c = c;
 				tmp->dup_c = NULL;
 				return tmp;	
 			}
+			printf("33333\n");
 
 }
 

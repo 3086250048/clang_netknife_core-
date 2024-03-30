@@ -55,15 +55,10 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 			   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 			   ;
 
-import_rule_chain_exp : EMPTY IMPORT STRING SEM { $$=join_import_rule($3,yylineno,NULL,NULL);} 
-					  | IMPORT STRING SEM { $$=join_import_rule($2,yylineno,NULL,NULL);} 
-					  | EMPTY IMPORT STRING include_exp SEM {$$=join_import_rule($3,yylineno,$4,NULL);}
+import_rule_chain_exp :  IMPORT STRING SEM { $$=join_import_rule($2,yylineno,NULL,NULL);} 
 					  | IMPORT STRING include_exp SEM {$$=join_import_rule($2,yylineno,$3,NULL);}
-					  | EMPTY IMPORT STRING exclude_exp SEM {$$=join_import_rule($3,yylineno,NULL,$4);}
 					  | IMPORT STRING exclude_exp SEM {$$=join_import_rule($2,yylineno,NULL,$3);}
-					  | EMPTY IMPORT STRING include_exp exclude_exp SEM {$$=join_import_rule($3,yylineno,$4,$5);}
 					  | IMPORT STRING include_exp exclude_exp SEM {$$=join_import_rule($2,yylineno,$3,$4);}
-					  | EMPTY IMPORT STRING exclude_exp include_exp SEM {$$=join_import_rule($3,yylineno,$5,$4);} 
 					  | IMPORT STRING exclude_exp include_exp SEM {$$=join_import_rule($2,yylineno,$4,$3);} 
 					  ;
 
@@ -105,7 +100,7 @@ regx_exp : REGX_START index_string_exp REGX_END {
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=string($2); }
 
 comment_table_exp : COMMENT_START index_string_exp COMMENT_END { 
-				  	 $$=join_comment_table(join_comment(string($2),yylineno));
+				  	 printf("11\n"); $$=join_comment_table(join_comment(string($2),yylineno));
 				  }
 				  ;
 
@@ -121,7 +116,6 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
 
 index_string_exp : STRING { $$=join_index_string($$,$1);}
 				 | LINE_BREAK { $$=join_index_string($$,$1);}
-				 | EMPTY  {  $$=join_index_string($$,$1);}
 				 | index_string_exp STRING {  $$=join_index_string($1,$2);}
 				 | index_string_exp EMPTY  {  $$=join_index_string($1,$2);}
 				 | index_string_exp LINE_BREAK { $$=join_index_string($1,$2);}

@@ -1,6 +1,9 @@
 trans cisco_to_huawei {
 	@huawei include r"^daw [daw" , r"^ddkad",22 to "d",22,"232","121" to "ddd" ;  
+	
+	"dadadwad"
 	show ip int b =100> display ip int b;  
 	show ip \n int b =100> display ip int b;  
+	"huawei"
 	bg prouter 112 =12> djkadad  ;   
 }
