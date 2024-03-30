@@ -43,6 +43,8 @@ trans { printf("TRANS "); return TRANS;}
 <REGX>. {}
 <REGX>\n { printf("\n");}
 
+
+
 <TRANS_IMPORT>include { printf("INCLUDE ");return INCLUDE;}
 <TRANS_IMPORT>exclude { printf("EXCLUDE ");return EXCLUDE;}
 <TRANS_IMPORT>[0-9]+ { printf("NUMBER ");yylval.d=atoi(yytext);return NUMBER;}
@@ -62,7 +64,7 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_RULE>\" {  printf("COMMENT_START ");BEGIN TRANS_RULE_COMMENT;return COMMENT_START;}
 <TRANS_RULE>\\n {  printf("LINE_BREAK ");yylval.s=strdup("\n"); return LINE_BREAK;}
 <TRANS_RULE>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
-<TRANS_RULE>"}" {  printf("RBRACE ");BEGIN 0;return RBRACE;}
+<TRANS_RULE>"}" {  printf("RBRACE\n");BEGIN 0;return RBRACE;}
 <TRANS_RULE>[^\"=>;}\n\t@ ]+ {  printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; }
 <TRANS_RULE>. {}
 <TRANS_RULE>\n { printf("\n");}
