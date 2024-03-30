@@ -75,14 +75,12 @@ struct comment_table * join_comment_table(struct comment * c){
 				comment_reverse(tmp);		
 				return tmp;
 			}
-			printf("2222\n");
 			if(tmp->c==NULL){
 				tmp->node_type =COMMENT_TABLE_NODE;
 				tmp->c = c;
 				tmp->dup_c = NULL;
 				return tmp;	
 			}
-			printf("33333\n");
 
 }
 

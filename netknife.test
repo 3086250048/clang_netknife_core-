@@ -7,3 +7,5 @@ trans cisco_to_huawei {
 	"huawei"
 	bg prouter 112 =12> djkadad  ;   
 }
+
+

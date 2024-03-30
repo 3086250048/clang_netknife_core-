@@ -16,7 +16,6 @@ struct rule * join_rule(struct index_string * s , struct index_string * d,int li
 
 
 struct comment * join_comment(struct index_string * c, int lineno ){
-	printf("comment :%s\n",cat_string(c));
 	struct comment * tmp = malloc(sizeof(struct comment));
 	tmp->node_type = COMMENT_NODE;
 	tmp->c = c;

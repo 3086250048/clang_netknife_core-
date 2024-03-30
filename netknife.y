@@ -100,7 +100,7 @@ regx_exp : REGX_START index_string_exp REGX_END {
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=string($2); }
 
 comment_table_exp : COMMENT_START index_string_exp COMMENT_END { 
-				  	 printf("11\n"); $$=join_comment_table(join_comment(string($2),yylineno));
+				  	$$=join_comment_table(join_comment(string($2),yylineno));
 				  }
 				  ;
 

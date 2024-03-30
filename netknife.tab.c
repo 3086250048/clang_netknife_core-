@@ -1382,7 +1382,7 @@ yyreduce:
   case 40: /* comment_table_exp: COMMENT_START index_string_exp COMMENT_END  */
 #line 102 "netknife.y"
                                                                { 
-				  	 printf("11\n"); (yyval.comment_tab)=join_comment_table(join_comment(string((yyvsp[-1].str)),yylineno));
+				  	(yyval.comment_tab)=join_comment_table(join_comment(string((yyvsp[-1].str)),yylineno));
 				  }
 #line 1388 "netknife.tab.c"
     break;

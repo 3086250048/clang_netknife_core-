@@ -36,9 +36,12 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_IMPORT_COMMENT>. {}
 <TRANS_IMPORT_COMMENT>\n { printf("\n");}
 
+
 <REGX>\" { printf("REGX_END ");BEGIN TRANS_IMPORT;return REGX_END;}
-<REGX>[\t\n]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
-<REGX>[^\t\n"]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
+<REGX>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
+<REGX>[\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
+<REGX>. {}
+<REGX>\n { printf("\n");}
 
 <TRANS_IMPORT>include { printf("INCLUDE ");return INCLUDE;}
 <TRANS_IMPORT>exclude { printf("EXCLUDE ");return EXCLUDE;}
