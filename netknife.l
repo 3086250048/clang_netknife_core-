@@ -44,7 +44,7 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_IMPORT>[0-9]+ { printf("NUMBER ");yylval.d=atoi(yytext);return NUMBER;}
 <TRANS_IMPORT>to { printf("TO ");return TO;}
 <TRANS_IMPORT>,   { printf("COMMA ");return COMMA;}
-<TRANS_IMPORT>\" {  printf("TRANS_IMPORT_COMMENT ");BEGIN TRANS_IMPORT_COMMENT;return  TRANS_IMPORT_COMMENT_START;}
+<TRANS_IMPORT>\" {  printf("TRANS_IMPORT_COMMENT_START");BEGIN TRANS_IMPORT_COMMENT;return  TRANS_IMPORT_COMMENT_START;}
 <TRANS_IMPORT>r\" { printf("REGX_START ");BEGIN REGX;return REGX_START;}
 <TRANS_IMPORT>; { printf("SEM ");BEGIN TRANS_RULE;return SEM;}
 <TRANS_IMPORT>[\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
