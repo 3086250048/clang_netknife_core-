@@ -14,7 +14,8 @@ trans { printf("TRANS "); return TRANS;}
 "{" {  printf("LBRACE ");BEGIN TRANS_RULE; return LBRACE;} 
 [\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING ");yylval.s=strdup(yytext ); return STRING;} 
 [ \t] {} 
-.|\n { printf("\n");}
+. {}
+\n { printf("\n");}
 
 
 <TRANS_COMMENT>\" { BEGIN 0;}
@@ -23,17 +24,20 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_RULE_COMMENT>\" { printf("COMMENT_END ");BEGIN TRANS_RULE;return COMMENT_END;}
 <TRANS_RULE_COMMENT>[ \t]+ { printf("EMPTY "); yylval.s=strdup(" ");return EMPTY; }
 <TRANS_RULE_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING "); yylval.s=strdup(yytext) ;return STRING; } 
-<TRANS_RULE_COMMENT>.|\n { printf("\n");}
+<TRANS_RULE_COMMENT>. {}
+<TRANS_RULE_COMMENT>\n { printf("\n");}
 
 <TRANS_IMPORT_COMMENT>\" { printf("TRANS_IMPORT_COMMENT_END ");BEGIN TRANS_IMPORT; return TRANS_IMPORT_COMMENT_END;}
 <TRANS_IMPORT_COMMENT>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY;}
 <TRANS_IMPORT_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING ");yylval.s= strdup(yytext) ;return STRING ; } 
-<TRANS_IMPORT_COMMENT>.|\n { printf("\n");}
+<TRANS_IMPORT_COMMENT>. {}
+<TRANS_IMPORT_COMMENT>\n { printf("\n");}
 
 <REGX>\" { printf("REGX_END ");BEGIN TRANS_IMPORT;return REGX_END;}
 <REGX>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
 <REGX>[\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
-<REGX>.|\n { printf("\n");}
+<REGX>. {}
+<REGX>\n { printf("\n");}
 
 <TRANS_IMPORT>include { printf("INCLUDE ");return INCLUDE;}
 <TRANS_IMPORT>exclude { printf("EXCLUDE ");return EXCLUDE;}
@@ -45,7 +49,8 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_IMPORT>; { printf("SEM ");BEGIN TRANS_RULE;return SEM;}
 <TRANS_IMPORT>[\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
 <TRANS_IMPORT>[ \t] {} 
-<TRANS_IMPORT>.|\n { printf("\n");}
+<TRANS_IMPORT>. {}
+<TRANS_IMPORT>\n { printf("\n");}
 
 <TRANS_RULE>= {  printf("EQ ");BEGIN TRANS_PRIORITY;return EQ;}
 <TRANS_RULE>@ {  printf("IMPORT ");BEGIN TRANS_IMPORT;return IMPORT;}
@@ -55,11 +60,13 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_RULE>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
 <TRANS_RULE>"}" {  printf("RBRACE ");BEGIN 0;return RBRACE;}
 <TRANS_RULE>[^\"=>;}\n\t@ ]+ {  printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; }
-<TRANS_RULE>.|\n { printf("\n");}
+<TRANS_RULE>. {}
+<TRANS_RULE>\n { printf("\n");}
 
 <TRANS_PRIORITY>[0-9]+ { printf("NUMBER ");yylval.d=atoi(yytext);return NUMBER;}
 <TRANS_PRIORITY>> { printf("TRANS_RULE ");BEGIN TRANS_RULE;return GT;}
-<TRANS_PRIORITY>.|\n { printf("\n");}
+<TRANS_PRIORITY>. {}
+<TRANS_PRIORITY>\n { printf("\n");}
 %%
 
 
