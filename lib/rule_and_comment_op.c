@@ -2,7 +2,7 @@
 #include <string.h>
 #include "netknife.h"
 #include <stdio.h>
-
+#include <unistd.h>
 
 struct rule * join_rule(char  * s , char * d,int lineno , int priority ){
 	struct rule * tmp = malloc(sizeof(struct rule));
@@ -27,6 +27,7 @@ struct comment * join_comment(char * c, int lineno ){
 
 void  print_comment(struct comment * c){
 	printf("%*snode_type:COMMENT\n",PRINT_COMMENT);
+	sleep(1);
 	printf("%*slineno:%d\n",PRINT_COMMENT,c->lineno);
 	printf("%*sstring:%s\n",PRINT_COMMENT,c->c);
 }

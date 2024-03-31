@@ -530,7 +530,7 @@ static const yytype_int8 yyrline[] =
       53,    54,    57,    58,    59,    60,    61,    64,    65,    66,
       67,    70,    71,    72,    73,    77,    78,    79,    80,    81,
       82,    83,    84,    85,    86,    87,    88,    91,    94,    99,
-     101,   106,   111,   118,   119,   120,   121,   122
+     101,   106,   109,   114,   115,   116,   117,   118
 };
 #endif
 
@@ -1391,55 +1391,51 @@ yyreduce:
   case 41: /* rule_table_exp: index_string_exp EQ GT index_string_exp SEM  */
 #line 106 "netknife.y"
                                                               {
-		    printf((yyvsp[-4].s)); 
-		    printf((yyvsp[-1].s)); 
 			(yyval.rule_tab)=join_rule_table(join_rule((yyvsp[-4].s),(yyvsp[-1].s),yylineno,0));
 		 }
-#line 1399 "netknife.tab.c"
+#line 1397 "netknife.tab.c"
     break;
 
   case 42: /* rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp SEM  */
-#line 111 "netknife.y"
+#line 109 "netknife.y"
                                                                 {
-		    printf((yyvsp[-5].s)); 
-		    printf((yyvsp[-1].s)); 
 		   (yyval.rule_tab)=join_rule_table(join_rule((yyvsp[-5].s),(yyvsp[-1].s),yylineno,(yyvsp[-3].d)));
 		 }
-#line 1409 "netknife.tab.c"
+#line 1405 "netknife.tab.c"
     break;
 
   case 43: /* index_string_exp: STRING  */
-#line 118 "netknife.y"
+#line 114 "netknife.y"
                           {(yyval.s)=strcat((yyval.s),(yyvsp[0].s));}
-#line 1415 "netknife.tab.c"
+#line 1411 "netknife.tab.c"
     break;
 
   case 44: /* index_string_exp: LINE_BREAK  */
-#line 119 "netknife.y"
+#line 115 "netknife.y"
                               { (yyval.s)=strcat((yyval.s),(yyvsp[0].s));}
-#line 1421 "netknife.tab.c"
+#line 1417 "netknife.tab.c"
     break;
 
   case 45: /* index_string_exp: index_string_exp STRING  */
-#line 120 "netknife.y"
+#line 116 "netknife.y"
                                            { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
-#line 1427 "netknife.tab.c"
+#line 1423 "netknife.tab.c"
     break;
 
   case 46: /* index_string_exp: index_string_exp EMPTY  */
-#line 121 "netknife.y"
+#line 117 "netknife.y"
                                            { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
-#line 1433 "netknife.tab.c"
+#line 1429 "netknife.tab.c"
     break;
 
   case 47: /* index_string_exp: index_string_exp LINE_BREAK  */
-#line 122 "netknife.y"
+#line 118 "netknife.y"
                                                { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
-#line 1439 "netknife.tab.c"
+#line 1435 "netknife.tab.c"
     break;
 
 
-#line 1443 "netknife.tab.c"
+#line 1439 "netknife.tab.c"
 
       default: break;
     }
@@ -1632,7 +1628,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 126 "netknife.y"
+#line 122 "netknife.y"
 
 
 

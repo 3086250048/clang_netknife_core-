@@ -104,13 +104,9 @@ comment_table_exp : COMMENT_START index_string_exp COMMENT_END {
 		  ;
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
-		    printf($1); 
-		    printf($4); 
 			$$=join_rule_table(join_rule($1,$4,yylineno,0));
 		 }
 	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
-		    printf($1); 
-		    printf($5); 
 		   $$=join_rule_table(join_rule($1,$5,yylineno,$3));
 		 }
 		;
