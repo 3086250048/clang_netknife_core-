@@ -63,7 +63,7 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_RULE>\\n {  printf("LINE_BREAK ");yylval.s=strdup("\n"); return LINE_BREAK;}
 <TRANS_RULE>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
 <TRANS_RULE>"}" {  printf("RBRACE\n");BEGIN 0;return RBRACE;}
-<TRANS_RULE>[^\"=>;}\n\t@ ]+ {  printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; }
+<TRANS_RULE>[^\"=>;}\n\t@ ]+ {  printf("STRING ");printf(" %s ",yytext);;yylval.s=strdup(yytext) ;return STRING ; }
 <TRANS_RULE>. {}
 <TRANS_RULE>\n { printf("\n");}
 

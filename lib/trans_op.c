@@ -54,7 +54,7 @@ struct trans * get_trans_table_entry(struct trans_table * trans_tab , char * fil
 //获取表地址
 struct trans_table * get_trans_table(){
 		struct trans_table * tmp = trans_tab ;
-		trans_tab = malloc(sizeof(struct trans_table)*MAX_HASH);
+		trans_tab = calloc(MAX_HASH, sizeof(struct trans_table) );
 		return tmp;
 }
 

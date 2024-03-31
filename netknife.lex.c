@@ -1081,7 +1081,7 @@ YY_RULE_SETUP
 case 44:
 YY_RULE_SETUP
 #line 66 "netknife.l"
-{  printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; }
+{  printf("STRING ");printf(" %s ",yytext);;yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP

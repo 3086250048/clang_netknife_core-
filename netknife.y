@@ -100,11 +100,14 @@ regx_exp : REGX_START index_string_exp REGX_END {
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=string($2); }
 
 comment_table_exp : COMMENT_START index_string_exp COMMENT_END { 
-			$$=join_comment_table(join_comment(string($2),yylineno));
+
+			 $$=join_comment_table(join_comment(string($2),yylineno));
 		  }
 		  ;
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
+	   	  print_index_string($1);
+	   	  print_index_string($4);
 		  $$=join_rule_table(join_rule(string($1),string($4),yylineno,0));
 		 }
 	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
@@ -112,10 +115,7 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
 		 }
 		;
 
-
-
-
-index_string_exp : STRING { $$=join_index_string($$,$1);}
+index_string_exp : STRING {$$=join_index_string($$,$1);}
 		 | LINE_BREAK { $$=join_index_string($$,$1);}
 		 | index_string_exp STRING {  $$=join_index_string($1,$2);}
 		 | index_string_exp EMPTY  {  $$=join_index_string($1,$2);}

@@ -9,7 +9,6 @@ void cat_test(char * s1,char *s2){
 
 
 int main(){
-	char * s = "1";
 
-	strcmp(s," ");
+	strcmp("这是测试"," ");
 }

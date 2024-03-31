@@ -1,12 +1,15 @@
 trans cisco_to_huawei {
+
+	show ip int b => display ip int b;
 	@huaw_test include r"^daw [daw" , r"^ddkad",22 to "d",22,"232","121" to "ddd" ;  	
-	show ip int b =100> display ip int b;
 	show ip \n int b =100> display ip int b;  
 	show ip \n int b =100> display ip int b;  
 	show ip \n int b =100> display ip int b;  
 	show ip \n int b =100> display ip int b;  
 	show ip \n int b =100> display ip int b;  
-	show ip \n int b =100> display ip int b;  
+ dispa=100> display ip int b; 
+"这是测试"
+
 }
 
 
