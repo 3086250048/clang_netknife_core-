@@ -60,10 +60,10 @@ struct trans_table * get_trans_table(){
 
 //打印trans_table表项
 void print_trans_table_entry(struct trans * trans){
-	printf("node_type:TRANS\n");
-	printf("filename:%s\n",trans->filename);
-	printf("trans_name:%s\n",trans->trans_name);
-	printf("lineno:%d\n",trans->lineno);
+	printf("%*snode_type:TRANS_NODE\n");
+	printf("%*sfilename:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->filename);
+	printf("%*strans_name:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->trans_name);
+	printf("%*slineno:%d\n",PRINT_TRANS_TABLE_ENTRY,trans->lineno);
 	int i;
 	if(trans->rule_tab)
 	for(i=0;i<MAX_HASH;i++){

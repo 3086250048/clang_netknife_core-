@@ -1,15 +1,14 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include  "netknife.h"
 %}
 
 
 %union {
-void * reduce;
 int d;
 char * s;
-struct index_string * str;
 struct rule * r;
 struct comment * c;
 struct rule_table * rule_tab;
@@ -28,7 +27,7 @@ struct trans_table * trans_tab ;
 %token <d> NUMBER 
 %token <s> STRING EMPTY LINE_BREAK
 %token TRANS IMPORT COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END 
-%type <str> index_string_exp const_comment_exp
+%type <s> index_string_exp const_comment_exp
 %type <rule_tab> rule_table_exp
 %type <comment_tab> comment_table_exp
 %type <reg> regx_exp
@@ -90,37 +89,40 @@ range_exp : NUMBER { $$=join_range($1,0,NULL,NULL); }
   ;
 
 regx_exp : REGX_START index_string_exp REGX_END {
-   $$=join_regx(string($2));
+   $$=join_regx($2);
  }
  | regx_exp COMMA  REGX_START index_string_exp REGX_END {
-   $$=join_regx(string($4));
+   $$=join_regx($4);
  }
  ;
 
-const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=string($2); }
+const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=$2; }
 
 comment_table_exp : COMMENT_START index_string_exp COMMENT_END { 
-
-			 $$=join_comment_table(join_comment(string($2),yylineno));
+			 $$=join_comment_table(join_comment($2,yylineno));
 		  }
 		  ;
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
-	   	  print_index_string($1);
-	   	  print_index_string($4);
-		  $$=join_rule_table(join_rule(string($1),string($4),yylineno,0));
+		    printf($1); 
+		    printf($4); 
+			$$=join_rule_table(join_rule($1,$4,yylineno,0));
 		 }
 	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
-		  $$=join_rule_table(join_rule(string($1),string($5),yylineno,$3));
+		    printf($1); 
+		    printf($5); 
+		   $$=join_rule_table(join_rule($1,$5,yylineno,$3));
 		 }
 		;
 
-index_string_exp : STRING {$$=join_index_string($$,$1);}
-		 | LINE_BREAK { $$=join_index_string($$,$1);}
-		 | index_string_exp STRING {  $$=join_index_string($1,$2);}
-		 | index_string_exp EMPTY  {  $$=join_index_string($1,$2);}
-		 | index_string_exp LINE_BREAK { $$=join_index_string($1,$2);}
+index_string_exp : STRING {$$=strcat($$,$1);}
+		 | LINE_BREAK { $$=strcat($$,$1);}
+		 | index_string_exp STRING { $$=strcat($1,$2);}
+		 | index_string_exp EMPTY  { $$=strcat($1,$2);}
+		 | index_string_exp LINE_BREAK { $$=strcat($1,$2);}
 		 ;
+
+
 %%
 
 

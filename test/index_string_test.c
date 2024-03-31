@@ -10,8 +10,8 @@ static struct index_string *  drop_index_string_htempty(struct index_string * ro
 			tmp = root->next;
 	}
 	
-	struct index_string * prev,*result =tmp ;
-	if(!prev->next ) return result;
+	struct index_string * prev =tmp ,*result =tmp ;
+	if(prev->next==NULL ) return result;
 	while(tmp->next){
 			prev = tmp ;
 			tmp=tmp->next;
@@ -63,11 +63,12 @@ void print_index_string(struct index_string * root){
 }
 
 int main(){
-    struct index_string * s=join_index_string(NULL," ");
+    struct index_string * s=join_index_string(NULL,NULL);
     s=join_index_string(s,"t这");
     s=join_index_string(s,"is");	
     s=join_index_string(s," ");
     s=join_index_string(s,"你好");
+    s=join_index_string(s,NULL);
 	print_index_string(s);
 
 

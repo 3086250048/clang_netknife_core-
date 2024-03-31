@@ -5,8 +5,27 @@ extern int yylineno;
 void yyerror(char * ,...);
 void init();
 
+#define PRINT_FACTOR 1
+
+#define PRINT_TRANS_TABLE_ENTRY 0*PRINT_FACTOR," "
+
+#define PRINT_IMPORT 5*PRINT_FACTOR," "
+
+#define PRINT_INCLUDE 10*PRINT_FACTOR," "
+#define PRINT_EXCLUDE 10*PRINT_FACTOR," "
+
+#define PRINT_REGX 15*PRINT_FACTOR," "
+#define PRINT_RANGE 15*PRINT_FACTOR," "
+
+#define PRINT_RULE_TABLE_ENTRY 5*PRINT_FACTOR," "
+#define PRINT_COMMENT_TABLE_ENTRY 5*PRINT_FACTOR," "
+
+#define PRINT_RULE 10*PRINT_FACTOR," "
+#define PRINT_COMMENT 10*PRINT_FACTOR," " 
 
 #define MAX_HASH 9999
+
+
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans_table * trans_tab ;
@@ -20,49 +39,30 @@ enum node_type {
 	RANGE_NODE,
 	INCLUDE_NODE,
 	EXCLUDE_NODE,
-	RULE_TABLE_NODE,
-	COMMENT_TABLE_NODE,
+	RULE_TABLE_ENTRY_NODE,
+	COMMENT_TABLE_ENTRY_NODE,
 	TRANS_NODE,
 	TRANS_TABLE_NODE
 };
-
-struct index_string {
-	int node_type;
-	char * s;
-	struct index_string * next ;
-};
-
-
-//添加字符到索引字符串
-struct index_string * join_index_string(struct index_string * root,char * str);
-//获取索引字符串的根节点地址,并作预处理
-struct index_string * string();
-//释放索引字符串
-void free_index_string(struct index_string * index_str_root);
-//打印当前索引字符串
-void print_index_string(struct index_string * index_str_root);
-//合并index_string 
-char * cat_string(struct index_string * root);
-
 
 struct rule {
 	int node_type;
 	int lineno;
 	int priority;
-	struct index_string * s;
-	struct index_string * d;
+	char  * s;
+	char  * d;
 };
 
 struct comment {
 	int node_type ;
 	int lineno;
-	struct index_string * c;
+	char  * c;
 };
 
 //添加参数到rule中
-struct rule * join_rule(struct index_string * s , struct index_string * d , int lineno , int priority );
+struct rule * join_rule(char  * s , char  * d , int lineno , int priority );
 //添加参数到comment中
-struct comment * join_comment(struct index_string * c , int lineno );
+struct comment * join_comment(char  * c , int lineno );
 //打印rule中的参数
 void print_rule(struct rule *  r);
 //打印comment中的参数
@@ -86,9 +86,9 @@ struct rule_table * join_rule_table(struct rule * r);
 //添加comment 到表中
 struct comment_table * join_comment_table(struct comment * c);
 //获取rule_table_entry
-struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab ,struct index_string * s);
+struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab ,char  * s);
 //获取comment_table_entry
-struct comment_table * get_comment_table_entry(struct comment_table * comment_tab ,struct index_string * c);
+struct comment_table * get_comment_table_entry(struct comment_table * comment_tab ,char * c);
 //获取rule_table地址,重新分配空间给rule_tab
 struct rule_table *  get_rule_table();
 //获取comment_table地址,重新分配空间给comment_tab
@@ -101,7 +101,7 @@ void print_comment_table_entry(struct comment_table * comment_tab);
 
 struct regx {
 	int node_type;
-	struct index_string * exp ;
+	char  * exp ;
 	struct regx * next;
 };
 
@@ -109,8 +109,8 @@ struct range {
 	int node_type;
 	int s_lineno ;
 	int d_lineno ;
-	struct index_string  * s_comment;
-	struct index_string  * d_comment;
+	char  * s_comment;
+	char  * d_comment;
 	struct range * next ;
 };
 
@@ -138,12 +138,12 @@ struct import_rule {
 
 
 //添加正则表达式
-struct regx * join_regx(struct index_string * exp);
+struct regx * join_regx(char * exp);
 //获取正则表达式链表根节点
 struct regx * get_regx();
 
 //添加range表达式
-struct range * join_range( int s_lineno ,int d_lineno , struct index_string * s_comment ,struct index_string * d_comment );
+struct range * join_range( int s_lineno ,int d_lineno , char  * s_comment ,char * d_comment );
 //获取range的根
 struct range * get_range();
 //打印range

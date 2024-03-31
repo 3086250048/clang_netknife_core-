@@ -83,12 +83,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 8 "netknife.y"
+#line 9 "netknife.y"
 
-void * reduce;
 int d;
 char * s;
-struct index_string * str;
 struct rule * r;
 struct comment * c;
 struct rule_table * rule_tab;
@@ -101,7 +99,7 @@ struct import_rule * import_rule_chain;
 struct trans * trans;
 struct trans_table * trans_tab ;					  
 
-#line 105 "netknife.tab.h"
+#line 103 "netknife.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

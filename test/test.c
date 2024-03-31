@@ -7,8 +7,9 @@ void cat_test(char * s1,char *s2){
 	printf("%s\n",s3);
 }
 
+#define PRINT 10," "
 
 int main(){
-
-	strcmp("这是测试"," ");
+	printf(" ");
+	printf("%*s %s\n",PRINT,"test");
 }
