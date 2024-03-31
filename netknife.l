@@ -39,9 +39,7 @@ trans { printf("TRANS "); return TRANS;}
 
 <REGX>\" { printf("REGX_END ");BEGIN TRANS_IMPORT;return REGX_END;}
 <REGX>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY; }
-<REGX>[\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
-<REGX>. {}
-<REGX>\n { printf("\n");}
+<REGX>[^ "\t]+ { printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; } 
 
 
 
