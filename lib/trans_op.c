@@ -60,7 +60,7 @@ struct trans_table * get_trans_table(){
 
 //打印trans_table表项
 void print_trans_table_entry(struct trans * trans){
-	printf("%*snode_type:TRANS_NODE\n");
+	printf("%*snode_type:TRANS_NODE\n",PRINT_TRANS_TABLE_ENTRY);
 	printf("%*sfilename:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->filename);
 	printf("%*strans_name:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->trans_name);
 	printf("%*slineno:%d\n",PRINT_TRANS_TABLE_ENTRY,trans->lineno);

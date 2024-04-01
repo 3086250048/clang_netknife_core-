@@ -1,5 +1,14 @@
-trans cisco_to_huawei {
-	show ip \n int b =100> display ip int b;  
+trans cisco_to_huawei {	
+	"查询命令"
+	show ip int b =100> display ip int b;    
+	@huawei_to_cisco include 22  ; 
+	"查询命令"
+	你好 ip int b =100> display ip int b;   
+	"查询命令"
+	@huawei 
+	include 99 to 100 
+	include r"^dipslya"
+    exclude 100 ; 
 }
 
 

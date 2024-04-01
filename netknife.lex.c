@@ -896,7 +896,7 @@ case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
 #line 20 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
@@ -912,7 +912,7 @@ case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
 #line 25 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -938,7 +938,7 @@ case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
 #line 31 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
@@ -964,7 +964,7 @@ case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
 #line 37 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
@@ -1041,7 +1041,7 @@ case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
 #line 57 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
@@ -1081,7 +1081,7 @@ YY_RULE_SETUP
 case 44:
 YY_RULE_SETUP
 #line 66 "netknife.l"
-{  printf("STRING ");printf(" %s ",yytext);;yylval.s=strdup(yytext) ;return STRING ; }
+{  printf("STRING ");yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
@@ -1092,7 +1092,7 @@ case 46:
 /* rule 46 can match eol */
 YY_RULE_SETUP
 #line 68 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
@@ -1113,7 +1113,7 @@ case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
 #line 73 "netknife.l"
-{}
+{ printf("\n");}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP

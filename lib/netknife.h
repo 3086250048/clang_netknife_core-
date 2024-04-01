@@ -7,14 +7,13 @@ void init();
 
 #define PRINT_FACTOR 1
 
-#define PRINT_TRANS_TABLE_ENTRY 0*PRINT_FACTOR," "
+#define PRINT_TRANS_TABLE_ENTRY 0*PRINT_FACTOR,""
 
 #define PRINT_IMPORT 5*PRINT_FACTOR," "
 
 #define PRINT_INCLUDE 10*PRINT_FACTOR," "
 #define PRINT_EXCLUDE 10*PRINT_FACTOR," "
 
-#define PRINT_REGX 15*PRINT_FACTOR," "
 #define PRINT_RANGE 15*PRINT_FACTOR," "
 
 #define PRINT_RULE_TABLE_ENTRY 5*PRINT_FACTOR," "
@@ -44,6 +43,8 @@ enum node_type {
 	TRANS_NODE,
 	TRANS_TABLE_NODE
 };
+
+char * trim(char * str);
 
 struct rule {
 	int node_type;
@@ -99,14 +100,9 @@ void print_rule_table_entry(struct rule_table * rule_tab);
 void print_comment_table_entry(struct comment_table * comment_tab);
 
 
-struct regx {
-	int node_type;
-	char  * exp ;
-	struct regx * next;
-};
-
 struct range {
 	int node_type;
+	char * regx;
 	int s_lineno ;
 	int d_lineno ;
 	char  * s_comment;
@@ -117,14 +113,14 @@ struct range {
 
 struct include {
 	int node_type;
-	struct regx * regx;
 	struct range * range;
+	struct include * next;
 };
 
 struct exclude {
 	int node_type ;
-	struct regx * regx ;
 	struct range * range ;
+	struct exclude * next;
 };
 
 struct import_rule {	
@@ -137,29 +133,21 @@ struct import_rule {
 };
 
 
-//添加正则表达式
-struct regx * join_regx(char * exp);
-//获取正则表达式链表根节点
-struct regx * get_regx();
 
 //添加range表达式
-struct range * join_range( int s_lineno ,int d_lineno , char  * s_comment ,char * d_comment );
-//获取range的根
-struct range * get_range();
-//打印range
-void print_range(struct range * range_root);
+struct range * join_range(struct range * root ,char  * regx , int s_lineno ,int d_lineno , char  * s_comment ,char * d_comment );
 
 //添加include表达式
-struct include * join_include(struct include * include , struct regx * regx,struct range * range );
+struct include * join_include(struct include * root ,struct range * range );
 //添加exclude表达式
-struct exclude * join_exclude(struct exclude *  exclude , struct regx * regx,struct range * range );
+struct exclude * join_exclude(struct exclude *  root ,struct range * range );
 //添加 import_rule
 struct import_rule * join_import_rule(char * import_name ,int lineno  ,struct include *inc ,struct exclude * exc);
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
 
-//打印regx
-void print_regx(struct regx * regx_root);
+//打印range
+void print_range(struct range * range_root);
 //打印include
 void print_include(struct include * include_root);
 //打印exclude

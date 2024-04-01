@@ -21,71 +21,66 @@ Grammar
    14                      | IMPORT STRING include_exp exclude_exp SEM
    15                      | IMPORT STRING exclude_exp include_exp SEM
 
-   16 exclude_exp: EXCLUDE regx_exp
-   17            | EXCLUDE range_exp
-   18            | EXCLUDE regx_exp COMMA range_exp
-   19            | EXCLUDE range_exp COMMA regx_exp
+   16 exclude_exp: EXCLUDE range_exp
+   17            | exclude_exp EXCLUDE range_exp
 
-   20 include_exp: INCLUDE regx_exp
-   21            | INCLUDE range_exp
-   22            | INCLUDE regx_exp COMMA range_exp
-   23            | INCLUDE range_exp COMMA regx_exp
+   18 include_exp: INCLUDE range_exp
+   19            | include_exp INCLUDE range_exp
 
-   24 range_exp: NUMBER
-   25          | const_comment_exp
-   26          | NUMBER TO NUMBER
-   27          | const_comment_exp TO const_comment_exp
-   28          | NUMBER TO const_comment_exp
-   29          | const_comment_exp TO NUMBER
-   30          | range_exp COMMA const_comment_exp
-   31          | range_exp COMMA NUMBER
-   32          | range_exp COMMA NUMBER TO NUMBER
-   33          | range_exp COMMA NUMBER TO const_comment_exp
-   34          | range_exp COMMA const_comment_exp TO NUMBER
-   35          | range_exp COMMA const_comment_exp TO const_comment_exp
+   20 range_exp: NUMBER
+   21          | const_comment_exp
+   22          | REGX_START index_string_exp REGX_END
+   23          | NUMBER TO NUMBER
+   24          | const_comment_exp TO const_comment_exp
+   25          | NUMBER TO const_comment_exp
+   26          | const_comment_exp TO NUMBER
+   27          | range_exp COMMA REGX_START index_string_exp REGX_END
+   28          | range_exp COMMA const_comment_exp
+   29          | range_exp COMMA NUMBER
+   30          | range_exp COMMA NUMBER TO NUMBER
+   31          | range_exp COMMA NUMBER TO const_comment_exp
+   32          | range_exp COMMA const_comment_exp TO NUMBER
+   33          | range_exp COMMA const_comment_exp TO const_comment_exp
 
-   36 regx_exp: REGX_START index_string_exp REGX_END
-   37         | regx_exp COMMA REGX_START index_string_exp REGX_END
+   34 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-   38 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   35 comment_table_exp: COMMENT_START index_string_exp COMMENT_END
 
-   39 comment_table_exp: COMMENT_START index_string_exp COMMENT_END
+   36 rule_table_exp: index_string_exp EQ GT index_string_exp SEM
+   37               | index_string_exp EQ NUMBER GT index_string_exp SEM
 
-   40 rule_table_exp: index_string_exp EQ GT index_string_exp SEM
-   41               | index_string_exp EQ NUMBER GT index_string_exp SEM
-
-   42 index_string_exp: STRING
-   43                 | LINE_BREAK
-   44                 | index_string_exp STRING
-   45                 | index_string_exp EMPTY
-   46                 | index_string_exp LINE_BREAK
+   38 index_string_exp: STRING
+   39                 | LINE_BREAK
+   40                 | index_string_exp STRING
+   41                 | index_string_exp EMPTY
+   42                 | index_string_exp LINE_BREAK
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    NUMBER <d> (258) 24 26 28 29 31 32 33 34 41
-    STRING <s> (259) 3 4 11 12 13 14 15 42 44
-    EMPTY <s> (260) 45
-    LINE_BREAK <s> (261) 43 46
+    NUMBER <d> (258) 20 23 25 26 29 30 31 32 37
+    STRING <s> (259) 3 4 11 12 13 14 15 38 40
+    EMPTY <s> (260) 41
+    LINE_BREAK <s> (261) 39 42
     TRANS (262) 3 4
     IMPORT (263) 11 12 13 14 15
-    COMMENT_START (264) 39
-    COMMENT_END (265) 39
-    INCLUDE (266) 20 21 22 23
-    EXCLUDE (267) 16 17 18 19
-    TO (268) 26 27 28 29 32 33 34 35
+    COMMENT_START (264) 35
+    COMMENT_END (265) 35
+    INCLUDE (266) 18 19
+    EXCLUDE (267) 16 17
+    TO (268) 23 24 25 26 30 31 32 33
     LBRACE (269) 3 4
     RBRACE (270) 3 4
-    REGX_START (271) 36 37
-    REGX_END (272) 36 37
-    COMMA (273) 18 19 22 23 30 31 32 33 34 35 37
-    EQ (274) 40 41
-    GT (275) 40 41
-    SEM (276) 11 12 13 14 15 40 41
-    TRANS_IMPORT_COMMENT_START (277) 38
-    TRANS_IMPORT_COMMENT_END (278) 38
+    REGX_START (271) 22 27
+    REGX_END (272) 22 27
+    COMMA (273) 27 28 29 30 31 32 33
+    EQ (274) 36 37
+    GT (275) 36 37
+    SEM (276) 11 12 13 14 15 36 37
+    TRANS_IMPORT_COMMENT_START (277) 34
+    TRANS_IMPORT_COMMENT_END (278) 34
 
 
 Nonterminals, with rules where they appear
@@ -105,29 +100,26 @@ Nonterminals, with rules where they appear
         on left: 11 12 13 14 15
         on right: 7 10
     exclude_exp <exc> (29)
-        on left: 16 17 18 19
-        on right: 13 14 15
+        on left: 16 17
+        on right: 13 14 15 17
     include_exp <inc> (30)
-        on left: 20 21 22 23
-        on right: 12 14 15
+        on left: 18 19
+        on right: 12 14 15 19
     range_exp <ran> (31)
-        on left: 24 25 26 27 28 29 30 31 32 33 34 35
-        on right: 17 18 19 21 22 23 30 31 32 33 34 35
-    regx_exp <reg> (32)
-        on left: 36 37
-        on right: 16 18 19 20 22 23 37
-    const_comment_exp <s> (33)
-        on left: 38
-        on right: 25 27 28 29 30 33 34 35
-    comment_table_exp <comment_tab> (34)
-        on left: 39
+        on left: 20 21 22 23 24 25 26 27 28 29 30 31 32 33
+        on right: 16 17 18 19 27 28 29 30 31 32 33
+    const_comment_exp <s> (32)
+        on left: 34
+        on right: 21 24 25 26 28 31 32 33
+    comment_table_exp <comment_tab> (33)
+        on left: 35
         on right: 6 9
-    rule_table_exp <rule_tab> (35)
-        on left: 40 41
+    rule_table_exp <rule_tab> (34)
+        on left: 36 37
         on right: 5 8
-    index_string_exp <s> (36)
-        on left: 42 43 44 45 46
-        on right: 36 37 38 39 40 41 44 45 46
+    index_string_exp <s> (35)
+        on left: 38 39 40 41 42
+        on right: 22 27 34 35 36 37 40 41 42
 
 
 State 0
@@ -199,14 +191,14 @@ State 6
    13                      | • IMPORT STRING exclude_exp SEM
    14                      | • IMPORT STRING include_exp exclude_exp SEM
    15                      | • IMPORT STRING exclude_exp include_exp SEM
-   39 comment_table_exp: • COMMENT_START index_string_exp COMMENT_END
-   40 rule_table_exp: • index_string_exp EQ GT index_string_exp SEM
-   41               | • index_string_exp EQ NUMBER GT index_string_exp SEM
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   35 comment_table_exp: • COMMENT_START index_string_exp COMMENT_END
+   36 rule_table_exp: • index_string_exp EQ GT index_string_exp SEM
+   37               | • index_string_exp EQ NUMBER GT index_string_exp SEM
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING         shift, and go to state 7
     LINE_BREAK     shift, and go to state 8
@@ -223,16 +215,16 @@ State 6
 
 State 7
 
-   42 index_string_exp: STRING •
+   38 index_string_exp: STRING •
 
-    $default  reduce using rule 42 (index_string_exp)
+    $default  reduce using rule 38 (index_string_exp)
 
 
 State 8
 
-   43 index_string_exp: LINE_BREAK •
+   39 index_string_exp: LINE_BREAK •
 
-    $default  reduce using rule 43 (index_string_exp)
+    $default  reduce using rule 39 (index_string_exp)
 
 
 State 9
@@ -248,12 +240,12 @@ State 9
 
 State 10
 
-   39 comment_table_exp: COMMENT_START • index_string_exp COMMENT_END
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   35 comment_table_exp: COMMENT_START • index_string_exp COMMENT_END
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 7
     LINE_BREAK  shift, and go to state 8
@@ -279,14 +271,14 @@ State 12
    13                      | • IMPORT STRING exclude_exp SEM
    14                      | • IMPORT STRING include_exp exclude_exp SEM
    15                      | • IMPORT STRING exclude_exp include_exp SEM
-   39 comment_table_exp: • COMMENT_START index_string_exp COMMENT_END
-   40 rule_table_exp: • index_string_exp EQ GT index_string_exp SEM
-   41               | • index_string_exp EQ NUMBER GT index_string_exp SEM
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   35 comment_table_exp: • COMMENT_START index_string_exp COMMENT_END
+   36 rule_table_exp: • index_string_exp EQ GT index_string_exp SEM
+   37               | • index_string_exp EQ NUMBER GT index_string_exp SEM
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING         shift, and go to state 7
     LINE_BREAK     shift, and go to state 8
@@ -323,11 +315,11 @@ State 15
 
 State 16
 
-   40 rule_table_exp: index_string_exp • EQ GT index_string_exp SEM
-   41               | index_string_exp • EQ NUMBER GT index_string_exp SEM
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   36 rule_table_exp: index_string_exp • EQ GT index_string_exp SEM
+   37               | index_string_exp • EQ NUMBER GT index_string_exp SEM
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING      shift, and go to state 23
     EMPTY       shift, and go to state 24
@@ -342,14 +334,10 @@ State 17
    13                      | IMPORT STRING • exclude_exp SEM
    14                      | IMPORT STRING • include_exp exclude_exp SEM
    15                      | IMPORT STRING • exclude_exp include_exp SEM
-   16 exclude_exp: • EXCLUDE regx_exp
-   17            | • EXCLUDE range_exp
-   18            | • EXCLUDE regx_exp COMMA range_exp
-   19            | • EXCLUDE range_exp COMMA regx_exp
-   20 include_exp: • INCLUDE regx_exp
-   21            | • INCLUDE range_exp
-   22            | • INCLUDE regx_exp COMMA range_exp
-   23            | • INCLUDE range_exp COMMA regx_exp
+   16 exclude_exp: • EXCLUDE range_exp
+   17            | • exclude_exp EXCLUDE range_exp
+   18 include_exp: • INCLUDE range_exp
+   19            | • include_exp INCLUDE range_exp
 
     INCLUDE  shift, and go to state 27
     EXCLUDE  shift, and go to state 28
@@ -361,10 +349,10 @@ State 17
 
 State 18
 
-   39 comment_table_exp: COMMENT_START index_string_exp • COMMENT_END
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   35 comment_table_exp: COMMENT_START index_string_exp • COMMENT_END
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING       shift, and go to state 23
     EMPTY        shift, and go to state 24
@@ -402,29 +390,29 @@ State 22
 
 State 23
 
-   44 index_string_exp: index_string_exp STRING •
+   40 index_string_exp: index_string_exp STRING •
 
-    $default  reduce using rule 44 (index_string_exp)
+    $default  reduce using rule 40 (index_string_exp)
 
 
 State 24
 
-   45 index_string_exp: index_string_exp EMPTY •
+   41 index_string_exp: index_string_exp EMPTY •
 
-    $default  reduce using rule 45 (index_string_exp)
+    $default  reduce using rule 41 (index_string_exp)
 
 
 State 25
 
-   46 index_string_exp: index_string_exp LINE_BREAK •
+   42 index_string_exp: index_string_exp LINE_BREAK •
 
-    $default  reduce using rule 46 (index_string_exp)
+    $default  reduce using rule 42 (index_string_exp)
 
 
 State 26
 
-   40 rule_table_exp: index_string_exp EQ • GT index_string_exp SEM
-   41               | index_string_exp EQ • NUMBER GT index_string_exp SEM
+   36 rule_table_exp: index_string_exp EQ • GT index_string_exp SEM
+   37               | index_string_exp EQ • NUMBER GT index_string_exp SEM
 
     NUMBER  shift, and go to state 33
     GT      shift, and go to state 34
@@ -432,64 +420,56 @@ State 26
 
 State 27
 
-   20 include_exp: INCLUDE • regx_exp
-   21            | INCLUDE • range_exp
-   22            | INCLUDE • regx_exp COMMA range_exp
-   23            | INCLUDE • range_exp COMMA regx_exp
-   24 range_exp: • NUMBER
-   25          | • const_comment_exp
-   26          | • NUMBER TO NUMBER
-   27          | • const_comment_exp TO const_comment_exp
-   28          | • NUMBER TO const_comment_exp
-   29          | • const_comment_exp TO NUMBER
-   30          | • range_exp COMMA const_comment_exp
-   31          | • range_exp COMMA NUMBER
-   32          | • range_exp COMMA NUMBER TO NUMBER
-   33          | • range_exp COMMA NUMBER TO const_comment_exp
-   34          | • range_exp COMMA const_comment_exp TO NUMBER
-   35          | • range_exp COMMA const_comment_exp TO const_comment_exp
-   36 regx_exp: • REGX_START index_string_exp REGX_END
-   37         | • regx_exp COMMA REGX_START index_string_exp REGX_END
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   18 include_exp: INCLUDE • range_exp
+   20 range_exp: • NUMBER
+   21          | • const_comment_exp
+   22          | • REGX_START index_string_exp REGX_END
+   23          | • NUMBER TO NUMBER
+   24          | • const_comment_exp TO const_comment_exp
+   25          | • NUMBER TO const_comment_exp
+   26          | • const_comment_exp TO NUMBER
+   27          | • range_exp COMMA REGX_START index_string_exp REGX_END
+   28          | • range_exp COMMA const_comment_exp
+   29          | • range_exp COMMA NUMBER
+   30          | • range_exp COMMA NUMBER TO NUMBER
+   31          | • range_exp COMMA NUMBER TO const_comment_exp
+   32          | • range_exp COMMA const_comment_exp TO NUMBER
+   33          | • range_exp COMMA const_comment_exp TO const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
     NUMBER                      shift, and go to state 35
     REGX_START                  shift, and go to state 36
     TRANS_IMPORT_COMMENT_START  shift, and go to state 37
 
     range_exp          go to state 38
-    regx_exp           go to state 39
-    const_comment_exp  go to state 40
+    const_comment_exp  go to state 39
 
 
 State 28
 
-   16 exclude_exp: EXCLUDE • regx_exp
-   17            | EXCLUDE • range_exp
-   18            | EXCLUDE • regx_exp COMMA range_exp
-   19            | EXCLUDE • range_exp COMMA regx_exp
-   24 range_exp: • NUMBER
-   25          | • const_comment_exp
-   26          | • NUMBER TO NUMBER
-   27          | • const_comment_exp TO const_comment_exp
-   28          | • NUMBER TO const_comment_exp
-   29          | • const_comment_exp TO NUMBER
-   30          | • range_exp COMMA const_comment_exp
-   31          | • range_exp COMMA NUMBER
-   32          | • range_exp COMMA NUMBER TO NUMBER
-   33          | • range_exp COMMA NUMBER TO const_comment_exp
-   34          | • range_exp COMMA const_comment_exp TO NUMBER
-   35          | • range_exp COMMA const_comment_exp TO const_comment_exp
-   36 regx_exp: • REGX_START index_string_exp REGX_END
-   37         | • regx_exp COMMA REGX_START index_string_exp REGX_END
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   16 exclude_exp: EXCLUDE • range_exp
+   20 range_exp: • NUMBER
+   21          | • const_comment_exp
+   22          | • REGX_START index_string_exp REGX_END
+   23          | • NUMBER TO NUMBER
+   24          | • const_comment_exp TO const_comment_exp
+   25          | • NUMBER TO const_comment_exp
+   26          | • const_comment_exp TO NUMBER
+   27          | • range_exp COMMA REGX_START index_string_exp REGX_END
+   28          | • range_exp COMMA const_comment_exp
+   29          | • range_exp COMMA NUMBER
+   30          | • range_exp COMMA NUMBER TO NUMBER
+   31          | • range_exp COMMA NUMBER TO const_comment_exp
+   32          | • range_exp COMMA const_comment_exp TO NUMBER
+   33          | • range_exp COMMA const_comment_exp TO const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
     NUMBER                      shift, and go to state 35
     REGX_START                  shift, and go to state 36
     TRANS_IMPORT_COMMENT_START  shift, and go to state 37
 
-    range_exp          go to state 41
-    regx_exp           go to state 42
-    const_comment_exp  go to state 40
+    range_exp          go to state 40
+    const_comment_exp  go to state 39
 
 
 State 29
@@ -503,26 +483,26 @@ State 30
 
    13 import_rule_chain_exp: IMPORT STRING exclude_exp • SEM
    15                      | IMPORT STRING exclude_exp • include_exp SEM
-   20 include_exp: • INCLUDE regx_exp
-   21            | • INCLUDE range_exp
-   22            | • INCLUDE regx_exp COMMA range_exp
-   23            | • INCLUDE range_exp COMMA regx_exp
+   17 exclude_exp: exclude_exp • EXCLUDE range_exp
+   18 include_exp: • INCLUDE range_exp
+   19            | • include_exp INCLUDE range_exp
 
     INCLUDE  shift, and go to state 27
-    SEM      shift, and go to state 43
+    EXCLUDE  shift, and go to state 41
+    SEM      shift, and go to state 42
 
-    include_exp  go to state 44
+    include_exp  go to state 43
 
 
 State 31
 
    12 import_rule_chain_exp: IMPORT STRING include_exp • SEM
    14                      | IMPORT STRING include_exp • exclude_exp SEM
-   16 exclude_exp: • EXCLUDE regx_exp
-   17            | • EXCLUDE range_exp
-   18            | • EXCLUDE regx_exp COMMA range_exp
-   19            | • EXCLUDE range_exp COMMA regx_exp
+   16 exclude_exp: • EXCLUDE range_exp
+   17            | • exclude_exp EXCLUDE range_exp
+   19 include_exp: include_exp • INCLUDE range_exp
 
+    INCLUDE  shift, and go to state 44
     EXCLUDE  shift, and go to state 28
     SEM      shift, and go to state 45
 
@@ -531,26 +511,26 @@ State 31
 
 State 32
 
-   39 comment_table_exp: COMMENT_START index_string_exp COMMENT_END •
+   35 comment_table_exp: COMMENT_START index_string_exp COMMENT_END •
 
-    $default  reduce using rule 39 (comment_table_exp)
+    $default  reduce using rule 35 (comment_table_exp)
 
 
 State 33
 
-   41 rule_table_exp: index_string_exp EQ NUMBER • GT index_string_exp SEM
+   37 rule_table_exp: index_string_exp EQ NUMBER • GT index_string_exp SEM
 
     GT  shift, and go to state 47
 
 
 State 34
 
-   40 rule_table_exp: index_string_exp EQ GT • index_string_exp SEM
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   36 rule_table_exp: index_string_exp EQ GT • index_string_exp SEM
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 7
     LINE_BREAK  shift, and go to state 8
@@ -560,23 +540,23 @@ State 34
 
 State 35
 
-   24 range_exp: NUMBER •  [INCLUDE, EXCLUDE, COMMA, SEM]
-   26          | NUMBER • TO NUMBER
-   28          | NUMBER • TO const_comment_exp
+   20 range_exp: NUMBER •  [INCLUDE, EXCLUDE, COMMA, SEM]
+   23          | NUMBER • TO NUMBER
+   25          | NUMBER • TO const_comment_exp
 
     TO  shift, and go to state 49
 
-    $default  reduce using rule 24 (range_exp)
+    $default  reduce using rule 20 (range_exp)
 
 
 State 36
 
-   36 regx_exp: REGX_START • index_string_exp REGX_END
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   22 range_exp: REGX_START • index_string_exp REGX_END
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 7
     LINE_BREAK  shift, and go to state 8
@@ -586,12 +566,12 @@ State 36
 
 State 37
 
-   38 const_comment_exp: TRANS_IMPORT_COMMENT_START • index_string_exp TRANS_IMPORT_COMMENT_END
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   34 const_comment_exp: TRANS_IMPORT_COMMENT_START • index_string_exp TRANS_IMPORT_COMMENT_END
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 7
     LINE_BREAK  shift, and go to state 8
@@ -601,81 +581,115 @@ State 37
 
 State 38
 
-   21 include_exp: INCLUDE range_exp •  [EXCLUDE, SEM]
-   23            | INCLUDE range_exp • COMMA regx_exp
-   30 range_exp: range_exp • COMMA const_comment_exp
-   31          | range_exp • COMMA NUMBER
-   32          | range_exp • COMMA NUMBER TO NUMBER
-   33          | range_exp • COMMA NUMBER TO const_comment_exp
-   34          | range_exp • COMMA const_comment_exp TO NUMBER
-   35          | range_exp • COMMA const_comment_exp TO const_comment_exp
+   18 include_exp: INCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
+   27 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
+   28          | range_exp • COMMA const_comment_exp
+   29          | range_exp • COMMA NUMBER
+   30          | range_exp • COMMA NUMBER TO NUMBER
+   31          | range_exp • COMMA NUMBER TO const_comment_exp
+   32          | range_exp • COMMA const_comment_exp TO NUMBER
+   33          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
     COMMA  shift, and go to state 52
 
-    $default  reduce using rule 21 (include_exp)
+    $default  reduce using rule 18 (include_exp)
 
 
 State 39
 
-   20 include_exp: INCLUDE regx_exp •  [EXCLUDE, SEM]
-   22            | INCLUDE regx_exp • COMMA range_exp
-   37 regx_exp: regx_exp • COMMA REGX_START index_string_exp REGX_END
+   21 range_exp: const_comment_exp •  [INCLUDE, EXCLUDE, COMMA, SEM]
+   24          | const_comment_exp • TO const_comment_exp
+   26          | const_comment_exp • TO NUMBER
 
-    COMMA  shift, and go to state 53
+    TO  shift, and go to state 53
 
-    $default  reduce using rule 20 (include_exp)
+    $default  reduce using rule 21 (range_exp)
 
 
 State 40
 
-   25 range_exp: const_comment_exp •  [INCLUDE, EXCLUDE, COMMA, SEM]
-   27          | const_comment_exp • TO const_comment_exp
-   29          | const_comment_exp • TO NUMBER
+   16 exclude_exp: EXCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
+   27 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
+   28          | range_exp • COMMA const_comment_exp
+   29          | range_exp • COMMA NUMBER
+   30          | range_exp • COMMA NUMBER TO NUMBER
+   31          | range_exp • COMMA NUMBER TO const_comment_exp
+   32          | range_exp • COMMA const_comment_exp TO NUMBER
+   33          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
-    TO  shift, and go to state 54
-
-    $default  reduce using rule 25 (range_exp)
-
-
-State 41
-
-   17 exclude_exp: EXCLUDE range_exp •  [INCLUDE, SEM]
-   19            | EXCLUDE range_exp • COMMA regx_exp
-   30 range_exp: range_exp • COMMA const_comment_exp
-   31          | range_exp • COMMA NUMBER
-   32          | range_exp • COMMA NUMBER TO NUMBER
-   33          | range_exp • COMMA NUMBER TO const_comment_exp
-   34          | range_exp • COMMA const_comment_exp TO NUMBER
-   35          | range_exp • COMMA const_comment_exp TO const_comment_exp
-
-    COMMA  shift, and go to state 55
-
-    $default  reduce using rule 17 (exclude_exp)
-
-
-State 42
-
-   16 exclude_exp: EXCLUDE regx_exp •  [INCLUDE, SEM]
-   18            | EXCLUDE regx_exp • COMMA range_exp
-   37 regx_exp: regx_exp • COMMA REGX_START index_string_exp REGX_END
-
-    COMMA  shift, and go to state 56
+    COMMA  shift, and go to state 52
 
     $default  reduce using rule 16 (exclude_exp)
 
 
-State 43
+State 41
+
+   17 exclude_exp: exclude_exp EXCLUDE • range_exp
+   20 range_exp: • NUMBER
+   21          | • const_comment_exp
+   22          | • REGX_START index_string_exp REGX_END
+   23          | • NUMBER TO NUMBER
+   24          | • const_comment_exp TO const_comment_exp
+   25          | • NUMBER TO const_comment_exp
+   26          | • const_comment_exp TO NUMBER
+   27          | • range_exp COMMA REGX_START index_string_exp REGX_END
+   28          | • range_exp COMMA const_comment_exp
+   29          | • range_exp COMMA NUMBER
+   30          | • range_exp COMMA NUMBER TO NUMBER
+   31          | • range_exp COMMA NUMBER TO const_comment_exp
+   32          | • range_exp COMMA const_comment_exp TO NUMBER
+   33          | • range_exp COMMA const_comment_exp TO const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+
+    NUMBER                      shift, and go to state 35
+    REGX_START                  shift, and go to state 36
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
+
+    range_exp          go to state 54
+    const_comment_exp  go to state 39
+
+
+State 42
 
    13 import_rule_chain_exp: IMPORT STRING exclude_exp SEM •
 
     $default  reduce using rule 13 (import_rule_chain_exp)
 
 
-State 44
+State 43
 
    15 import_rule_chain_exp: IMPORT STRING exclude_exp include_exp • SEM
+   19 include_exp: include_exp • INCLUDE range_exp
 
-    SEM  shift, and go to state 57
+    INCLUDE  shift, and go to state 44
+    SEM      shift, and go to state 55
+
+
+State 44
+
+   19 include_exp: include_exp INCLUDE • range_exp
+   20 range_exp: • NUMBER
+   21          | • const_comment_exp
+   22          | • REGX_START index_string_exp REGX_END
+   23          | • NUMBER TO NUMBER
+   24          | • const_comment_exp TO const_comment_exp
+   25          | • NUMBER TO const_comment_exp
+   26          | • const_comment_exp TO NUMBER
+   27          | • range_exp COMMA REGX_START index_string_exp REGX_END
+   28          | • range_exp COMMA const_comment_exp
+   29          | • range_exp COMMA NUMBER
+   30          | • range_exp COMMA NUMBER TO NUMBER
+   31          | • range_exp COMMA NUMBER TO const_comment_exp
+   32          | • range_exp COMMA const_comment_exp TO NUMBER
+   33          | • range_exp COMMA const_comment_exp TO const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+
+    NUMBER                      shift, and go to state 35
+    REGX_START                  shift, and go to state 36
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
+
+    range_exp          go to state 56
+    const_comment_exp  go to state 39
 
 
 State 45
@@ -688,442 +702,327 @@ State 45
 State 46
 
    14 import_rule_chain_exp: IMPORT STRING include_exp exclude_exp • SEM
+   17 exclude_exp: exclude_exp • EXCLUDE range_exp
 
-    SEM  shift, and go to state 58
+    EXCLUDE  shift, and go to state 41
+    SEM      shift, and go to state 57
 
 
 State 47
 
-   41 rule_table_exp: index_string_exp EQ NUMBER GT • index_string_exp SEM
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
+   37 rule_table_exp: index_string_exp EQ NUMBER GT • index_string_exp SEM
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 7
     LINE_BREAK  shift, and go to state 8
 
-    index_string_exp  go to state 59
+    index_string_exp  go to state 58
 
 
 State 48
 
-   40 rule_table_exp: index_string_exp EQ GT index_string_exp • SEM
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   36 rule_table_exp: index_string_exp EQ GT index_string_exp • SEM
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING      shift, and go to state 23
     EMPTY       shift, and go to state 24
     LINE_BREAK  shift, and go to state 25
-    SEM         shift, and go to state 60
+    SEM         shift, and go to state 59
 
 
 State 49
 
-   26 range_exp: NUMBER TO • NUMBER
-   28          | NUMBER TO • const_comment_exp
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   23 range_exp: NUMBER TO • NUMBER
+   25          | NUMBER TO • const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 61
+    NUMBER                      shift, and go to state 60
     TRANS_IMPORT_COMMENT_START  shift, and go to state 37
 
-    const_comment_exp  go to state 62
+    const_comment_exp  go to state 61
 
 
 State 50
 
-   36 regx_exp: REGX_START index_string_exp • REGX_END
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   22 range_exp: REGX_START index_string_exp • REGX_END
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING      shift, and go to state 23
     EMPTY       shift, and go to state 24
     LINE_BREAK  shift, and go to state 25
-    REGX_END    shift, and go to state 63
+    REGX_END    shift, and go to state 62
 
 
 State 51
 
-   38 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp • TRANS_IMPORT_COMMENT_END
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   34 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp • TRANS_IMPORT_COMMENT_END
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING                    shift, and go to state 23
     EMPTY                     shift, and go to state 24
     LINE_BREAK                shift, and go to state 25
-    TRANS_IMPORT_COMMENT_END  shift, and go to state 64
+    TRANS_IMPORT_COMMENT_END  shift, and go to state 63
 
 
 State 52
 
-   23 include_exp: INCLUDE range_exp COMMA • regx_exp
-   30 range_exp: range_exp COMMA • const_comment_exp
-   31          | range_exp COMMA • NUMBER
-   32          | range_exp COMMA • NUMBER TO NUMBER
-   33          | range_exp COMMA • NUMBER TO const_comment_exp
-   34          | range_exp COMMA • const_comment_exp TO NUMBER
-   35          | range_exp COMMA • const_comment_exp TO const_comment_exp
-   36 regx_exp: • REGX_START index_string_exp REGX_END
-   37         | • regx_exp COMMA REGX_START index_string_exp REGX_END
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   27 range_exp: range_exp COMMA • REGX_START index_string_exp REGX_END
+   28          | range_exp COMMA • const_comment_exp
+   29          | range_exp COMMA • NUMBER
+   30          | range_exp COMMA • NUMBER TO NUMBER
+   31          | range_exp COMMA • NUMBER TO const_comment_exp
+   32          | range_exp COMMA • const_comment_exp TO NUMBER
+   33          | range_exp COMMA • const_comment_exp TO const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 65
-    REGX_START                  shift, and go to state 36
+    NUMBER                      shift, and go to state 64
+    REGX_START                  shift, and go to state 65
     TRANS_IMPORT_COMMENT_START  shift, and go to state 37
 
-    regx_exp           go to state 66
-    const_comment_exp  go to state 67
+    const_comment_exp  go to state 66
 
 
 State 53
 
-   22 include_exp: INCLUDE regx_exp COMMA • range_exp
-   24 range_exp: • NUMBER
-   25          | • const_comment_exp
-   26          | • NUMBER TO NUMBER
-   27          | • const_comment_exp TO const_comment_exp
-   28          | • NUMBER TO const_comment_exp
-   29          | • const_comment_exp TO NUMBER
-   30          | • range_exp COMMA const_comment_exp
-   31          | • range_exp COMMA NUMBER
-   32          | • range_exp COMMA NUMBER TO NUMBER
-   33          | • range_exp COMMA NUMBER TO const_comment_exp
-   34          | • range_exp COMMA const_comment_exp TO NUMBER
-   35          | • range_exp COMMA const_comment_exp TO const_comment_exp
-   37 regx_exp: regx_exp COMMA • REGX_START index_string_exp REGX_END
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   24 range_exp: const_comment_exp TO • const_comment_exp
+   26          | const_comment_exp TO • NUMBER
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 35
-    REGX_START                  shift, and go to state 68
+    NUMBER                      shift, and go to state 67
     TRANS_IMPORT_COMMENT_START  shift, and go to state 37
 
-    range_exp          go to state 69
-    const_comment_exp  go to state 40
+    const_comment_exp  go to state 68
 
 
 State 54
 
-   27 range_exp: const_comment_exp TO • const_comment_exp
-   29          | const_comment_exp TO • NUMBER
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   17 exclude_exp: exclude_exp EXCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
+   27 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
+   28          | range_exp • COMMA const_comment_exp
+   29          | range_exp • COMMA NUMBER
+   30          | range_exp • COMMA NUMBER TO NUMBER
+   31          | range_exp • COMMA NUMBER TO const_comment_exp
+   32          | range_exp • COMMA const_comment_exp TO NUMBER
+   33          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
-    NUMBER                      shift, and go to state 70
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
+    COMMA  shift, and go to state 52
 
-    const_comment_exp  go to state 71
+    $default  reduce using rule 17 (exclude_exp)
 
 
 State 55
-
-   19 exclude_exp: EXCLUDE range_exp COMMA • regx_exp
-   30 range_exp: range_exp COMMA • const_comment_exp
-   31          | range_exp COMMA • NUMBER
-   32          | range_exp COMMA • NUMBER TO NUMBER
-   33          | range_exp COMMA • NUMBER TO const_comment_exp
-   34          | range_exp COMMA • const_comment_exp TO NUMBER
-   35          | range_exp COMMA • const_comment_exp TO const_comment_exp
-   36 regx_exp: • REGX_START index_string_exp REGX_END
-   37         | • regx_exp COMMA REGX_START index_string_exp REGX_END
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
-
-    NUMBER                      shift, and go to state 65
-    REGX_START                  shift, and go to state 36
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
-
-    regx_exp           go to state 72
-    const_comment_exp  go to state 67
-
-
-State 56
-
-   18 exclude_exp: EXCLUDE regx_exp COMMA • range_exp
-   24 range_exp: • NUMBER
-   25          | • const_comment_exp
-   26          | • NUMBER TO NUMBER
-   27          | • const_comment_exp TO const_comment_exp
-   28          | • NUMBER TO const_comment_exp
-   29          | • const_comment_exp TO NUMBER
-   30          | • range_exp COMMA const_comment_exp
-   31          | • range_exp COMMA NUMBER
-   32          | • range_exp COMMA NUMBER TO NUMBER
-   33          | • range_exp COMMA NUMBER TO const_comment_exp
-   34          | • range_exp COMMA const_comment_exp TO NUMBER
-   35          | • range_exp COMMA const_comment_exp TO const_comment_exp
-   37 regx_exp: regx_exp COMMA • REGX_START index_string_exp REGX_END
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
-
-    NUMBER                      shift, and go to state 35
-    REGX_START                  shift, and go to state 68
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
-
-    range_exp          go to state 73
-    const_comment_exp  go to state 40
-
-
-State 57
 
    15 import_rule_chain_exp: IMPORT STRING exclude_exp include_exp SEM •
 
     $default  reduce using rule 15 (import_rule_chain_exp)
 
 
-State 58
+State 56
+
+   19 include_exp: include_exp INCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
+   27 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
+   28          | range_exp • COMMA const_comment_exp
+   29          | range_exp • COMMA NUMBER
+   30          | range_exp • COMMA NUMBER TO NUMBER
+   31          | range_exp • COMMA NUMBER TO const_comment_exp
+   32          | range_exp • COMMA const_comment_exp TO NUMBER
+   33          | range_exp • COMMA const_comment_exp TO const_comment_exp
+
+    COMMA  shift, and go to state 52
+
+    $default  reduce using rule 19 (include_exp)
+
+
+State 57
 
    14 import_rule_chain_exp: IMPORT STRING include_exp exclude_exp SEM •
 
     $default  reduce using rule 14 (import_rule_chain_exp)
 
 
-State 59
+State 58
 
-   41 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp • SEM
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   37 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp • SEM
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING      shift, and go to state 23
     EMPTY       shift, and go to state 24
     LINE_BREAK  shift, and go to state 25
-    SEM         shift, and go to state 74
+    SEM         shift, and go to state 69
+
+
+State 59
+
+   36 rule_table_exp: index_string_exp EQ GT index_string_exp SEM •
+
+    $default  reduce using rule 36 (rule_table_exp)
 
 
 State 60
 
-   40 rule_table_exp: index_string_exp EQ GT index_string_exp SEM •
+   23 range_exp: NUMBER TO NUMBER •
 
-    $default  reduce using rule 40 (rule_table_exp)
+    $default  reduce using rule 23 (range_exp)
 
 
 State 61
 
-   26 range_exp: NUMBER TO NUMBER •
+   25 range_exp: NUMBER TO const_comment_exp •
 
-    $default  reduce using rule 26 (range_exp)
+    $default  reduce using rule 25 (range_exp)
 
 
 State 62
 
-   28 range_exp: NUMBER TO const_comment_exp •
+   22 range_exp: REGX_START index_string_exp REGX_END •
 
-    $default  reduce using rule 28 (range_exp)
+    $default  reduce using rule 22 (range_exp)
 
 
 State 63
 
-   36 regx_exp: REGX_START index_string_exp REGX_END •
+   34 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END •
 
-    $default  reduce using rule 36 (regx_exp)
+    $default  reduce using rule 34 (const_comment_exp)
 
 
 State 64
 
-   38 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END •
+   29 range_exp: range_exp COMMA NUMBER •  [INCLUDE, EXCLUDE, COMMA, SEM]
+   30          | range_exp COMMA NUMBER • TO NUMBER
+   31          | range_exp COMMA NUMBER • TO const_comment_exp
 
-    $default  reduce using rule 38 (const_comment_exp)
-
-
-State 65
-
-   31 range_exp: range_exp COMMA NUMBER •  [INCLUDE, EXCLUDE, COMMA, SEM]
-   32          | range_exp COMMA NUMBER • TO NUMBER
-   33          | range_exp COMMA NUMBER • TO const_comment_exp
-
-    TO  shift, and go to state 75
-
-    $default  reduce using rule 31 (range_exp)
-
-
-State 66
-
-   23 include_exp: INCLUDE range_exp COMMA regx_exp •  [EXCLUDE, SEM]
-   37 regx_exp: regx_exp • COMMA REGX_START index_string_exp REGX_END
-
-    COMMA  shift, and go to state 76
-
-    $default  reduce using rule 23 (include_exp)
-
-
-State 67
-
-   30 range_exp: range_exp COMMA const_comment_exp •  [INCLUDE, EXCLUDE, COMMA, SEM]
-   34          | range_exp COMMA const_comment_exp • TO NUMBER
-   35          | range_exp COMMA const_comment_exp • TO const_comment_exp
-
-    TO  shift, and go to state 77
-
-    $default  reduce using rule 30 (range_exp)
-
-
-State 68
-
-   37 regx_exp: regx_exp COMMA REGX_START • index_string_exp REGX_END
-   42 index_string_exp: • STRING
-   43                 | • LINE_BREAK
-   44                 | • index_string_exp STRING
-   45                 | • index_string_exp EMPTY
-   46                 | • index_string_exp LINE_BREAK
-
-    STRING      shift, and go to state 7
-    LINE_BREAK  shift, and go to state 8
-
-    index_string_exp  go to state 78
-
-
-State 69
-
-   22 include_exp: INCLUDE regx_exp COMMA range_exp •  [EXCLUDE, SEM]
-   30 range_exp: range_exp • COMMA const_comment_exp
-   31          | range_exp • COMMA NUMBER
-   32          | range_exp • COMMA NUMBER TO NUMBER
-   33          | range_exp • COMMA NUMBER TO const_comment_exp
-   34          | range_exp • COMMA const_comment_exp TO NUMBER
-   35          | range_exp • COMMA const_comment_exp TO const_comment_exp
-
-    COMMA  shift, and go to state 79
-
-    $default  reduce using rule 22 (include_exp)
-
-
-State 70
-
-   29 range_exp: const_comment_exp TO NUMBER •
+    TO  shift, and go to state 70
 
     $default  reduce using rule 29 (range_exp)
 
 
+State 65
+
+   27 range_exp: range_exp COMMA REGX_START • index_string_exp REGX_END
+   38 index_string_exp: • STRING
+   39                 | • LINE_BREAK
+   40                 | • index_string_exp STRING
+   41                 | • index_string_exp EMPTY
+   42                 | • index_string_exp LINE_BREAK
+
+    STRING      shift, and go to state 7
+    LINE_BREAK  shift, and go to state 8
+
+    index_string_exp  go to state 71
+
+
+State 66
+
+   28 range_exp: range_exp COMMA const_comment_exp •  [INCLUDE, EXCLUDE, COMMA, SEM]
+   32          | range_exp COMMA const_comment_exp • TO NUMBER
+   33          | range_exp COMMA const_comment_exp • TO const_comment_exp
+
+    TO  shift, and go to state 72
+
+    $default  reduce using rule 28 (range_exp)
+
+
+State 67
+
+   26 range_exp: const_comment_exp TO NUMBER •
+
+    $default  reduce using rule 26 (range_exp)
+
+
+State 68
+
+   24 range_exp: const_comment_exp TO const_comment_exp •
+
+    $default  reduce using rule 24 (range_exp)
+
+
+State 69
+
+   37 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp SEM •
+
+    $default  reduce using rule 37 (rule_table_exp)
+
+
+State 70
+
+   30 range_exp: range_exp COMMA NUMBER TO • NUMBER
+   31          | range_exp COMMA NUMBER TO • const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+
+    NUMBER                      shift, and go to state 73
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
+
+    const_comment_exp  go to state 74
+
+
 State 71
 
-   27 range_exp: const_comment_exp TO const_comment_exp •
-
-    $default  reduce using rule 27 (range_exp)
-
-
-State 72
-
-   19 exclude_exp: EXCLUDE range_exp COMMA regx_exp •  [INCLUDE, SEM]
-   37 regx_exp: regx_exp • COMMA REGX_START index_string_exp REGX_END
-
-    COMMA  shift, and go to state 76
-
-    $default  reduce using rule 19 (exclude_exp)
-
-
-State 73
-
-   18 exclude_exp: EXCLUDE regx_exp COMMA range_exp •  [INCLUDE, SEM]
-   30 range_exp: range_exp • COMMA const_comment_exp
-   31          | range_exp • COMMA NUMBER
-   32          | range_exp • COMMA NUMBER TO NUMBER
-   33          | range_exp • COMMA NUMBER TO const_comment_exp
-   34          | range_exp • COMMA const_comment_exp TO NUMBER
-   35          | range_exp • COMMA const_comment_exp TO const_comment_exp
-
-    COMMA  shift, and go to state 79
-
-    $default  reduce using rule 18 (exclude_exp)
-
-
-State 74
-
-   41 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp SEM •
-
-    $default  reduce using rule 41 (rule_table_exp)
-
-
-State 75
-
-   32 range_exp: range_exp COMMA NUMBER TO • NUMBER
-   33          | range_exp COMMA NUMBER TO • const_comment_exp
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
-
-    NUMBER                      shift, and go to state 80
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
-
-    const_comment_exp  go to state 81
-
-
-State 76
-
-   37 regx_exp: regx_exp COMMA • REGX_START index_string_exp REGX_END
-
-    REGX_START  shift, and go to state 68
-
-
-State 77
-
-   34 range_exp: range_exp COMMA const_comment_exp TO • NUMBER
-   35          | range_exp COMMA const_comment_exp TO • const_comment_exp
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
-
-    NUMBER                      shift, and go to state 82
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 37
-
-    const_comment_exp  go to state 83
-
-
-State 78
-
-   37 regx_exp: regx_exp COMMA REGX_START index_string_exp • REGX_END
-   44 index_string_exp: index_string_exp • STRING
-   45                 | index_string_exp • EMPTY
-   46                 | index_string_exp • LINE_BREAK
+   27 range_exp: range_exp COMMA REGX_START index_string_exp • REGX_END
+   40 index_string_exp: index_string_exp • STRING
+   41                 | index_string_exp • EMPTY
+   42                 | index_string_exp • LINE_BREAK
 
     STRING      shift, and go to state 23
     EMPTY       shift, and go to state 24
     LINE_BREAK  shift, and go to state 25
-    REGX_END    shift, and go to state 84
+    REGX_END    shift, and go to state 75
 
 
-State 79
+State 72
 
-   30 range_exp: range_exp COMMA • const_comment_exp
-   31          | range_exp COMMA • NUMBER
-   32          | range_exp COMMA • NUMBER TO NUMBER
-   33          | range_exp COMMA • NUMBER TO const_comment_exp
-   34          | range_exp COMMA • const_comment_exp TO NUMBER
-   35          | range_exp COMMA • const_comment_exp TO const_comment_exp
-   38 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
+   32 range_exp: range_exp COMMA const_comment_exp TO • NUMBER
+   33          | range_exp COMMA const_comment_exp TO • const_comment_exp
+   34 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 65
+    NUMBER                      shift, and go to state 76
     TRANS_IMPORT_COMMENT_START  shift, and go to state 37
 
-    const_comment_exp  go to state 67
+    const_comment_exp  go to state 77
 
 
-State 80
+State 73
 
-   32 range_exp: range_exp COMMA NUMBER TO NUMBER •
+   30 range_exp: range_exp COMMA NUMBER TO NUMBER •
+
+    $default  reduce using rule 30 (range_exp)
+
+
+State 74
+
+   31 range_exp: range_exp COMMA NUMBER TO const_comment_exp •
+
+    $default  reduce using rule 31 (range_exp)
+
+
+State 75
+
+   27 range_exp: range_exp COMMA REGX_START index_string_exp REGX_END •
+
+    $default  reduce using rule 27 (range_exp)
+
+
+State 76
+
+   32 range_exp: range_exp COMMA const_comment_exp TO NUMBER •
 
     $default  reduce using rule 32 (range_exp)
 
 
-State 81
+State 77
 
-   33 range_exp: range_exp COMMA NUMBER TO const_comment_exp •
+   33 range_exp: range_exp COMMA const_comment_exp TO const_comment_exp •
 
     $default  reduce using rule 33 (range_exp)
-
-
-State 82
-
-   34 range_exp: range_exp COMMA const_comment_exp TO NUMBER •
-
-    $default  reduce using rule 34 (range_exp)
-
-
-State 83
-
-   35 range_exp: range_exp COMMA const_comment_exp TO const_comment_exp •
-
-    $default  reduce using rule 35 (range_exp)
-
-
-State 84
-
-   37 regx_exp: regx_exp COMMA REGX_START index_string_exp REGX_END •
-
-    $default  reduce using rule 37 (regx_exp)
