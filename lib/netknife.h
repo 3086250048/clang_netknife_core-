@@ -11,9 +11,7 @@ void init();
 
 #define PRINT_IMPORT 5*PRINT_FACTOR," "
 
-#define PRINT_INCLUDE 10*PRINT_FACTOR," "
-#define PRINT_EXCLUDE 10*PRINT_FACTOR," "
-
+#define PRINT_FILTER 10*PRINT_FACTOR," "
 #define PRINT_RANGE 15*PRINT_FACTOR," "
 
 #define PRINT_RULE_TABLE_ENTRY 5*PRINT_FACTOR," "
@@ -111,24 +109,17 @@ struct range {
 };
 
 
-struct include {
+struct filter {
 	int node_type;
-	struct range * range;
-	struct include * next;
-};
-
-struct exclude {
-	int node_type ;
 	struct range * range ;
-	struct exclude * next;
+	struct filter * next ;
 };
 
 struct import_rule {	
 	int node_type ;
 	char * import_name ;
 	int lineno;
-	struct include * inc;
-	struct exclude * exc;
+	struct filter * filter ;
 	struct import_rule *  next ;
 };
 
@@ -136,22 +127,15 @@ struct import_rule {
 
 //添加range表达式
 struct range * join_range(struct range * root ,char  * regx , int s_lineno ,int d_lineno , char  * s_comment ,char * d_comment );
-
-//添加include表达式
-struct include * join_include(struct include * root ,struct range * range );
-//添加exclude表达式
-struct exclude * join_exclude(struct exclude *  root ,struct range * range );
+//添加filter表达式
+struct filter * join_filter(struct filter * root , int node_type , struct range  * range);
 //添加 import_rule
-struct import_rule * join_import_rule(char * import_name ,int lineno  ,struct include *inc ,struct exclude * exc);
+struct import_rule * join_import_rule(char * import_name ,int lineno  ,struct filter * filter );
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
 
 //打印range
 void print_range(struct range * range_root);
-//打印include
-void print_include(struct include * include_root);
-//打印exclude
-void print_exclude(struct exclude * exclude_root);
 //打印import_rule
 void print_import_rule(struct import_rule * import_rule_root);
 

@@ -15,8 +15,7 @@ struct rule_table * rule_tab;
 struct comment_table * comment_tab;	
 struct regx * reg;
 struct range * ran;
-struct include * inc ;
-struct exclude * exc ;
+struct filter * filter;
 struct import_rule * import_rule_chain;
 struct trans * trans;
 struct trans_table * trans_tab ;					  
@@ -31,8 +30,7 @@ struct trans_table * trans_tab ;
 %type <rule_tab> rule_table_exp
 %type <comment_tab> comment_table_exp
 %type <ran> range_exp
-%type <inc> include_exp
-%type <exc> exclude_exp
+%type <filter> filter_exp
 %type <import_rule_chain> import_rule_chain_exp
 %type <trans> trans_exp trans_body_exp  
 %type <trans_tab> trans_table_exp
@@ -53,21 +51,13 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :  IMPORT STRING SEM {  $$=join_import_rule($2,yylineno,NULL,NULL);} 
-			  | IMPORT STRING include_exp SEM { $$=join_import_rule($2,yylineno,$3,NULL);}
-			  | IMPORT STRING exclude_exp SEM {$$=join_import_rule($2,yylineno,NULL,$3);}
-			  | IMPORT STRING include_exp exclude_exp SEM {$$=join_import_rule($2,yylineno,$3,$4);}
-			  | IMPORT STRING exclude_exp include_exp SEM {$$=join_import_rule($2,yylineno,$4,$3);} 
+import_rule_chain_exp :  IMPORT STRING SEM {  $$=join_import_rule($2,yylineno,NULL);} 
+			  | IMPORT STRING filter_exp SEM { $$=join_import_rule($2,yylineno,$3);}
 			  ;
-
-exclude_exp : EXCLUDE range_exp  { $$=join_exclude(NULL,$2);}
-	|  exclude_exp EXCLUDE range_exp { $$=join_exclude($1,$3); }
-	;
-
-include_exp : INCLUDE range_exp  { $$=join_include(NULL,$2);}
-	|  include_exp INCLUDE range_exp { $$=join_include($1,$3); }
-	;
-
+filter_exp : INCLUDE range_exp { $$ = join_filter(NULL,INCLUDE_NODE,$2);}
+		   | EXCLUDE range_exp { $$ = join_filter(NULL,EXCLUDE_NODE,$2);}
+		   | filter_exp INCLUDE range_exp  { $$ = join_filter($1,INCLUDE_NODE,$3);}
+		   | filter_exp EXCLUDE range_exp  { $$ = join_filter($1,EXCLUDE_NODE,$3);}
 
 range_exp : NUMBER { $$=join_range(NULL,NULL,$1,0,NULL,NULL); }
   | const_comment_exp  {$$ = join_range(NULL,NULL,0,0,$1,NULL); }

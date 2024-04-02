@@ -93,13 +93,12 @@ struct rule_table * rule_tab;
 struct comment_table * comment_tab;	
 struct regx * reg;
 struct range * ran;
-struct include * inc ;
-struct exclude * exc ;
+struct filter * filter;
 struct import_rule * import_rule_chain;
 struct trans * trans;
 struct trans_table * trans_tab ;					  
 
-#line 103 "netknife.tab.h"
+#line 102 "netknife.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

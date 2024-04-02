@@ -2,13 +2,16 @@ trans cisco_to_huawei {
 	"查询命令"
 	show ip int b =100> display ip int b;    
 	@huawei_to_cisco include 22  ; 
+	@huawei_to_cisco include 22  ; 
+	@huawei_to_cisco include 22  ; 
 	"查询命令"
-	你好 ip int b =100> display ip int b;   
-	"查询命令"
+	你好 ip \n int b =100> display ip int b;   
+	"查\n 你好 询命令"
 	@huawei 
 	include 99 to 100 
+    exclude 100  
 	include r"^dipslya"
-    exclude 100 ; 
+	exclude "nihao" to "haoye" ;
 }
 
 

@@ -26,14 +26,12 @@ trans { printf("TRANS "); return TRANS;}
 
 <TRANS_RULE_COMMENT>\" { printf("COMMENT_END ");BEGIN READY ;return COMMENT_END;}
 <TRANS_RULE_COMMENT>[ \t]+ { printf("EMPTY "); yylval.s=strdup(" ");return EMPTY; }
-<TRANS_RULE_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING "); yylval.s=strdup(yytext) ;return STRING; } 
-<TRANS_RULE_COMMENT>. {}
+<TRANS_RULE_COMMENT>[^ \t\n"]+ {  printf("STRING "); yylval.s=strdup(yytext) ;return STRING; } 
 <TRANS_RULE_COMMENT>\n { printf("\n");}
 
 <TRANS_IMPORT_COMMENT>\" { printf("TRANS_IMPORT_COMMENT_END ");BEGIN TRANS_IMPORT; return TRANS_IMPORT_COMMENT_END;}
 <TRANS_IMPORT_COMMENT>[ \t]+ { printf("EMPTY ");yylval.s=strdup(" ");return EMPTY;}
-<TRANS_IMPORT_COMMENT>[\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING ");yylval.s= strdup(yytext) ;return STRING ; } 
-<TRANS_IMPORT_COMMENT>. {}
+<TRANS_IMPORT_COMMENT>[^ \t\n"]+ {  printf("STRING ");yylval.s= strdup(yytext) ;return STRING ; } 
 <TRANS_IMPORT_COMMENT>\n { printf("\n");}
 
 

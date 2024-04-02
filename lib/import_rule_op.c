@@ -39,54 +39,34 @@ void print_range(struct range * range_root){
 }
 
 
-struct include * join_include(struct include * root , struct range * range ){
-	 struct include * tmp =  malloc(sizeof(struct include));
-	 tmp->node_type = INCLUDE_NODE ;
-	 tmp->range =range;
-	 tmp->next = root;
-	 root = tmp ;
-	 return root ;
+struct filter * join_filter(struct filter * root , int node_type ,struct range * range){
+		struct filter *  tmp = malloc(sizeof(struct filter));
+		tmp->node_type = node_type ;
+		tmp->range=range;
+		tmp->next = root;
+		root = tmp;
+		return root;
 }
 
-
-
-void print_include(struct include * include){
-		while(include){	
-	 	printf("%*snode_type:INCLUDE\n",PRINT_INCLUDE);
-	 	print_range(include->range);
-		include=include->next;
+void print_filter(struct filter * filter_root){
+	while(filter_root){
+		if(filter_root->node_type == INCLUDE_NODE){
+			printf("%*snode_type:INCLUDE_NODE\n",PRINT_FILTER);
+		}else{
+			printf("%*snode_type:EXCLUDE_NODE\n",PRINT_FILTER);	
 		}
+		print_range(filter_root->range);
+		filter_root=filter_root->next;
+	}
 }
 
 
-
-
-struct exclude * join_exclude(struct exclude *root ,struct range * range ){
-	struct exclude * tmp =  malloc(sizeof(struct exclude));
-	tmp->node_type = EXCLUDE_NODE ;
-	tmp->range=range;
-	tmp->next= root;
-	root=tmp;
-	return root ;
-}
-
-
-void print_exclude(struct exclude * exclude){
-		while(exclude){
-		printf("%*snode_type:EXCLUDE\n",PRINT_EXCLUDE);
-		print_range(exclude->range);
-		exclude=exclude->next;
-		}
-
-}
-
-struct  import_rule * join_import_rule(char * import_name , int lineno,struct include * inc , struct exclude * exc){
+struct  import_rule * join_import_rule(char * import_name , int lineno,struct filter * filter ){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT_NODE;
 	tmp->lineno = lineno ;
 	tmp->import_name=import_name;
-	tmp->inc =inc;
-	tmp->exc=exc;
+	tmp->filter = filter ;
 	tmp->next = import_rule_root ;
 	import_rule_root = tmp ;
 	return  tmp ;
@@ -106,8 +86,7 @@ void print_import_rule(struct import_rule * import_rule_root){
 		printf("%*snode_type:IMPORT\n",PRINT_IMPORT);
 		printf("%*simport_name:%s\n",PRINT_IMPORT,tmp->import_name);
 		printf("%*slineno:%d\n",PRINT_IMPORT,tmp->lineno);
-		print_include(tmp->inc);
-		print_exclude(tmp->exc);
+		print_filter(tmp->filter);
 		tmp = tmp->next;
 	}
 }
