@@ -5,8 +5,6 @@ struct  rule_table * rule_tab ;
 struct  comment_table * comment_tab;
 struct  trans_table  * trans_tab ;
 
-struct bufstack * curbs=0;
-char * curfilename;
 
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));

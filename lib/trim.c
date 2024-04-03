@@ -42,12 +42,35 @@ char *ltrim(char *str)
  
 	return str;
 }
- 
+
+
+//去除\n前后的empty字符
+char * tidy_str(char *str){
+	if(str==NULL || *str == '\0'){
+		return str;
+	}
+	int  len = 0;
+	char *p = str;
+    while(*p !='\0' && *p != '\n' ){
+		++p;
+		++len;
+	}	
+	if( *p != '\0' && *p == '\n'  &&  isspace(*(--p))){
+		memmove(p , p+1 ,strlen(p+1));
+	}
+	
+	if( *p != '\0' && *p == '\n'  &&  isspace(*(++p))){
+		memmove( p ,p+1 ,strlen(p+1));
+	}
+	return str;	
+}
+
+
 //去除首尾空格
 char *trim(char *str)
 {
 	str = rtrim(str);
 	str = ltrim(str);
-	
+	str = tidy_str(str);
 	return str;
 }

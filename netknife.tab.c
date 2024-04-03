@@ -1156,13 +1156,13 @@ yyreduce:
 
   case 4: /* trans_exp: TRANS STRING LBRACE RBRACE  */
 #line 43 "netknife.y"
-                                        { (yyval.trans)=join_trans(file_name,(yyvsp[-2].s),yylineno,NULL,NULL,NULL); }
+                                        { (yyval.trans)=join_trans(curfilename,(yyvsp[-2].s),yylineno,NULL,NULL,NULL); }
 #line 1161 "netknife.tab.c"
     break;
 
   case 5: /* trans_exp: TRANS STRING LBRACE trans_body_exp RBRACE  */
 #line 44 "netknife.y"
-                                              { (yyval.trans)=join_trans(file_name,(yyvsp[-3].s),yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
+                                              { (yyval.trans)=join_trans(curfilename,(yyvsp[-3].s),yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
 #line 1167 "netknife.tab.c"
     break;
 

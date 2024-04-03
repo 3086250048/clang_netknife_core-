@@ -181,16 +181,6 @@ struct trans_table * get_trans_table();
 void print_trans_table_entry(struct trans * trans);
 
 
-struct bufstack{
-	//上一个文件信息
-	struct bufstack * prev ;
-	//保存的缓冲区
-	YY_BUFFER_STATE bs;
-	int lineno;	
-	char * filename;
-	FILE * f;//当前文件		
-};
-
 #endif
 
 

@@ -4,6 +4,20 @@
 	#include <string.h>
 	#include "netknife.tab.h"
 	#include "netknife.h"
+	
+
+	struct bufstack{
+		//上一个文件信息
+		struct bufstack * prev ;
+		//保存的缓冲区
+		YY_BUFFER_STATE bs;
+		int lineno;	
+		char * filename;
+		FILE * f;//当前文件		
+	};
+
+	struct bufstack * curbs=0;
+	char * curfilename;
 
 %}
 

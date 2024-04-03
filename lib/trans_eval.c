@@ -55,7 +55,7 @@ struct trans_table * eval_trans(void  * p ){
 				eval_trans(p->import_rule_chain);
 			case IMPORT_NODE:
 				if(p->file_name != NULL){
-				     
+					return null;	     
 				}
 		 }		
 	 }
