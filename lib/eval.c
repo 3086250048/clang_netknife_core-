@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-int newfile_trans(char * fn ){
+int newfile(char * fn ){
 	FILE * f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(bufstack));
 	if(!f){ perror(fn), return 0};
@@ -53,13 +53,17 @@ struct trans_table * eval_trans(void  * p ){
 				break;
 			case TRANS_NODE:
 				eval_trans(p->import_rule_chain);
+				break;
 			case IMPORT_NODE:
 				if(p->file_name != NULL){
-					return null;	     
+					mode =  TRANS_MODE;
+		   			if(newfile(p->file_name)) yyparse();		
 				}
+				break;
+			case 
 		 }		
-	 }
-} 
+}
+ 
 
 
 

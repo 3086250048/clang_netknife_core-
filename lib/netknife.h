@@ -1,8 +1,11 @@
 #ifndef _NETKNIFE_H_
 #define _NETKNIFE_H_
-
+#include <stdio.h>
 extern int yylineno;
 void yyerror(char * ,...);
+int  yylex(void);
+int yyparse(void);
+void yyrestart ( FILE *input_file  );
 void init();
 
 #define PRINT_FACTOR 1
@@ -26,11 +29,44 @@ void init();
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans_table * trans_tab ;
-extern struct  bufstack * curbs ;
+extern int mode ;
+
+
+struct yy_buffer_state
+	{
+	FILE *yy_input_file;
+	char *yy_ch_buf;		/* input buffer */
+	char *yy_buf_pos;		/* current position in input buffer */
+	int yy_buf_size;
+	int yy_n_chars;
+	int yy_is_our_buffer;
+	int yy_is_interactive;
+	int yy_at_bol;
+    int yy_bs_lineno; /**< The line count. */
+    int yy_bs_column; /**< The column count. */
+	int yy_fill_buffer;
+	int yy_buffer_status;
+	#define YY_BUFFER_NEW 0	
+	#define YY_BUFFER_NORMAL 1
+	#define YY_BUFFER_EOF_PENDING 2
+};
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+
+struct bufstack{
+		//上一个文件信息
+		struct bufstack * prev ;
+		//保存的缓冲区
+		YY_BUFFER_STATE bs;
+		int lineno;	
+		char * filename;
+		FILE * f;//当前文件		
+};
+
+extern bufstack * curbs ;
 extern char * curfilename ;
 
 
-enum node_type {
+enum type {
 	INDEX_STRING_NODE =1,
 	RULE_NODE,
 	COMMENT_NODE,
@@ -43,6 +79,8 @@ enum node_type {
 	COMMENT_TABLE_ENTRY_NODE,
 	TRANS_NODE,
 	TRANS_TABLE_NODE
+	PUB_MODE,
+	TRANS_MODE
 };
 
 char * trim(char * str);
