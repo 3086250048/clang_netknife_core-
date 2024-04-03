@@ -26,7 +26,8 @@ void init();
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans_table * trans_tab ;
-extern char * file_name ;
+extern struct  bufstack * curbs ;
+extern char * curfilename ;
 
 
 enum node_type {
@@ -154,7 +155,7 @@ struct trans {
 };
 
 struct trans_table{
-	int node_type; 
+	int node_type;  
 	struct trans * trans;
 };
 
@@ -178,6 +179,17 @@ struct trans * get_trans_table_entry(struct trans_table * trans_tab,char * filen
 struct trans_table * get_trans_table();
 //打印trans表项
 void print_trans_table_entry(struct trans * trans);
+
+
+struct bufstack{
+	//上一个文件信息
+	struct bufstack * prev ;
+	//保存的缓冲区
+	YY_BUFFER_STATE bs;
+	int lineno;	
+	char * filename;
+	FILE * f;//当前文件		
+};
 
 #endif
 
