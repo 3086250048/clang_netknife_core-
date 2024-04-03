@@ -25,7 +25,7 @@ struct trans_table * trans_tab ;
 
 %token <d> NUMBER 
 %token <s> STRING EMPTY LINE_BREAK
-%token TRANS IMPORT COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END 
+%token TRANS IMPORT COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END DOT  
 %type <s> index_string_exp const_comment_exp
 %type <rule_tab> rule_table_exp
 %type <comment_tab> comment_table_exp
@@ -40,8 +40,8 @@ struct trans_table * trans_tab ;
 trans_table_exp : {$$=NULL;}
 		| trans_table_exp trans_exp {$$=join_trans_table($2); print_trans_table_entry($$->trans);}
 		;
-trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans("TEST",$2,yylineno,NULL,NULL,NULL); }
-  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans("TEST",$2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
+trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans(file_name,$2,yylineno,NULL,NULL,NULL); }
+  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans(file_name,$2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
   ;
 trans_body_exp : rule_table_exp{$$=NULL;} 
 	   | comment_table_exp {$$=NULL;} 
@@ -51,8 +51,9 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :  IMPORT STRING SEM {  $$=join_import_rule($2,yylineno,NULL);} 
-			  | IMPORT STRING filter_exp SEM { $$=join_import_rule($2,yylineno,$3);}
+import_rule_chain_exp :  IMPORT STRING SEM {  $$=join_import_rule(NULL,$2,yylineno,NULL);} 
+			  | IMPORT  STRING  filter_exp SEM { $$=join_import_rule(NULL,$2,yylineno,$3);}
+			  | IMPORT STRING DOT STRING  filter_exp SEM { $$=join_import_rule($2,$4,yylineno,$5);}
 			  ;
 filter_exp : INCLUDE range_exp { $$ = join_filter(NULL,INCLUDE_NODE,$2);}
 		   | EXCLUDE range_exp { $$ = join_filter(NULL,EXCLUDE_NODE,$2);}

@@ -7,7 +7,7 @@ trans cisco_to_huawei {
 	"查询命令"
 	你好 ip \n int b =100> display ip int b;   
 	"查\n 你好 询命令"
-	@huawei 
+	@huawei.to_6080
 	include 99 to 100 
     exclude 100  
 	include r"^dipslya"
@@ -15,3 +15,4 @@ trans cisco_to_huawei {
 }
 
 
+ 

@@ -4,6 +4,7 @@
 struct  rule_table * rule_tab ;
 struct  comment_table * comment_tab;
 struct  trans_table  * trans_tab ;
+char * file_name;
 
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));

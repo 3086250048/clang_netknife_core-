@@ -74,7 +74,8 @@ extern int yydebug;
     GT = 275,                      /* GT  */
     SEM = 276,                     /* SEM  */
     TRANS_IMPORT_COMMENT_START = 277, /* TRANS_IMPORT_COMMENT_START  */
-    TRANS_IMPORT_COMMENT_END = 278 /* TRANS_IMPORT_COMMENT_END  */
+    TRANS_IMPORT_COMMENT_END = 278, /* TRANS_IMPORT_COMMENT_END  */
+    DOT = 279                      /* DOT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -98,7 +99,7 @@ struct import_rule * import_rule_chain;
 struct trans * trans;
 struct trans_table * trans_tab ;					  
 
-#line 102 "netknife.tab.h"
+#line 103 "netknife.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -26,6 +26,8 @@ void init();
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans_table * trans_tab ;
+extern char * file_name ;
+
 
 enum node_type {
 	INDEX_STRING_NODE =1,
@@ -117,6 +119,7 @@ struct filter {
 
 struct import_rule {	
 	int node_type ;
+	char * file_name ;
 	char * import_name ;
 	int lineno;
 	struct filter * filter ;
@@ -130,7 +133,7 @@ struct range * join_range(struct range * root ,char  * regx , int s_lineno ,int 
 //添加filter表达式
 struct filter * join_filter(struct filter * root , int node_type , struct range  * range);
 //添加 import_rule
-struct import_rule * join_import_rule(char * import_name ,int lineno  ,struct filter * filter );
+struct import_rule * join_import_rule(char * file_name , char * import_name ,int lineno  ,struct filter * filter );
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
 

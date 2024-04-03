@@ -61,10 +61,11 @@ void print_filter(struct filter * filter_root){
 }
 
 
-struct  import_rule * join_import_rule(char * import_name , int lineno,struct filter * filter ){
+struct  import_rule * join_import_rule(char * file_name ,char * import_name , int lineno,struct filter * filter ){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT_NODE;
 	tmp->lineno = lineno ;
+	tmp->file_name = file_name ;
 	tmp->import_name=import_name;
 	tmp->filter = filter ;
 	tmp->next = import_rule_root ;
@@ -84,6 +85,7 @@ void print_import_rule(struct import_rule * import_rule_root){
 	struct import_rule * tmp = import_rule_root;
 	while(tmp){
 		printf("%*snode_type:IMPORT\n",PRINT_IMPORT);
+		printf("%*sfile_name:%s\n",PRINT_IMPORT,tmp->file_name);
 		printf("%*simport_name:%s\n",PRINT_IMPORT,tmp->import_name);
 		printf("%*slineno:%d\n",PRINT_IMPORT,tmp->lineno);
 		print_filter(tmp->filter);
