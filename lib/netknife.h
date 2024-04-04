@@ -1,6 +1,24 @@
 #ifndef _NETKNIFE_H_
 #define _NETKNIFE_H_
 #include <stdio.h>
+enum type {
+	INDEX_STRING_NODE =1,
+	RULE_NODE,
+	COMMENT_NODE,
+	IMPORT_NODE ,
+	REGX_NODE,
+	RANGE_NODE,
+	INCLUDE_NODE,
+	EXCLUDE_NODE,
+	RULE_TABLE_ENTRY_NODE,
+	COMMENT_TABLE_ENTRY_NODE,
+	TRANS_NODE,
+	NETKNIFE_NODE,
+	PUB_MODE,
+	TRANS_MODE,
+	ALL
+};
+
 extern int yylineno;
 void yyerror(char * ,...);
 int  yylex(void);
@@ -9,27 +27,16 @@ void yyrestart ( FILE *input_file  );
 void init();
 
 #define PRINT_FACTOR 1
-
 #define PRINT_TRANS_TABLE_ENTRY 0*PRINT_FACTOR,""
-
 #define PRINT_IMPORT 5*PRINT_FACTOR," "
-
 #define PRINT_FILTER 10*PRINT_FACTOR," "
 #define PRINT_RANGE 15*PRINT_FACTOR," "
-
 #define PRINT_RULE_TABLE_ENTRY 5*PRINT_FACTOR," "
 #define PRINT_COMMENT_TABLE_ENTRY 5*PRINT_FACTOR," "
-
 #define PRINT_RULE 10*PRINT_FACTOR," "
 #define PRINT_COMMENT 10*PRINT_FACTOR," " 
-
-#define MAX_HASH 9999
-
-
-extern struct rule_table * rule_tab ;
-extern struct comment_table * comment_tab ;
-extern struct trans_table * trans_tab ;
-extern int mode ;
+#define MAX_HASH 99999
+#define MAX_STACK 9999
 
 
 struct yy_buffer_state
@@ -62,26 +69,20 @@ struct bufstack{
 		FILE * f;//当前文件		
 };
 
+
+extern struct rule_table * rule_tab ;
+extern struct comment_table * comment_tab ;
+extern struct trans_table * trans_tab ;
+extern int mode ;
+extern char * trans_target;
+
 extern bufstack * curbs ;
 extern char * curfilename ;
+extern int stack_count;
 
-
-enum type {
-	INDEX_STRING_NODE =1,
-	RULE_NODE,
-	COMMENT_NODE,
-	IMPORT_NODE ,
-	REGX_NODE,
-	RANGE_NODE,
-	INCLUDE_NODE,
-	EXCLUDE_NODE,
-	RULE_TABLE_ENTRY_NODE,
-	COMMENT_TABLE_ENTRY_NODE,
-	TRANS_NODE,
-	TRANS_TABLE_NODE
-	PUB_MODE,
-	TRANS_MODE
-};
+int newfile(char * fb);
+int popfile(void);
+void eval_import(struct import_rule * import_node);
 
 char * trim(char * str);
 
@@ -192,13 +193,8 @@ struct trans {
 	struct import_rule * import_rule_chain ;
 };
 
-struct trans_table{
-	int node_type;  
-	struct trans * trans;
-};
-
 //添加trans
-struct trans * join_trans(
+struct trans * join_trans_table(
 	char * filename ,
 	char * trans_name , 
 	int lineno , 
@@ -207,16 +203,26 @@ struct trans * join_trans(
 	struct import_rule * import_rule_chain 
 );
 
-	
-//添加到trans_table
-struct trans_table * join_trans_table(struct trans * trans);
-
-//获取trans_tabele 表项
-struct trans * get_trans_table_entry(struct trans_table * trans_tab,char * filename , char * trans_name);
 //获取trans_table
 struct trans_table * get_trans_table();
+
 //打印trans表项
-void print_trans_table_entry(struct trans * trans);
+void print_trans(struct trans * trans);
+
+struct netknife{
+	int node_type;  
+	char * filename ; //文件名称
+	char * node_type; // 节点类型
+    char * node_name; // 节点名称
+	void * node_tab ;// 节点hash表头地址
+	
+};
+	
+//添加到netknife_table 
+struct netknife  * join_netknife_table(void * node_tab );
+
+//获取某个node_tab
+void  * get_node_table(char * filename , char * node_type, char * node_name , void * node_tab );
 
 
 #endif

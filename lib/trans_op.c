@@ -4,18 +4,6 @@
 #include <stdio.h>
 
 
-struct trans * join_trans(char * filename ,char * trans_name,int lineno , struct rule_table * rule_tab , struct comment_table * comment_tab ,struct import_rule * import_rule_chain ){
-	struct trans * tmp = malloc(sizeof(struct trans));
-	tmp->node_type = TRANS_NODE;
-	tmp->filename = filename ;
-	tmp->trans_name = trans_name ;
-	tmp->lineno=lineno;
-	tmp->rule_tab = rule_tab ;
-	tmp->comment_tab = comment_tab;
-	tmp->import_rule_chain = import_rule_chain;
-	return tmp;
-}
-
 static unsigned int trans_index_hash(char * filename,char * trans_name){
 	char * s1 = malloc(strlen(filename));
 	char * s2 = malloc(strlen(trans_name));
@@ -28,38 +16,33 @@ static unsigned int trans_index_hash(char * filename,char * trans_name){
 	return hash;
 }
 
-//添加rule到表中
-struct trans_table * join_trans_table(struct  trans * trans){	
-	struct trans_table * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
-		if(tmp->trans==NULL){
-			tmp->node_type = TRANS_TABLE_NODE;
-			tmp->trans = trans;
-			return  tmp ;
-		}else{
-			printf("trans_table hash confilct\n");
-		}
-}
 
-//获取rule表表项
-struct trans * get_trans_table_entry(struct trans_table * trans_tab , char * filename , char * trans_name){
-		struct trans_table * tmp = &trans_tab[trans_index_hash(filename,trans_name)%MAX_HASH];
-		
-		if(tmp->trans){
-				return tmp->trans;
-		}else{
-		 	printf("trans_table no has this entry\n");
-		}	
+
+struct trans * join_trans_table(char * filename ,char * trans_name,int lineno , struct rule_table * rule_tab , struct comment_table * comment_tab ,struct import_rule * import_rule_chain ){
+	struct trans  * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
+    if(tmp->node_type !=TRANS_NODE ){	
+		tmp->node_type = TRANS_NODE;
+		tmp->filename = filename ;
+		tmp->trans_name = trans_name ;
+		tmp->lineno=lineno;
+		tmp->rule_tab = rule_tab ;
+		tmp->comment_tab = comment_tab;
+		tmp->import_rule_chain = import_rule_chain;
+		return tmp;
+	}else{
+		perror("trans name conflict");exit(1);
+	}
 }
 
 //获取表地址
-struct trans_table * get_trans_table(){
-		struct trans_table * tmp = trans_tab ;
-		trans_tab = calloc(MAX_HASH, sizeof(struct trans_table) );
+struct trans * get_trans_table(){
+		struct trans  * tmp = trans_tab ;
+		trans_tab = calloc(MAX_HASH, sizeof(struct trans) );
 		return tmp;
 }
 
 //打印trans_table表项
-void print_trans_table_entry(struct trans * trans){
+void print_trans(struct trans * trans){
 	printf("%*snode_type:TRANS_NODE\n",PRINT_TRANS_TABLE_ENTRY);
 	printf("%*sfilename:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->filename);
 	printf("%*strans_name:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->trans_name);

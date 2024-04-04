@@ -5,6 +5,9 @@
 
 
 int newfile(char * fn ){
+	if(stack_count >= MAX_STACK ){
+		perror("Too many file stacks");exit(1);
+	}
 	FILE * f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(bufstack));
 	if(!f){ perror(fn), return 0};
@@ -22,6 +25,7 @@ int newfile(char * fn ){
 	curbs=bs;
 	yylineno=1;
 	curfilename = fn;
+	++stack_count 
 	return 1;
 }
 
@@ -43,25 +47,19 @@ int popfile(void){
 	curbs = prevbs;
 	yylineno = curbs->lineno;
 	curfilename = curbs->filename;
+	--stack_count; 
 	return 1;
 }
 
-struct trans_table * eval_trans(void  * p ){
-		 switch((*(int *)p)){
-			case TRANS_TABLE_NODE :
-				eval_trans(p->trans);
-				break;
-			case TRANS_NODE:
-				eval_trans(p->import_rule_chain);
-				break;
-			case IMPORT_NODE:
-				if(p->file_name != NULL){
-					mode =  TRANS_MODE;
-		   			if(newfile(p->file_name)) yyparse();		
-				}
-				break;
-			case 
-		 }		
+void  * eval_import(struct import_rule * import_node  ){
+		
+		if(import_node->file_name != NULL){
+		  mode =  TRANS_MODE;
+		  trans_target = p->import_name;
+		  if(newfile(p->file_name)) yyparse();			
+		else{
+			
+		}
 }
  
 
