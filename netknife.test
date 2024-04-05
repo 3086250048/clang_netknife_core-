@@ -1,6 +1,6 @@
 trans cisco_to_huawei {	
 	"查询命令"
-	show ip \n int b =100> display ip int b;    
+	show ip \n \n int b =100> display ip int b;    
 	@huawei_to_cisco include 22  ; 
 	@huawei_to_cisco include 22  ; 
 	@huawei_to_cisco include 22  ; 
@@ -14,5 +14,4 @@ trans cisco_to_huawei {
 
 
 
-display ip \n int b 
 

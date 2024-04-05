@@ -13,6 +13,8 @@ static unsigned int trans_index_hash(char * filename,char * trans_name){
 	unsigned int hash = 0;
 	unsigned c ;
 	while(c=*trans_index++) hash = hash*9 ^ c;
+	free(s1);
+	free(s2);
 	return hash;
 }
 

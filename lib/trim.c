@@ -49,19 +49,16 @@ char * tidy_str(char *str){
 	if(str==NULL || *str == '\0'){
 		return str;
 	}
-	int  len = 0;
 	char *p = str;
-    while(*p !='\0' && *p != '\n' ){
+    while(*p !='\0' ){
+		if( *p != '\0' && *p == '\n'  &&  isspace(*(p-1))){
+			memmove(p-1 , p ,strlen(p)+1);
+			--p;
+		}	
+		if( *p != '\0' && *p == '\n'  &&  isspace(*(p+1))){
+			memmove( p+1 ,p+2 ,strlen(p)+1);
+		}
 		++p;
-		++len;
-	}	
-	if( *p != '\0' && *p == '\n'  &&  isspace(*(p-1))){
-		memmove(p-1 , p ,strlen(p)+1);
-		--p;
-	}
-	
-	if( *p != '\0' && *p == '\n'  &&  isspace(*(p+1))){
-		memmove( p+1 ,p+2 ,strlen(p)+1);
 	}
 	return str;	
 }

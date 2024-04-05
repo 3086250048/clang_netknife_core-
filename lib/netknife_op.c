@@ -6,15 +6,17 @@
 static unsigned int netknife_index_hash(char * filename, int  child_type ,char * child_name){
 	char * s1 = malloc(strlen(filename));
 	char * s2 = malloc(strlen(child_name));
-	char * s3[10];
+	char  s3[10];
 	sprintf(s3,"%d",child_type);
 	strcpy(s1,filename);
 	strcpy(s2,child_name);
-	char * trans_index = strcat(s1,s2);
-	trans_index = strcat(trans_index,s3);
+	char * netknife_index = strcat(s1,s2);
+	netknife_index = strcat(netknife_index,s3);
 	unsigned int hash = 0;
 	unsigned c ;
-	while(c=*trans_index++) hash = hash*9 ^ c;
+	while(c=*netknife_index++) hash = hash*9 ^ c;
+	free(s1);
+	free(s2);
 	return hash;
 }
 
