@@ -10,6 +10,8 @@ void cat_test(char * s1,char *s2){
 #define PRINT 10," "
 
 int main(){
-	printf(" ");
-	printf("%*s %s\n",PRINT,"test");
+	char str[10];
+	int a=1234;
+	sprintf(str,"%d",a);
+	printf("%s\n",str);
 }

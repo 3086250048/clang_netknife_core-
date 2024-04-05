@@ -19,7 +19,7 @@ static unsigned int trans_index_hash(char * filename,char * trans_name){
 
 
 struct trans * join_trans_table(char * filename ,char * trans_name,int lineno , struct rule_table * rule_tab , struct comment_table * comment_tab ,struct import_rule * import_rule_chain ){
-	struct trans  * tmp = &trans_tab[trans_index_hash(trans->filename,trans->trans_name)%MAX_HASH];
+	struct trans  * tmp = &trans_tab[trans_index_hash(filename,trans_name)%MAX_HASH];
     if(tmp->node_type !=TRANS_NODE ){	
 		tmp->node_type = TRANS_NODE;
 		tmp->filename = filename ;

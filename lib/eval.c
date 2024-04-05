@@ -9,14 +9,13 @@ int newfile(char * fn ){
 		perror("Too many file stacks");exit(1);
 	}
 	FILE * f =	fopen(fn,"r");
-	struct bufstack * bs=malloc(sizeof(bufstack));
-	if(!f){ perror(fn), return 0};
+	struct bufstack * bs=malloc(sizeof(struct bufstack));
+	if(!f){ perror(fn);return 0;}
 	if(!bs) { perror("malloc"); exit(1);}
 
 	//记住当前状态
 	if(curbs)curbs->lineno = yylineno ;
 	bs->prev=curbs ;
-
 	//建立当前文件信息
 	bs->bs=yy_create_buffer(f,YY_BUF_SIZE);
   	bs->f=f;
@@ -25,7 +24,7 @@ int newfile(char * fn ){
 	curbs=bs;
 	yylineno=1;
 	curfilename = fn;
-	++stack_count 
+	++stack_count ;
 	return 1;
 }
 
@@ -51,17 +50,18 @@ int popfile(void){
 	return 1;
 }
 
-void  * eval_import(struct import_rule * import_node  ){
+
+void eval_import(struct import_rule * import_node  ){
 		
 		if(import_node->file_name != NULL){
 		  mode =  TRANS_MODE;
-		  trans_target = p->import_name;
-		  if(newfile(p->file_name)) yyparse();			
-		else{
-			
+		  trans_target = import_node->import_name;
+		  if(newfile(import_node->file_name)) yyparse();			
 		}
+		else{
+		}
+		
 }
- 
 
 
 

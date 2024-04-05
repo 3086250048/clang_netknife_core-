@@ -6,18 +6,6 @@
 	#include "netknife.h"
 	
 
-	struct bufstack{
-		//上一个文件信息
-		struct bufstack * prev ;
-		//保存的缓冲区
-		YY_BUFFER_STATE bs;
-		int lineno;	
-		char * filename;
-		FILE * f;//当前文件		
-	};
-
-	struct bufstack * curbs=0;
-	char * curfilename;
 
 %}
 
@@ -29,6 +17,7 @@ trans { printf("TRANS "); return TRANS;}
 [\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING ");yylval.s=strdup(yytext ); return STRING;} 
 . {} 
 \n { printf("\n");}
+<<EOF>> { if(!popfile()) yyterminate(); }
 
 <READY>[ \t] {}
 <READY>[\n] { printf("\n");}
@@ -84,6 +73,9 @@ trans { printf("TRANS "); return TRANS;}
 <TRANS_PRIORITY>> { printf("GT ");BEGIN READY;return GT;}
 <TRANS_PRIORITY>. {}
 <TRANS_PRIORITY>\n { printf("\n");}
+
+
+
 
 %%
 

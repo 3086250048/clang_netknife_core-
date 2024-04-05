@@ -19,12 +19,9 @@ int main(int  argc ,char ** argv ){
 		  yyparse();
 		  return 0;
 		}else{
-			FILE * f = fopen(argv[1],"r");
-			curfilename = malloc(strlen(argv[1]));
-			strcpy(curfilename,argv[1]);
-			yyrestart(f);
-			yyparse();
-			fclose(f);
+			if(newfile(argv[1])){
+				yyparse();
+			}
 			return 0;
 		}
 }

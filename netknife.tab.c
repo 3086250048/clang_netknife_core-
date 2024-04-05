@@ -1204,19 +1204,19 @@ yyreduce:
 
   case 12: /* import_rule_chain_exp: IMPORT STRING SEM  */
 #line 54 "netknife.y"
-                                           {  (yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL);}
+                                           {  (yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL);eval_import((yyval.import_rule_chain));}
 #line 1209 "netknife.tab.c"
     break;
 
   case 13: /* import_rule_chain_exp: IMPORT STRING filter_exp SEM  */
 #line 55 "netknife.y"
-                                                           { (yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
+                                                           { (yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));eval_import((yyval.import_rule_chain));}
 #line 1215 "netknife.tab.c"
     break;
 
   case 14: /* import_rule_chain_exp: IMPORT STRING DOT STRING filter_exp SEM  */
 #line 56 "netknife.y"
-                                                                     { (yyval.import_rule_chain)=join_import_rule((yyvsp[-4].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
+                                                                     { (yyval.import_rule_chain)=join_import_rule((yyvsp[-4].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));eval_import((yyval.import_rule_chain));}
 #line 1221 "netknife.tab.c"
     break;
 

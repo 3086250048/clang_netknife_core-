@@ -55,12 +55,13 @@ char * tidy_str(char *str){
 		++p;
 		++len;
 	}	
-	if( *p != '\0' && *p == '\n'  &&  isspace(*(--p))){
-		memmove(p , p+1 ,strlen(p+1));
+	if( *p != '\0' && *p == '\n'  &&  isspace(*(p-1))){
+		memmove(p-1 , p ,strlen(p)+1);
+		--p;
 	}
 	
-	if( *p != '\0' && *p == '\n'  &&  isspace(*(++p))){
-		memmove( p ,p+1 ,strlen(p+1));
+	if( *p != '\0' && *p == '\n'  &&  isspace(*(p+1))){
+		memmove( p+1 ,p+2 ,strlen(p)+1);
 	}
 	return str;	
 }

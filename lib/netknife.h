@@ -19,12 +19,6 @@ enum type {
 	ALL
 };
 
-extern int yylineno;
-void yyerror(char * ,...);
-int  yylex(void);
-int yyparse(void);
-void yyrestart ( FILE *input_file  );
-void init();
 
 #define PRINT_FACTOR 1
 #define PRINT_TRANS_TABLE_ENTRY 0*PRINT_FACTOR,""
@@ -38,6 +32,12 @@ void init();
 #define MAX_HASH 99999
 #define MAX_STACK 9999
 
+/*lex.c 中的一些定义************************************************/
+extern int yylineno;
+void yyerror(char * ,...);
+int  yylex(void);
+int yyparse(void);
+void yyrestart ( FILE *input_file  );
 
 struct yy_buffer_state
 	{
@@ -59,6 +59,24 @@ struct yy_buffer_state
 };
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 
+#ifndef YY_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k.
+ * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
+ * Ditto for the __ia64__ case accordingly.
+ */
+#define YY_BUF_SIZE 32768
+#else
+#define YY_BUF_SIZE 16384
+#endif /* __ia64__ */
+#endif
+
+void yy_delete_buffer ( YY_BUFFER_STATE b  );
+void yy_switch_to_buffer ( YY_BUFFER_STATE new_buffer  );
+YY_BUFFER_STATE yy_create_buffer ( FILE *file, int size  );
+/**************************************************************/
+
+
 struct bufstack{
 		//上一个文件信息
 		struct bufstack * prev ;
@@ -68,24 +86,23 @@ struct bufstack{
 		char * filename;
 		FILE * f;//当前文件		
 };
-
-
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
-extern struct trans_table * trans_tab ;
+extern struct trans * trans_tab ;
+extern struct netknife * netknife_tab;
 extern int mode ;
 extern char * trans_target;
 
-extern bufstack * curbs ;
+extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int stack_count;
 
 int newfile(char * fb);
 int popfile(void);
-void eval_import(struct import_rule * import_node);
-
+void init();
 char * trim(char * str);
 
+/******************** 语法相关结构体和方法 ***********************/
 struct rule {
 	int node_type;
 	int lineno;
@@ -181,7 +198,8 @@ struct import_rule * get_import_rule();
 void print_range(struct range * range_root);
 //打印import_rule
 void print_import_rule(struct import_rule * import_rule_root);
-
+//计算import
+void eval_import(struct import_rule * import_node);
 
 struct trans {
 	int node_type ;
@@ -204,7 +222,7 @@ struct trans * join_trans_table(
 );
 
 //获取trans_table
-struct trans_table * get_trans_table();
+struct trans  * get_trans_table();
 
 //打印trans表项
 void print_trans(struct trans * trans);
@@ -212,17 +230,17 @@ void print_trans(struct trans * trans);
 struct netknife{
 	int node_type;  
 	char * filename ; //文件名称
-	char * node_type; // 节点类型
-    char * node_name; // 节点名称
-	void * node_tab ;// 节点hash表头地址
+	int  child_type; // 节点类型
+    char * child_name; // 节点名称
+	void * child_tab ;// 节点hash表头地址
 	
 };
 	
 //添加到netknife_table 
-struct netknife  * join_netknife_table(void * node_tab );
+struct netknife  * join_netknife_table(char * filename , int node_type , char * node_name , void * node_tab );
 
 //获取某个node_tab
-void  * get_node_table(char * filename , char * node_type, char * node_name , void * node_tab );
+void  * get_node_table(char * filename , int  node_type, char * node_name );
 
 
 #endif
