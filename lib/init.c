@@ -3,7 +3,6 @@
 //TRANS语法树相关
 struct  rule_table * rule_tab ;
 struct  comment_table * comment_tab;
-struct  trans * trans_tab ;
 struct  netknife * netknife_tab ;
 //文件栈相关
 struct bufstack * curbs=0;
@@ -20,13 +19,12 @@ int mode = PUB_MODE;
 1)只有与trans_target名称一致的trans才会被添加进语法树
 2)默认值为ALL,表示所有名称的trans节点都会被添加进语法树
 */
-char * trans_target = ALL;
+char * trans_target = NULL;
 
 
 
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );
-trans_tab = calloc(MAX_HASH , sizeof(struct trans) );
 netknife_tab  = calloc(MAX_HASH,sizeof(struct netknife));
 }

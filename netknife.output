@@ -1,9 +1,9 @@
 Grammar
 
-    0 $accept: trans_table_exp $end
+    0 $accept: netknife_exp $end
 
-    1 trans_table_exp: ε
-    2                | trans_table_exp trans_exp
+    1 netknife_exp: ε
+    2             | netknife_exp trans_exp
 
     3 trans_exp: TRANS STRING LBRACE RBRACE
     4          | TRANS STRING LBRACE trans_body_exp RBRACE
@@ -85,7 +85,7 @@ Nonterminals, with rules where they appear
 
     $accept (25)
         on left: 0
-    trans_table_exp <trans_tab> (26)
+    netknife_exp <netknife> (26)
         on left: 1 2
         on right: 0 2
     trans_exp <trans> (27)
@@ -119,19 +119,19 @@ Nonterminals, with rules where they appear
 
 State 0
 
-    0 $accept: • trans_table_exp $end
-    1 trans_table_exp: ε •
-    2                | • trans_table_exp trans_exp
+    0 $accept: • netknife_exp $end
+    1 netknife_exp: ε •
+    2             | • netknife_exp trans_exp
 
-    $default  reduce using rule 1 (trans_table_exp)
+    $default  reduce using rule 1 (netknife_exp)
 
-    trans_table_exp  go to state 1
+    netknife_exp  go to state 1
 
 
 State 1
 
-    0 $accept: trans_table_exp • $end
-    2 trans_table_exp: trans_table_exp • trans_exp
+    0 $accept: netknife_exp • $end
+    2 netknife_exp: netknife_exp • trans_exp
     3 trans_exp: • TRANS STRING LBRACE RBRACE
     4          | • TRANS STRING LBRACE trans_body_exp RBRACE
 
@@ -143,7 +143,7 @@ State 1
 
 State 2
 
-    0 $accept: trans_table_exp $end •
+    0 $accept: netknife_exp $end •
 
     $default  accept
 
@@ -158,9 +158,9 @@ State 3
 
 State 4
 
-    2 trans_table_exp: trans_table_exp trans_exp •
+    2 netknife_exp: netknife_exp trans_exp •
 
-    $default  reduce using rule 2 (trans_table_exp)
+    $default  reduce using rule 2 (netknife_exp)
 
 
 State 5

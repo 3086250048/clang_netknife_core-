@@ -16,7 +16,6 @@ enum type {
 	NETKNIFE_NODE,
 	PUB_MODE,
 	TRANS_MODE,
-	ALL
 };
 
 
@@ -29,10 +28,10 @@ enum type {
 #define PRINT_COMMENT_TABLE_ENTRY 5*PRINT_FACTOR," "
 #define PRINT_RULE 10*PRINT_FACTOR," "
 #define PRINT_COMMENT 10*PRINT_FACTOR," " 
-#define MAX_HASH 99999
+#define MAX_HASH 9999
 #define MAX_STACK 9999
 
-/*lex.c 中的一些定义************************************************/
+/*lex.c 中的一些定义*/
 extern int yylineno;
 void yyerror(char * ,...);
 int  yylex(void);
@@ -256,26 +255,21 @@ void eval_import(struct import_rule * import_node);
 
 struct trans {
 	int node_type ;
+	char * name ;
 	int lineno ;
-	char * filename ;
-	char * trans_name ;
 	struct rule_table * rule_tab;
 	struct comment_table * comment_tab;
 	struct import_rule * import_rule_chain ;
 };
 
 //添加trans
-struct trans * join_trans_table(
-	char * filename ,
-	char * trans_name , 
+struct trans * join_trans(
+	char * name , 
 	int lineno , 
 	struct rule_table * rule_tab ,
 	struct comment_table * comment_tab ,
 	struct import_rule * import_rule_chain 
 );
-
-//获取trans_table
-struct trans  * get_trans_table();
 
 //打印trans表项
 void print_trans(struct trans * trans);
@@ -290,7 +284,7 @@ struct netknife{
 };
 	
 //添加到netknife_table 
-struct netknife  * join_netknife_table(char * filename , int node_type , char * node_name , void * node_tab );
+struct netknife  * join_netknife_table(char * filename ,void * node );
 
 //获取某个node_tab
 void  * get_node_table(char * filename , int  node_type, char * node_name );

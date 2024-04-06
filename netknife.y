@@ -5,7 +5,6 @@
 #include  "netknife.h"
 %}
 
-
 %union {
 int d;
 char * s;
@@ -18,7 +17,7 @@ struct range * ran;
 struct filter * filter;
 struct import_rule * import_rule_chain;
 struct trans * trans;
-struct trans_table * trans_tab ;					  
+struct netknife  * netknife;					  
 }
 
 //声明记号
@@ -33,15 +32,15 @@ struct trans_table * trans_tab ;
 %type <filter> filter_exp
 %type <import_rule_chain> import_rule_chain_exp
 %type <trans> trans_exp trans_body_exp  
-%type <trans_tab> trans_table_exp
+%type <netknife> netknife_exp
 %%
 
 
-trans_table_exp : {$$=NULL;}
-		| trans_table_exp trans_exp {$$=join_trans_table($2); print_trans_table_entry($$->trans);}
+netknife_exp : {$$=NULL;}
+		| netknife_exp trans_exp {$$=join_netknife_table(curfilename,$2);print_trans($2);}
 		;
-trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans(curfilename,$2,yylineno,NULL,NULL,NULL); }
-  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans(curfilename,$2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
+trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans($2,yylineno,NULL,NULL,NULL); }
+  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans($2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
   ;
 trans_body_exp : rule_table_exp{$$=NULL;} 
 	   | comment_table_exp {$$=NULL;} 
@@ -51,9 +50,9 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :  IMPORT STRING SEM {  $$=join_import_rule(NULL,$2,yylineno,NULL);eval_import($$);} 
-			  | IMPORT  STRING  filter_exp SEM { $$=join_import_rule(NULL,$2,yylineno,$3);eval_import($$);}
-			  | IMPORT STRING DOT STRING  filter_exp SEM { $$=join_import_rule($2,$4,yylineno,$5);eval_import($$);}
+import_rule_chain_exp :  IMPORT STRING SEM {  $$=join_import_rule(NULL,$2,yylineno,NULL);} 
+			  | IMPORT  STRING  filter_exp SEM { $$=join_import_rule(NULL,$2,yylineno,$3);}
+			  | IMPORT STRING DOT STRING  filter_exp SEM { $$=join_import_rule($2,$4,yylineno,$5);}
 			  ;
 filter_exp : INCLUDE range_exp { $$ = join_filter(NULL,INCLUDE_NODE,$2);}
 		   | EXCLUDE range_exp { $$ = join_filter(NULL,EXCLUDE_NODE,$2);}
@@ -84,7 +83,7 @@ comment_table_exp : COMMENT_START index_string_exp COMMENT_END {
 		  ;
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
-			$$=join_rule_table(join_rule(trim($1),trim($4),yylineno,0));
+		 $$=join_rule_table(join_rule(trim($1),trim($4),yylineno,0));
 		 }
 	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
 		   $$=join_rule_table(join_rule(trim($1),trim($5),yylineno,$3));

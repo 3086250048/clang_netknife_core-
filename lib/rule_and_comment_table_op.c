@@ -49,10 +49,9 @@ struct comment_table * join_comment_table(struct comment * c){
 					tail=tail->dup_c;
 				}
 				tail->dup_c = dup ;
-
 				return tmp;
 			}
-			if(tmp->c==NULL){
+			if(tmp->c == NULL){
 				tmp->node_type =COMMENT_TABLE_ENTRY_NODE;
 				tmp->c = c;
 				tmp->dup_c = NULL;
