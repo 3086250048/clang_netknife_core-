@@ -18,11 +18,10 @@ int mode = PUB_MODE;
 /*
 1)只有与trans_target名称一致的trans才会被添加进语法树
 2)默认值为ALL,表示所有名称的trans节点都会被添加进语法树
+3)cur_trans 代表当前trans的名称。
 */
 char * trans_target = NULL;
-
-
-
+char * cur_trans = NULL;
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );

@@ -39,9 +39,9 @@ struct netknife  * netknife;
 netknife_exp : {$$=NULL;}
 		| netknife_exp trans_exp {$$=join_netknife_table(curfilename,$2);print_trans($2);}
 		;
-trans_exp : TRANS STRING LBRACE RBRACE  { $$=join_trans($2,yylineno,NULL,NULL,NULL); }
-  | TRANS STRING LBRACE trans_body_exp RBRACE { $$=join_trans($2,yylineno,get_rule_table(),get_comment_table(),get_import_rule()) ;}
-  ;
+trans_exp : TRANS STRING LBRACE RBRACE  {$$=join_trans($2,yylineno,NULL,NULL,NULL); }
+          | TRANS STRING LBRACE trans_body_exp RBRACE {$$=join_trans($2,yylineno,get_rule_table(),get_comment_table(),get_import_rule());}
+  		  ;
 trans_body_exp : rule_table_exp{$$=NULL;} 
 	   | comment_table_exp {$$=NULL;} 
 	   | import_rule_chain_exp{$$=NULL;}

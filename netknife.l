@@ -4,17 +4,26 @@
 	#include <string.h>
 	#include "netknife.tab.h"
 	#include "netknife.h"
-	
-
-
+    /*
+	 * 判断trans是否被读取   
+	 */
+	int get_trans=0;	
 %}
 
 %x READY  TRANS_RULE TRANS_PRIORITY REGX TRANS_COMMENT TRANS_RULE_COMMENT TRANS_IMPORT_COMMENT TRANS_IMPORT 
 %%
-trans { printf("TRANS "); return TRANS;}
+trans { printf("TRANS "); get_trans=1; return TRANS;}
 \" {  BEGIN TRANS_COMMENT ;}
 "{" {  printf("LBRACE ");BEGIN READY; return LBRACE;} 
-[\x80-\xFFa-zA-Z0-9_]+ {  printf("STRING ");yylval.s=strdup(yytext ); return STRING;} 
+[\x80-\xFFa-zA-Z0-9_]+ {  
+	printf("STRING ");
+	if(get_trans=1){
+		cur_trans = strdup(yytext);
+	}
+	yylval.s=strdup(yytext );
+	get_trans = 0;
+	return STRING;
+} 
 . {} 
 \n { printf("\n");}
 <<EOF>> { if(!popfile()) yyterminate(); }
