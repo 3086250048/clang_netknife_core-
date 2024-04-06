@@ -51,19 +51,16 @@ int popfile(void){
 }
 
 
-void eval_import(struct import_rule * import_node  ){
-		
-		if(import_node->file_name != NULL){
-		   mode =  TRANS_MODE;
-		   trans_target = import_node->import_name;
-		   if(newfile(import_node->file_name)) yyparse();			
-		}
-		else{
-		    struct trans * tmp = (struct trans *)get_node_table(curfilename,TRANS_NODE,import_node->import_name);			   
-
-
-		}
-		
+void eval_import(struct import_rule * import_node  ){		
+	mode =  TRANS_MODE;
+	trans_target = import_node->import_name;
+	char * filename ;
+	if(import_node->file_name != NULL){
+		filename = import_node->file_name;
+	}else{
+		filename = curfilename;
+	}
+	if(newfile(filename)) yyparse();			
 }
 
 
