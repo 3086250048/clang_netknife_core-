@@ -142,9 +142,9 @@ extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
 extern struct netknife * netknife_tab;
-extern int mode ;
-extern char * trans_target;
-extern char * cur_trans;
+extern int mode ;//unused
+extern char * trans_target;//unused
+extern char * cur_trans;//unused
 extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int stack_count;

@@ -52,8 +52,7 @@ int popfile(void){
 
 
 void eval_import(struct import_rule * import_node  ){		
-	mode =  TRANS_MODE;
-	trans_target = import_node->import_name;
+	if(import_node == NULL)return ;
 	char * filename ;
 	if(import_node->file_name != NULL){
 		filename = import_node->file_name;
