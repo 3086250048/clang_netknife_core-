@@ -5,7 +5,7 @@ struct  rule_table * rule_tab ;
 struct  comment_table * comment_tab;
 struct  netknife * netknife_tab ;
 //文件栈相关
-struct bufstack * curbs=0;
+struct bufstack * curbs=NULL;
 char * curfilename;
 int stack_count=0; 
 //计算语法树相关
@@ -20,8 +20,8 @@ int mode = PUB_MODE;//unused
 2)默认值为ALL,表示所有名称的trans节点都会被添加进语法树
 3)cur_trans 代表当前trans的名称。
 */
-char * trans_target = NULL; //unused
-char * cur_trans = NULL;//unused
+char * cur_trans ;
+
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );

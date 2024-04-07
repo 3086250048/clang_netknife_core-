@@ -1154,13 +1154,13 @@ yyreduce:
 
   case 4: /* trans_exp: TRANS STRING LBRACE RBRACE  */
 #line 42 "netknife.y"
-                                        {(yyval.trans)=join_trans((yyvsp[-2].s),yylineno,NULL,NULL,NULL); }
+                                        {cur_trans=(yyvsp[-2].s);(yyval.trans)=join_trans((yyvsp[-2].s),yylineno,NULL,NULL,NULL); }
 #line 1159 "netknife.tab.c"
     break;
 
   case 5: /* trans_exp: TRANS STRING LBRACE trans_body_exp RBRACE  */
 #line 43 "netknife.y"
-                                                      {(yyval.trans)=join_trans((yyvsp[-3].s),yylineno,get_rule_table(),get_comment_table(),get_import_rule());}
+                                                      {cur_trans=(yyvsp[-3].s);(yyval.trans)=join_trans((yyvsp[-3].s),yylineno,get_rule_table(),get_comment_table(),get_import_rule());}
 #line 1165 "netknife.tab.c"
     break;
 
@@ -1202,25 +1202,25 @@ yyreduce:
 
   case 12: /* import_rule_chain_exp: IMPORT STRING SEM  */
 #line 53 "netknife.y"
-                                           {  (yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL);}
+                                           {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL); }
 #line 1207 "netknife.tab.c"
     break;
 
   case 13: /* import_rule_chain_exp: IMPORT STRING filter_exp SEM  */
 #line 54 "netknife.y"
-                                                           { (yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
+                                                           {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
 #line 1213 "netknife.tab.c"
     break;
 
   case 14: /* import_rule_chain_exp: IMPORT STRING DOT STRING SEM  */
 #line 55 "netknife.y"
-                                                         { (yyval.import_rule_chain)=join_import_rule((yyvsp[-3].s),(yyvsp[-1].s),yylineno,NULL);}
+                                                         {(yyval.import_rule_chain)=join_import_rule((yyvsp[-3].s),(yyvsp[-1].s),yylineno,NULL); }
 #line 1219 "netknife.tab.c"
     break;
 
   case 15: /* import_rule_chain_exp: IMPORT STRING DOT STRING filter_exp SEM  */
 #line 56 "netknife.y"
-                                                                     { (yyval.import_rule_chain)=join_import_rule((yyvsp[-4].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
+                                                                     {(yyval.import_rule_chain)=join_import_rule((yyvsp[-4].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
 #line 1225 "netknife.tab.c"
     break;
 

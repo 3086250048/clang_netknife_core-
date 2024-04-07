@@ -1,4 +1,4 @@
-trans cisco {
+trans c121isco {
 set ip gt 192.168.2.21 => undo_ipsource ;
 check_ip_source => undo_ipsource ;
 check_ip_source => undo_ipsource ;

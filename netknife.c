@@ -16,12 +16,13 @@ void yyerror(char * s ,...){
 int main(int  argc ,char ** argv ){
 		init();
 		if(argc<2){
-		  yyparse();
+			  yyparse();
 		  return 0;
 		}else{
-			if(newfile(argv[1])){
+			if(newfile(strdup(argv[1]))){
 				yyparse();
+			}else{
+				return 0;
 			}
-			return 0;
 		}
 }
