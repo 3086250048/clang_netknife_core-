@@ -1153,13 +1153,13 @@ yyreduce:
 #line 40 "netknife.y"
                                          {
 			if(cur_state==NORMAL_STATE){
-				(yyval.netknife)=join_netknife_table(curfilename,(yyvsp[0].trans));eval_import((yyvsp[0].trans)->import_rule_chain,(yyvsp[0].trans)->name);
+				(yyval.netknife)=join_netknife_table(curfilename,(yyvsp[0].trans));eval_import((yyvsp[0].trans)->import_rule_chain,(yyvsp[0].trans)->name);print_trans((yyvsp[0].trans));
 			}
 			else{
-				if(!strcmp(cur_trans,target_trans)){
-					(yyval.netknife)=NULL;
+				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
 					struct import_rule * import_rule_chain =(struct import_rule *)(yyvsp[0].trans);
 					eval_import(import_rule_chain,cur_trans );
+					(yyval.netknife)=NULL;
 				}
 			}
 		 }
@@ -1178,7 +1178,7 @@ yyreduce:
 			 if(cur_state==NORMAL_STATE){
 				(yyval.trans)=join_trans((yyvsp[-3].s),yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			 }else{
-				if(!strcmp(cur_trans,target_trans)){
+				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS , target_trans) ){
 					(yyval.trans)=(struct trans *)get_import_rule();			
 				}else{
 					(yyval.trans)=NULL;
@@ -1232,13 +1232,13 @@ yyreduce:
 
   case 13: /* import_rule_chain_exp: IMPORT STRING SEM  */
 #line 76 "netknife.y"
-                                         {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL); }
+                                         {(yyval.import_rule_chain)=join_import_rule((yyvsp[-1].s),NULL,yylineno,NULL); }
 #line 1237 "netknife.tab.c"
     break;
 
   case 14: /* import_rule_chain_exp: IMPORT STRING filter_exp SEM  */
 #line 77 "netknife.y"
-                                                           {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
+                                                           {(yyval.import_rule_chain)=join_import_rule((yyvsp[-2].s),NULL,yylineno,(yyvsp[-1].filter)); }
 #line 1243 "netknife.tab.c"
     break;
 
@@ -1374,7 +1374,7 @@ yyreduce:
 			 if(cur_state==NORMAL_STATE){
 				 (yyval.comment_tab)=join_comment_table(join_comment(trim((yyvsp[-1].s)),yylineno));
 			 }else{
-				if(!strcmp(cur_trans,target_trans)){
+				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
 					(yyval.comment_tab)=NULL;
 					join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim((yyvsp[-1].s)),yylineno));
 				}else{
@@ -1391,7 +1391,7 @@ yyreduce:
 		  if(cur_state==NORMAL_STATE){
 		  	(yyval.rule_tab)=join_rule_table(join_rule(trim((yyvsp[-4].s)),trim((yyvsp[-1].s)),yylineno,0));
 		  }else{
-			 if(!strcmp(cur_trans,target_trans)){
+			 if(!strcmp(cur_trans,target_trans)||!strcmp(ALL_TRANS,target_trans)){
 				(yyval.rule_tab)=NULL;
 				join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim((yyvsp[-4].s)),trim((yyvsp[-1].s)),yylineno,0));
 			  }else{
@@ -1408,7 +1408,7 @@ yyreduce:
 		  if(cur_state==NORMAL_STATE){
 		    (yyval.rule_tab)=join_rule_table(join_rule(trim((yyvsp[-5].s)),trim((yyvsp[-1].s)),yylineno,(yyvsp[-3].d)));
 		  }else{
-			if(!strcmp(cur_trans,target_trans)){
+			if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
 				(yyval.rule_tab)=NULL;
 				join_buffer_chain(curfilename , cur_trans , RULE_NODE,join_rule( trim((yyvsp[-5].s)),trim((yyvsp[-1].s)),yylineno,(yyvsp[-3].d)));
 			}else{

@@ -48,7 +48,7 @@ struct netknife * join_netknife_table( char * filename ,  void * node){
 
 void  * get_netknife_node(char * filename , int child_type , char * child_name){
 		struct netknife * tmp = &netknife_tab[netknife_index_hash(filename,child_type,child_name)%MAX_HASH];	
-		if(tmp->child_type == NETKNIFE_NODE){
+		if(tmp->node_type == NETKNIFE_NODE){
 				return tmp->child_tab;
 		}else{
 		 	printf("netknife_table no has this entry\n");

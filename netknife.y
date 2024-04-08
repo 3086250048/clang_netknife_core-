@@ -39,13 +39,13 @@ struct netknife  * netknife;
 netknife_exp : {$$=NULL;}
 		| netknife_exp trans_exp {
 			if(cur_state==NORMAL_STATE){
-				$$=join_netknife_table(curfilename,$2);eval_import($2->import_rule_chain,$2->name);
+				$$=join_netknife_table(curfilename,$2);eval_import($2->import_rule_chain,$2->name);print_trans($2);
 			}
 			else{
-				if(!strcmp(cur_trans,target_trans)){
-					$$=NULL;
+				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
 					struct import_rule * import_rule_chain =(struct import_rule *)$2;
 					eval_import(import_rule_chain,cur_trans );
+					$$=NULL;
 				}
 			}
 		 }
@@ -55,7 +55,7 @@ trans_exp : trans_name_exp LBRACE RBRACE  {$$=join_trans($1,yylineno,NULL,NULL,N
 			 if(cur_state==NORMAL_STATE){
 				$$=join_trans($1,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			 }else{
-				if(!strcmp(cur_trans,target_trans)){
+				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS , target_trans) ){
 					$$=(struct trans *)get_import_rule();			
 				}else{
 					$$=NULL;
@@ -73,8 +73,8 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :IMPORT STRING SEM {$$=join_import_rule(NULL,$2,yylineno,NULL); } 
-			  | IMPORT  STRING  filter_exp SEM {$$=join_import_rule(NULL,$2,yylineno,$3); }
+import_rule_chain_exp :IMPORT STRING SEM {$$=join_import_rule($2,NULL,yylineno,NULL); } 
+			  | IMPORT  STRING  filter_exp SEM {$$=join_import_rule($2,NULL,yylineno,$3); }
 			  | IMPORT STRING DOT STRING SEM {$$=join_import_rule($2,$4,yylineno,NULL); }
 			  | IMPORT STRING DOT STRING  filter_exp SEM {$$=join_import_rule($2,$4,yylineno,$5); }
 			  ;
@@ -105,7 +105,7 @@ comment_table_exp : COMMENT_START index_string_exp COMMENT_END {
 			 if(cur_state==NORMAL_STATE){
 				 $$=join_comment_table(join_comment(trim($2),yylineno));
 			 }else{
-				if(!strcmp(cur_trans,target_trans)){
+				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
 					$$=NULL;
 					join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim($2),yylineno));
 				}else{
@@ -119,7 +119,7 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
 		  if(cur_state==NORMAL_STATE){
 		  	$$=join_rule_table(join_rule(trim($1),trim($4),yylineno,0));
 		  }else{
-			 if(!strcmp(cur_trans,target_trans)){
+			 if(!strcmp(cur_trans,target_trans)||!strcmp(ALL_TRANS,target_trans)){
 				$$=NULL;
 				join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim($1),trim($4),yylineno,0));
 			  }else{
@@ -131,7 +131,7 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
 		  if(cur_state==NORMAL_STATE){
 		    $$=join_rule_table(join_rule(trim($1),trim($5),yylineno,$3));
 		  }else{
-			if(!strcmp(cur_trans,target_trans)){
+			if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
 				$$=NULL;
 				join_buffer_chain(curfilename , cur_trans , RULE_NODE,join_rule( trim($1),trim($5),yylineno,$3));
 			}else{

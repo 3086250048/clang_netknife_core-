@@ -5,8 +5,8 @@
 
 
 int newfile(char * fn ){
-	if(file_stack_count >= MAX_STACK ){
-		perror("Too many file stacks");exit(1);
+	if(file_stack_count >= MAX_STACK || import_stack_count >= MAX_STACK ){
+		printf("Too many file stacks\n");exit(1);
 	}
 	FILE * f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
@@ -56,6 +56,7 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 		int result;
 		if(!import_stack_count)
 		{
+			cur_state = IMPORT_TRANS_STATE;			
 			start_trans = trans_name ; 			
 		}
 		cur_state = IMPORT_TRANS_STATE;
@@ -79,17 +80,18 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 			}
 		}
 		if(!import_stack_count){
+			printf("curfilename = %s\n",curfilename);
 			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,start_trans );
 			struct rule_table * rule_tab  = tmp->rule_tab;
 			struct comment_table * comment_tab =  tmp->comment_tab ;	
 
 			struct buffer * buf_root = get_buffer();
 			while(buf_root){
-				if(buf_root->node_type == RULE_NODE) assign_join_rule_table(rule_tab,buf_root->buffer);
-				if(buf_root->node_type == COMMENT_NODE) assign_join_comment_table(comment_tab,buf_root->buffer)	;
+				if(buf_root->buffer_type == RULE_NODE)assign_join_rule_table(rule_tab,buf_root->buffer);
+				if(buf_root->buffer_type == COMMENT_NODE) assign_join_comment_table(comment_tab,buf_root->buffer)	;
 				buf_root=buf_root->next;
 			}
-			cur_state = 0;
+			cur_state = NORMAL_STATE;
 			start_trans=NULL;
 		}
 }
