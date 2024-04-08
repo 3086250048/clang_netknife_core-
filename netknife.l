@@ -14,7 +14,7 @@ trans { printf("TRANS "); return TRANS;}
 [\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext );return STRING;} 
 . {} 
 \n { printf("\n");}
-<<EOF>> { if(stack_count == 1){yyterminate();}else{popfile();} }
+<<EOF>> { if(file_stack_count == 1){yyterminate();}else{popfile();} }
 
 <READY>[ \t] {}
 <READY>[\n] { printf("\n");}

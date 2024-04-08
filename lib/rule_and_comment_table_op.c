@@ -34,6 +34,31 @@ struct rule_table * join_rule_table(struct rule * r){
 			return tmp;	
 		}
 }
+//二次添加rule到表中
+struct rule_table * assign_join_rule_table(struct rule_table * rule_tab , struct rule * r){
+	struct rule_table  * tmp = &rule_tab[index_string_hash(r->s)%MAX_HASH];
+	    if(tmp->r != NULL){
+			struct rule_table * tail = tmp;
+			struct rule_table * dup = malloc(sizeof(struct rule_table));
+			dup->node_type = RULE_TABLE_ENTRY_NODE;
+			dup->r = r ;
+			dup->dup_r  = NULL;
+			
+			while(tail->dup_r){
+				tail=tail->dup_r;
+			}
+			tail->dup_r = dup; 
+			
+			return tmp;
+		}
+		if(tmp->r == NULL){
+			tmp->node_type = RULE_TABLE_ENTRY_NODE;
+			tmp->r = r;
+		   	tmp->dup_r = NULL;
+			return tmp;	
+		}
+}
+
 
 
 //添加comment 到表中
@@ -59,6 +84,30 @@ struct comment_table * join_comment_table(struct comment * c){
 			}
 
 }
+//二次添加comment 到表中
+struct comment_table * assign_join_comment_table(struct comment_table * comment_tab ,struct comment * c){
+	struct comment_table  * tmp =&comment_tab[index_string_hash(c->c)%MAX_HASH];
+			if(tmp->c !=NULL ){
+				struct comment_table * tail  = tmp ;
+				struct comment_table * dup = malloc(sizeof(struct comment_table));
+				dup->node_type = COMMENT_TABLE_ENTRY_NODE;
+				dup->c = c ;
+				dup->dup_c = NULL ;
+				while(tail->dup_c){
+					tail=tail->dup_c;
+				}
+				tail->dup_c = dup ;
+				return tmp;
+			}
+			if(tmp->c == NULL){
+				tmp->node_type =COMMENT_TABLE_ENTRY_NODE;
+				tmp->c = c;
+				tmp->dup_c = NULL;
+				return tmp;	
+			}
+
+}
+
 
 
 //获取rule_table_entry

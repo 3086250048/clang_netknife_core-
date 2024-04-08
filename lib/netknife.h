@@ -16,7 +16,9 @@ enum type {
 	NETKNIFE_NODE,
 	PUB_MODE,
 	TRANS_MODE,
-	IMPORT_TRANS_STATE	
+	IMPORT_TRANS_STATE,	
+	NORMAL_STATE,
+	BUFFER_NODE
 };
 
 
@@ -144,10 +146,11 @@ extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
 extern struct netknife * netknife_tab;
-extern struct netknife * buffer_tab;
 extern int mode ;//unused
 extern char * cur_trans;
 extern char * target_trans;
+extern char * start_trans;
+extern int cur_state;
 extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int file_stack_count;
@@ -197,8 +200,13 @@ struct comment_table{
 
 //添加rule到表中
 struct rule_table * join_rule_table(struct rule * r);
+//二次添加rule到rule_tab表中
+struct rule_table * assign_join_rule_table(struct rule_table * root,struct rule * r);
+
 //添加comment 到表中
 struct comment_table * join_comment_table(struct comment * c);
+//二次添加rule到rule_tab表中
+struct comment_table * assign_join_comment_table(struct comment_table * root,struct comment * c);
 //获取rule_table_entry
 struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab ,char  * s);
 //获取comment_table_entry
@@ -255,7 +263,7 @@ void print_range(struct range * range_root);
 //打印import_rule
 void print_import_rule(struct import_rule * import_rule_root);
 //计算import
-void eval_import(struct import_rule * import_node);
+void eval_import(struct import_rule * import_node,char * trans_name);
 
 struct trans {
 	int node_type ;
@@ -289,15 +297,24 @@ struct netknife{
 	
 //添加到netknife_table 
 struct netknife  * join_netknife_table(char * filename ,void * node );
-//添加到buffer 
-struct netknife * join_buffer_table(char * filename , void * node);
-
 //获取netknife中某个node_tab
 void  * get_netknife_node(char * filename , int  node_type, char * node_name );
-//获取buffer中某个node_tab
-void * get_buffer_node(char * filename , int node_type , char * node_name);
 
 
+struct buffer{
+	int node_type ;
+	char * filename ; //文件名称
+	int  buffer_type; // 缓存类型
+    char * buffer_name; // 缓存名称
+	void * buffer  ;// 缓存根节点地址
+	struct buffer * next ;
+};
+
+
+//添加到buffer 
+void  join_buffer_chain(char * filename ,char * buffer_name ,int buffer_type ,void * buffer);
+//获取buffer_chain 的根地址
+struct buffer * get_buffer(); 
 
 #endif
 

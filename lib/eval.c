@@ -5,7 +5,7 @@
 
 
 int newfile(char * fn ){
-	if(stack_count >= MAX_STACK ){
+	if(file_stack_count >= MAX_STACK ){
 		perror("Too many file stacks");exit(1);
 	}
 	FILE * f =	fopen(fn,"r");
@@ -40,7 +40,7 @@ int popfile(void){
 	prevbs = bs->prev;
 	free(bs);
 	if(!prevbs){
-	--stack_count;
+	--file_stack_count;
 		return 0;
 	}
 	yy_switch_to_buffer(prevbs->bs);
@@ -53,8 +53,12 @@ int popfile(void){
 
 
 void eval_import(struct import_rule * import_node,char * trans_name){		
-		cur_state = IMPORT_TRANS_IMPORT;
-		import_stack_count++;
+		int result;
+		if(!import_stack_count)
+		{
+			start_trans = trans_name ; 			
+		}
+		cur_state = IMPORT_TRANS_STATE;
 		while(import_node){
 			char * filename ;	
 			if(import_node->import_name)target_trans=import_node->import_name;
@@ -65,14 +69,28 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 			}else{
 				filename = curfilename;
 			}
-			if(newfile(filename)) yyparse();			
-			import_node=import_node->next;
+			if(newfile(filename)){
+				import_stack_count++;
+				 result = yyparse();			
+			}
+			if(!result){
+				import_stack_count--;	
+				import_node=import_node->next;
+			}
 		}
-		import_stack_count--;
-		if(!import_tack_count){
-			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,trans_name);
-			//将buffer中的所有trans->rule_tab->rule添加到tmp->trans->rule_tab中 		
-			cur_state = NULL;
+		if(!import_stack_count){
+			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,start_trans );
+			struct rule_table * rule_tab  = tmp->rule_tab;
+			struct comment_table * comment_tab =  tmp->comment_tab ;	
+
+			struct buffer * buf_root = get_buffer();
+			while(buf_root){
+				if(buf_root->node_type == RULE_NODE) assign_join_rule_table(rule_tab,buf_root->buffer);
+				if(buf_root->node_type == COMMENT_NODE) assign_join_comment_table(comment_tab,buf_root->buffer)	;
+				buf_root=buf_root->next;
+			}
+			cur_state = 0;
+			start_trans=NULL;
 		}
 }
 

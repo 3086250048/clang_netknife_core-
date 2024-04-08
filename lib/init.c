@@ -4,13 +4,12 @@
 struct  rule_table * rule_tab ;
 struct  comment_table * comment_tab;
 struct  netknife * netknife_tab ;
-struct  netknife * buffer_tab;
 //文件栈相关
 struct bufstack * curbs=NULL;
 char * curfilename;
 int file_stack_count=0; 
 //import相关
-int import_stack_coutn=0;
+int import_stack_count=0;
 
 //计算语法树相关
 /*
@@ -26,16 +25,16 @@ int mode = PUB_MODE;//unused
 */
 char * cur_trans=NULL ;
 char * target_trans=NULL;
+char * start_trans=NULL;
 
 
 /*
  *状态机
  */
-int cur_state = NULL;
+int cur_state = NORMAL_STATE;
 
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );
 netknife_tab  = calloc(MAX_HASH,sizeof(struct netknife));
-buffer_tab = calloc(MAX_HASH,sizeof(struct netknife));
 }
