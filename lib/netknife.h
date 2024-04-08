@@ -16,6 +16,7 @@ enum type {
 	NETKNIFE_NODE,
 	PUB_MODE,
 	TRANS_MODE,
+	IMPORT_TRANS_STATE	
 };
 
 
@@ -30,6 +31,7 @@ enum type {
 #define PRINT_COMMENT 10*PRINT_FACTOR," " 
 #define MAX_HASH 9999
 #define MAX_STACK 9999
+#define ALL_TRANS "ALL_TRANS"
 
 /*lex.c 中的一些定义*/
 extern int yylineno;
@@ -142,11 +144,14 @@ extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
 extern struct netknife * netknife_tab;
+extern struct netknife * buffer_tab;
 extern int mode ;//unused
 extern char * cur_trans;
+extern char * target_trans;
 extern struct bufstack * curbs ;
 extern char * curfilename ;
-extern int stack_count;
+extern int file_stack_count;
+extern int import_stack_count;
 
 int newfile(char * fb);
 int popfile(void);
@@ -284,9 +289,14 @@ struct netknife{
 	
 //添加到netknife_table 
 struct netknife  * join_netknife_table(char * filename ,void * node );
+//添加到buffer 
+struct netknife * join_buffer_table(char * filename , void * node);
 
-//获取某个node_tab
-void  * get_node_table(char * filename , int  node_type, char * node_name );
+//获取netknife中某个node_tab
+void  * get_netknife_node(char * filename , int  node_type, char * node_name );
+//获取buffer中某个node_tab
+void * get_buffer_node(char * filename , int node_type , char * node_name);
+
 
 
 #endif

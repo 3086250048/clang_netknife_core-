@@ -1202,7 +1202,7 @@ yyreduce:
 
   case 12: /* import_rule_chain_exp: IMPORT STRING SEM  */
 #line 53 "netknife.y"
-                                           {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL); }
+                                         {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL); }
 #line 1207 "netknife.tab.c"
     break;
 

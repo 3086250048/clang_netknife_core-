@@ -1,5 +1,4 @@
 trans c2isco {
-@netknife3.a;
 check_ip_source => undo_ipsource ;
 check_ip_source => undo_ipsource ;
 check_ip_source => undo_ipsource ;

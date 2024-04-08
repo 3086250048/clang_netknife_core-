@@ -1,17 +1,7 @@
 trans cisco_to_huawei {	
 	"查询命令"
 	@netknife2.a;
+	@netknife3.a;
 	show    \n ip \n \n int b =100> dplay ip int \n  b;    
 	"查询命令"
 }
-
-
-
-trans c2isco_to_huawei {	
-	"查询命令"
-	show    \n ip \n \n int b =100> dplay ip int \n  b;    
-	"查询命令"
-}
-
-
-

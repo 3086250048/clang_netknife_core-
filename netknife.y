@@ -37,7 +37,16 @@ struct netknife  * netknife;
 
 
 netknife_exp : {$$=NULL;}
-		| netknife_exp trans_exp {$$=join_netknife_table(curfilename,$2);eval_import($2->import_rule_chain);}
+		| netknife_exp trans_exp {if(!cur_state){
+									$$=join_netknife_table(curfilename,$2);}
+								  	eval_import($2->import_rule_chain,$2->name);
+								  else{
+									if(!strcmp(cur_trans,target_trans)){
+										$$=join_buffer_table(curfilename,$2);
+										eval_import($2->import_rule_chain,$2->name);
+									}
+								  }
+								}
 		;
 trans_exp : TRANS STRING LBRACE RBRACE  {cur_trans=$2;$$=join_trans($2,yylineno,NULL,NULL,NULL); }
           | TRANS STRING LBRACE trans_body_exp RBRACE {cur_trans=$2;$$=join_trans($2,yylineno,get_rule_table(),get_comment_table(),get_import_rule());}
@@ -50,7 +59,7 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :  IMPORT STRING SEM {$$=join_import_rule(NULL,$2,yylineno,NULL); } 
+import_rule_chain_exp :IMPORT STRING SEM {$$=join_import_rule(NULL,$2,yylineno,NULL); } 
 			  | IMPORT  STRING  filter_exp SEM {$$=join_import_rule(NULL,$2,yylineno,$3); }
 			  | IMPORT STRING DOT STRING SEM {$$=join_import_rule($2,$4,yylineno,NULL); }
 			  | IMPORT STRING DOT STRING  filter_exp SEM {$$=join_import_rule($2,$4,yylineno,$5); }
@@ -84,7 +93,7 @@ comment_table_exp : COMMENT_START index_string_exp COMMENT_END {
 		  ;
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
-		 $$=join_rule_table(join_rule(trim($1),trim($4),yylineno,0));
+		  $$=join_rule_table(join_rule(trim($1),trim($4),yylineno,0));
 		 }
 	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
 		   $$=join_rule_table(join_rule(trim($1),trim($5),yylineno,$3));

@@ -24,7 +24,7 @@ int newfile(char * fn ){
 	curbs=bs;
 	yylineno=1;
 	curfilename = fn;
-	++stack_count ;
+	++file_stack_count ;
 	return 1;
 }
 
@@ -47,20 +47,33 @@ int popfile(void){
 	curbs = prevbs;
 	yylineno = curbs->lineno;
 	curfilename = curbs->filename;
-	--stack_count; 
+	--file_stack_count; 
 	return 1;
 }
 
 
-void eval_import(struct import_rule * import_node  ){		
-		if(!import_node) return ;
-		char * filename ;
-		if(import_node->file_name != NULL){
-			filename = import_node->file_name;
-		}else{
-			filename = curfilename;
+void eval_import(struct import_rule * import_node,char * trans_name){		
+		cur_state = IMPORT_TRANS_IMPORT;
+		import_stack_count++;
+		while(import_node){
+			char * filename ;	
+			if(import_node->import_name)target_trans=import_node->import_name;
+			if(!import_node->import_name)target_trans=ALL_TRANS;
+
+			if(import_node->file_name != NULL){
+				filename = import_node->file_name;
+			}else{
+				filename = curfilename;
+			}
+			if(newfile(filename)) yyparse();			
+			import_node=import_node->next;
 		}
-		if(newfile(filename)) yyparse();			
+		import_stack_count--;
+		if(!import_tack_count){
+			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,trans_name);
+			//将buffer中的所有trans->rule_tab->rule添加到tmp->trans->rule_tab中 		
+			cur_state = NULL;
+		}
 }
 
 
