@@ -37,31 +37,10 @@ struct netknife  * netknife;
 
 
 netknife_exp : {$$=NULL;}
-		| netknife_exp trans_exp {
-			if(cur_state==NORMAL_STATE){
-				$$=join_netknife_table(curfilename,$2);eval_import($2->import_rule_chain,$2->name);print_trans($2);
-			}
-			else{
-				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-					struct import_rule * import_rule_chain =(struct import_rule *)$2;
-					eval_import(import_rule_chain,cur_trans );
-					$$=NULL;
-				}
-			}
-		 }
+		| netknife_exp trans_exp { $$ = netknife_reduce(NORMAL,$2);}
 		;
-trans_exp : trans_name_exp LBRACE RBRACE  {$$=join_trans($1,yylineno,NULL,NULL,NULL); }
-          | trans_name_exp LBRACE trans_body_exp RBRACE {
-			 if(cur_state==NORMAL_STATE){
-				$$=join_trans($1,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
-			 }else{
-				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS , target_trans) ){
-					$$=(struct trans *)get_import_rule();			
-				}else{
-					$$=NULL;
-				}
-			 }
-		  }
+trans_exp : trans_name_exp LBRACE RBRACE  { $$=trans_reduce(VOID);}
+          | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce(NORMAL);}
   		  ;
 trans_name_exp : TRANS STRING {cur_trans=$2;$$=$2;}
 

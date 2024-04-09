@@ -2,6 +2,7 @@
 #define _NETKNIFE_H_
 #include <stdio.h>
 enum type {
+	/*节点类型*/
 	INDEX_STRING_NODE =1,
 	RULE_NODE=2,
 	COMMENT_NODE=3,
@@ -14,11 +15,13 @@ enum type {
 	COMMENT_TABLE_ENTRY_NODE=10,
 	TRANS_NODE=11,
 	NETKNIFE_NODE=12,
-	PUB_MODE=13,
-	TRANS_MODE=14,
-	IMPORT_TRANS_STATE=15,	
-	NORMAL_STATE=16,
-	BUFFER_NODE=17
+	BUFFER_NODE=13,
+	/*规约状态*/
+	IMPORT_TRANS_STATE=14,	
+	NORMAL_STATE=15,
+	/*规约函数特殊参数 */
+	VOID = 16,
+	NORMAL =17
 };
 
 
@@ -258,6 +261,7 @@ struct import_rule * join_import_rule(char * file_name , char * import_name ,int
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
 
+
 //打印range
 void print_range(struct range * range_root);
 //打印import_rule
@@ -286,6 +290,10 @@ struct trans * join_trans(
 //打印trans表项
 void print_trans(struct trans * trans);
 
+//trans 规约
+struct trans * trans_reduce(int isempty);
+
+
 struct netknife{
 	int node_type;  
 	char * filename ; //文件名称
@@ -299,7 +307,8 @@ struct netknife{
 struct netknife  * join_netknife_table(char * filename ,void * node );
 //获取netknife中某个node_tab
 void  * get_netknife_node(char * filename , int  node_type, char * node_name );
-
+//netknife规约
+struct netknife * netknife_reduce(int isempty , void * node);
 
 struct buffer{
 	int node_type ;

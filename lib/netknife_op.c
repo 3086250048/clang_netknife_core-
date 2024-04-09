@@ -23,7 +23,6 @@ static unsigned int netknife_index_hash(char * filename, int  child_type ,char *
 
 
 struct netknife * join_netknife_table( char * filename ,  void * node){
-		if(filename==NULL || node == NULL ) {printf("filename or node is NULL\n");exit(1);}
 		char * child_name;
 		int  child_type ;
 
@@ -55,5 +54,32 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 		}	
 }
 
+
+struct netknife * netknife_reduce(int isempty , void  * node){
+	
+	 if(isempty == VOID){return NULL;}
+
+	 if(cur_state == NORMAL_STATE){
+	 	struct netknife * tmp =NULL;
+			 if(*(int *)node == TRANS_NODE){
+				struct trans * trans = (struct trans *)node;
+				tmp =  join_netknife_table(curfilename ,trans);
+				eval_import(trans->import_rule_chain,trans->name);
+				print_trans(trans);
+				return tmp;
+			 }
+	 }
+
+	 if(cur_state == IMPORT_TRANS_STATE){
+		if(!strcmp(cur_trans ,target_trans) || !strcmp(ALL_TRANS,target_trans))
+		{
+			struct import_rule * import_rule_chain =(struct import_rule *)node;
+			eval_import(import_rule_chain,cur_trans);
+			return NULL;
+		 }
+	 }
+
+
+}  
 
 

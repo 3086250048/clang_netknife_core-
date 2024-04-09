@@ -38,3 +38,27 @@ void print_trans(struct trans * trans){
 	print_import_rule(trans->import_rule_chain);
 }
 
+
+struct trans *  trans_reduce( int isempty)
+{
+	if(cur_state == NORMAL_STATE ){
+    	if(isempty == VOID) return join_trans(cur_trans,yylineno,NULL,NULL,NULL);
+		return join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+	}
+	
+	if(cur_state == IMPORT_TRANS_STATE){
+		if(isempty == VOID) return NULL;
+		if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
+			return (struct trans *)get_import_rule();
+		}else{
+			return NULL;
+		}
+	}
+}
+
+
+
+
+
+
+

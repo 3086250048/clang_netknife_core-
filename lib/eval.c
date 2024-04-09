@@ -80,7 +80,6 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 			}
 		}
 		if(!import_stack_count){
-			printf("curfilename = %s\n",curfilename);
 			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,start_trans );
 			struct rule_table * rule_tab  = tmp->rule_tab;
 			struct comment_table * comment_tab =  tmp->comment_tab ;	
