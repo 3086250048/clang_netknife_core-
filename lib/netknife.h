@@ -145,6 +145,13 @@ struct bufstack{
 		char * filename;
 		FILE * f;//当前文件		
 };
+
+struct filterstack{
+	//上一个import的filter信息
+	struct filterstack * prev ;
+	struct filter * filter ;
+};
+
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
@@ -158,9 +165,15 @@ extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int file_stack_count;
 extern int import_stack_count;
+extern int filter_stack_count;
+extern struct filter *  curfilter;
+extern struct filterstack * curfilterstack;
 
 int newfile(char * fb);
 int popfile(void);
+int newfilter(struct filter *);
+int popfilter(void);
+
 void init();
 char * trim(char * str);
 
@@ -255,6 +268,7 @@ struct import_rule {
 	struct filter * filter ;
 	struct import_rule *  next ;
 };
+
 
 
 

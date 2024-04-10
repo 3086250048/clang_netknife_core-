@@ -28,6 +28,7 @@ int newfile(char * fn ){
 	return 1;
 }
 
+
 int popfile(void){
 	struct bufstack * bs = curbs;
 	struct bufstack * prevbs;
@@ -51,6 +52,27 @@ int popfile(void){
 	return 1;
 }
 
+int newfilter(struct filter * filter){
+	if(filter_stack_count >= MAX_STACK ){
+		printf("Too many filter stacks \n");
+		exit(1);
+	}		
+    struct filterstack * tmp  = malloc(sizeof(struct filterstack));
+	tmp->prev=curfilterstack ;
+	tmp->filter = filter ;
+	curfilterstack = tmp;
+	filter_stack_count++;
+	return 1 ;
+}
+
+int popfilter(void){
+	curfilter = curfilterstack->prev->filter;
+	struct filterstack * tmp=curfilterstack;
+	curfilterstack = curfilterstack->prev;
+	free(tmp);
+	filter_stack_count--;
+	return 1;
+}
 
 void eval_import(struct import_rule * import_node,char * trans_name){		
 		int result;
@@ -61,6 +83,8 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 		}
 		cur_state = IMPORT_TRANS_STATE;
 		while(import_node){
+			//添加filter栈
+			if(!newfilter(import_node->filter)){ printf("push filter stack error\n");exit(1);} 
 			char * filename ;	
 			if(import_node->import_name)target_trans=import_node->import_name;
 			if(!import_node->import_name)target_trans=ALL_TRANS;
@@ -76,6 +100,8 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 			}
 			if(!result){
 				import_stack_count--;	
+				//弹出filter栈
+				if(!popfilter()){ printf("pop filter stack error\n");exit(1); }
 				import_node=import_node->next;
 			}
 		}

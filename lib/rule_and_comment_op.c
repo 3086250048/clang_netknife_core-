@@ -26,28 +26,36 @@ struct comment * join_comment(char * c, int lineno ){
 struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 	if(cur_state==NORMAL_STATE){
 		  	return join_rule_table(join_rule(trim(s),trim(d),yylineno,priority));
-	}else{
+	}
+	
+	if(cur_state==IMPORT_TRANS_STATE){
 		if(!strcmp(cur_trans,target_trans)||!strcmp(ALL_TRANS,target_trans)){
+			//filter 过滤
 			join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim(s),trim(d),yylineno,priority));
 			return NULL;
 		}else{
 			return NULL;
 		}
-	 }
+	}
+	 
 }
 
 
 struct comment_table * comment_table_reduce(char * c){
  	if(cur_state==NORMAL_STATE){
 		 return join_comment_table(join_comment(trim(c),yylineno));
-	}else{
+	}
+
+	if(cur_state == IMPORT_TRANS_STATE){
 		if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-			join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim(c),yylineno));
+			//filter 过滤
+				join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim(c),yylineno));
 			return NULL;
 		}else{
 			return NULL;
 		}
 	}
+	
 }
 
 void  print_comment(struct comment * c){
