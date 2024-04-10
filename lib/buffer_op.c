@@ -17,7 +17,6 @@ void join_buffer_chain( char * filename , char * buffer_name , int buffer_type ,
 		buffer_root = tmp;
 }
 
-
 struct buffer * get_buffer(){
 	struct buffer * tmp = buffer_root ;
 	buffer_root = NULL;

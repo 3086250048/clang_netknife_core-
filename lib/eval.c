@@ -74,14 +74,51 @@ int popfilter(void){
 	return 1;
 }
 
+/*将buffer中的数据根据filter过滤*/
+struct buffer * filter_buffer(){
+		struct buffer * tmp = buffer_root;
+		int s_lineno ;
+		int d_lineno ;
+		char * s_comment;
+		char * d_comment;
+		char * regx;
+		while(tmp){
+			while(curfilter){
+				if(curfilter->range->s_lineno)s_lineno=curfilter->range->s_lineno;
+				if(curfilter->ranfe->d_lineno)d_lineno=curfilter->range->d_lineno;
+				if(curfilter->range->s_comment)s_comment=curfilter->range->s_comment;
+				if(curfilter->range->d_comment)d_comment=curfilter->range->d_comment;
+				if(curfilter->range->d_comment)regx=curfilter->range->regx;
+				if(regx){
+					return 
+				}
+				if(s_lineno && d_lineno){
+						
+				}
+				if(s_lineno && d_comment){
+				}
+				if(s_comment && d_comment){
+				
+				}
+				if(s_comment && d_lineno){
+				
+				
+				}
+			}		
+		}	
+}
+
+
 void eval_import(struct import_rule * import_node,char * trans_name){		
 		int result;
+		/*设置起始参数*/
 		if(!import_stack_count)
 		{
 			cur_state = IMPORT_TRANS_STATE;			
 			start_trans = trans_name ; 			
 		}
 		cur_state = IMPORT_TRANS_STATE;
+		/*执行import动作*/
 		while(import_node){
 			//添加filter栈
 			if(!newfilter(import_node->filter)){ printf("push filter stack error\n");exit(1);} 
@@ -105,6 +142,8 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 				import_node=import_node->next;
 			}
 		}
+		
+			/*import最终归约*/
 		if(!import_stack_count){
 			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,start_trans );
 			struct rule_table * rule_tab  = tmp->rule_tab;
