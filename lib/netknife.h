@@ -205,11 +205,17 @@ struct comment_table{
 struct rule_table * join_rule_table(struct rule * r);
 //二次添加rule到rule_tab表中
 struct rule_table * assign_join_rule_table(struct rule_table * root,struct rule * r);
+//rule_table 规约
+struct rule_table * rule_table_reduce(char *s , char * d , int priority);
 
 //添加comment 到表中
 struct comment_table * join_comment_table(struct comment * c);
 //二次添加rule到rule_tab表中
 struct comment_table * assign_join_comment_table(struct comment_table * root,struct comment * c);
+//comment_tabele 规约
+struct comment_table * comment_table_reduce(char * c); 
+
+
 //获取rule_table_entry
 struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab ,char  * s);
 //获取comment_table_entry

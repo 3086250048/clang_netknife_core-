@@ -10,7 +10,7 @@ int newfile(char * fn ){
 	}
 	FILE * f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
-	if(!f){ perror(fn);return 0;}
+	if(!f){ perror(fn);exit(1);}
 	if(!bs) { perror("malloc"); exit(1);}
 
 	//记住当前状态

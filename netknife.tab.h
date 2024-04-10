@@ -75,7 +75,7 @@ extern int yydebug;
     SEM = 276,                     /* SEM  */
     TRANS_IMPORT_COMMENT_START = 277, /* TRANS_IMPORT_COMMENT_START  */
     TRANS_IMPORT_COMMENT_END = 278, /* TRANS_IMPORT_COMMENT_END  */
-    DOT = 279                      /* DOT  */
+    HYPHEN = 279                   /* HYPHEN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

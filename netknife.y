@@ -24,8 +24,8 @@ struct netknife  * netknife;
 
 %token <d> NUMBER 
 %token <s> STRING EMPTY LINE_BREAK 
-%token TRANS IMPORT COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END DOT  
-%type <s> index_string_exp const_comment_exp trans_name_exp
+%token TRANS IMPORT COMMENT_START COMMENT_END INCLUDE EXCLUDE TO LBRACE RBRACE REGX_START REGX_END COMMA EQ GT SEM TRANS_IMPORT_COMMENT_START TRANS_IMPORT_COMMENT_END HYPHEN  
+%type <s> index_string_exp const_comment_exp trans_name_exp    
 %type <rule_tab> rule_table_exp
 %type <comment_tab> comment_table_exp
 %type <ran> range_exp
@@ -52,11 +52,14 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :IMPORT STRING SEM {$$=join_import_rule($2,NULL,yylineno,NULL); } 
-			  | IMPORT  STRING  filter_exp SEM {$$=join_import_rule($2,NULL,yylineno,$3); }
-			  | IMPORT STRING DOT STRING SEM {$$=join_import_rule($2,$4,yylineno,NULL); }
-			  | IMPORT STRING DOT STRING  filter_exp SEM {$$=join_import_rule($2,$4,yylineno,$5); }
+import_rule_chain_exp :IMPORT STRING SEM {$$=join_import_rule(NULL,$2,yylineno,NULL); } 		  
+			  | IMPORT STRING  filter_exp SEM {$$=join_import_rule(NULL,$2,yylineno,$3); }
+			  | IMPORT LBRACE index_string_exp RBRACE SEM { $$=join_import_rule($3,NULL,yylineno,NULL);}
+			  | IMPORT LBRACE index_string_exp RBRACE filter_exp SEM { $$=join_import_rule($3,NULL,yylineno,$5);}
+			  | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM { $$=join_import_rule($3,$7,yylineno,NULL);}
+			  | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM { $$=join_import_rule($3,$7,yylineno,$8);}
 			  ;
+
 filter_exp : INCLUDE range_exp { $$ = join_filter(NULL,INCLUDE_NODE,$2);}
 		   | EXCLUDE range_exp { $$ = join_filter(NULL,EXCLUDE_NODE,$2);}
 		   | filter_exp INCLUDE range_exp  { $$ = join_filter($1,INCLUDE_NODE,$3);}
@@ -80,45 +83,11 @@ range_exp : NUMBER { $$=join_range(NULL,NULL,$1,0,NULL,NULL); }
 
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=trim($2); }
 
-comment_table_exp : COMMENT_START index_string_exp COMMENT_END { 
-			 if(cur_state==NORMAL_STATE){
-				 $$=join_comment_table(join_comment(trim($2),yylineno));
-			 }else{
-				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-					$$=NULL;
-					join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim($2),yylineno));
-				}else{
-					$$=NULL;
-				}
-		    }
-		  }
-		  ;
+comment_table_exp : COMMENT_START index_string_exp COMMENT_END {comment_table_reduce($2);};
 
-rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {
-		  if(cur_state==NORMAL_STATE){
-		  	$$=join_rule_table(join_rule(trim($1),trim($4),yylineno,0));
-		  }else{
-			 if(!strcmp(cur_trans,target_trans)||!strcmp(ALL_TRANS,target_trans)){
-				$$=NULL;
-				join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim($1),trim($4),yylineno,0));
-			  }else{
-				$$=NULL;
-			  }
-		  }
-		 }
-	   | index_string_exp EQ NUMBER GT index_string_exp SEM {
-		  if(cur_state==NORMAL_STATE){
-		    $$=join_rule_table(join_rule(trim($1),trim($5),yylineno,$3));
-		  }else{
-			if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-				$$=NULL;
-				join_buffer_chain(curfilename , cur_trans , RULE_NODE,join_rule( trim($1),trim($5),yylineno,$3));
-			}else{
-				$$=NULL;
-			}
-		  }
-		 }
-		;
+rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {rule_table_reduce($1,$4,0);}
+	           | index_string_exp EQ NUMBER GT index_string_exp SEM {rule_table_reduce($1,$5,$3);}
+	           ;
 
 index_string_exp : STRING {$$=$1;}
 		 | LINE_BREAK { $$=$1;}

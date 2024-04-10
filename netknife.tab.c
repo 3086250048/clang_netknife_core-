@@ -126,7 +126,7 @@ enum yysymbol_kind_t
   YYSYMBOL_SEM = 21,                       /* SEM  */
   YYSYMBOL_TRANS_IMPORT_COMMENT_START = 22, /* TRANS_IMPORT_COMMENT_START  */
   YYSYMBOL_TRANS_IMPORT_COMMENT_END = 23,  /* TRANS_IMPORT_COMMENT_END  */
-  YYSYMBOL_DOT = 24,                       /* DOT  */
+  YYSYMBOL_HYPHEN = 24,                    /* HYPHEN  */
   YYSYMBOL_YYACCEPT = 25,                  /* $accept  */
   YYSYMBOL_netknife_exp = 26,              /* netknife_exp  */
   YYSYMBOL_trans_exp = 27,                 /* trans_exp  */
@@ -466,16 +466,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   100
+#define YYLAST   113
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  25
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  12
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  43
+#define YYNRULES  45
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  78
+#define YYNSTATES  85
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   279
@@ -527,10 +527,10 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int8 yyrline[] =
 {
        0,    39,    39,    40,    42,    43,    45,    47,    48,    49,
-      50,    51,    52,    55,    56,    57,    58,    60,    61,    62,
-      63,    65,    66,    67,    68,    69,    70,    71,    72,    73,
-      74,    75,    76,    77,    78,    81,    83,    97,   109,   123,
-     124,   125,   126,   127
+      50,    51,    52,    55,    56,    57,    58,    59,    60,    63,
+      64,    65,    66,    68,    69,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79,    80,    81,    84,    86,    88,
+      89,    92,    93,    94,    95,    96
 };
 #endif
 
@@ -550,7 +550,7 @@ static const char *const yytname[] =
   "EMPTY", "LINE_BREAK", "TRANS", "IMPORT", "COMMENT_START", "COMMENT_END",
   "INCLUDE", "EXCLUDE", "TO", "LBRACE", "RBRACE", "REGX_START", "REGX_END",
   "COMMA", "EQ", "GT", "SEM", "TRANS_IMPORT_COMMENT_START",
-  "TRANS_IMPORT_COMMENT_END", "DOT", "$accept", "netknife_exp",
+  "TRANS_IMPORT_COMMENT_END", "HYPHEN", "$accept", "netknife_exp",
   "trans_exp", "trans_name_exp", "trans_body_exp", "import_rule_chain_exp",
   "filter_exp", "range_exp", "const_comment_exp", "comment_table_exp",
   "rule_table_exp", "index_string_exp", YY_NULLPTR
@@ -563,7 +563,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-48)
+#define YYPACT_NINF (-46)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -577,14 +577,15 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -48,    59,   -48,    16,   -48,     4,   -48,    63,   -48,   -48,
-      30,    86,   -48,    71,   -48,   -48,   -48,    39,    44,    83,
-     -48,   -48,   -48,   -48,   -48,   -48,   -48,    26,    -1,    -1,
-     -48,    45,    62,   -48,    28,    86,    17,    86,    86,    42,
-      51,    42,    70,    -1,    -1,   -48,    86,    33,     9,     2,
-       5,     0,    10,   -48,    73,    42,    42,    36,   -48,   -48,
-     -48,   -48,   -48,    57,    86,    82,   -48,   -48,   -48,   -48,
-      11,    46,    14,   -48,   -48,   -48,   -48,   -48
+     -46,    90,   -46,    18,   -46,    -3,   -46,    62,   -46,   -46,
+      53,   102,   -46,    70,   -46,   -46,   -46,    41,    72,   102,
+      97,   -46,   -46,   -46,   -46,   -46,   -46,   -46,     9,     2,
+       2,   -46,    75,    76,   -46,    -7,   102,    10,   102,   102,
+      -1,    56,    -1,     2,     2,   -46,    37,   102,    35,    11,
+      48,    -2,     4,    12,    -1,    -1,   -46,    52,    77,    38,
+     -46,   -46,   -46,   -46,   -46,    60,   102,    79,   -46,   -46,
+     101,   -46,   -46,    13,    58,    16,    83,   -46,   -46,   -46,
+     -46,   -46,   -46,    88,   -46
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -592,27 +593,28 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       2,     0,     1,     0,     3,     0,     6,     0,    39,    40,
+       2,     0,     1,     0,     3,     0,     6,     0,    41,    42,
        0,     0,     4,     0,     9,     8,     7,     0,     0,     0,
-       5,    12,    11,    10,    41,    42,    43,     0,     0,     0,
-      13,     0,     0,    36,     0,     0,    21,     0,     0,    17,
-      22,    18,     0,     0,     0,    14,     0,     0,     0,     0,
-       0,     0,     0,    15,     0,    19,    20,     0,    37,    24,
-      26,    23,    35,    30,     0,    29,    27,    25,    16,    38,
-       0,     0,     0,    31,    32,    28,    33,    34
+       0,     5,    12,    11,    10,    43,    44,    45,     0,     0,
+       0,    13,     0,     0,    38,     0,     0,    23,     0,     0,
+      19,    24,    20,     0,     0,    14,     0,     0,     0,     0,
+       0,     0,     0,     0,    21,    22,    15,     0,     0,     0,
+      39,    26,    28,    25,    37,    32,     0,    31,    29,    27,
+       0,    16,    40,     0,     0,     0,     0,    33,    34,    30,
+      35,    36,    17,     0,    18
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -48,   -48,   -48,   -48,   -48,    84,    34,    18,   -47,    85,
-      87,   -11
+     -46,   -46,   -46,   -46,   -46,    98,   -45,     7,   -43,    99,
+     100,   -11
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     4,     5,    13,    14,    32,    39,    40,    15,
+       0,     1,     4,     5,    13,    14,    32,    40,    41,    15,
       16,    17
 };
 
@@ -621,32 +623,34 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      19,    60,    36,    63,    65,    67,    24,    25,    26,    24,
-      25,    26,    59,    66,    73,    37,    64,    76,     7,    61,
-       6,    38,    38,    74,    47,    77,    49,    50,    62,    34,
-      48,    38,    38,    38,    18,    57,    38,    24,    25,    26,
-      24,    25,    26,    24,    25,    26,    35,    41,    46,    42,
-      24,    25,    26,    71,    58,    28,    29,    69,    27,     2,
-      51,    55,    56,    75,    52,    30,     3,     8,    31,     9,
-      70,    10,    11,    43,    44,     8,    54,     9,    12,    10,
-      11,    28,    29,    45,    43,    44,    20,    24,    25,    26,
-       8,    53,     9,    33,    68,    72,     0,    21,    22,     0,
-      23
+      20,    58,    25,    26,    27,    37,    62,    65,    33,    67,
+      69,     7,    35,    47,    61,    68,    77,    52,    38,    80,
+      66,    64,     6,    49,    39,    48,    39,    50,    51,    36,
+      78,    83,    81,    39,    39,    39,    59,    42,    39,    25,
+      26,    27,    25,    26,    27,    25,    26,    27,    29,    30,
+      54,    55,    25,    26,    27,    74,    60,    18,    56,    72,
+      28,    57,    25,    26,    27,    63,     8,    19,     9,    53,
+      10,    11,    70,    73,     8,    79,     9,    12,    10,    11,
+      25,    26,    27,    29,    30,    21,    43,    44,    43,    44,
+       2,    46,    75,    31,    29,    30,    45,     3,    71,    43,
+      44,    25,    26,    27,    82,    76,     8,    34,     9,    84,
+       0,    22,    23,    24
 };
 
 static const yytype_int8 yycheck[] =
 {
-      11,    48,     3,     3,    51,    52,     4,     5,     6,     4,
-       5,     6,     3,     3,     3,    16,    16,     3,    14,    17,
-       4,    22,    22,    70,    35,    72,    37,    38,    23,     3,
-      13,    22,    22,    22,     4,    46,    22,     4,     5,     6,
-       4,     5,     6,     4,     5,     6,    20,    29,    20,     4,
-       4,     5,     6,    64,    21,    11,    12,    21,    19,     0,
-      18,    43,    44,    17,    13,    21,     7,     4,    24,     6,
-      13,     8,     9,    11,    12,     4,    42,     6,    15,     8,
-       9,    11,    12,    21,    11,    12,    15,     4,     5,     6,
-       4,    21,     6,    10,    21,    13,    -1,    13,    13,    -1,
-      13
+      11,    46,     4,     5,     6,     3,    49,     3,    19,    52,
+      53,    14,     3,    20,     3,     3,     3,    18,    16,     3,
+      16,    23,     4,    13,    22,    36,    22,    38,    39,    20,
+      73,    76,    75,    22,    22,    22,    47,    30,    22,     4,
+       5,     6,     4,     5,     6,     4,     5,     6,    11,    12,
+      43,    44,     4,     5,     6,    66,    21,     4,    21,    21,
+      19,    24,     4,     5,     6,    17,     4,    14,     6,    13,
+       8,     9,    20,    13,     4,    17,     6,    15,     8,     9,
+       4,     5,     6,    11,    12,    15,    11,    12,    11,    12,
+       0,    15,    13,    21,    11,    12,    21,     7,    21,    11,
+      12,     4,     5,     6,    21,     4,     4,    10,     6,    21,
+      -1,    13,    13,    13
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -654,33 +658,34 @@ static const yytype_int8 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,    26,     0,     7,    27,    28,     4,    14,     4,     6,
-       8,     9,    15,    29,    30,    34,    35,    36,     4,    36,
-      15,    30,    34,    35,     4,     5,     6,    19,    11,    12,
-      21,    24,    31,    10,     3,    20,     3,    16,    22,    32,
-      33,    32,     4,    11,    12,    21,    20,    36,    13,    36,
-      36,    18,    13,    21,    31,    32,    32,    36,    21,     3,
-      33,    17,    23,     3,    16,    33,     3,    33,    21,    21,
-      13,    36,    13,     3,    33,    17,     3,    33
+       8,     9,    15,    29,    30,    34,    35,    36,     4,    14,
+      36,    15,    30,    34,    35,     4,     5,     6,    19,    11,
+      12,    21,    31,    36,    10,     3,    20,     3,    16,    22,
+      32,    33,    32,    11,    12,    21,    15,    20,    36,    13,
+      36,    36,    18,    13,    32,    32,    21,    24,    31,    36,
+      21,     3,    33,    17,    23,     3,    16,    33,     3,    33,
+      20,    21,    21,    13,    36,    13,     4,     3,    33,    17,
+       3,    33,    21,    31,    21
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,    25,    26,    26,    27,    27,    28,    29,    29,    29,
-      29,    29,    29,    30,    30,    30,    30,    31,    31,    31,
-      31,    32,    32,    32,    32,    32,    32,    32,    32,    32,
-      32,    32,    32,    32,    32,    33,    34,    35,    35,    36,
-      36,    36,    36,    36
+      29,    29,    29,    30,    30,    30,    30,    30,    30,    31,
+      31,    31,    31,    32,    32,    32,    32,    32,    32,    32,
+      32,    32,    32,    32,    32,    32,    32,    33,    34,    35,
+      35,    36,    36,    36,    36,    36
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     0,     2,     3,     4,     2,     1,     1,     1,
-       2,     2,     2,     3,     4,     5,     6,     2,     2,     3,
-       3,     1,     1,     3,     3,     3,     3,     3,     5,     3,
-       3,     5,     5,     5,     5,     3,     3,     5,     6,     1,
-       1,     2,     2,     2
+       2,     2,     2,     3,     4,     5,     6,     8,     9,     2,
+       2,     3,     3,     1,     1,     3,     3,     3,     3,     3,
+       5,     3,     3,     5,     5,     5,     5,     3,     3,     5,
+       6,     1,     1,     2,     2,     2
 };
 
 
@@ -1146,290 +1151,269 @@ yyreduce:
   case 2: /* netknife_exp: %empty  */
 #line 39 "netknife.y"
                {(yyval.netknife)=NULL;}
-#line 1150 "netknife.tab.c"
+#line 1155 "netknife.tab.c"
     break;
 
   case 3: /* netknife_exp: netknife_exp trans_exp  */
 #line 40 "netknife.y"
                                          { (yyval.netknife) = netknife_reduce(NORMAL,(yyvsp[0].trans));}
-#line 1156 "netknife.tab.c"
+#line 1161 "netknife.tab.c"
     break;
 
   case 4: /* trans_exp: trans_name_exp LBRACE RBRACE  */
 #line 42 "netknife.y"
                                           { (yyval.trans)=trans_reduce(VOID);}
-#line 1162 "netknife.tab.c"
+#line 1167 "netknife.tab.c"
     break;
 
   case 5: /* trans_exp: trans_name_exp LBRACE trans_body_exp RBRACE  */
 #line 43 "netknife.y"
                                                         {(yyval.trans)=trans_reduce(NORMAL);}
-#line 1168 "netknife.tab.c"
+#line 1173 "netknife.tab.c"
     break;
 
   case 6: /* trans_name_exp: TRANS STRING  */
 #line 45 "netknife.y"
                               {cur_trans=(yyvsp[0].s);(yyval.s)=(yyvsp[0].s);}
-#line 1174 "netknife.tab.c"
+#line 1179 "netknife.tab.c"
     break;
 
   case 7: /* trans_body_exp: rule_table_exp  */
 #line 47 "netknife.y"
                                {(yyval.trans)=NULL;}
-#line 1180 "netknife.tab.c"
+#line 1185 "netknife.tab.c"
     break;
 
   case 8: /* trans_body_exp: comment_table_exp  */
 #line 48 "netknife.y"
                                {(yyval.trans)=NULL;}
-#line 1186 "netknife.tab.c"
+#line 1191 "netknife.tab.c"
     break;
 
   case 9: /* trans_body_exp: import_rule_chain_exp  */
 #line 49 "netknife.y"
                                   {(yyval.trans)=NULL;}
-#line 1192 "netknife.tab.c"
+#line 1197 "netknife.tab.c"
     break;
 
   case 10: /* trans_body_exp: trans_body_exp rule_table_exp  */
 #line 50 "netknife.y"
                                            {(yyval.trans)=NULL;}
-#line 1198 "netknife.tab.c"
+#line 1203 "netknife.tab.c"
     break;
 
   case 11: /* trans_body_exp: trans_body_exp comment_table_exp  */
 #line 51 "netknife.y"
                                               {(yyval.trans)=NULL;}
-#line 1204 "netknife.tab.c"
+#line 1209 "netknife.tab.c"
     break;
 
   case 12: /* trans_body_exp: trans_body_exp import_rule_chain_exp  */
 #line 52 "netknife.y"
                                                   {(yyval.trans)=NULL;}
-#line 1210 "netknife.tab.c"
+#line 1215 "netknife.tab.c"
     break;
 
   case 13: /* import_rule_chain_exp: IMPORT STRING SEM  */
 #line 55 "netknife.y"
-                                         {(yyval.import_rule_chain)=join_import_rule((yyvsp[-1].s),NULL,yylineno,NULL); }
-#line 1216 "netknife.tab.c"
+                                         {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL); }
+#line 1221 "netknife.tab.c"
     break;
 
   case 14: /* import_rule_chain_exp: IMPORT STRING filter_exp SEM  */
 #line 56 "netknife.y"
-                                                           {(yyval.import_rule_chain)=join_import_rule((yyvsp[-2].s),NULL,yylineno,(yyvsp[-1].filter)); }
-#line 1222 "netknife.tab.c"
+                                                          {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
+#line 1227 "netknife.tab.c"
     break;
 
-  case 15: /* import_rule_chain_exp: IMPORT STRING DOT STRING SEM  */
+  case 15: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE SEM  */
 #line 57 "netknife.y"
-                                                         {(yyval.import_rule_chain)=join_import_rule((yyvsp[-3].s),(yyvsp[-1].s),yylineno,NULL); }
-#line 1228 "netknife.tab.c"
+                                                                      { (yyval.import_rule_chain)=join_import_rule((yyvsp[-2].s),NULL,yylineno,NULL);}
+#line 1233 "netknife.tab.c"
     break;
 
-  case 16: /* import_rule_chain_exp: IMPORT STRING DOT STRING filter_exp SEM  */
+  case 16: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE filter_exp SEM  */
 #line 58 "netknife.y"
-                                                                     {(yyval.import_rule_chain)=join_import_rule((yyvsp[-4].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
-#line 1234 "netknife.tab.c"
+                                                                                 { (yyval.import_rule_chain)=join_import_rule((yyvsp[-3].s),NULL,yylineno,(yyvsp[-1].filter));}
+#line 1239 "netknife.tab.c"
     break;
 
-  case 17: /* filter_exp: INCLUDE range_exp  */
+  case 17: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM  */
+#line 59 "netknife.y"
+                                                                                       { (yyval.import_rule_chain)=join_import_rule((yyvsp[-5].s),(yyvsp[-1].s),yylineno,NULL);}
+#line 1245 "netknife.tab.c"
+    break;
+
+  case 18: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM  */
 #line 60 "netknife.y"
-                               { (yyval.filter) = join_filter(NULL,INCLUDE_NODE,(yyvsp[0].ran));}
-#line 1240 "netknife.tab.c"
+                                                                                                  { (yyval.import_rule_chain)=join_import_rule((yyvsp[-6].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
+#line 1251 "netknife.tab.c"
     break;
 
-  case 18: /* filter_exp: EXCLUDE range_exp  */
-#line 61 "netknife.y"
-                                       { (yyval.filter) = join_filter(NULL,EXCLUDE_NODE,(yyvsp[0].ran));}
-#line 1246 "netknife.tab.c"
-    break;
-
-  case 19: /* filter_exp: filter_exp INCLUDE range_exp  */
-#line 62 "netknife.y"
-                                                   { (yyval.filter) = join_filter((yyvsp[-2].filter),INCLUDE_NODE,(yyvsp[0].ran));}
-#line 1252 "netknife.tab.c"
-    break;
-
-  case 20: /* filter_exp: filter_exp EXCLUDE range_exp  */
+  case 19: /* filter_exp: INCLUDE range_exp  */
 #line 63 "netknife.y"
-                                                   { (yyval.filter) = join_filter((yyvsp[-2].filter),EXCLUDE_NODE,(yyvsp[0].ran));}
-#line 1258 "netknife.tab.c"
+                               { (yyval.filter) = join_filter(NULL,INCLUDE_NODE,(yyvsp[0].ran));}
+#line 1257 "netknife.tab.c"
     break;
 
-  case 21: /* range_exp: NUMBER  */
+  case 20: /* filter_exp: EXCLUDE range_exp  */
+#line 64 "netknife.y"
+                                       { (yyval.filter) = join_filter(NULL,EXCLUDE_NODE,(yyvsp[0].ran));}
+#line 1263 "netknife.tab.c"
+    break;
+
+  case 21: /* filter_exp: filter_exp INCLUDE range_exp  */
 #line 65 "netknife.y"
-                   { (yyval.ran)=join_range(NULL,NULL,(yyvsp[0].d),0,NULL,NULL); }
-#line 1264 "netknife.tab.c"
+                                                   { (yyval.filter) = join_filter((yyvsp[-2].filter),INCLUDE_NODE,(yyvsp[0].ran));}
+#line 1269 "netknife.tab.c"
     break;
 
-  case 22: /* range_exp: const_comment_exp  */
+  case 22: /* filter_exp: filter_exp EXCLUDE range_exp  */
 #line 66 "netknife.y"
-                       {(yyval.ran) = join_range(NULL,NULL,0,0,(yyvsp[0].s),NULL); }
-#line 1270 "netknife.tab.c"
+                                                   { (yyval.filter) = join_filter((yyvsp[-2].filter),EXCLUDE_NODE,(yyvsp[0].ran));}
+#line 1275 "netknife.tab.c"
     break;
 
-  case 23: /* range_exp: REGX_START index_string_exp REGX_END  */
-#line 67 "netknife.y"
-                                          {(yyval.ran) = join_range(NULL,trim((yyvsp[-1].s)),0,0,NULL,NULL); }
-#line 1276 "netknife.tab.c"
-    break;
-
-  case 24: /* range_exp: NUMBER TO NUMBER  */
+  case 23: /* range_exp: NUMBER  */
 #line 68 "netknife.y"
-                       {(yyval.ran)=join_range(NULL,NULL,(yyvsp[-2].d),(yyvsp[0].d),NULL,NULL);}
-#line 1282 "netknife.tab.c"
+                   { (yyval.ran)=join_range(NULL,NULL,(yyvsp[0].d),0,NULL,NULL); }
+#line 1281 "netknife.tab.c"
     break;
 
-  case 25: /* range_exp: const_comment_exp TO const_comment_exp  */
+  case 24: /* range_exp: const_comment_exp  */
 #line 69 "netknife.y"
-                                             {(yyval.ran)=join_range(NULL,NULL,0,0,(yyvsp[-2].s),(yyvsp[0].s));}
-#line 1288 "netknife.tab.c"
+                       {(yyval.ran) = join_range(NULL,NULL,0,0,(yyvsp[0].s),NULL); }
+#line 1287 "netknife.tab.c"
     break;
 
-  case 26: /* range_exp: NUMBER TO const_comment_exp  */
+  case 25: /* range_exp: REGX_START index_string_exp REGX_END  */
 #line 70 "netknife.y"
-                                   {(yyval.ran)=join_range(NULL,NULL,(yyvsp[-2].d),0,NULL,(yyvsp[0].s));}
-#line 1294 "netknife.tab.c"
+                                          {(yyval.ran) = join_range(NULL,trim((yyvsp[-1].s)),0,0,NULL,NULL); }
+#line 1293 "netknife.tab.c"
     break;
 
-  case 27: /* range_exp: const_comment_exp TO NUMBER  */
+  case 26: /* range_exp: NUMBER TO NUMBER  */
 #line 71 "netknife.y"
-                                   {(yyval.ran)=join_range(NULL,NULL,0,(yyvsp[0].d),(yyvsp[-2].s),NULL);}
-#line 1300 "netknife.tab.c"
+                       {(yyval.ran)=join_range(NULL,NULL,(yyvsp[-2].d),(yyvsp[0].d),NULL,NULL);}
+#line 1299 "netknife.tab.c"
     break;
 
-  case 28: /* range_exp: range_exp COMMA REGX_START index_string_exp REGX_END  */
+  case 27: /* range_exp: const_comment_exp TO const_comment_exp  */
 #line 72 "netknife.y"
-                                                         {(yyval.ran)=join_range((yyvsp[-4].ran),trim((yyvsp[-1].s)),0,0,NULL,NULL);}
-#line 1306 "netknife.tab.c"
+                                             {(yyval.ran)=join_range(NULL,NULL,0,0,(yyvsp[-2].s),(yyvsp[0].s));}
+#line 1305 "netknife.tab.c"
     break;
 
-  case 29: /* range_exp: range_exp COMMA const_comment_exp  */
+  case 28: /* range_exp: NUMBER TO const_comment_exp  */
 #line 73 "netknife.y"
-                                      {(yyval.ran)=join_range((yyvsp[-2].ran),NULL,0,0,(yyvsp[0].s),NULL);}
-#line 1312 "netknife.tab.c"
+                                   {(yyval.ran)=join_range(NULL,NULL,(yyvsp[-2].d),0,NULL,(yyvsp[0].s));}
+#line 1311 "netknife.tab.c"
     break;
 
-  case 30: /* range_exp: range_exp COMMA NUMBER  */
+  case 29: /* range_exp: const_comment_exp TO NUMBER  */
 #line 74 "netknife.y"
-                            {(yyval.ran)=join_range((yyvsp[-2].ran),NULL,(yyvsp[0].d),0,NULL,NULL);}
-#line 1318 "netknife.tab.c"
+                                   {(yyval.ran)=join_range(NULL,NULL,0,(yyvsp[0].d),(yyvsp[-2].s),NULL);}
+#line 1317 "netknife.tab.c"
     break;
 
-  case 31: /* range_exp: range_exp COMMA NUMBER TO NUMBER  */
+  case 30: /* range_exp: range_exp COMMA REGX_START index_string_exp REGX_END  */
 #line 75 "netknife.y"
-                                     { (yyval.ran) = join_range((yyvsp[-4].ran),NULL,(yyvsp[-2].d),(yyvsp[0].d),NULL,NULL);}
-#line 1324 "netknife.tab.c"
+                                                         {(yyval.ran)=join_range((yyvsp[-4].ran),trim((yyvsp[-1].s)),0,0,NULL,NULL);}
+#line 1323 "netknife.tab.c"
     break;
 
-  case 32: /* range_exp: range_exp COMMA NUMBER TO const_comment_exp  */
+  case 31: /* range_exp: range_exp COMMA const_comment_exp  */
 #line 76 "netknife.y"
-                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,(yyvsp[-2].d),0,NULL,(yyvsp[0].s));}
-#line 1330 "netknife.tab.c"
+                                      {(yyval.ran)=join_range((yyvsp[-2].ran),NULL,0,0,(yyvsp[0].s),NULL);}
+#line 1329 "netknife.tab.c"
     break;
 
-  case 33: /* range_exp: range_exp COMMA const_comment_exp TO NUMBER  */
+  case 32: /* range_exp: range_exp COMMA NUMBER  */
 #line 77 "netknife.y"
-                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,0,(yyvsp[0].d),(yyvsp[-2].s),NULL);}
-#line 1336 "netknife.tab.c"
+                            {(yyval.ran)=join_range((yyvsp[-2].ran),NULL,(yyvsp[0].d),0,NULL,NULL);}
+#line 1335 "netknife.tab.c"
     break;
 
-  case 34: /* range_exp: range_exp COMMA const_comment_exp TO const_comment_exp  */
+  case 33: /* range_exp: range_exp COMMA NUMBER TO NUMBER  */
 #line 78 "netknife.y"
-                                                           {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,0,0,(yyvsp[-2].s),(yyvsp[0].s));}
-#line 1342 "netknife.tab.c"
+                                     { (yyval.ran) = join_range((yyvsp[-4].ran),NULL,(yyvsp[-2].d),(yyvsp[0].d),NULL,NULL);}
+#line 1341 "netknife.tab.c"
     break;
 
-  case 35: /* const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END  */
+  case 34: /* range_exp: range_exp COMMA NUMBER TO const_comment_exp  */
+#line 79 "netknife.y"
+                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,(yyvsp[-2].d),0,NULL,(yyvsp[0].s));}
+#line 1347 "netknife.tab.c"
+    break;
+
+  case 35: /* range_exp: range_exp COMMA const_comment_exp TO NUMBER  */
+#line 80 "netknife.y"
+                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,0,(yyvsp[0].d),(yyvsp[-2].s),NULL);}
+#line 1353 "netknife.tab.c"
+    break;
+
+  case 36: /* range_exp: range_exp COMMA const_comment_exp TO const_comment_exp  */
 #line 81 "netknife.y"
-                                                                                         { (yyval.s)=trim((yyvsp[-1].s)); }
-#line 1348 "netknife.tab.c"
+                                                           {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,0,0,(yyvsp[-2].s),(yyvsp[0].s));}
+#line 1359 "netknife.tab.c"
     break;
 
-  case 36: /* comment_table_exp: COMMENT_START index_string_exp COMMENT_END  */
-#line 83 "netknife.y"
-                                                               { 
-			 if(cur_state==NORMAL_STATE){
-				 (yyval.comment_tab)=join_comment_table(join_comment(trim((yyvsp[-1].s)),yylineno));
-			 }else{
-				if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-					(yyval.comment_tab)=NULL;
-					join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim((yyvsp[-1].s)),yylineno));
-				}else{
-					(yyval.comment_tab)=NULL;
-				}
-		    }
-		  }
+  case 37: /* const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END  */
+#line 84 "netknife.y"
+                                                                                         { (yyval.s)=trim((yyvsp[-1].s)); }
 #line 1365 "netknife.tab.c"
     break;
 
-  case 37: /* rule_table_exp: index_string_exp EQ GT index_string_exp SEM  */
-#line 97 "netknife.y"
-                                                              {
-		  if(cur_state==NORMAL_STATE){
-		  	(yyval.rule_tab)=join_rule_table(join_rule(trim((yyvsp[-4].s)),trim((yyvsp[-1].s)),yylineno,0));
-		  }else{
-			 if(!strcmp(cur_trans,target_trans)||!strcmp(ALL_TRANS,target_trans)){
-				(yyval.rule_tab)=NULL;
-				join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim((yyvsp[-4].s)),trim((yyvsp[-1].s)),yylineno,0));
-			  }else{
-				(yyval.rule_tab)=NULL;
-			  }
-		  }
-		 }
-#line 1382 "netknife.tab.c"
+  case 38: /* comment_table_exp: COMMENT_START index_string_exp COMMENT_END  */
+#line 86 "netknife.y"
+                                                               {comment_table_reduce((yyvsp[-1].s));}
+#line 1371 "netknife.tab.c"
     break;
 
-  case 38: /* rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp SEM  */
-#line 109 "netknife.y"
-                                                                {
-		  if(cur_state==NORMAL_STATE){
-		    (yyval.rule_tab)=join_rule_table(join_rule(trim((yyvsp[-5].s)),trim((yyvsp[-1].s)),yylineno,(yyvsp[-3].d)));
-		  }else{
-			if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-				(yyval.rule_tab)=NULL;
-				join_buffer_chain(curfilename , cur_trans , RULE_NODE,join_rule( trim((yyvsp[-5].s)),trim((yyvsp[-1].s)),yylineno,(yyvsp[-3].d)));
-			}else{
-				(yyval.rule_tab)=NULL;
-			}
-		  }
-		 }
-#line 1399 "netknife.tab.c"
+  case 39: /* rule_table_exp: index_string_exp EQ GT index_string_exp SEM  */
+#line 88 "netknife.y"
+                                                              {rule_table_reduce((yyvsp[-4].s),(yyvsp[-1].s),0);}
+#line 1377 "netknife.tab.c"
     break;
 
-  case 39: /* index_string_exp: STRING  */
-#line 123 "netknife.y"
+  case 40: /* rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp SEM  */
+#line 89 "netknife.y"
+                                                                        {rule_table_reduce((yyvsp[-5].s),(yyvsp[-1].s),(yyvsp[-3].d));}
+#line 1383 "netknife.tab.c"
+    break;
+
+  case 41: /* index_string_exp: STRING  */
+#line 92 "netknife.y"
                           {(yyval.s)=(yyvsp[0].s);}
-#line 1405 "netknife.tab.c"
+#line 1389 "netknife.tab.c"
     break;
 
-  case 40: /* index_string_exp: LINE_BREAK  */
-#line 124 "netknife.y"
+  case 42: /* index_string_exp: LINE_BREAK  */
+#line 93 "netknife.y"
                               { (yyval.s)=(yyvsp[0].s);}
-#line 1411 "netknife.tab.c"
+#line 1395 "netknife.tab.c"
     break;
 
-  case 41: /* index_string_exp: index_string_exp STRING  */
-#line 125 "netknife.y"
+  case 43: /* index_string_exp: index_string_exp STRING  */
+#line 94 "netknife.y"
                                            { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
-#line 1417 "netknife.tab.c"
+#line 1401 "netknife.tab.c"
     break;
 
-  case 42: /* index_string_exp: index_string_exp EMPTY  */
-#line 126 "netknife.y"
+  case 44: /* index_string_exp: index_string_exp EMPTY  */
+#line 95 "netknife.y"
                                            { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
-#line 1423 "netknife.tab.c"
+#line 1407 "netknife.tab.c"
     break;
 
-  case 43: /* index_string_exp: index_string_exp LINE_BREAK  */
-#line 127 "netknife.y"
+  case 45: /* index_string_exp: index_string_exp LINE_BREAK  */
+#line 96 "netknife.y"
                                                { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
-#line 1429 "netknife.tab.c"
+#line 1413 "netknife.tab.c"
     break;
 
 
-#line 1433 "netknife.tab.c"
+#line 1417 "netknife.tab.c"
 
       default: break;
     }
@@ -1622,6 +1606,6 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 131 "netknife.y"
+#line 100 "netknife.y"
 
 
