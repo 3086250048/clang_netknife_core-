@@ -2,6 +2,7 @@
 #include <string.h>
 #include "netknife.h"
 #include <stdio.h>
+#include <regex.h>
 
 
 int newfile(char * fn ){
@@ -61,6 +62,7 @@ int newfilter(struct filter * filter){
 	tmp->prev=curfilterstack ;
 	tmp->filter = filter ;
 	curfilterstack = tmp;
+	curfilter = tmp->filter;
 	filter_stack_count++;
 	return 1 ;
 }
@@ -74,6 +76,51 @@ int popfilter(void){
 	return 1;
 }
 
+int regx_match(char * regx , char * str){
+    regex_t regex;
+    int reti;
+    char msgbuf[100];
+
+    reti = regcomp(&regex, regx, 0);
+    if (reti) {
+        fprintf(stderr, "Could not compile regex\n");
+        exit(1);
+    }
+
+    // 匹配字符串
+    reti = regexec(&regex, str, 0, NULL, 0);
+    if (!reti) {
+    	regfree(&regex);
+		return 0;
+    } else if (reti == REG_NOMATCH) {
+    	regfree(&regex);
+		return 1;
+    } else {
+    	regfree(&regex);
+        regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+        fprintf(stderr, "Regex match failed: %s\n", msgbuf);
+        exit(1);
+    }
+}
+
+
+void drop_buffer(struct buffer * tmp ){
+	struct buffer * prev = tmp->prev;
+	struct buffer * next = tmp->next;
+    free(tmp);
+	prev->next = next;
+	next->prev = prev;				
+}
+
+int get_comment_lineno(struct buffer * buf,char * c){
+	while(buf){
+		char  * comment =((struct comment *)buf->buffer)->c
+		if( !strcmp((comment,c) )return  ((struct comment *)buf->buffer)->lineno;	
+	}
+	/*当c_buf中不存在传入的comment则return -1*/
+	return -1;
+}
+
 /*将buffer中的数据根据filter过滤*/
 struct buffer * filter_buffer(){
 		struct buffer * tmp = buffer_root;
@@ -82,31 +129,122 @@ struct buffer * filter_buffer(){
 		char * s_comment;
 		char * d_comment;
 		char * regx;
+		if(!curfilter)return NULL; 
+		struct filter* filter = curfilter;
+		
+		struct buffer * c_buf=NULL;
 		while(tmp){
-			while(curfilter){
-				if(curfilter->range->s_lineno)s_lineno=curfilter->range->s_lineno;
-				if(curfilter->ranfe->d_lineno)d_lineno=curfilter->range->d_lineno;
-				if(curfilter->range->s_comment)s_comment=curfilter->range->s_comment;
-				if(curfilter->range->d_comment)d_comment=curfilter->range->d_comment;
-				if(curfilter->range->d_comment)regx=curfilter->range->regx;
-				if(regx){
-					return 
+		   if(tmp->buffer_type == COMMENT_NODE){
+		  		assign_join_buffer_chain(c_buf,"TMP","TMP",COMMENT_NODE,tmp->buffer); 
+		   }	
+		   tmp=tmp->next;
+		} 
+
+		while(tmp){
+				while(filter){
+				struct range * range = curfilter->range;
+						while(range){
+								if(range->s_lineno)s_lineno=range->s_lineno;
+								if(ranfe->d_lineno)d_lineno=range->d_lineno;
+								if(range->s_comment)s_comment=range->s_comment;
+								if(range->d_comment)d_comment=range->d_comment;
+								if(range->d_comment)regx=range->regx;
+								if(tmp->buffer_type == RULE_NODE){
+									struct rule * rule =(struct rule *)tmp->buffer;
+								}else{
+									continue ;
+								}
+								//regx only
+								if(regx){
+									if(filter->node_type == INCLUDE_NODE){
+										//判断是否匹配正则
+										if(regx_match(regx,rule->s)drop_buffer(tmp); 
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+										if(!regx_match(regx,rule->s))drop_buffer(tmp);
+									}
+										
+								}
+								//s_lineno only
+								if(s_lineno && !d_lineno && !s_comment && !d_comment){
+									if(filter->node_type == INCLUDE_NODE){
+										if(rule->lineno !=  s_lineno)drop_buffer(tmp);
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+										if(rule->lineno ==  s_lineno)drop_buffer(tmp);
+									}
+								}
+								//s_comment only
+								if(s_comment && !d_comment && !s_lineno && !d_lineno)
+								{
+									int lineno = get_comment_lineno(buf_c , s_comment);
+									if(lineno== -1){ printf("This comment does not exist");exit(-1); }
+									if(filter->node_type == INCLUDE_NODE){
+										if(rule->lineno != lineno)drop_buffer(tmp); 	
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+										if(rule->lineno == lineno)drop_buffer(tmp);
+									}
+								}
+
+								//s_lineno and d_lineno only
+								if(s_lineno && d_lineno && !s_commet && !d_comment ){
+									if(s_lineno > d_lineno){
+										int a = s_lineno;
+										s_lineno = d_lineno ;
+										d_lineno = a;
+									}
+									if(filter->node_type == INCLUDE_NODE){
+										if(  rule->lineno < s_lineno || rule->lineno >d_lineno  )drop_buffer(tmp);
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+										if( rule->lineno>= s_lineno && rule->lineno<=d_lineno  )drop_buffer(tmp);	
+									}
+
+															
+								}
+								
+								//s_lineno and d_comment only
+								if(s_lineno && d_comment){
+									if(filter->node_type == INCLUDE_NODE){
+									
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+									
+									}
+
+								}
+								//s_comment  and d_comment only
+								if(s_comment && d_comment){
+									if(filter->node_type == INCLUDE_NODE){
+									
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+									
+									}
+
+								
+								}
+								//s_comment  and d_lineno only
+								if(s_comment && d_lineno){
+									if(filter->node_type == INCLUDE_NODE){
+									
+									}
+									if(filter->node_type == EXCLUDE_NODE){
+									
+									}
+
+								
+								
+								}
+								range=range->next;
+						}
+					filter=filter->next;
 				}
-				if(s_lineno && d_lineno){
-						
-				}
-				if(s_lineno && d_comment){
-				}
-				if(s_comment && d_comment){
-				
-				}
-				if(s_comment && d_lineno){
-				
-				
-				}
-			}		
-		}	
-}
+				tmp=tmp->next;
+				if(tmp->node_type == _EOF_ ) break;
+		}		
+}	
 
 
 void eval_import(struct import_rule * import_node,char * trans_name){		
@@ -135,7 +273,13 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 				import_stack_count++;
 				 result = yyparse();			
 			}
+
 			if(!result){
+				//执行buffer_filter 
+				
+
+				//添加buffer终结_EOF_,防止不同import语句的filter互相干扰
+				join_buffer_chain("EOF","EOF",_EOF_);
 				import_stack_count--;	
 				//弹出filter栈
 				if(!popfilter()){ printf("pop filter stack error\n");exit(1); }
@@ -148,7 +292,7 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,start_trans );
 			struct rule_table * rule_tab  = tmp->rule_tab;
 			struct comment_table * comment_tab =  tmp->comment_tab ;	
-
+			//get_buffer包含重置buffer_root动作
 			struct buffer * buf_root = get_buffer();
 			while(buf_root){
 				if(buf_root->buffer_type == RULE_NODE)assign_join_rule_table(rule_tab,buf_root->buffer);

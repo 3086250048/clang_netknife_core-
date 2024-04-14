@@ -21,7 +21,9 @@ enum type {
 	NORMAL_STATE=15,
 	/*规约函数特殊参数 */
 	VOID = 16,
-	NORMAL =17
+	NORMAL =17,
+	/*特殊的BUFFER类型*/
+	_EOF_ = 18 
 };
 
 
@@ -300,6 +302,7 @@ struct buffer{
 	int  buffer_type; // 缓存类型
     char * buffer_name; // 缓存名称
 	void * buffer  ;// 缓存根节点地址
+	struct buffer * prev ;
 	struct buffer * next ;
 };
 
