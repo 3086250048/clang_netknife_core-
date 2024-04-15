@@ -5,7 +5,7 @@
 
 struct buffer * buffer_root = NULL;
 
-void assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer){
+struct buffer *  assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer){
 		if(filename==NULL || buffer_name  == NULL || buffer== NULL ) {printf("assign_join_buffer_chain:element is NULL\n");exit(1);}
 		struct buffer * tmp =malloc(sizeof(struct buffer));
 		tmp->node_type = BUFFER_NODE;
@@ -17,11 +17,12 @@ void assign_join_buffer_chain( struct buffer * root, char * filename , char * bu
 		tmp->prev = NULL;
 		if(root == NULL){
 			root = tmp;
-			return;
+			return root;
 		}
 		root->prev = tmp;
 		tmp->next = root;
 		root = tmp;
+		return root;
 }
 
 void join_buffer_chain( char * filename , char * buffer_name , int buffer_type ,  void * buffer){

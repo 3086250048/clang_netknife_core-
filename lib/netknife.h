@@ -319,7 +319,8 @@ void  join_buffer_chain(char * filename ,char * buffer_name ,int buffer_type ,vo
 //获取buffer_chain 的根地址
 struct buffer * get_buffer(); 
 //添加到指定的buffer
-void assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer);
+struct buffer * assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer);
+
 
 #endif
 
