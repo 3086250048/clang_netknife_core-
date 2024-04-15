@@ -70,14 +70,14 @@ range_exp : NUMBER { $$=join_range(NULL,NULL,$1,0,NULL,NULL); }
   | REGX_START index_string_exp REGX_END  {$$ = join_range(NULL,trim($2),0,0,NULL,NULL); }
   | NUMBER  TO NUMBER  {$$=join_range(NULL,NULL,$1,$3,NULL,NULL);}
   | const_comment_exp  TO const_comment_exp  {$$=join_range(NULL,NULL,0,0,$1,$3);}
-  | NUMBER  TO const_comment_exp   {$$=join_range(NULL,NULL,$1,0,NULL,$3);}
-  | const_comment_exp TO  NUMBER   {$$=join_range(NULL,NULL,0,$3,$1,NULL);}
+  | NUMBER  TO const_comment_exp   {$$=join_range(NULL,NULL,$1,0,$3,NULL);}
+  | const_comment_exp TO  NUMBER   {$$=join_range(NULL,NULL,$3,0,$1,NULL);}
   | range_exp COMMA REGX_START index_string_exp REGX_END {$$=join_range($1,trim($4),0,0,NULL,NULL);} 
   | range_exp COMMA const_comment_exp {$$=join_range($1,NULL,0,0,$3,NULL);}
   | range_exp COMMA NUMBER  {$$=join_range($1,NULL,$3,0,NULL,NULL);}
   | range_exp COMMA NUMBER TO NUMBER { $$ = join_range($1,NULL,$3,$5,NULL,NULL);}
-  | range_exp COMMA NUMBER TO const_comment_exp {$$=join_range($1,NULL,$3,0,NULL,$5);}
-  | range_exp COMMA const_comment_exp TO NUMBER {$$=join_range($1,NULL,0,$5,$3,NULL);}
+  | range_exp COMMA NUMBER TO const_comment_exp {$$=join_range($1,NULL,$3,0,$5,NULL);}
+  | range_exp COMMA const_comment_exp TO NUMBER {$$=join_range($1,NULL,$5,0,$3,NULL);}
   | range_exp COMMA const_comment_exp TO const_comment_exp {$$=join_range($1,NULL,0,0,$3,$5);}
   ;
 

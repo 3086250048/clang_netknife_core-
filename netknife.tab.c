@@ -1306,13 +1306,13 @@ yyreduce:
 
   case 28: /* range_exp: NUMBER TO const_comment_exp  */
 #line 73 "netknife.y"
-                                   {(yyval.ran)=join_range(NULL,NULL,(yyvsp[-2].d),0,NULL,(yyvsp[0].s));}
+                                   {(yyval.ran)=join_range(NULL,NULL,(yyvsp[-2].d),0,(yyvsp[0].s),NULL);}
 #line 1311 "netknife.tab.c"
     break;
 
   case 29: /* range_exp: const_comment_exp TO NUMBER  */
 #line 74 "netknife.y"
-                                   {(yyval.ran)=join_range(NULL,NULL,0,(yyvsp[0].d),(yyvsp[-2].s),NULL);}
+                                   {(yyval.ran)=join_range(NULL,NULL,(yyvsp[0].d),0,(yyvsp[-2].s),NULL);}
 #line 1317 "netknife.tab.c"
     break;
 
@@ -1342,13 +1342,13 @@ yyreduce:
 
   case 34: /* range_exp: range_exp COMMA NUMBER TO const_comment_exp  */
 #line 79 "netknife.y"
-                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,(yyvsp[-2].d),0,NULL,(yyvsp[0].s));}
+                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,(yyvsp[-2].d),0,(yyvsp[0].s),NULL);}
 #line 1347 "netknife.tab.c"
     break;
 
   case 35: /* range_exp: range_exp COMMA const_comment_exp TO NUMBER  */
 #line 80 "netknife.y"
-                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,0,(yyvsp[0].d),(yyvsp[-2].s),NULL);}
+                                                {(yyval.ran)=join_range((yyvsp[-4].ran),NULL,(yyvsp[0].d),0,(yyvsp[-2].s),NULL);}
 #line 1353 "netknife.tab.c"
     break;
 

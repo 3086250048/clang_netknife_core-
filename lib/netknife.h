@@ -23,7 +23,14 @@ enum type {
 	VOID = 16,
 	NORMAL =17,
 	/*特殊的BUFFER类型*/
-	_EOF_ = 18 
+	_EOF_ = 18 ,
+	/*过滤所匹配的规则*/
+	REGX_ONLY = 19,
+	S_LINENO_ONLY =20,
+	S_COMMENT_ONLY = 21 ,
+	LINENO_ONLY = 22 ,
+	COMMENT_ONLY =23 ,
+	LINENO_AND_COMMENT=24
 };
 
 
@@ -311,6 +318,8 @@ struct buffer{
 void  join_buffer_chain(char * filename ,char * buffer_name ,int buffer_type ,void * buffer);
 //获取buffer_chain 的根地址
 struct buffer * get_buffer(); 
+//添加到指定的buffer
+void assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer);
 
 #endif
 

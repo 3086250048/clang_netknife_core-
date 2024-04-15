@@ -1,0 +1,80 @@
+void tmp(){
+	if(range->s_lineno)s_lineno=range->s_lineno;
+	if(range->d_lineno)d_lineno=range->d_lineno;
+	if(range->s_comment)s_comment=range->s_comment;
+	if(range->d_comment)d_comment=range->d_comment;
+	if(range->d_comment)regx=range->regx;
+	int mode = bitmap(regx,s_lineno,d_lineno,s_comment ,d_comment);
+	if( mode==REGX_ONLY ){
+		if(filter->node_type == INCLUDE_NODE){
+			//判断是否匹配正则
+			if(regx_match(regx,rule->s))drop_buffer(tmp); 
+		}
+		if(filter->node_type == EXCLUDE_NODE){
+			if(!regx_match(regx,rule->s))drop_buffer(tmp);
+		}
+								
+	}
+	if(mode == S_LINENO_ONLY ){
+		if(filter->node_type == INCLUDE_NODE)if(rule->lineno !=  s_lineno)drop_buffer(tmp);
+	
+		if(filter->node_type == EXCLUDE_NODE)if(rule->lineno ==  s_lineno)drop_buffer(tmp);
+		
+	}
+if( mode == S_COMMENT_ONLY )
+{
+	int lineno = get_comment_lineno(c_buf , s_comment);
+	if(lineno== -1){ printf("This comment does not exist");exit(-1); }
+	if(filter->node_type == INCLUDE_NODE){
+		if(rule->lineno != lineno)drop_buffer(tmp); 	
+	}
+	if(filter->node_type == EXCLUDE_NODE){
+		if(rule->lineno == lineno)drop_buffer(tmp);
+	}
+}
+
+if( mode == LINENO_ONLY){
+	if(s_lineno > d_lineno)	swap_number(&s_lineno, &d_lineno);
+
+	if(filter->node_type == INCLUDE_NODE){
+		if(  rule->lineno < s_lineno || rule->lineno >d_lineno  )drop_buffer(tmp);
+	}
+	if(filter->node_type == EXCLUDE_NODE){
+		if( rule->lineno>= s_lineno && rule->lineno<=d_lineno  )drop_buffer(tmp);	
+	}
+
+							
+}
+	
+if( mode == COMMENT_ONLY){
+	int s_c = get_comment_lineno(c_buf , s_comment);
+	int d_c = get_comment_lineno(c_buf,d_comment);
+	if(s_c == -1 ){ printf("This s_comment does not exist");exit(-1); }
+	if(d_c == -1){ printf("This d_comment does not exist");exit(-1); }
+	if(s_c > d_c)swap_number(&s_c , &d_c);
+	if(filter->node_type == INCLUDE_NODE){
+		if(  rule->lineno < s_c || rule->lineno >d_c  )drop_buffer(tmp);
+	
+	}
+	if(filter->node_type == EXCLUDE_NODE){	
+		if( rule->lineno>= s_c && rule->lineno<=d_c  )drop_buffer(tmp);	
+	}
+
+
+}
+if( mode == LINENO_AND_COMMENT){
+	int  s_c = get_comment_lineno(c_buf , s_comment);
+	if(s_c == -1){ printf("This comment does not exist");exit(-1); }
+	if(s_lineno > s_c )swap_number(&s_lineno,&s_c);
+	if(filter->node_type == INCLUDE_NODE){
+		if(  rule->lineno < s_lineno  || rule->lineno >s_c  )drop_buffer(tmp);
+	}
+	if(filter->node_type == EXCLUDE_NODE){
+		if( rule->lineno>= s_lineno  && rule->lineno<=s_c  )drop_buffer(tmp);	
+	}
+
+}
+
+}
+
+
