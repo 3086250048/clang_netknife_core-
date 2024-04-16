@@ -111,16 +111,14 @@ int regx_match(char * regx , char * str){
 }
 
 
-void drop_buffer(struct buffer ** tmp ){
-	printf("drop start \n");
-	printf("tmp->buffer_type:%d\n",(*tmp)->buffer_type);
-	printf("rule_s:%s\n",((struct rule *)(*tmp)->buffer)->s );
-	if((*tmp)->prev != NULL) (*tmp)->prev->next = (*tmp)->next;
-	if((*tmp)->next != NULL ) (*tmp)->next->prev= (*tmp)->prev;
-	struct buffer * t = *tmp;
-	(*tmp) = (*tmp)->prev ;
-    free(t);
-	printf("drop end \n");
+struct buffer * drop_buffer(struct buffer * tmp ){
+	/*drop标志位置1*/
+	is_drop=1;
+	if(tmp->prev) tmp->prev->next = tmp->next;
+	if(tmp->next) tmp->next->prev= tmp->prev;
+	struct buffer * cur = tmp->next;
+    free(tmp);
+	return cur;
 }
 
 int get_comment_lineno(struct buffer * buf,char * c){
@@ -161,7 +159,6 @@ struct buffer * extract_buffer(struct buffer * buf,int node_type ){
 /*将buffer中的数据根据filter过滤*/
 void  filter_buffer(){
 		struct buffer * tmp = buffer_root;
-		struct buffer * result_buf = NULL;
 		int s_lineno ;
 		int d_lineno ;
 		char * s_comment;
@@ -193,6 +190,8 @@ void  filter_buffer(){
 				tmp=tmp->next;
 				continue ;
 			}
+			/*重置drop标志位*/
+			is_drop=0;
 			while(range_buf){
 				printf("raaaange\n");
 			 	struct range * range = range_buf->buffer;
@@ -201,15 +200,16 @@ void  filter_buffer(){
 				printf("get_mode:%d \n",mode);
 				/*regx*/
 				if( mode==REGX_ONLY ){
-					if(range_buf->buffer_name="INCLUDE" ) if(!regx_match(regx,rule->s))
-					result_buf = assign_join_buffer_chain(result_buf,"RULE","RULE",RULE_NODE,rule); 
-					if(range_buf->buffer_name="EXCLUDE" )if(!regx_match(regx,rule->s))drop_buffer(&tmp);
+					if(range_buf->buffer_name="INCLUDE" )if(regx_match(regx,rule->s))tmp=drop_buffer(tmp);
+					if(range_buf->buffer_name="EXCLUDE" )if(!regx_match(regx,rule->s))tmp=drop_buffer(tmp);
 					break;
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno !=  s_lineno)drop_buffer(&tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno ==  s_lineno)drop_buffer(&tmp);
+					printf("S_LINENO_ONLY_start\n");
+					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno !=  s_lineno)tmp=drop_buffer(tmp);
+					printf("S_LINENO_ONLY_end\n");
+					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno ==  s_lineno)tmp=drop_buffer(tmp);
 					break;
 				}
 				/*s_comment*/
@@ -217,15 +217,15 @@ void  filter_buffer(){
 				{
 					int lineno = get_comment_lineno(c_buf , s_comment);
 					if(lineno== -1){ printf("This comment does not exist");exit(-1); }
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno != lineno)drop_buffer(&tmp); 	
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno)drop_buffer(&tmp);
+					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno != lineno)tmp=drop_buffer(tmp); 	
+					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno)tmp=drop_buffer(tmp);
 					break;
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
 					if(s_lineno > d_lineno)	swap_number(&s_lineno, &d_lineno);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_lineno || rule->lineno >d_lineno)drop_buffer(&tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_lineno && rule->lineno<=d_lineno)drop_buffer(&tmp);	
+					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_lineno || rule->lineno >d_lineno)tmp=drop_buffer(tmp);
+					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_lineno && rule->lineno<=d_lineno)tmp=drop_buffer(tmp);	
 					break;
 				}
 				/*comment*/
@@ -234,8 +234,8 @@ void  filter_buffer(){
 					int d_c = get_comment_lineno(c_buf,d_comment);
 					if(s_c== -1 || d_c == -1){ printf("This comment does not exist");exit(-1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_c || rule->lineno >d_c)drop_buffer(&tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_c && rule->lineno<=d_c)drop_buffer(&tmp);		
+					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_c || rule->lineno >d_c)tmp=drop_buffer(tmp);
+					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_c && rule->lineno<=d_c)tmp=drop_buffer(tmp);		
 					break;
 				}	
 				/*lineno and comment */
@@ -243,14 +243,17 @@ void  filter_buffer(){
 					int s_c = get_comment_lineno(c_buf , s_comment);
 					if(s_c== -1){ printf("This comment does not exist");exit(-1); }
 					if(s_lineno > s_c) swap_number(&s_lineno,&s_c);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_lineno || rule->lineno >s_c)drop_buffer(&tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_lineno && rule->lineno<=s_c)drop_buffer(&tmp);		
+					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_lineno || rule->lineno >s_c)tmp=drop_buffer(tmp);
+					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_lineno && rule->lineno<=s_c)tmp=drop_buffer(tmp);		
 					break;
 				}
 			    range_buf = range_buf->next ;
 			}
-			tmp=tmp->next;
+			/*如果drop标志位为1，则代表tmp指针已经指向下个位置*/
+			if(!is_drop)tmp=tmp->next;
+			/*如果buffer_type为_EOF_代表这个trans中的语句已经过滤完成*/
 			if(!tmp ||  tmp->buffer_type == _EOF_ ) return ;
+			
 		}
 }
 
@@ -284,9 +287,9 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 
 			if(!result){
 				//执行buffer_filter 
-				filter_buffer();
+//				filter_buffer();
 				//添加buffer终结_EOF_,防止不同import语句的filter互相干扰
-				join_buffer_chain("EOF","EOF",_EOF_,"EOF");
+//				join_buffer_chain("EOF","EOF",_EOF_,"EOF");
 				import_stack_count--;	
 				//弹出filter栈
 				if(!popfilter()){ printf("pop filter stack error\n");exit(1); }

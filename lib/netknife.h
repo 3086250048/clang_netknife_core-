@@ -142,6 +142,9 @@ extern struct filter *  curfilter;
 extern struct filterstack * curfilterstack;
 extern struct buffer * buffer_root;
 
+/*辅助变量*/
+extern int is_drop ;
+
 int newfile(char * fb);
 int popfile(void);
 int newfilter(struct filter *);

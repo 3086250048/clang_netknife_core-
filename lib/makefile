@@ -5,8 +5,8 @@ dst1 = $(patsubst %.c,%.o,$(src))
 ALL:libnetknife.a
 
 libnetknife.a:${dst1}
-		ar rcs $@ $^
+		ar rcs  $@ $^  
 %.o:%.c
-	gcc -c $< -o $@ 
+	gcc -c $< -o $@ -g
 
 
