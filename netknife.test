@@ -1,11 +1,3 @@
 trans cisco_to_huawei {	
-	"查询命令"
-	@(netknife2)-> a1  include 7 include 8 include 9;
-	show 1   ip  int b =100> dplay ip int \n  b;    
-	show 2   ip  int b =100> dplay ip int \n  b;    
-	show 3   ip  int b =100> dplay ip int \n  b;    
-	show 4   ip  int b =100> dplay ip int \n  b;    
-	show 5   ip  int b =100> dplay ip int \n  b;    
-	"查询命令"
-	
+	@(netknife2)-> a1 include "test1" ;
 }

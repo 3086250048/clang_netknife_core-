@@ -1,9 +1,5 @@
 trans a1 {
-"netknif2文件中的注释测试"
-	@(netknife3);
-"netknif2文件中的注释测试"
-"netknif2文件中的注释测试"
-check ip resource => display ip int b ;
-define all ip address => drop all ip address;
+check ip resource => display ip int b ; 
+define all ip address => drop all ip address; "test1"
 display ip int b 1 => show ip int b;
 }

@@ -19,8 +19,6 @@ char * target_trans=NULL;
 char * start_trans=NULL;
 //状态机
 int cur_state = NORMAL_STATE;
-//辅助的全局变量
-int is_drop = 0;
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );

@@ -23,14 +23,16 @@ enum type {
 	VOID = 16,
 	NORMAL =17,
 	/*特殊的BUFFER类型*/
-	_EOF_ = 18 ,
+	EOF_NODE = 18 ,
+	/*特殊节点类型*/
+	SKIP_NODE = 19,
 	/*过滤所匹配的规则*/
-	REGX_ONLY = 19,
-	S_LINENO_ONLY =20,
-	S_COMMENT_ONLY = 21 ,
-	LINENO_ONLY = 22 ,
-	COMMENT_ONLY =23 ,
-	LINENO_AND_COMMENT=24
+	REGX_ONLY = 20,
+	S_LINENO_ONLY =21,
+	S_COMMENT_ONLY = 22 ,
+	LINENO_ONLY = 23 ,
+	COMMENT_ONLY =24 ,
+	LINENO_AND_COMMENT=25
 };
 
 
@@ -142,8 +144,6 @@ extern struct filter *  curfilter;
 extern struct filterstack * curfilterstack;
 extern struct buffer * buffer_root;
 
-/*辅助变量*/
-extern int is_drop ;
 
 int newfile(char * fb);
 int popfile(void);

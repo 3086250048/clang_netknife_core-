@@ -54,7 +54,10 @@ int popfile(void){
 }
 
 int newfilter(struct filter * filter){
-	if(!filter)return 1;
+	if(!filter){
+		 struct filter * filter =malloc(sizeof(struct filter));
+		 filter->node_type = SKIP_NODE;
+	}	
 	if(filter_stack_count >= MAX_STACK ){
 		printf("Too many filter stacks \n");
 		exit(1);
@@ -113,7 +116,6 @@ int regx_match(char * regx , char * str){
 
 struct buffer * drop_buffer(struct buffer * tmp ){
 	/*drop标志位置1*/
-	is_drop=1;
 	if(tmp->prev) tmp->prev->next = tmp->next;
 	if(tmp->next) tmp->next->prev= tmp->prev;
 	struct buffer * cur = tmp->next;
@@ -157,19 +159,10 @@ struct buffer * extract_buffer(struct buffer * buf,int node_type ){
 }
 
 /*将buffer中的数据根据filter过滤*/
-void  filter_buffer(){
-		struct buffer * tmp = buffer_root;
-		int s_lineno ;
-		int d_lineno ;
-		char * s_comment;
-		char * d_comment;
-		char * regx;
+struct rule *  filter_rule(struct rule * rule,struct buffer * c_buf){
 		/*如果不存在filter则直接退出*/
-		if(!curfilter || !curfilterstack)return; 
-		struct filter* filter = curfilter;	
-		/*提取所有comment*/
-		struct buffer * c_buf= extract_buffer(tmp,COMMENT_NODE);
-		
+		if(!curfilter || !curfilterstack || curfilter->node_type == SKIP_NODE)return rule; 
+		struct filter* filter = curfilter;		
 		/*合并filter中的range*/
 		struct buffer * range_buf=NULL ;
 		while(filter){
@@ -181,80 +174,53 @@ void  filter_buffer(){
 			}
 			filter = filter->next;
 		}
-		/*将buffer中的rule与filter进行匹配*/
-		while(tmp){
-			struct rule * rule = NULL;
-			if(tmp->buffer_type == RULE_NODE){
-				rule =(struct rule *)tmp->buffer;
-			}else{
-				tmp=tmp->next;
-				continue ;
-			}
-			/*重置drop标志位*/
-			is_drop=0;
-			while(range_buf){
-				printf("raaaange\n");
-			 	struct range * range = range_buf->buffer;
-				printf("get_range \n");
+		/*判断rule是否符合filter*/
+		while(range_buf){
+				struct range * range = range_buf->buffer;
 				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
-				printf("get_mode:%d \n",mode);
 				/*regx*/
 				if( mode==REGX_ONLY ){
-					if(range_buf->buffer_name="INCLUDE" )if(regx_match(regx,rule->s))tmp=drop_buffer(tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if(!regx_match(regx,rule->s))tmp=drop_buffer(tmp);
-					break;
+					if(range_buf->buffer_name="INCLUDE" )if(!regx_match(range->regx,rule->s)) return rule ;
+					if(range_buf->buffer_name="EXCLUDE" )if(!regx_match(range->regx,rule->s)) return NULL;
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
-					printf("S_LINENO_ONLY_start\n");
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno !=  s_lineno)tmp=drop_buffer(tmp);
-					printf("S_LINENO_ONLY_end\n");
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno ==  s_lineno)tmp=drop_buffer(tmp);
-					break;
+					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno ==  range->s_lineno) return rule;
+					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno ==  range->s_lineno) return NULL;
 				}
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int lineno = get_comment_lineno(c_buf , s_comment);
+					int lineno = get_comment_lineno(c_buf , range->s_comment);
 					if(lineno== -1){ printf("This comment does not exist");exit(-1); }
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno != lineno)tmp=drop_buffer(tmp); 	
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno)tmp=drop_buffer(tmp);
-					break;
+					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno == lineno) return rule ; 	
+					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno) return NULL;
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
-					if(s_lineno > d_lineno)	swap_number(&s_lineno, &d_lineno);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_lineno || rule->lineno >d_lineno)tmp=drop_buffer(tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_lineno && rule->lineno<=d_lineno)tmp=drop_buffer(tmp);	
-					break;
+					if(range->s_lineno > range->d_lineno)	swap_number(&range->s_lineno, &range->d_lineno);
+					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return rule;
+					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return NULL;	
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
-					int s_c = get_comment_lineno(c_buf , s_comment);
-					int d_c = get_comment_lineno(c_buf,d_comment);
+					int s_c = get_comment_lineno(c_buf , range->s_comment);
+					int d_c = get_comment_lineno(c_buf,range->d_comment);
 					if(s_c== -1 || d_c == -1){ printf("This comment does not exist");exit(-1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_c || rule->lineno >d_c)tmp=drop_buffer(tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_c && rule->lineno<=d_c)tmp=drop_buffer(tmp);		
-					break;
+					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= s_c && rule->lineno <= d_c)return rule;
+					if(range_buf->buffer_name="EXCLUDE" )if(  rule->lineno >= s_c &&  rule->lineno <= d_c)return NULL;		
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
-					int s_c = get_comment_lineno(c_buf , s_comment);
+					int s_c = get_comment_lineno(c_buf ,range->s_comment);
 					if(s_c== -1){ printf("This comment does not exist");exit(-1); }
-					if(s_lineno > s_c) swap_number(&s_lineno,&s_c);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno < s_lineno || rule->lineno >s_c)tmp=drop_buffer(tmp);
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= s_lineno && rule->lineno<=s_c)tmp=drop_buffer(tmp);		
-					break;
+					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
+					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c)return rule;
+					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= range->s_lineno && rule->lineno<=s_c)return NULL;		
 				}
-			    range_buf = range_buf->next ;
+				range_buf = range_buf->next ;
 			}
-			/*如果drop标志位为1，则代表tmp指针已经指向下个位置*/
-			if(!is_drop)tmp=tmp->next;
-			/*如果buffer_type为_EOF_代表这个trans中的语句已经过滤完成*/
-			if(!tmp ||  tmp->buffer_type == _EOF_ ) return ;
-			
-		}
 }
 
 
@@ -269,7 +235,7 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 		cur_state = IMPORT_TRANS_STATE;
 		/*执行import动作*/
 		while(import_node){
-			//添加filter栈
+			/*添加filter栈*/
 			if(!newfilter(import_node->filter)){ printf("push filter stack error\n");exit(1);} 
 			char * filename ;	
 			if(import_node->import_name)target_trans=import_node->import_name;
@@ -286,26 +252,32 @@ void eval_import(struct import_rule * import_node,char * trans_name){
 			}
 
 			if(!result){
-				//执行buffer_filter 
-//				filter_buffer();
-				//添加buffer终结_EOF_,防止不同import语句的filter互相干扰
-//				join_buffer_chain("EOF","EOF",_EOF_,"EOF");
+				/*添加buffer终结_EOF_,防止不同import语句的filter互相干扰*/
+				join_buffer_chain("EOF","EOF",EOF_NODE,"EOF");
 				import_stack_count--;	
-				//弹出filter栈
-				if(!popfilter()){ printf("pop filter stack error\n");exit(1); }
 				import_node=import_node->next;
 			}
 		}
 		
-			/*import最终归约*/
+
+
+		/*import最终归约*/
 		if(!import_stack_count){
 			struct trans *  tmp = get_netknife_node(curfilename,TRANS_NODE,start_trans );
 			struct rule_table * rule_tab  = tmp->rule_tab;
 			struct comment_table * comment_tab =  tmp->comment_tab ;	
-			//get_buffer包含重置buffer_root动作
+			/*get_buffer包含重置buffer_root动作*/
 			struct buffer * buf_root = get_buffer();
+			/*提取所有comment*/
+			struct buffer * c_buf= extract_buffer(buf_root,COMMENT_NODE);
+			/*跳过初始的EOF头*/
+			buf_root = buf_root->next;		
 			while(buf_root){
-				if(buf_root->buffer_type == RULE_NODE)assign_join_rule_table(rule_tab,buf_root->buffer);
+				if(buf_root->buffer_type==EOF_NODE) popfilter();
+				if(buf_root->buffer_type == RULE_NODE){
+					struct rule * rule = filter_rule(buf_root->buffer,c_buf);
+					if(rule)assign_join_rule_table(rule_tab,rule);
+				}
 				if(buf_root->buffer_type == COMMENT_NODE) assign_join_comment_table(comment_tab,buf_root->buffer)	;
 				buf_root=buf_root->next;
 			}
