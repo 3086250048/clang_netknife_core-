@@ -1,5 +1,5 @@
 trans c121isco_qq {
-set ip gt 192.168.2.21 => undo_ipsource ;
+set ip gt 192.168.2.21 => undo_ipsource ; "dis"
 check_ip_source => undo_ipsource ;
 check_ip_source => undo_ipsource ;
 }

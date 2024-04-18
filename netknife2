@@ -1,5 +1,5 @@
 trans a1 {
-check ip resource => display ip int b ; 
-define all ip address => drop all ip address; "test1"
+check ip resource => display ip int b ; "test1"
+define all ip address => drop all ip address; 
 display ip int b 1 => show ip int b;
 }

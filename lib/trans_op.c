@@ -49,6 +49,7 @@ struct trans *  trans_reduce( int isempty)
 	if(cur_state == IMPORT_TRANS_STATE){
 		if(isempty == VOID) return NULL;
 		if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
+			printf("cur_trans:%s , target_trans:%s \n",cur_trans , target_trans);
 			return (struct trans *)get_import_rule();
 		}else{
 			return NULL;

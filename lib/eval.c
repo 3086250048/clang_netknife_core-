@@ -90,15 +90,15 @@ int regx_match(char * regx , char * str){
     regex_t regex;
     int reti;
     char msgbuf[100];
-
-    reti = regcomp(&regex, regx, 0);
+	int flag =  REG_NOSUB | REG_EXTENDED;
+    reti = regcomp(&regex, regx,flag);
     if (reti) {
         fprintf(stderr, "Could not compile regex\n");
         exit(1);
     }
 
     // 匹配字符串
-    reti = regexec(&regex, str, 0, NULL, 0);
+    reti = regexec(&regex, str, 0, NULL,0);
     if (!reti) {
     	regfree(&regex);
 		return 0;
@@ -127,6 +127,7 @@ int get_comment_lineno(struct buffer * buf,char * c){
 	while(buf){
 		char  * comment =((struct comment *)buf->buffer)->c;
 		if( !strcmp(comment,c) )return  ((struct comment *)buf->buffer)->lineno;	
+		buf=buf->next;
 	}
 	/*当c_buf中不存在传入的comment则return -1*/
 	return -1;
@@ -192,7 +193,7 @@ struct rule *  filter_rule(struct rule * rule,struct buffer * c_buf){
 				if( mode == S_COMMENT_ONLY )
 				{
 					int lineno = get_comment_lineno(c_buf , range->s_comment);
-					if(lineno== -1){ printf("This comment does not exist");exit(-1); }
+					if(lineno== -1){ printf("This comment does not exist\n");exit(-1); }
 					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno == lineno) return rule ; 	
 					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno) return NULL;
 				}	
@@ -206,7 +207,7 @@ struct rule *  filter_rule(struct rule * rule,struct buffer * c_buf){
 				if( mode == COMMENT_ONLY){
 					int s_c = get_comment_lineno(c_buf , range->s_comment);
 					int d_c = get_comment_lineno(c_buf,range->d_comment);
-					if(s_c== -1 || d_c == -1){ printf("This comment does not exist");exit(-1); }
+					if(s_c== -1 || d_c == -1){ printf("This comment does not exist\n");exit(-1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= s_c && rule->lineno <= d_c)return rule;
 					if(range_buf->buffer_name="EXCLUDE" )if(  rule->lineno >= s_c &&  rule->lineno <= d_c)return NULL;		
@@ -225,6 +226,7 @@ struct rule *  filter_rule(struct rule * rule,struct buffer * c_buf){
 
 
 void eval_import(struct import_rule * import_node,char * trans_name){		
+		if(!import_node) return;
 		int result;
 		/*设置起始参数*/
 		if(!import_stack_count)
