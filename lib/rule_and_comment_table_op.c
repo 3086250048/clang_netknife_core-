@@ -112,25 +112,27 @@ void print_comment_table_entry(struct comment_table * comment_tab){
 
 struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 	/*当文件栈只有1层则无条件添加rule*/
-	if(file_stack_count ==  1 )   
-		join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim(s),trim(d),yylineno,priority));
-		return join_rule_table(join_rule(trim(s),trim(d),yylineno,priority));
-		
+	if(file_stack_count ==  1 )  { 
+		struct rule * rule = join_rule(trim(s),trim(d),yylineno,priority);
+		join_buf( curfilename , rule->s , RULE_NODE , rule) ;
+		return join_rule_table(rule);
+	}
     /*当文件栈不为1层则判断cur_trans 与 target_trans的值决定是否再进一步处理 */		
 	if(!strcmp(cur_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
 			struct rule * rule = join_rule(trim(s),trim(d),yylineno,priority);
 			rule = filter_rule(rule);
-			if(rule){
-				join_buffer_chain(curfilename, cur_trans,RULE_NODE, join_rule(trim(s),trim(d),yylineno,priority));
-				return join_rule_table(join_rule(trim(s),trim(d),yylineno,priority));
+			if(rule){	
+				join_buf( curfilename , rule->s , RULE_NODE , rule) ;
+				return join_rule_table(rule);
 			}
 	} 
 }
 	
 struct comment_table * comment_table_reduce(char * c){		
 	if(file_stack_count ==  1 || !strcmp(cur_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
-		 join_buffer_chain(curfilename , cur_trans , COMMENT_NODE ,join_comment(trim(c),yylineno));
-		 return join_comment_table(join_comment(trim(c),yylineno));
+		 struct comment * comment = join_comment(trim(c),yylineno); 
+		 join_buf( curfilename , comment->c , COMMENT_NODE , comment) ;
+		 return join_comment_table(comment);
 	}
 }
 

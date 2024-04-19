@@ -8,13 +8,13 @@
 
 %x READY  TRANS_RULE TRANS_PRIORITY REGX TRANS_COMMENT TRANS_RULE_COMMENT TRANS_IMPORT_COMMENT TRANS_IMPORT TRANS_IMPORT_NAME 
 %%
-trans { printf("TRANS "); return TRANS;}
+trans {  printf("TRANS "); return TRANS;}
 \" {  BEGIN TRANS_COMMENT ;}
 "{" {  printf("LBRACE ");BEGIN READY; return LBRACE;} 
 [\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext );return STRING;} 
 . {} 
 \n { printf("\n");}
-<<EOF>> { if(!file_stack_count){yyterminate();}else{popfile();} }
+<<EOF>> { if(file_stack_count==1){yyterminate();}else{popfile();} }
 
 <READY>[ \t] {}
 <READY>[\n] { printf("\n");}

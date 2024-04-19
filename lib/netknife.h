@@ -16,23 +16,24 @@ enum type {
 	TRANS_NODE=11,
 	NETKNIFE_NODE=12,
 	BUFFER_NODE=13,
+	BUF_NODE = 14,
 	/*规约状态*/
-	IMPORT_TRANS_STATE=14,	
-	NORMAL_STATE=15,
+	IMPORT_TRANS_STATE=15,	
+	NORMAL_STATE=16,
 	/*规约函数特殊参数 */
-	VOID = 16,
-	NORMAL =17,
+	VOID = 17,
+	NORMAL =18,
 	/*特殊的BUFFER类型*/
-	EOF_NODE = 18 ,
+	EOF_NODE = 19 ,
 	/*特殊节点类型*/
-	SKIP_NODE = 19,
+	SKIP_NODE = 20,
 	/*过滤所匹配的规则*/
-	REGX_ONLY = 20,
-	S_LINENO_ONLY =21,
-	S_COMMENT_ONLY = 22 ,
-	LINENO_ONLY = 23 ,
-	COMMENT_ONLY =24 ,
-	LINENO_AND_COMMENT=25
+	REGX_ONLY = 21,
+	S_LINENO_ONLY =22,
+	S_COMMENT_ONLY = 23 ,
+	LINENO_ONLY = 24 ,
+	COMMENT_ONLY =25 ,
+	LINENO_AND_COMMENT=26
 };
 
 
@@ -130,6 +131,7 @@ extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
 extern struct netknife * netknife_tab;
+extern struct buf * buf_tab;
 extern int mode ;//unused
 extern char * cur_trans;
 extern char * target_trans;
@@ -256,6 +258,10 @@ struct filter * join_filter(struct filter * root , int node_type , struct range 
 struct import_rule * join_import_rule(char * file_name , char * import_name ,int lineno  ,struct filter * filter );
 //获取import_rule表达式根节点
 struct import_rule * get_import_rule();
+//import_rule 规约
+struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter );
+//过滤rule
+struct rule *  filter_rule(struct rule * rule);
 
 
 //打印range
@@ -287,7 +293,7 @@ struct trans * join_trans(
 void print_trans(struct trans * trans);
 
 //trans 规约
-struct trans * trans_reduce(int isempty);
+struct trans * trans_reduce();
 
 
 struct netknife{
@@ -304,7 +310,7 @@ struct netknife  * join_netknife_table(char * filename ,void * node );
 //获取netknife中某个node_tab
 void  * get_netknife_node(char * filename , int  node_type, char * node_name );
 //netknife规约
-struct netknife * netknife_reduce(int isempty , void * node);
+struct netknife * netknife_reduce( void * node);
 
 struct buffer{
 	int node_type ;
@@ -316,7 +322,14 @@ struct buffer{
 	struct buffer * next ;
 };
 
-
+struct buf{
+	int node_type ;
+	char * filename ; //文件名称
+	int  buf_type; // 缓存类型
+    char * buf_name; // 缓存名称
+	void * buf  ;// 缓存根节点地址
+	struct buf * dup_buf;
+};
 //添加到buffer 
 void  join_buffer_chain(char * filename ,char * buffer_name ,int buffer_type ,void * buffer);
 //获取buffer_chain 的根地址
@@ -324,7 +337,8 @@ struct buffer * get_buffer();
 //添加到指定的buffer
 struct buffer * assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer);
 
-
+void join_buf( char * filename , char * buf_name , int buf_type  , void * buf);
+struct  buf * get_buf( char * filename , char * buf_name , int buf_type);
 #endif
 
 

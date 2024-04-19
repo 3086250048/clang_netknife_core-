@@ -1156,19 +1156,19 @@ yyreduce:
 
   case 3: /* netknife_exp: netknife_exp trans_exp  */
 #line 40 "netknife.y"
-                                         { (yyval.netknife) = netknife_reduce(NORMAL,(yyvsp[0].trans));}
+                                         { (yyval.netknife) = netknife_reduce((yyvsp[0].trans));}
 #line 1161 "netknife.tab.c"
     break;
 
   case 4: /* trans_exp: trans_name_exp LBRACE RBRACE  */
 #line 42 "netknife.y"
-                                          { (yyval.trans)=trans_reduce(VOID);}
+                                          { (yyval.trans)=trans_reduce();}
 #line 1167 "netknife.tab.c"
     break;
 
   case 5: /* trans_exp: trans_name_exp LBRACE trans_body_exp RBRACE  */
 #line 43 "netknife.y"
-                                                        {(yyval.trans)=trans_reduce(NORMAL);}
+                                                        {(yyval.trans)=trans_reduce();}
 #line 1173 "netknife.tab.c"
     break;
 
@@ -1216,37 +1216,37 @@ yyreduce:
 
   case 13: /* import_rule_chain_exp: IMPORT STRING SEM  */
 #line 55 "netknife.y"
-                                         {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-1].s),yylineno,NULL); }
+                                         {(yyval.import_rule_chain)=import_rule_reduce(NULL,(yyvsp[-1].s),yylineno,NULL); }
 #line 1221 "netknife.tab.c"
     break;
 
   case 14: /* import_rule_chain_exp: IMPORT STRING filter_exp SEM  */
 #line 56 "netknife.y"
-                                                          {(yyval.import_rule_chain)=join_import_rule(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
+                                                          {(yyval.import_rule_chain)=import_rule_reduce(NULL,(yyvsp[-2].s),yylineno,(yyvsp[-1].filter)); }
 #line 1227 "netknife.tab.c"
     break;
 
   case 15: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE SEM  */
 #line 57 "netknife.y"
-                                                                      { (yyval.import_rule_chain)=join_import_rule((yyvsp[-2].s),NULL,yylineno,NULL);}
+                                                                      { (yyval.import_rule_chain)=import_rule_reduce((yyvsp[-2].s),NULL,yylineno,NULL);}
 #line 1233 "netknife.tab.c"
     break;
 
   case 16: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE filter_exp SEM  */
 #line 58 "netknife.y"
-                                                                                 { (yyval.import_rule_chain)=join_import_rule((yyvsp[-3].s),NULL,yylineno,(yyvsp[-1].filter));}
+                                                                                 { (yyval.import_rule_chain)=import_rule_reduce((yyvsp[-3].s),NULL,yylineno,(yyvsp[-1].filter));}
 #line 1239 "netknife.tab.c"
     break;
 
   case 17: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM  */
 #line 59 "netknife.y"
-                                                                                       { (yyval.import_rule_chain)=join_import_rule((yyvsp[-5].s),(yyvsp[-1].s),yylineno,NULL);}
+                                                                                       { (yyval.import_rule_chain)=import_rule_reduce((yyvsp[-5].s),(yyvsp[-1].s),yylineno,NULL);}
 #line 1245 "netknife.tab.c"
     break;
 
   case 18: /* import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM  */
 #line 60 "netknife.y"
-                                                                                                  { (yyval.import_rule_chain)=join_import_rule((yyvsp[-6].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
+                                                                                                  { (yyval.import_rule_chain)=import_rule_reduce((yyvsp[-6].s),(yyvsp[-2].s),yylineno,(yyvsp[-1].filter));}
 #line 1251 "netknife.tab.c"
     break;
 

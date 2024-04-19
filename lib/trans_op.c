@@ -39,22 +39,12 @@ void print_trans(struct trans * trans){
 }
 
 
-struct trans *  trans_reduce( int isempty)
+struct trans *  trans_reduce()
 {
-	if(cur_state == NORMAL_STATE ){
-    	if(isempty == VOID) return join_trans(cur_trans,yylineno,NULL,NULL,NULL);
+	if( file_stack_count == 1 ){
 		return join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 	}
 	
-	if(cur_state == IMPORT_TRANS_STATE){
-		if(isempty == VOID) return NULL;
-		if(!strcmp(cur_trans,target_trans) || !strcmp(ALL_TRANS,target_trans)){
-			printf("cur_trans:%s , target_trans:%s \n",cur_trans , target_trans);
-			return (struct trans *)get_import_rule();
-		}else{
-			return NULL;
-		}
-	}
 }
 
 

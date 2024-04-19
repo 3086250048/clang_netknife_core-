@@ -904,7 +904,7 @@ case YY_STATE_EOF(TRANS_IMPORT_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT):
 case YY_STATE_EOF(TRANS_IMPORT_NAME):
 #line 17 "netknife.l"
-{ if(file_stack_count == 1){yyterminate();}else{popfile();} }
+{ if(file_stack_count==1){yyterminate();}else{popfile();} }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP

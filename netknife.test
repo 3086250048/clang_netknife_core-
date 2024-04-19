@@ -1,9 +1,6 @@
 
 trans cisco_to_huawei {	
-	@(netknife2)-> a1 include "test1"  ;
 	ospf => bgp;
-	@(netknife3) include "dis";
-	@a;
 }
 
 

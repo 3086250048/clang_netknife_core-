@@ -153,14 +153,13 @@ int regx_match(char * regx , char * str){
 
 
 
-int get_comment_lineno(struct buffer * buf,char * c){
-	while(buf){
-		char  * comment =((struct comment *)buf->buffer)->c;
-		if( !strcmp(comment,c) )return  ((struct comment *)buf->buffer)->lineno;	
-		buf=buf->next;
+int exist_comment (char * c){
+	struct buf * buf =  get_buf(curfilename,c,COMMENT_NODE);
+	if(buf->node_type == BUF_NODE){ 
+	 	return ((struct comment *)buf)->lineno;
+	}else{
+		return 0;
 	}
-	/*当c_buf中不存在传入的comment则return -1*/
-	return -1;
 }
 
 int bitmap( char * regx , int s_lineno , int d_lineno , char * s_comment ,char * d_comment ){
@@ -177,6 +176,8 @@ void swap_number(int * a , int * b){
 	*a =*b  ;
 	*b = tmp ;
 }
+
+
 
 /*将buffer中的数据根据filter过滤*/
 struct rule *  filter_rule(struct rule * rule){
@@ -211,7 +212,7 @@ struct rule *  filter_rule(struct rule * rule){
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int lineno = get_comment_lineno(c_buf , range->s_comment);
+					int lineno = exist_comment( range->s_comment);
 					if(lineno== -1){ printf("This comment does not exist\n");exit(-1); }
 					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno == lineno) return rule ; 	
 					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno) return NULL;
@@ -224,17 +225,18 @@ struct rule *  filter_rule(struct rule * rule){
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
-					int s_c = get_comment_lineno(c_buf , range->s_comment);
-					int d_c = get_comment_lineno(c_buf,range->d_comment);
-					if(s_c== -1 || d_c == -1){ printf("This comment does not exist\n");exit(-1); }
+					int s_c = exist_comment( range->s_comment);
+					int d_c = exist_comment( range->d_comment);
+					if(!s_c || !d_c){ printf("This comment does not exist\n");exit(-1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= s_c && rule->lineno <= d_c)return rule;
 					if(range_buf->buffer_name="EXCLUDE" )if(  rule->lineno >= s_c &&  rule->lineno <= d_c)return NULL;		
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
-					int s_c = get_comment_lineno(c_buf ,range->s_comment);
-					if(s_c== -1){ printf("This comment does not exist");exit(-1); }
+					
+					int s_c = exist_comment( range->s_comment);
+					if(!s_c){ printf("This comment does not exist");exit(-1); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
 					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c)return rule;
 					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= range->s_lineno && rule->lineno<=s_c)return NULL;		

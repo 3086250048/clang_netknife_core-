@@ -55,31 +55,16 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 }
 
 
-struct netknife * netknife_reduce(int isempty , void  * node){
-	
-	 if(isempty == VOID){return NULL;}
-
-	 if(cur_state == NORMAL_STATE){
-	 	struct netknife * tmp =NULL;
-			 if(*(int *)node == TRANS_NODE){
-				struct trans * trans = (struct trans *)node;
-				tmp =  join_netknife_table(curfilename ,trans);
-				eval_import(trans->import_rule_chain,trans->name);
-				print_trans(trans);
-				return tmp;
-			 }
-	 }
-
-	 if(cur_state == IMPORT_TRANS_STATE){
-		if(!strcmp(cur_trans ,target_trans) || !strcmp(ALL_TRANS,target_trans))
-		{
-			struct import_rule * import_rule_chain =(struct import_rule *)node;
-			eval_import(import_rule_chain,cur_trans);
-			return NULL;
-		 }
-	 }
-
-
+struct netknife * netknife_reduce( void  * node){
+	if(file_stack_count == 1){
+		 struct netknife * tmp =NULL;
+		if(*(int *)node == TRANS_NODE){
+			struct trans * trans = (struct trans *)node;
+			tmp =  join_netknife_table(curfilename ,trans);
+			print_trans(trans);
+			return tmp;
+		}
+	}
 }  
 
 

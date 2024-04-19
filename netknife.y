@@ -37,10 +37,10 @@ struct netknife  * netknife;
 
 
 netknife_exp : {$$=NULL;}
-		| netknife_exp trans_exp { $$ = netknife_reduce(NORMAL,$2);}
+		| netknife_exp trans_exp { $$ = netknife_reduce($2);}
 		;
-trans_exp : trans_name_exp LBRACE RBRACE  { $$=trans_reduce(VOID);}
-          | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce(NORMAL);}
+trans_exp : trans_name_exp LBRACE RBRACE  { $$=trans_reduce();}
+          | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce();}
   		  ;
 trans_name_exp : TRANS STRING {cur_trans=$2;$$=$2;}
 
@@ -52,12 +52,12 @@ trans_body_exp : rule_table_exp{$$=NULL;}
 	   | trans_body_exp import_rule_chain_exp {$$=NULL;}	
 	   ;
 
-import_rule_chain_exp :IMPORT STRING SEM {$$=join_import_rule(NULL,$2,yylineno,NULL); } 		  
-			  | IMPORT STRING  filter_exp SEM {$$=join_import_rule(NULL,$2,yylineno,$3); }
-			  | IMPORT LBRACE index_string_exp RBRACE SEM { $$=join_import_rule($3,NULL,yylineno,NULL);}
-			  | IMPORT LBRACE index_string_exp RBRACE filter_exp SEM { $$=join_import_rule($3,NULL,yylineno,$5);}
-			  | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM { $$=join_import_rule($3,$7,yylineno,NULL);}
-			  | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM { $$=join_import_rule($3,$7,yylineno,$8);}
+import_rule_chain_exp :IMPORT STRING SEM {$$=import_rule_reduce(NULL,$2,yylineno,NULL); } 		  
+			  | IMPORT STRING  filter_exp SEM {$$=import_rule_reduce(NULL,$2,yylineno,$3); }
+			  | IMPORT LBRACE index_string_exp RBRACE SEM { $$=import_rule_reduce($3,NULL,yylineno,NULL);}
+			  | IMPORT LBRACE index_string_exp RBRACE filter_exp SEM { $$=import_rule_reduce($3,NULL,yylineno,$5);}
+			  | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM { $$=import_rule_reduce($3,$7,yylineno,NULL);}
+			  | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM { $$=import_rule_reduce($3,$7,yylineno,$8);}
 			  ;
 
 filter_exp : INCLUDE range_exp { $$ = join_filter(NULL,INCLUDE_NODE,$2);}
