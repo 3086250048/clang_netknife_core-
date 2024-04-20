@@ -909,7 +909,7 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 case 7:
 YY_RULE_SETUP
 #line 19 "netknife.l"
-{}
+{ }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */

@@ -83,31 +83,6 @@ struct import_rule * get_import_rule(){
 
 
 
-struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
-	if(file_stack_count ==  1 || !strcmp(cur_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
-		/*被执行的import_rule添加进import_rule_chain*/
-		struct import_rule * cur_import =  join_import_rule(file_name , import_name , lineno,filter );
-		char * filename ;	
-		/*目标trans*/
-		if(import_name)target_trans=import_name;
-		if(!import_name)target_trans=ALL_TRANS;
-		/*使用的filter*/
-		if(filter) curfilter=filter;
-		if(!filter) curfilter=NULL;
-		/*即将打开的文件*/
-		if(file_name)filename = file_name;
-		if(!file_name)filename = curfilename;
-	    /*切换当前的输入流*/
-		if(newfile(filename)){
-	   	  yyparse();			
-		}
-		/*返回执行成功的import_rule*/
-		return  cur_import ;
-	}else{
-		return NULL;
-	}
-}
-
 
 
 
@@ -243,6 +218,29 @@ struct rule *  filter_rule(struct rule * rule){
 				}
 				range_buf = range_buf->next ;
 			}
+}
+
+struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
+	if(file_stack_count ==  1 || !strcmp(cur_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
+		/*被执行的import_rule添加进import_rule_chain*/
+		struct import_rule * cur_import =  join_import_rule(file_name , import_name , lineno,filter );
+		char * filename ;	
+		/*目标trans*/
+		if(import_name)target_trans=import_name;
+		if(!import_name)target_trans=ALL_TRANS;
+		/*使用的filter*/
+		if(filter) curfilter=filter;
+		if(!filter) curfilter=NULL;
+		/*即将打开的文件*/
+		if(file_name)filename = file_name;
+		if(!file_name)filename = curfilename;
+		/*添加到import_trans栈内*/
+		newimport(filename , target_trans , curfilter);
+		/*返回执行成功的import_rule*/
+		return  cur_import ;
+	}else{
+		return NULL;
+	}
 }
 
 

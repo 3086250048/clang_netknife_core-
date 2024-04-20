@@ -5,7 +5,7 @@
 
 
 int newfile(char * fn ){
-	if(file_stack_count >= MAX_STACK || import_stack_count >= MAX_STACK ){
+	if(file_stack_count >= MAX_STACK ){
 		printf("Too many file stacks\n");exit(1);
 	}
 	FILE * f =	fopen(fn,"r");
@@ -52,4 +52,31 @@ int popfile(void){
 	return 1;
 }
 
+int newimport(char * filename , char * target_trans, struct filter * filter ){
+	struct import_trans * cur = malloc(sizeof(struct import_trans));
+	if(!cur){ perror("malloc err");exit(1);}
+	cur->filename = filename;
+	cur->target_trans = target_trans;
+	cur->filter=filter;
+	cur->prev=cur_import_trans;
+	cur_import_trans=cur;
+	return 1;
+}
 
+int popimport(){
+	if(!cur_import_trans) return 0;
+	struct import_trans * tmp = cur_import_trans;
+	curfilename = cur_import_trans->filename;
+	target_trans = cur_import_trans->target_trans;
+	curfilter = cur_import_trans->filter;
+	cur_import_trans = cur_import_trans->prev;
+	free(tmp);
+	return 1;
+}
+
+
+void eval(){
+	int state = popimport();
+	if(!state) return ;
+	newfile(curfilename);
+}

@@ -42,7 +42,14 @@ void print_trans(struct trans * trans){
 struct trans *  trans_reduce()
 {
 	if( file_stack_count == 1 ){
-		return join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+		struct join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+		eval();
+		return 
+	}
+	
+	if(cur_trans == target_trans){
+		eval();
+		return NULL;
 	}
 	
 }

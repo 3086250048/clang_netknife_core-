@@ -132,19 +132,15 @@ extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
 extern struct netknife * netknife_tab;
 extern struct buf * buf_tab;
-extern int mode ;//unused
 extern char * cur_trans;
 extern char * target_trans;
-extern char * start_trans;
-extern int cur_state;
 extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int file_stack_count;
-extern int import_stack_count;
-extern int filter_stack_count;
 extern struct filter *  curfilter;
-extern struct filterstack * curfilterstack;
 extern struct buffer * buffer_root;
+extern struct import_trans * cur_import_trans;
+
 
 
 int newfile(char * fb);
@@ -337,8 +333,24 @@ struct buffer * get_buffer();
 //添加到指定的buffer
 struct buffer * assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer);
 
+
+//全局hash表
 void join_buf( char * filename , char * buf_name , int buf_type  , void * buf);
 struct  buf * get_buf( char * filename , char * buf_name , int buf_type);
+
+
+//import_trans_stack 
+struct import_trans{
+	char * filename;
+	char * target_trans;
+	struct filter * filter;
+	struct  import_trans  * prev;
+};
+int newimport(char * filename , char * target_trans, struct filter * filter );
+int popimport();
+
+//eval
+void eval();
 #endif
 
 
