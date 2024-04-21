@@ -1174,7 +1174,7 @@ yyreduce:
 
   case 6: /* trans_name_exp: TRANS STRING  */
 #line 45 "netknife.y"
-                              {cur_trans=(yyvsp[0].s);(yyval.s)=(yyvsp[0].s);}
+                              { cur_trans=(yyvsp[0].s);(yyval.s)=(yyvsp[0].s);}
 #line 1179 "netknife.tab.c"
     break;
 

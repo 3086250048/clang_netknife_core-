@@ -40,7 +40,7 @@ struct netknife * join_netknife_table( char * filename ,  void * node){
 			tmp->child_tab = node ;	
 			return tmp ;
 		}else{
-			printf("hash conflict\n");exit(1);
+			printf("join netknife_table hash conflict\n");exit(1);
 		}
 }
 
@@ -56,14 +56,24 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 
 
 struct netknife * netknife_reduce( void  * node){
-	if(file_stack_count == 1){
-		 struct netknife * tmp =NULL;
-		if(*(int *)node == TRANS_NODE){
-			struct trans * trans = (struct trans *)node;
-			tmp =  join_netknife_table(curfilename ,trans);
-			print_trans(trans);
-			return tmp;
+	struct netknife * netknife;
+	struct trans * trans;
+	if( file_stack_count == 1 && !cur_import_trans){
+		if(start_trans){
+	 	trans  = join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+		start_trans = NULL;
+		}else{
+	 		trans =join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 		}
+		netknife =  join_netknife_table(curfilename ,trans);
+		print_trans(trans);
+		return netknife;
+	}
+	if(file_stack_count == 1  && cur_import_trans){
+			eval();
+	}
+	if(!strcmp(cur_trans,target_trans) || !strcmp(target_trans , ALL_TRANS)){
+			eval();
 	}
 }  
 

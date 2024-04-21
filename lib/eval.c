@@ -53,6 +53,7 @@ int popfile(void){
 }
 
 int newimport(char * filename , char * target_trans, struct filter * filter ){
+	printf("filename:%s trget_trans:%s \n",filename,target_trans);
 	struct import_trans * cur = malloc(sizeof(struct import_trans));
 	if(!cur){ perror("malloc err");exit(1);}
 	cur->filename = filename;
@@ -76,8 +77,8 @@ int popimport(){
 
 
 void eval(){
-	while(popimport()){
-		newfile(curfilename);
-		yyparse();
+	if(popimport()){
+		if(newfile(curfilename))yyparse();
 	}
 }
+

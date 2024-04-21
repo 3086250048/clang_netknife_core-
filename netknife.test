@@ -1,6 +1,6 @@
+
 trans a{
 	display ip int b => show ip int b ;
-
 }
 
 
@@ -13,5 +13,6 @@ trans cisco_to_huawei {
 	ospf =100> bgp;
 	@a ;
 }
+
 
 

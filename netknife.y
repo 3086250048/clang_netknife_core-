@@ -42,7 +42,7 @@ netknife_exp : {$$=NULL;}
 trans_exp : trans_name_exp LBRACE RBRACE  { $$=trans_reduce();}
           | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce();}
   		  ;
-trans_name_exp : TRANS STRING {cur_trans=$2;$$=$2;}
+trans_name_exp : TRANS STRING { cur_trans=$2;$$=$2;}
 
 trans_body_exp : rule_table_exp{$$=NULL;} 
 	   | comment_table_exp {$$=NULL;} 
