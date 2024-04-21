@@ -76,7 +76,8 @@ int popimport(){
 
 
 void eval(){
-	int state = popimport();
-	if(!state) return ;
-	newfile(curfilename);
+	while(popimport()){
+		newfile(curfilename);
+		yyparse();
+	}
 }
