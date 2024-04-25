@@ -1,18 +1,22 @@
 
-trans a{
-	display ip int b => show ip int b ;
-}
-
 
 trans cisco_to_huawei {	
+	@a ;
 	ospf => bgp111111111;
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
 	ospf =100> bgp;
-	@a ;
 }
 
 
+trans a{
+	display ip int b => show ip int b ;
+	@test;
+}
 
+
+trans test{
+	这是test => 你好test;
+}

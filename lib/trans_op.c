@@ -40,13 +40,31 @@ void print_trans(struct trans * trans){
 
 
 struct trans *  trans_reduce()
-{
-	struct trans * tmp;
-	if( file_stack_count == 1 ){	
-		if(cur_import_trans)start_trans = cur_trans;			
+{	
+	if(popimport()){
+		if(file_stack_count == 1 ){start_trans = cur_trans;}
+		import_trans_count++;
+		if(newfile(curfilename)){
+			yyparse();
+		}
+	}else{
+		char * trans ;
+		if(file_stack_count > 1 && !strcmp(cur_trans,target_trans)){	
+			struct trans * t=  join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+			if(!(--import_trans_count))start_trans = NULL;
+			print_trans(t);
+			return t ;
+		}
+		if(file_stack_count == 1){
+			if(start_trans){trans = start_trans;start_trans = NULL; }else{trans = cur_trans;}
+			struct trans * t=  join_trans(trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+			print_trans(t);
+			return t ;
+		}
 		return NULL;
-	}
+	}	
 }
+
 
 
 

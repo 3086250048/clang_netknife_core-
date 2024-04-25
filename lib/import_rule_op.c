@@ -113,13 +113,10 @@ int regx_match(char * regx , char * str){
     // 匹配字符串
     reti = regexec(&regex, str, 0, NULL,0);
     if (!reti) {
-    	regfree(&regex);
 		return 0;
     } else if (reti == REG_NOMATCH) {
-    	regfree(&regex);
 		return 1;
     } else {
-    	regfree(&regex);
         regerror(reti, &regex, msgbuf, sizeof(msgbuf));
         fprintf(stderr, "Regex match failed: %s\n", msgbuf);
         exit(1);
@@ -176,27 +173,27 @@ struct rule *  filter_rule(struct rule * rule){
 				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
 				/*regx*/
 				if( mode==REGX_ONLY ){
-					if(range_buf->buffer_name="INCLUDE" )if(!regx_match(range->regx,rule->s)) return rule ;
-					if(range_buf->buffer_name="EXCLUDE" )if(!regx_match(range->regx,rule->s)) return NULL;
+					if(!strcmp(range_buf->buffer_name,"INCLUDE") )if(!regx_match(range->regx,rule->s)) return rule ;
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE"))if(!regx_match(range->regx,rule->s)) return NULL;
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno ==  range->s_lineno) return rule;
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno ==  range->s_lineno) return NULL;
+					if(!strcmp(range_buf->buffer_name,"INCLUDE"))if(rule->lineno ==  range->s_lineno) return rule;
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(rule->lineno ==  range->s_lineno) return NULL;
 				}
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
 					int lineno = exist_comment( range->s_comment);
 					if(lineno== -1){ printf("This comment does not exist\n");exit(-1); }
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno == lineno) return rule ; 	
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno == lineno) return NULL;
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(rule->lineno == lineno) return rule ; 	
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(rule->lineno == lineno) return NULL;
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
 					if(range->s_lineno > range->d_lineno)	swap_number(&range->s_lineno, &range->d_lineno);
-					if(range_buf->buffer_name="INCLUDE" )if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return rule;
-					if(range_buf->buffer_name="EXCLUDE" )if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return NULL;	
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return rule;
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return NULL;	
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
@@ -204,8 +201,8 @@ struct rule *  filter_rule(struct rule * rule){
 					int d_c = exist_comment( range->d_comment);
 					if(!s_c || !d_c){ printf("This comment does not exist\n");exit(-1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= s_c && rule->lineno <= d_c)return rule;
-					if(range_buf->buffer_name="EXCLUDE" )if(  rule->lineno >= s_c &&  rule->lineno <= d_c)return NULL;		
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(  rule->lineno >= s_c && rule->lineno <= d_c)return rule;
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(  rule->lineno >= s_c &&  rule->lineno <= d_c)return NULL;		
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
@@ -213,8 +210,8 @@ struct rule *  filter_rule(struct rule * rule){
 					int s_c = exist_comment( range->s_comment);
 					if(!s_c){ printf("This comment does not exist");exit(-1); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
-					if(range_buf->buffer_name="INCLUDE" )if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c)return rule;
-					if(range_buf->buffer_name="EXCLUDE" )if( rule->lineno>= range->s_lineno && rule->lineno<=s_c)return NULL;		
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c)return rule;
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if( rule->lineno>= range->s_lineno && rule->lineno<=s_c)return NULL;		
 				}
 				range_buf = range_buf->next ;
 			}

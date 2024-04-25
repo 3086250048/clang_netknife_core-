@@ -15,6 +15,7 @@ char * cur_trans=NULL ;
 char * target_trans=NULL;
 struct import_trans *  cur_import_trans=NULL;
 char * start_trans = NULL;
+int import_trans_count = 0;
 //状态机
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));

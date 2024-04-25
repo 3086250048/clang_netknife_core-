@@ -56,25 +56,8 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 
 
 struct netknife * netknife_reduce( void  * node){
-	struct netknife * netknife;
-	struct trans * trans;
-	if( file_stack_count == 1 && !cur_import_trans){
-		if(start_trans){
-	 	trans  = join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
-		start_trans = NULL;
-		}else{
-	 		trans =join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
-		}
-		netknife =  join_netknife_table(curfilename ,trans);
-		print_trans(trans);
-		return netknife;
-	}
-	if(file_stack_count == 1  && cur_import_trans){
-			eval();
-	}
-	if(!strcmp(cur_trans,target_trans) || !strcmp(target_trans , ALL_TRANS)){
-			eval();
-	}
+		if(!node)return NULL ;
+		return  join_netknife_table(curfilename ,(struct trans *)node);
 }  
 
 
