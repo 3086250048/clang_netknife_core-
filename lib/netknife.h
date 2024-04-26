@@ -141,8 +141,7 @@ extern struct filter *  curfilter;
 extern struct buffer * buffer_root;
 extern struct import_trans * cur_import_trans;
 extern char * start_trans;
-extern int import_trans_count ;
-
+extern int import_state ;
 
 
 int newfile(char * fb);

@@ -2,7 +2,6 @@
 
 trans cisco_to_huawei {	
 	@a ;
-	ospf => bgp111111111;
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
@@ -19,4 +18,11 @@ trans a{
 
 trans test{
 	这是test => 你好test;
+}
+
+
+trans b {
+	check ip resource => deny ip all ;
+	show mac-address => display mac-address; 
+
 }
