@@ -52,6 +52,7 @@ struct trans *  trans_reduce()
 		if(file_stack_count > 1 && !strcmp(cur_trans,target_trans) && import_state ){	
 			import_state = 0;
 			struct trans * t=  join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+			start_trans = NULL;
 			print_trans(t);
 			return t ;
 		}
