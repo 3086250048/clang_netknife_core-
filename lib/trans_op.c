@@ -40,7 +40,9 @@ void print_trans(struct trans * trans){
 
 
 struct trans *  trans_reduce()
-{	
+{
+	if(file_stack_count > 1 && !target_trans) return NULL;
+	if(file_stack_count > 1 && strcmp(cur_trans,target_trans)!=0 ) return NULL;	
 	if(popimport()){
 		import_state = 1;
 		if(file_stack_count == 1 ){start_trans = cur_trans;}
@@ -49,10 +51,11 @@ struct trans *  trans_reduce()
 		}
 	}else{
 		char * trans ;
-		if(file_stack_count > 1 && !strcmp(cur_trans,target_trans) && import_state ){	
+		if( import_state ){	
 			import_state = 0;
 			struct trans * t=  join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			start_trans = NULL;
+			target_trans = NULL;
 			print_trans(t);
 			return t ;
 		}

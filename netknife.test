@@ -1,7 +1,5 @@
-
-
 trans cisco_to_huawei {	
-	@test ;
+	@a ;
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
@@ -9,8 +7,6 @@ trans cisco_to_huawei {
 	ospf =100> bgp;
 	@b;
 }
-
-
 
 
 trans a{

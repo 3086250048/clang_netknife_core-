@@ -111,6 +111,7 @@ void print_comment_table_entry(struct comment_table * comment_tab){
 
 
 struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
+	if(file_stack_count>1 && !import_state  ) return  NULL;
 	/*当文件栈只有1层则无条件添加rule*/
 	if(file_stack_count ==  1 )  { 
 		struct rule * rule = join_rule(trim(s),trim(d),yylineno,priority);
@@ -129,6 +130,8 @@ struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 }
 	
 struct comment_table * comment_table_reduce(char * c){		
+
+	if(file_stack_count>1 && !import_state  ) return  NULL;
 	if(file_stack_count ==  1 || !strcmp(target_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
 		 struct comment * comment = join_comment(trim(c),yylineno); 
 		 join_buf( curfilename , comment->c , COMMENT_NODE , comment) ;

@@ -218,10 +218,12 @@ struct rule *  filter_rule(struct rule * rule){
 }
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
+	if(file_stack_count>1 && !import_state  ) return  NULL;
 	if(file_stack_count ==  1 || !strcmp(cur_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
 		/*被执行的import_rule添加进import_rule_chain*/
 		struct import_rule * cur_import =  join_import_rule(file_name , import_name , lineno,filter );
 		char * filename ;	
+		char * target_trans;
 		/*目标trans*/
 		if(import_name)target_trans=import_name;
 		if(!import_name)target_trans=ALL_TRANS;
