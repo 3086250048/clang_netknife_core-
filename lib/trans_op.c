@@ -42,7 +42,7 @@ void print_trans(struct trans * trans){
 struct trans *  trans_reduce()
 {
 	if(file_stack_count > 1 && !target_trans) return NULL;
-	if(file_stack_count > 1 && strcmp(cur_trans,target_trans)!=0 ) return NULL;	
+	if(file_stack_count > 1 && strcmp(cur_trans,target_trans)!=0  && strcmp(target_trans,ALL_TRANS)!=0) return NULL;	
 	if(popimport()){
 		import_state = 1;
 		if(file_stack_count == 1 ){start_trans = cur_trans;}

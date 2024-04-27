@@ -149,6 +149,16 @@ void swap_number(int * a , int * b){
 	*b = tmp ;
 }
 
+int get_comment_lineno(struct buffer * buf,char * c){
+	while(buf){
+		char  * comment =((struct comment *)buf->buffer)->c;
+		if( !strcmp(comment,c) )return  ((struct comment *)buf->buffer)->lineno;	
+		buf=buf->next;
+	}
+	/*当c_buf中不存在传入的comment则return -1*/
+	return -1;
+}
+
 
 
 /*将buffer中的数据根据filter过滤*/
@@ -173,8 +183,20 @@ struct rule *  filter_rule(struct rule * rule){
 				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
 				/*regx*/
 				if( mode==REGX_ONLY ){
-					if(!strcmp(range_buf->buffer_name,"INCLUDE") )if(!regx_match(range->regx,rule->s)) return rule ;
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE"))if(!regx_match(range->regx,rule->s)) return NULL;
+					if(!strcmp(range_buf->buffer_name,"INCLUDE") ){
+							if(!regx_match(range->regx,rule->s)){
+									return rule ;
+							}else{
+								return NULL;
+							}
+					}
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE")){
+							if(!regx_match(range->regx,rule->s)) {
+									return NULL;
+							}else{
+								return rule;
+							}
+					}
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
@@ -219,7 +241,7 @@ struct rule *  filter_rule(struct rule * rule){
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
 	if(file_stack_count>1 && !import_state  ) return  NULL;
-	if(file_stack_count ==  1 || !strcmp(cur_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
+	if(file_stack_count ==  1 || !strcmp(target_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
 		/*被执行的import_rule添加进import_rule_chain*/
 		struct import_rule * cur_import =  join_import_rule(file_name , import_name , lineno,filter );
 		char * filename ;	
