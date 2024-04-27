@@ -1,0 +1,24 @@
+--------------------------------------------------
+filename:netknife.test
+file_stack_count:999
+last_read_trans_name:test
+line:25
+state:newfile
+err:too many file stacks
+--------------------------------------------------
+--------------------------------------------------
+filename:netknife.test
+file_stack_count:2
+last_read_trans_name:test
+line:28
+state:import_trans_state
+err:no imported trans found
+--------------------------------------------------
+--------------------------------------------------
+filename:netknife.test
+file_stack_count:2
+last_read_trans_name:test
+line:28
+state:import_trans_state
+err:no imported trans found
+--------------------------------------------------

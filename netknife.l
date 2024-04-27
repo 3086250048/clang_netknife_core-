@@ -14,7 +14,16 @@ trans { printf("TRANS "); return TRANS;}
 [\x80-\xFFa-zA-Z0-9_]+ { printf("STRING ");yylval.s=strdup(yytext );return STRING;} 
 . {} 
 \n { printf("\n");}
-<<EOF>> { if(file_stack_count == 1){return 0;}else{popfile();}}
+<<EOF>> { 
+	if(file_stack_count > 1 && import_state){
+		err("import_trans_state","no imported trans found");
+	}  
+	if(file_stack_count == 1){
+		return 0;
+	}else{
+		popfile();
+	}
+}
 
 <READY>[ \t] { }
 <READY>[\n] { printf("\n");}

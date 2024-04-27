@@ -352,6 +352,8 @@ int popimport();
 
 //eval
 void eval();
+//err
+void err(char * state , char * err);
 #endif
 
 

@@ -6,7 +6,7 @@
 struct buffer * buffer_root = NULL;
 
 struct buffer *  assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer){
-		if(filename==NULL || buffer_name  == NULL || buffer== NULL ) {printf("assign_join_buffer_chain:element is NULL\n");exit(1);}
+		if(filename==NULL || buffer_name  == NULL || buffer== NULL )err("assign_join_buffer_chain","element is NULL");
 		struct buffer * tmp =malloc(sizeof(struct buffer));
 		tmp->node_type = BUFFER_NODE;
 		tmp->filename = filename;
@@ -26,7 +26,7 @@ struct buffer *  assign_join_buffer_chain( struct buffer * root, char * filename
 }
 
 void join_buffer_chain( char * filename , char * buffer_name , int buffer_type ,  void * buffer){
-		if(filename==NULL || buffer_name  == NULL || buffer== NULL ) {printf("join_buffer_chain:element is NULL\n");exit(1);}
+		if(filename==NULL || buffer_name  == NULL || buffer== NULL )  err("join_buffer_chain","element is NULL");
 		struct buffer * tmp =malloc(sizeof(struct buffer));
 		tmp->node_type = BUFFER_NODE;
 		tmp->filename = filename;
@@ -103,8 +103,7 @@ struct buf * get_buf( char * filename , char * buf_name , int buf_type){
 	if(tmp->node_type == BUF_NODE){
 		return tmp;
 	}else{
-		printf("buf no has this entry\n");
-		exit(1);
+		err("get_buf","buf no has this entry");
 	}
 }
 

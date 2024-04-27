@@ -40,7 +40,7 @@ struct netknife * join_netknife_table( char * filename ,  void * node){
 			tmp->child_tab = node ;	
 			return tmp ;
 		}else{
-			printf("join netknife_table hash conflict\n");exit(1);
+			err("join_netknife_table","join netknife_table hash conflict");
 		}
 }
 
@@ -50,7 +50,7 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 		if(tmp->node_type == NETKNIFE_NODE){
 				return tmp->child_tab;
 		}else{
-		 	printf("netknife_table no has this entry\n");
+			err("get_netknife_node","netknife_table no has this entry");
 		}	
 }
 

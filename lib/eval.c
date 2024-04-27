@@ -3,14 +3,27 @@
 #include "netknife.h"
 #include <stdio.h>
 
+void err(char * state , char * err){
+	for(int i=0;i<50;i++)fprintf(stderr,"-");
+	fprintf(stderr,"\n");
+	fprintf(stderr,"filename:%s\n",curfilename);
+	fprintf(stderr,"file_stack_count:%d\n",file_stack_count);
+	fprintf(stderr,"last_read_trans_name:%s\n",cur_trans);
+	fprintf(stderr,"line:%d\n",yylineno);
+	fprintf(stderr,"state:%s\n",state);
+	fprintf(stderr,"err:%s\n",err);
+	for(int i=0;i<50;i++)fprintf(stderr,"-");
+	fprintf(stderr,"\n");
+	exit(1);
+}
 
 int newfile(char * fn ){
 	if(file_stack_count >= MAX_STACK ){
-		printf("Too many file stacks\n");exit(1);
+		err("newfile","too many file stacks");
 	}
 	FILE * f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
-	if(!f){ perror(fn);exit(1);}
+	if(!f) err("openfile","no file with the same name was found");
 	if(!bs) { perror("malloc"); exit(1);}
 
 	//记住当前状态
