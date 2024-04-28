@@ -3,7 +3,7 @@ trans cisco_to_huawei {
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
-	@(netknife2) ;
+	@(netknife2) include "test1" ;
 	ospf =100> bgp;
 }
 
@@ -21,5 +21,12 @@ trans b {
 
 trans test{
 	这是test => 你好test;
-	ssssshhhhhhhhhhhhhhhhhhhhhhhhhssssssssssssssssssssss => a;
+ez30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ea30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+eb30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ec30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ed30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ee30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ef30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+eg30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
 }

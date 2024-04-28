@@ -83,9 +83,6 @@ struct import_rule * get_import_rule(){
 
 
 
-
-
-
 void print_import_rule(struct import_rule * import_rule_root){
 	struct import_rule * tmp = import_rule_root;
 	while(tmp){
@@ -124,16 +121,6 @@ int regx_match(char * regx , char * str){
 }
 
 
-
-int exist_comment (char * c){
-	struct buf * buf =  get_buf(curfilename,c,COMMENT_NODE);
-	if(buf->node_type == BUF_NODE){ 
-	 	return ((struct comment *)buf)->lineno;
-	}else{
-		return 0;
-	}
-}
-
 int bitmap( char * regx , int s_lineno , int d_lineno , char * s_comment ,char * d_comment ){
 	if(regx)return REGX_ONLY ;
 	if(s_lineno!=0 && d_lineno == 0 && s_comment ==0 && d_comment == 0 ) return S_LINENO_ONLY;
@@ -149,12 +136,10 @@ void swap_number(int * a , int * b){
 	*b = tmp ;
 }
 
-int get_comment_lineno(struct buffer * buf,char * c){
-	while(buf){
-		char  * comment =((struct comment *)buf->buffer)->c;
-		if( !strcmp(comment,c) )return  ((struct comment *)buf->buffer)->lineno;	
-		buf=buf->next;
-	}
+
+int get_comment_lineno(char * c){
+	struct comment_table * tmp =  get_comment_table_entry(comment_tab,c);
+	return tmp->c->lineno;
 	/*当c_buf中不存在传入的comment则return -1*/
 	return -1;
 }
@@ -218,8 +203,8 @@ struct rule *  filter_rule(struct rule * rule){
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int lineno = exist_comment( range->s_comment);
-					if(lineno== -1){ printf("This comment does not exist\n");exit(-1); }
+					int lineno = get_comment_lineno(range->s_comment);
+					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); }
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
 							if(rule->lineno == lineno) {
 								return rule ; 	
@@ -255,9 +240,9 @@ struct rule *  filter_rule(struct rule * rule){
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
-					int s_c = exist_comment( range->s_comment);
-					int d_c = exist_comment( range->d_comment);
-					if(!s_c || !d_c){ printf("This comment does not exist\n");exit(-1); }
+					int s_c = get_comment_lineno( range->s_comment);
+					int d_c = get_comment_lineno( range->d_comment);
+					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
 							if(  rule->lineno >= s_c && rule->lineno <= d_c){
@@ -277,8 +262,8 @@ struct rule *  filter_rule(struct rule * rule){
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
 					
-					int s_c = exist_comment( range->s_comment);
-					if(!s_c){ printf("This comment does not exist");exit(-1); }
+					int s_c = get_comment_lineno( range->s_comment);
+					if(!s_c){  err("get_comment_lineno","this comment does not exist"); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
 							if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){
