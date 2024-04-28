@@ -200,22 +200,58 @@ struct rule *  filter_rule(struct rule * rule){
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
-					if(!strcmp(range_buf->buffer_name,"INCLUDE"))if(rule->lineno ==  range->s_lineno) return rule;
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(rule->lineno ==  range->s_lineno) return NULL;
+					if(!strcmp(range_buf->buffer_name,"INCLUDE")){
+							if(rule->lineno ==  range->s_lineno){
+								   	return rule;
+							}else{
+								return NULL;
+							}
+					}
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
+							if(rule->lineno ==  range->s_lineno){
+								   	return NULL;
+							}else{
+								return rule;
+							}
+					}
 				}
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
 					int lineno = exist_comment( range->s_comment);
 					if(lineno== -1){ printf("This comment does not exist\n");exit(-1); }
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(rule->lineno == lineno) return rule ; 	
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(rule->lineno == lineno) return NULL;
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
+							if(rule->lineno == lineno) {
+								return rule ; 	
+							}else{
+								return NULL;
+							}
+					}
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
+							if(rule->lineno == lineno){
+								return NULL;
+							}else{
+								return rule ;
+							}
+					}
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
 					if(range->s_lineno > range->d_lineno)	swap_number(&range->s_lineno, &range->d_lineno);
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return rule;
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno)return NULL;	
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
+							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){
+								return rule;
+							}else{
+								return NULL;
+							}
+					}
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
+							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){
+									return NULL;	
+							}else{
+									return rule;
+							}
+					}
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
@@ -223,8 +259,20 @@ struct rule *  filter_rule(struct rule * rule){
 					int d_c = exist_comment( range->d_comment);
 					if(!s_c || !d_c){ printf("This comment does not exist\n");exit(-1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(  rule->lineno >= s_c && rule->lineno <= d_c)return rule;
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if(  rule->lineno >= s_c &&  rule->lineno <= d_c)return NULL;		
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
+							if(  rule->lineno >= s_c && rule->lineno <= d_c){
+									return rule;
+							}else{
+								return NULL;
+							}
+					}
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
+							if(  rule->lineno >= s_c &&  rule->lineno <= d_c){
+									return NULL;		
+							}else{
+								return rule;
+							}
+					}
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
@@ -232,8 +280,20 @@ struct rule *  filter_rule(struct rule * rule){
 					int s_c = exist_comment( range->s_comment);
 					if(!s_c){ printf("This comment does not exist");exit(-1); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" ))if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c)return rule;
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" ))if( rule->lineno>= range->s_lineno && rule->lineno<=s_c)return NULL;		
+					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
+							if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){
+									return rule;
+							}else{
+									return NULL;
+							}
+					}
+					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
+							if( rule->lineno>= range->s_lineno && rule->lineno<=s_c){
+									return NULL;		
+							}else{
+								return rule;
+							}
+					}
 				}
 				range_buf = range_buf->next ;
 			}

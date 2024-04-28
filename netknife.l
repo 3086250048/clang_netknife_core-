@@ -247,7 +247,11 @@ yylval.d=atoi(yytext);return NUMBER;}
 #endif
 BEGIN READY;return GT;}
 <TRANS_PRIORITY>. {}
-<TRANS_PRIORITY>\n { printf("\n");}
+<TRANS_PRIORITY>\n { 
+#ifdef ECHO_TOKEN
+printf("\n");
+#endif
+}
 
 
 
