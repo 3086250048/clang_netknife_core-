@@ -138,10 +138,14 @@ void swap_number(int * a , int * b){
 
 
 int get_comment_lineno(char * c){
-	struct comment_table * tmp =  get_comment_table_entry(comment_tab,c);
-	return tmp->c->lineno;
+	struct comment_table  * tmp =&comment_tab[index_string_hash(c)%MAX_HASH];
+
+	if(tmp->c){
+		return tmp->c->lineno;
+	}else{
 	/*当c_buf中不存在传入的comment则return -1*/
 	return -1;
+	}
 }
 
 

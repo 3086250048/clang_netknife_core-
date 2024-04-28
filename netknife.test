@@ -3,7 +3,7 @@ trans cisco_to_huawei {
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
-	@(netknife2) include "test1" ;
+	@(netknife2) exclude 3 to 10 ;
 	ospf =100> bgp;
 }
 

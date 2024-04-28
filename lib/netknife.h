@@ -354,6 +354,8 @@ int popimport();
 void eval();
 //err
 void err(char * state , char * err);
+//
+unsigned int index_string_hash(char * index_string);
 #endif
 
 

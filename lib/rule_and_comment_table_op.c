@@ -3,7 +3,7 @@
 #include "netknife.h"
 #include <stdio.h>
 
-static unsigned int index_string_hash(char * index_string){
+unsigned int index_string_hash(char * index_string){
 	unsigned int hash = 0;
 	unsigned c ;
 	while(c=*index_string++) hash = hash*9 ^ c;
@@ -123,7 +123,6 @@ struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 			struct rule * rule = join_rule(trim(s),trim(d),yylineno,priority);
 			rule = filter_rule(rule);
 			if(rule){	
-//				join_buf( curfilename , rule->s , RULE_NODE , rule) ;
 				return join_rule_table(rule);
 			}
 	} 
@@ -134,7 +133,6 @@ struct comment_table * comment_table_reduce(char * c){
 	if(file_stack_count>1 && !import_state  ) return  NULL;
 	if(file_stack_count ==  1 || !strcmp(target_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
 		 struct comment * comment = join_comment(trim(c),yylineno); 
-//		 join_buf( curfilename , comment->c , COMMENT_NODE , comment) ;
 		 return join_comment_table(comment);
 	}
 }
