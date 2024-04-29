@@ -157,62 +157,48 @@ struct rule *  filter_rule(struct rule * rule){
 		if(!curfilter )return rule; 
 		struct filter* filter = curfilter;		
 		/*合并filter中的range*/
-		struct buffer * range_buf=NULL ;
+		struct buffer *  include_range_buf=NULL ;
+		struct buffer * exclude_range_buf = NULL;
 		while(filter){	
 			struct range * range = filter->range;
 			while(range){
-				if(filter->node_type == INCLUDE_NODE )range_buf = assign_join_buffer_chain(range_buf,"RANGE","INCLUDE",RANGE_NODE,range); 
-				if(filter->node_type == EXCLUDE_NODE) range_buf = assign_join_buffer_chain(range_buf,"RANGE","EXCLUDE",RANGE_NODE,range); 
+				if(filter->node_type == INCLUDE_NODE )
+						include_range_buf = assign_join_buffer_chain(include_range_buf,"RANGE","INCLUDE",RANGE_NODE,range); 
+				if(filter->node_type == EXCLUDE_NODE) 
+						exclude_range_buf = assign_join_buffer_chain(exclude_range_buf,"RANGE","EXCLUDE",RANGE_NODE,range); 
 				range=range->next;
 			}
 			filter = filter->next;
 		}
 
-		int match = 0;
-
-		/*判断rule是否符合filter*/
-		while(range_buf){
-				struct range * range = range_buf->buffer;
+		int include_match_result = 0;	
+		int exist_include_filter =0;
+		struct range * inc_match_range = NULL;
+		/*判断rule是否符合include_filter*/
+		while(include_range_buf){
+				exist_include_filter = 1;
+				struct range * range = include_range_buf->buffer;
 				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
+				
 				/*regx*/
 				if( mode==REGX_ONLY ){
-					if(!strcmp(range_buf->buffer_name,"INCLUDE") ){
-							if(!regx_match(range->regx,rule->s)){return rule ;}
-					}
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE")){
-							if(!regx_match(range->regx,rule->s)) {return NULL;}
-					}
+							if(!regx_match(range->regx,rule->s)){ inc_match_range =range; include_match_result =1;break;}
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
-					if(!strcmp(range_buf->buffer_name,"INCLUDE")){
-							if(rule->lineno ==  range->s_lineno){return rule;}
-					}
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(rule->lineno ==  range->s_lineno){return NULL;}
-					}
+							if(rule->lineno ==  range->s_lineno){ inc_match_range =range; include_match_result=1;break;}
 				}
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
 					int lineno = get_comment_lineno(range->s_comment);
 					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); }
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(rule->lineno == lineno) {return rule;}	
-					}
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(rule->lineno == lineno){ return NULL;}
-					}
+					if(rule->lineno == lineno) { inc_match_range =range; include_match_result=1; break;}	
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
 					if(range->s_lineno > range->d_lineno)	swap_number(&range->s_lineno, &range->d_lineno);
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){return rule;}
-					}
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){return NULL;}	
-					}
+					if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){ inc_match_range =range; include_match_result=1; break;}
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
@@ -220,12 +206,7 @@ struct rule *  filter_rule(struct rule * rule){
 					int d_c = get_comment_lineno( range->d_comment);
 					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(  rule->lineno >= s_c && rule->lineno <= d_c){return rule;}
-					}
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(  rule->lineno >= s_c &&  rule->lineno <= d_c){return NULL;}	
-					}
+					if(  rule->lineno >= s_c && rule->lineno <= d_c){ inc_match_range =range; include_match_result=1;break;}
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
@@ -233,14 +214,76 @@ struct rule *  filter_rule(struct rule * rule){
 					int s_c = get_comment_lineno( range->s_comment);
 					if(!s_c){  err("get_comment_lineno","this comment does not exist"); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
-					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){return rule;}
-					}
-					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if( rule->lineno>= range->s_lineno && rule->lineno<=s_c){return NULL;}	
-					}
+					if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){ inc_match_range =range; include_match_result=1; break;}
 				}
-				range_buf = range_buf->next ;
+				include_range_buf = include_range_buf->next ;
+			}
+
+			/*判断rule是否符合exclude_filter*/
+			int exclude_match_result = 0;	
+			int exist_exclude_filter = 0;
+			struct range * exc_match_range = NULL;
+			while(exclude_range_buf){
+				exist_exclude_filter = 1;
+				struct range * range = exclude_range_buf->buffer;
+				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
+				
+				/*regx*/
+				if( mode==REGX_ONLY ){
+							if(!regx_match(range->regx,rule->s)){ exc_match_range = range; exclude_match_result =1; break;}
+				}
+				/*s_lineno*/
+				if(mode == S_LINENO_ONLY ){
+							if(rule->lineno ==  range->s_lineno){ exc_match_range = range; exclude_match_result=1; break;}
+				}
+				/*s_comment*/
+				if( mode == S_COMMENT_ONLY )
+				{
+					int lineno = get_comment_lineno(range->s_comment);
+					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); }
+					if(rule->lineno == lineno) { exc_match_range = range; exclude_match_result=1; break;}	
+				}	
+				/*lineno*/
+				if( mode == LINENO_ONLY){
+					if(range->s_lineno > range->d_lineno)	swap_number(&range->s_lineno, &range->d_lineno);
+					if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){ exc_match_range = range; exclude_match_result=1; break;}
+				}
+				/*comment*/
+				if( mode == COMMENT_ONLY){
+					int s_c = get_comment_lineno( range->s_comment);
+					int d_c = get_comment_lineno( range->d_comment);
+					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); }
+					if(s_c > d_c) swap_number(&s_c,&d_c);
+					if(  rule->lineno >= s_c && rule->lineno <= d_c){ exc_match_range = range; exclude_match_result=1; break;}
+				}	
+				/*lineno and comment */
+				if( mode == LINENO_AND_COMMENT ){
+					
+					int s_c = get_comment_lineno( range->s_comment);
+					if(!s_c){  err("get_comment_lineno","this comment does not exist"); }
+					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
+					if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){ exc_match_range = range; exclude_match_result=1; break ;}
+				}
+				exclude_range_buf = exclude_range_buf->next ;
+			}
+			/*filter 结果判断*/
+			if( exist_include_filter && !exist_exclude_filter){
+				if(include_match_result) return rule ;
+				return NULL;
+			}
+			if(!exist_include_filter && exist_exclude_filter){
+				if(!exclude_match_result) return rule ;
+				return NULL;
+			}
+			if(exist_include_filter && exist_exclude_filter){	
+				if(include_match_result && !exclude_match_result  )return rule;
+				if(!include_match_result && exclude_match_result)return NULL;
+				if(!include_match_result && !exclude_match_result) return rule ;
+				if(include_match_result && exclude_match_result ){
+					print_range(inc_match_range);
+					print_range(exc_match_range);
+		 		    err("rule_filter","filter rule conflict");
+				}
 			}
 		
 }
