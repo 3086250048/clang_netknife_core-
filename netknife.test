@@ -3,15 +3,13 @@ trans cisco_to_huawei {
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
-	@(netknife2) exclude 3 to 10 ;
+	@(netknife2) exclude 3 ,1,2 ;
 	ospf =100> bgp;
 }
 
 
 trans a{
-	@b;
 	display ip int b => show ip int b ;
-	@test;
 }
 
 trans b {

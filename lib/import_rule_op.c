@@ -150,6 +150,7 @@ int get_comment_lineno(char * c){
 
 
 
+
 /*将buffer中的数据根据filter过滤*/
 struct rule *  filter_rule(struct rule * rule){
 		/*如果不存在filter则直接退出*/
@@ -157,7 +158,7 @@ struct rule *  filter_rule(struct rule * rule){
 		struct filter* filter = curfilter;		
 		/*合并filter中的range*/
 		struct buffer * range_buf=NULL ;
-		while(filter){
+		while(filter){	
 			struct range * range = filter->range;
 			while(range){
 				if(filter->node_type == INCLUDE_NODE )range_buf = assign_join_buffer_chain(range_buf,"RANGE","INCLUDE",RANGE_NODE,range); 
@@ -166,6 +167,9 @@ struct rule *  filter_rule(struct rule * rule){
 			}
 			filter = filter->next;
 		}
+
+		int match = 0;
+
 		/*判断rule是否符合filter*/
 		while(range_buf){
 				struct range * range = range_buf->buffer;
@@ -173,35 +177,19 @@ struct rule *  filter_rule(struct rule * rule){
 				/*regx*/
 				if( mode==REGX_ONLY ){
 					if(!strcmp(range_buf->buffer_name,"INCLUDE") ){
-							if(!regx_match(range->regx,rule->s)){
-									return rule ;
-							}else{
-								return NULL;
-							}
+							if(!regx_match(range->regx,rule->s)){return rule ;}
 					}
 					if(!strcmp(range_buf->buffer_name,"EXCLUDE")){
-							if(!regx_match(range->regx,rule->s)) {
-									return NULL;
-							}else{
-								return rule;
-							}
+							if(!regx_match(range->regx,rule->s)) {return NULL;}
 					}
 				}
 				/*s_lineno*/
 				if(mode == S_LINENO_ONLY ){
 					if(!strcmp(range_buf->buffer_name,"INCLUDE")){
-							if(rule->lineno ==  range->s_lineno){
-								   	return rule;
-							}else{
-								return NULL;
-							}
+							if(rule->lineno ==  range->s_lineno){return rule;}
 					}
 					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(rule->lineno ==  range->s_lineno){
-								   	return NULL;
-							}else{
-								return rule;
-							}
+							if(rule->lineno ==  range->s_lineno){return NULL;}
 					}
 				}
 				/*s_comment*/
@@ -210,36 +198,20 @@ struct rule *  filter_rule(struct rule * rule){
 					int lineno = get_comment_lineno(range->s_comment);
 					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); }
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(rule->lineno == lineno) {
-								return rule ; 	
-							}else{
-								return NULL;
-							}
+							if(rule->lineno == lineno) {return rule;}	
 					}
 					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(rule->lineno == lineno){
-								return NULL;
-							}else{
-								return rule ;
-							}
+							if(rule->lineno == lineno){ return NULL;}
 					}
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
 					if(range->s_lineno > range->d_lineno)	swap_number(&range->s_lineno, &range->d_lineno);
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){
-								return rule;
-							}else{
-								return NULL;
-							}
+							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){return rule;}
 					}
 					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){
-									return NULL;	
-							}else{
-									return rule;
-							}
+							if(rule->lineno >= range->s_lineno && rule->lineno <= range->d_lineno){return NULL;}	
 					}
 				}
 				/*comment*/
@@ -249,18 +221,10 @@ struct rule *  filter_rule(struct rule * rule){
 					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(  rule->lineno >= s_c && rule->lineno <= d_c){
-									return rule;
-							}else{
-								return NULL;
-							}
+							if(  rule->lineno >= s_c && rule->lineno <= d_c){return rule;}
 					}
 					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if(  rule->lineno >= s_c &&  rule->lineno <= d_c){
-									return NULL;		
-							}else{
-								return rule;
-							}
+							if(  rule->lineno >= s_c &&  rule->lineno <= d_c){return NULL;}	
 					}
 				}	
 				/*lineno and comment */
@@ -270,22 +234,15 @@ struct rule *  filter_rule(struct rule * rule){
 					if(!s_c){  err("get_comment_lineno","this comment does not exist"); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
 					if(!strcmp(range_buf->buffer_name,"INCLUDE" )){
-							if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){
-									return rule;
-							}else{
-									return NULL;
-							}
+							if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){return rule;}
 					}
 					if(!strcmp(range_buf->buffer_name,"EXCLUDE" )){
-							if( rule->lineno>= range->s_lineno && rule->lineno<=s_c){
-									return NULL;		
-							}else{
-								return rule;
-							}
+							if( rule->lineno>= range->s_lineno && rule->lineno<=s_c){return NULL;}	
 					}
 				}
 				range_buf = range_buf->next ;
 			}
+		
 }
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){

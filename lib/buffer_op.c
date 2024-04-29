@@ -11,7 +11,9 @@ struct buffer *  assign_join_buffer_chain( struct buffer * root, char * filename
 		tmp->node_type = BUFFER_NODE;
 		tmp->filename = filename;
 		tmp->buffer_type = buffer_type;
+		printf("buffer_name:%s\n",buffer_name);
 		tmp->buffer_name = buffer_name;
+		printf("s_lineno:%d d_lineno:%d\n ",((struct range *)buffer)->s_lineno ,((struct range *)buffer)->d_lineno); 
 		tmp->buffer = buffer ;
 		tmp->next = NULL;
 		tmp->prev = NULL;
