@@ -111,23 +111,20 @@ void print_import_rule(struct import_rule * import_rule_root){
 int regx_match(char * regx , char * str){
     regex_t regex;
     int reti;
-    char msgbuf[100];
-	int flag =  REG_NOSUB | REG_EXTENDED;
-    reti = regcomp(&regex, regx,flag);
+    reti = regcomp(&regex, regx,0);
     if (reti) {
-        fprintf(stderr, "Could not compile regex\n");
+		err("regx_match","the regular expression syntax is incorrect");
         exit(1);
     }
 
-    // 匹配字符串
+    /* 匹配字符串*/
     reti = regexec(&regex, str, 0, NULL,0);
     if (!reti) {
 		return 0;
     } else if (reti == REG_NOMATCH) {
 		return 1;
     } else {
-        regerror(reti, &regex, msgbuf, sizeof(msgbuf));
-        fprintf(stderr, "Regex match failed: %s\n", msgbuf);
+		err("regx_match","the regular expression matching error");
         exit(1);
     }
 }
