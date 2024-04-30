@@ -109,7 +109,7 @@ void print_import_rule(struct import_rule * import_rule_root){
 
 
 int regx_match(char * regx , char * str){
-    regex_t regex;
+    regex_t regex ;
 	int m=1 ;
     int reti;
     char msgbuf[100];
@@ -132,7 +132,7 @@ int regx_match(char * regx , char * str){
 		err("regular match",msgbuf);
         exit(1);
     }
-//	regfree(&regex);
+	regfree(&regex);
 	return m;
 }
 

@@ -949,7 +949,7 @@ printf("\n");
 case 9:
 YY_RULE_SETUP
 #line 51 "netknife.l"
-{ unput(strdup(yytext)[0]);BEGIN TRANS_RULE;}
+{ unput(yytext[0]);BEGIN TRANS_RULE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP

@@ -6,6 +6,7 @@
 
 
 struct trans * join_trans(char *  name ,int lineno , struct rule_table * rule_tab , struct comment_table * comment_tab ,struct import_rule * import_rule_chain ){
+	
 	struct trans  * tmp = malloc(sizeof(struct trans));
 		tmp->node_type = TRANS_NODE;
 		tmp->name = name ;

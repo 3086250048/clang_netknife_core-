@@ -48,7 +48,7 @@ printf("\n");
 printf("\n");
 #endif
 }
-<READY>. { unput(strdup(yytext)[0]);BEGIN TRANS_RULE;}
+<READY>. { unput(yytext[0]);BEGIN TRANS_RULE;}
 
 
 <TRANS_COMMENT>\" { BEGIN 0;}
