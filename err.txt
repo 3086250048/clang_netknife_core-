@@ -1,24 +1,44 @@
+**************************************************
+INCLUDE NODE
+               node_type:RANGE_NODE
+               regx:(null)
+               s_lineno:2
+               d_lineno:0
+               s_comment:(null)
+               d_comment:(null)
+               node_type:RANGE_NODE
+               regx:(null)
+               s_lineno:1
+               d_lineno:0
+               s_comment:(null)
+               d_comment:(null)
+**************************************************
+**************************************************
+EXCLUDE NODE
+               node_type:RANGE_NODE
+               regx:(null)
+               s_lineno:2
+               d_lineno:0
+               s_comment:(null)
+               d_comment:(null)
+               node_type:RANGE_NODE
+               regx:(null)
+               s_lineno:1
+               d_lineno:0
+               s_comment:(null)
+               d_comment:(null)
+               node_type:RANGE_NODE
+               regx:(null)
+               s_lineno:3
+               d_lineno:0
+               s_comment:(null)
+               d_comment:(null)
+**************************************************
 --------------------------------------------------
-filename:netknife.test
-file_stack_count:999
-last_read_trans_name:test
-line:25
-state:newfile
-err:too many file stacks
---------------------------------------------------
---------------------------------------------------
-filename:netknife.test
+filename:netknife2
 file_stack_count:2
-last_read_trans_name:test
-line:28
-state:import_trans_state
-err:no imported trans found
---------------------------------------------------
---------------------------------------------------
-filename:netknife.test
-file_stack_count:2
-last_read_trans_name:test
-line:28
-state:import_trans_state
-err:no imported trans found
+last_read_trans_name:a
+line:2
+state:rule_filter
+err:filter rule conflict
 --------------------------------------------------

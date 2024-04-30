@@ -263,6 +263,7 @@ struct rule *  filter_rule(struct rule * rule);
 
 //打印range
 void print_range(struct range * range_root);
+void stderr_print_range(struct range * range);
 //打印import_rule
 void print_import_rule(struct import_rule * import_rule_root);
 //计算import
@@ -354,6 +355,7 @@ int popimport();
 void eval();
 //err
 void err(char * state , char * err);
+void err_node(void * node , char * banner);
 //
 unsigned int index_string_hash(char * index_string);
 #endif

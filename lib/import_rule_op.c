@@ -38,6 +38,18 @@ void print_range(struct range * range_root){
 
 }
 
+void stderr_print_range(struct range * range_root){
+	struct range * tmp  = range_root;
+	while(tmp){
+ 		fprintf(stderr,"%*snode_type:RANGE_NODE\n",PRINT_RANGE);
+		fprintf(stderr,"%*sregx:%s\n",PRINT_RANGE,tmp->regx);
+		fprintf(stderr,"%*ss_lineno:%d\n",PRINT_RANGE,tmp->s_lineno);
+		fprintf(stderr,"%*sd_lineno:%d\n",PRINT_RANGE,tmp->d_lineno);
+		fprintf(stderr,"%*ss_comment:%s\n",PRINT_RANGE,tmp->s_comment);
+		fprintf(stderr,"%*sd_comment:%s\n",PRINT_RANGE, tmp->d_comment);
+		tmp=tmp->next;
+	}
+}
 
 struct filter * join_filter(struct filter * root , int node_type ,struct range * range){
 		struct filter *  tmp = malloc(sizeof(struct filter));
@@ -192,7 +204,7 @@ struct rule *  filter_rule(struct rule * rule){
 				if( mode == S_COMMENT_ONLY )
 				{
 					int lineno = get_comment_lineno(range->s_comment);
-					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); }
+					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); exit(1);}
 					if(rule->lineno == lineno) { inc_match_range =range; include_match_result=1; break;}	
 				}	
 				/*lineno*/
@@ -204,7 +216,7 @@ struct rule *  filter_rule(struct rule * rule){
 				if( mode == COMMENT_ONLY){
 					int s_c = get_comment_lineno( range->s_comment);
 					int d_c = get_comment_lineno( range->d_comment);
-					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); }
+					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); exit(1);}
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(  rule->lineno >= s_c && rule->lineno <= d_c){ inc_match_range =range; include_match_result=1;break;}
 				}	
@@ -212,7 +224,7 @@ struct rule *  filter_rule(struct rule * rule){
 				if( mode == LINENO_AND_COMMENT ){
 					
 					int s_c = get_comment_lineno( range->s_comment);
-					if(!s_c){  err("get_comment_lineno","this comment does not exist"); }
+					if(!s_c){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
 					if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){ inc_match_range =range; include_match_result=1; break;}
 				}
@@ -240,7 +252,7 @@ struct rule *  filter_rule(struct rule * rule){
 				if( mode == S_COMMENT_ONLY )
 				{
 					int lineno = get_comment_lineno(range->s_comment);
-					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); }
+					if(lineno== -1){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					if(rule->lineno == lineno) { exc_match_range = range; exclude_match_result=1; break;}	
 				}	
 				/*lineno*/
@@ -252,7 +264,7 @@ struct rule *  filter_rule(struct rule * rule){
 				if( mode == COMMENT_ONLY){
 					int s_c = get_comment_lineno( range->s_comment);
 					int d_c = get_comment_lineno( range->d_comment);
-					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist"); }
+					if(!s_c || !d_c){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(  rule->lineno >= s_c && rule->lineno <= d_c){ exc_match_range = range; exclude_match_result=1; break;}
 				}	
@@ -260,7 +272,7 @@ struct rule *  filter_rule(struct rule * rule){
 				if( mode == LINENO_AND_COMMENT ){
 					
 					int s_c = get_comment_lineno( range->s_comment);
-					if(!s_c){  err("get_comment_lineno","this comment does not exist"); }
+					if(!s_c){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					if(range->s_lineno > s_c) swap_number(&range->s_lineno,&s_c);
 					if(  rule->lineno >= range->s_lineno && rule->lineno <=s_c){ exc_match_range = range; exclude_match_result=1; break ;}
 				}
@@ -280,9 +292,10 @@ struct rule *  filter_rule(struct rule * rule){
 				if(!include_match_result && exclude_match_result)return NULL;
 				if(!include_match_result && !exclude_match_result) return rule ;
 				if(include_match_result && exclude_match_result ){
-					print_range(inc_match_range);
-					print_range(exc_match_range);
 		 		    err("rule_filter","filter rule conflict");
+					err_node(inc_match_range,"INCLUDE");
+					err_node(exc_match_range,"EXCLUDE");
+					exit(1);
 				}
 			}
 		

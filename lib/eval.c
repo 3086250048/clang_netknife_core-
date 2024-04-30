@@ -3,6 +3,19 @@
 #include "netknife.h"
 #include <stdio.h>
 
+void err_node(void * node,char * banner ){
+	
+	for(int i=0;i<50;i++)fprintf(stderr,"-");
+	fprintf(stderr,"\n");
+	fprintf(stderr,"%s\n",banner);
+	if(*((int *)node) == RANGE_NODE ){
+		stderr_print_range(node);
+	}
+	for(int i=0;i<50;i++)fprintf(stderr,"-");
+	fprintf(stderr,"\n");
+
+}
+
 void err(char * state , char * err){
 	for(int i=0;i<50;i++)fprintf(stderr,"-");
 	fprintf(stderr,"\n");
@@ -14,16 +27,16 @@ void err(char * state , char * err){
 	fprintf(stderr,"err:%s\n",err);
 	for(int i=0;i<50;i++)fprintf(stderr,"-");
 	fprintf(stderr,"\n");
-	exit(1);
 }
 
 int newfile(char * fn ){
 	if(file_stack_count >= MAX_STACK ){
 		err("newfile","too many file stacks");
+		exit(1);
 	}
 	FILE * f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
-	if(!f) err("openfile","no file with the same name was found");
+	if(!f) {err("openfile","no file with the same name was found");exit(1);};
 	if(!bs) { perror("malloc"); exit(1);}
 
 	//记住当前状态

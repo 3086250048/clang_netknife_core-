@@ -1,4 +1,5 @@
 trans a {
 check ip resource => display ip int b ; "test1"
+check ip resource => display ip int b ; "test1"
 display ip int b 1 => show ip int b;
 }
