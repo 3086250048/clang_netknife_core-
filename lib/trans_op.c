@@ -53,7 +53,7 @@ struct trans *  trans_reduce()
 		char * trans ;
 		if( import_state ){	
 			import_state = 0;
-			struct trans * t=  join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+			struct trans * t= join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			start_trans = NULL;
 			target_trans = NULL;
 			print_trans(t);
@@ -61,7 +61,7 @@ struct trans *  trans_reduce()
 			return t ;
 		}
 		if(file_stack_count == 1){
-			struct trans * t=  join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+			struct trans * t= join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			print_trans(t);
 			printf("\n");
 			return t ;

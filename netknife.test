@@ -3,7 +3,7 @@ trans cisco_to_huawei {
 	ospf => bgp;
 	ospf => bgp;
 	ospf => bgp;
-	@(netknife2) exclude r"^check" ;
+	@(netknife2) include r"^display";
 	ospf =100> bgp;
 }
 
@@ -14,17 +14,21 @@ trans a{
 
 trans b {
 	this is b => show b ;
-
 }
+
 
 trans test{
-	这是test => 你好test;
+1111这是test => 你好test;
 ez30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
-ea30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
-eb30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
-ec30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
-ed30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
-ee30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ez30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+ez30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
 ef30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
 eg30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili=>qq;
+plV1k5CzNSRwPvKSK6krXeJgmVT8cAjfkvXy1kCnd2hLwB8ITG2Tia01UO0b7CYV6EBjemgM9HObOPJpag1QeFFoF2LhTGv2dkxk=>qq;
+Ha9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL=>qq;
+Hb9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL=>qq;
+Hc9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL=>qq;
+Hd9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL=>qq;
+He9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL=>qq;
 }
+

@@ -110,23 +110,30 @@ void print_import_rule(struct import_rule * import_rule_root){
 
 int regx_match(char * regx , char * str){
     regex_t regex;
+	int m=1 ;
     int reti;
+    char msgbuf[100];
     reti = regcomp(&regex, regx,0);
     if (reti) {
-		err("regx_match","the regular expression syntax is incorrect");
+		regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+		msgbuf[sizeof(msgbuf) - 1] = '\0';
+		err("regular compilation",msgbuf);
         exit(1);
     }
-
     /* 匹配字符串*/
     reti = regexec(&regex, str, 0, NULL,0);
     if (!reti) {
-		return 0;
+		m=0;
     } else if (reti == REG_NOMATCH) {
-		return 1;
+		m=1;
     } else {
-		err("regx_match","the regular expression matching error");
+		regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+		msgbuf[sizeof(msgbuf) - 1] = '\0';
+		err("regular match",msgbuf);
         exit(1);
     }
+//	regfree(&regex);
+	return m;
 }
 
 
