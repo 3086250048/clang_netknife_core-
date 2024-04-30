@@ -1,8 +1,6 @@
 trans cisco_to_huawei {	
 	ospf => bgp;
 	ospf => bgp;
-	ospf => bgp;
-	ospf => bgp;
 	@(netknife2) include r"^display";
 	ospf =100> bgp;
 }
