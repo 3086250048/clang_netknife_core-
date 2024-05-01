@@ -56,7 +56,7 @@ struct trans *  trans_reduce()
 			import_state = 0;
 			struct trans * t= join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			start_trans = NULL;
-			target_trans = NULL;
+			if(strcmp(target_trans,ALL_TRANS)!=0)target_trans = NULL;
 			print_trans(t);
 			printf("\n");
 			return t ;
@@ -66,6 +66,12 @@ struct trans *  trans_reduce()
 			print_trans(t);
 			printf("\n");
 			return t ;
+		}
+		if(!strcmp(target_trans,ALL_TRANS)){
+			struct trans * t= join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
+			print_trans(t);
+			printf("\n");
+			return t ;	
 		}
 		return NULL;
 	}	

@@ -121,11 +121,6 @@ struct bufstack{
 		FILE * f;//当前文件		
 };
 
-struct filterstack{
-	//上一个import的filter信息
-	struct filterstack * prev ;
-	struct filter * filter ;
-};
 
 extern struct rule_table * rule_tab ;
 extern struct comment_table * comment_tab ;

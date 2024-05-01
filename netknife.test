@@ -7,13 +7,13 @@ trans cisco_to_huawei {
 	bgp 100 \n 
 	peer 192.168.100.1 asnumber 101 \n
 	peer 192.168.100.1 connectinterfacae loopback 0 \n
-	 => 
+	 =100> 
 	route bgp 100 \n 
 	neignbor 192.168.100.1 as 100 \n
 	neignbor 192.168.100.1 connectinterface loopback 0 \n
 	;
 
-	@(netknife2) include  r"^display" exclude r"^dis" , r"^check";
+	@(netknife2) include r"^check" , r"^1dis" ;
 	ospf =100> bgp;
 }
 
