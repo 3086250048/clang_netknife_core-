@@ -3,11 +3,8 @@
 #include "netknife.h"
 #include <stdio.h>
 
-unsigned int index_string_hash(char * index_string){
-	unsigned int hash = 0;
-	unsigned c ;
-	while(c=*index_string++) hash = hash*9 ^ c;
-	return hash;
+unsigned long index_string_hash(const char * index_string){
+	return hash_string(index_string);
 }
 
 //添加rule到表中

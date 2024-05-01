@@ -3,24 +3,12 @@
 #include "netknife.h"
 #include <stdio.h>
 
-static unsigned int netknife_index_hash(char * filename, int  child_type ,char * child_name){
-	char * s1 =strdup(filename);
-	char s2[10] ;
-	sprintf(s2,"%d",child_type);
-	char * s3 = strdup(child_name);
-	strcat(s1,s2);
-	strcat(s1,s3);
-	unsigned int hash = 0;
-	unsigned c ;
-	char * tmp =s1;
-	while(c=*tmp++){
-		   	hash = hash*9 ^ c;
-	}
-	free(s1);
-	return hash;
-
+unsigned long netknife_index_hash(const char * filename ,  int child_type , const char * child_name) {
+    unsigned long combined_hash = hash_string(filename);
+    combined_hash = combine_hashes(combined_hash, hash_string(child_name));
+    combined_hash = combine_hashes(combined_hash, child_type);
+    return combined_hash;
 }
-
 
 struct netknife * join_netknife_table( char * filename ,  void * node){
 		char * child_name;

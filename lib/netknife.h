@@ -351,13 +351,13 @@ struct import_trans{
 int newimport(char * filename , char * target_trans, struct filter * filter );
 int popimport();
 
-//eval
+/*eval*/
 void eval();
-//err
 void err(char * state , char * err);
 void err_node(void * node , char * banner);
-//
-unsigned int index_string_hash(char * index_string);
+unsigned long hash_string(const char * str);
+unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
+
 #endif
 
 

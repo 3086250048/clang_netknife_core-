@@ -50,22 +50,11 @@ struct buffer * get_buffer(){
 	return tmp;
 }
 
-static unsigned int buf_index_hash(char * filename, int  buf_type ,char * buf_name){
-	char * s1 =strdup(filename);
-	char s2[10] ;
-	sprintf(s2,"%d",buf_type);
-	char * s3 = strdup(buf_name);
-	strcat(s1,s2);
-	strcat(s1,s3);
-	unsigned int hash = 0;
-	unsigned c ;
-	char * tmp =s1;
-	while(c=*tmp++){
-		   	hash = hash*9 ^ c;
-	}
-	free(s1);
-	return hash;
-
+unsigned long buf_index_hash(const char * filename, int  buf_type ,const char * buf_name){
+    unsigned long combined_hash = hash_string(filename);
+    combined_hash = combine_hashes(combined_hash, hash_string(buf_name));
+    combined_hash = combine_hashes(combined_hash, buf_type);
+    return combined_hash;
 }
 
 

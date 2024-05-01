@@ -3,6 +3,20 @@
 #include "netknife.h"
 #include <stdio.h>
 
+
+unsigned long hash_string(const char * str){
+	unsigned long hash = 5381;
+    int c;
+    while ((c = *str++)) {
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+    }
+    return hash;
+}
+
+unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) {
+    return hash1 ^ hash2;
+}
+
 void err_node(void * node,char * banner ){
 	
 	for(int i=0;i<50;i++)fprintf(stderr,"-");

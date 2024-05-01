@@ -1,0 +1,134 @@
+node_type:TRANS_NODE
+trans_name:cisco_to_huawei
+lineno:5
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:ospf
+          destination:bgp
+          lineno:2
+          priority:0
+          node_type:RULE
+          source:ospf
+          destination:bgp
+          lineno:3
+          priority:0
+          node_type:RULE
+          source:ospf
+          destination:bgp
+          lineno:5
+          priority:100
+     node_type:COMMENT_TABLE_ENTRY
+          node_type:COMMENT
+          lineno:2
+          string:test1
+          node_type:COMMENT
+          lineno:3
+          string:test1
+     node_type:IMPORT
+     file_name:netknife2
+     import_name:(null)
+     lineno:4
+          node_type:INCLUDE_NODE
+               node_type:RANGE_NODE
+               regx:^didadsplaadwadwadawdadawdy
+               s_lineno:0
+               d_lineno:0
+               s_comment:(null)
+               d_comment:(null)
+
+node_type:TRANS_NODE
+trans_name:a
+lineno:11
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:display ip int b
+          destination:show ip int b
+          lineno:10
+          priority:0
+
+node_type:TRANS_NODE
+trans_name:b
+lineno:15
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:this is b
+          destination:show b
+          lineno:14
+          priority:0
+
+node_type:TRANS_NODE
+trans_name:test
+lineno:31
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:eb30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili
+          destination:qq3
+          lineno:22
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:eg30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili
+          destination:qq
+          lineno:24
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:ea30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili
+          destination:qq2
+          lineno:21
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:Hb9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL
+          destination:qq
+          lineno:27
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:plV1k5CzNSRwPvKSK6krXeJgmVT8cAjfkvXy1kCnd2hLwB8ITG2Tia01UO0b7CYV6EBjemgM9HObOPJpag1QeFFoF2LhTGv2dkxk
+          destination:qq
+          lineno:25
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:Hd9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL
+          destination:qq
+          lineno:29
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:Ha9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL
+          destination:qq
+          lineno:26
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:He9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL
+          destination:qq
+          lineno:30
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:ec30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili
+          destination:qq
+          lineno:23
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:Hc9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL
+          destination:qq
+          lineno:28
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:1111这是test
+          destination:你好test
+          lineno:19
+          priority:0
+     node_type:RULE_TABLE_ENTRY_NODE
+          node_type:RULE
+          source:ez30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili
+          destination:qq1
+          lineno:20
+          priority:0
+
