@@ -5,20 +5,23 @@
 void remove_spaces_around_char(char *str, char ch) {
     char *read_ptr = str;
     char *write_ptr = str;
-    int in_target_char = 0;
+    int found_char = 0;
 
     while (*read_ptr) {
         if (*read_ptr == ch) {
-            in_target_char = 1;
+            // Found the target char, remove spaces before it
+            while (write_ptr > str && isspace(*(write_ptr - 1)) && (*(write_ptr - 1) != '\n')) {
+                write_ptr--;
+            }
+            found_char = 1;
             *write_ptr++ = *read_ptr++;
-            while (isspace(*read_ptr)) {
+            // Remove trailing spaces
+            while (isspace(*read_ptr) && (*read_ptr != '\n')) {
                 read_ptr++;
             }
-        } else if (isspace(*read_ptr) && in_target_char) {
-            read_ptr++;
         } else {
+            // Copy non-target characters
             *write_ptr++ = *read_ptr++;
-            in_target_char = 0;
         }
     }
 
@@ -26,11 +29,12 @@ void remove_spaces_around_char(char *str, char ch) {
 }
 
 int main() {
-    char str[] = "  Hello ,  World   !  ";
+    char str[] = "  Hello \n my \n name \n  World   !  ";
     
     printf("Original string: \"%s\"\n", str);
-    remove_spaces_around_char(str, ',');
+    remove_spaces_around_char(str, '\n');
     printf("Processed string: \"%s\"\n", str);
 
     return 0;
 }
+
