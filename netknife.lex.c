@@ -1297,11 +1297,15 @@ case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
 #line 237 "netknife.l"
-{ printf("\n");}
+{
+#ifdef ECHO_TOKEN
+ printf("\n");
+#endif
+}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 239 "netknife.l"
+#line 243 "netknife.l"
 {
 #ifdef ECHO_TOKEN
  printf("NUMBER ");
@@ -1310,7 +1314,7 @@ yylval.d=atoi(yytext);return NUMBER;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 244 "netknife.l"
+#line 248 "netknife.l"
 {
 #ifdef ECHO_TOKEN
  printf("GT ");
@@ -1319,13 +1323,13 @@ BEGIN READY;return GT;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 249 "netknife.l"
+#line 253 "netknife.l"
 {}
 	YY_BREAK
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 250 "netknife.l"
+#line 254 "netknife.l"
 { 
 #ifdef ECHO_TOKEN
 printf("\n");
@@ -1334,10 +1338,10 @@ printf("\n");
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 259 "netknife.l"
+#line 263 "netknife.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1341 "netknife.lex.c"
+#line 1345 "netknife.lex.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2352,7 +2356,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 259 "netknife.l"
+#line 263 "netknife.l"
 
 
 

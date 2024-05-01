@@ -234,7 +234,11 @@ BEGIN 0;return RBRACE;}
 #endif
 yylval.s=strdup(yytext) ;return STRING ; }
 <TRANS_RULE>. {}
-<TRANS_RULE>\n { printf("\n");}
+<TRANS_RULE>\n {
+#ifdef ECHO_TOKEN
+ printf("\n");
+#endif
+}
 
 <TRANS_PRIORITY>[0-9]+ {
 #ifdef ECHO_TOKEN
