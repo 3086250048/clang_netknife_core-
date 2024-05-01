@@ -3,6 +3,22 @@
 #include "netknife.h"
 #include <stdio.h>
 
+void append_string(char **dest, const char *src) {
+    size_t dest_len = strlen(*dest);
+    size_t src_len = strlen(src);
+    
+    // Reallocate memory for destination string
+    *dest = (char *)realloc(*dest, dest_len + src_len + 1); // +1 for null terminator
+    if (*dest == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    // Append source string to destination string
+    strcpy(*dest + dest_len, src);
+}
+
+
 
 unsigned long hash_string(const char * str){
 	unsigned long hash = 5381;

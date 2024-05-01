@@ -94,6 +94,7 @@ char *trim(char *str)
 {
 	str = rtrim(str);
 	str = ltrim(str);
+//	str = tidy_str(str);
 	remove_spaces_around_char(str,'\n');
 	return str;
 }

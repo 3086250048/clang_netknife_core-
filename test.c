@@ -1,39 +1,39 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-void remove_spaces_around_char(char *str, char ch) {
-    char *read_ptr = str;
-    char *write_ptr = str;
-    int found_char = 0;
-
-    while (*read_ptr) {
-        if (*read_ptr == ch) {
-            // Found the target char, remove spaces before it
-            while (write_ptr > str && isspace(*(write_ptr - 1)) && (*(write_ptr - 1) != '\n')) {
-                write_ptr--;
-            }
-            found_char = 1;
-            *write_ptr++ = *read_ptr++;
-            // Remove trailing spaces
-            while (isspace(*read_ptr) && (*read_ptr != '\n')) {
-                read_ptr++;
-            }
-        } else {
-            // Copy non-target characters
-            *write_ptr++ = *read_ptr++;
-        }
+void append_string(char **dest, const char *src) {
+    size_t dest_len = strlen(*dest);
+    size_t src_len = strlen(src);
+    
+    // Reallocate memory for destination string
+    *dest = (char *)realloc(*dest, dest_len + src_len + 1); // +1 for null terminator
+    if (*dest == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
     }
 
-    *write_ptr = '\0'; // Null-terminate the string
+    // Append source string to destination string
+    strcpy(*dest + dest_len, src);
 }
 
 int main() {
-    char str[] = "  Hello \n my \n name \n  World   !  ";
-    
+    char *str = malloc(sizeof(char) * 10); // Allocate initial memory
+    if (str == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    strcpy(str, "Hello");
+
     printf("Original string: \"%s\"\n", str);
-    remove_spaces_around_char(str, '\n');
-    printf("Processed string: \"%s\"\n", str);
+    
+    // Append additional content
+    append_string(&str, ", World!");
+
+    printf("Appended string: \"%s\"\n", str);
+
+    free(str); // Don't forget to free allocated memory
 
     return 0;
 }

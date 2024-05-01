@@ -91,9 +91,9 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {rule_table_reduce
 
 index_string_exp : STRING {$$=$1;}
 		 | LINE_BREAK { $$=$1;}
-		 | index_string_exp STRING { $$=strcat($1,$2);}
-		 | index_string_exp EMPTY  { $$=strcat($1,$2);}
-		 | index_string_exp LINE_BREAK { $$=strcat($1,$2);}
+		 | index_string_exp STRING { append_string(&$1,$2);$$=$1 ;}
+		 | index_string_exp EMPTY  { append_string(&$1,$2);$$=$1 ;}
+		 | index_string_exp LINE_BREAK { append_string(&$1,$2);$$=$1; }
 		 ;
 
 

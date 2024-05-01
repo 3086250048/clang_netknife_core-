@@ -1396,19 +1396,19 @@ yyreduce:
 
   case 43: /* index_string_exp: index_string_exp STRING  */
 #line 94 "netknife.y"
-                                           { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
+                                           { append_string(&(yyvsp[-1].s),(yyvsp[0].s));(yyval.s)=(yyvsp[-1].s) ;}
 #line 1401 "netknife.tab.c"
     break;
 
   case 44: /* index_string_exp: index_string_exp EMPTY  */
 #line 95 "netknife.y"
-                                           { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
+                                           { append_string(&(yyvsp[-1].s),(yyvsp[0].s));(yyval.s)=(yyvsp[-1].s) ;}
 #line 1407 "netknife.tab.c"
     break;
 
   case 45: /* index_string_exp: index_string_exp LINE_BREAK  */
 #line 96 "netknife.y"
-                                               { (yyval.s)=strcat((yyvsp[-1].s),(yyvsp[0].s));}
+                                               { append_string(&(yyvsp[-1].s),(yyvsp[0].s));(yyval.s)=(yyvsp[-1].s); }
 #line 1413 "netknife.tab.c"
     break;
 
