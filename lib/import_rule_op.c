@@ -310,10 +310,9 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 	if(file_stack_count>1 && !import_state  && !transcmp(target_trans , ALL_TRANS)  ) return  NULL;
 	if(file_stack_count ==  1 || transcmp(target_trans,ALL_TRANS)  || transcmp(cur_trans ,target_trans) ){
 		/*被执行的import_rule添加进import_rule_chain*/
-		struct import_rule * cur_import =  join_import_rule(file_name , import_name , lineno,filter );
+		/*目标trans*/
 		char * filename ;	
 		char * target_trans;
-		/*目标trans*/
 		if(import_name)target_trans=import_name;
 		if(!import_name)target_trans=ALL_TRANS;
 		/*使用的filter*/
@@ -322,6 +321,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 		/*即将打开的文件*/
 		if(file_name)filename = file_name;
 		if(!file_name)filename = curfilename;
+		struct import_rule * cur_import =  join_import_rule(filename  , target_trans , lineno,filter );
 		/*添加到import_trans栈内*/
 		newimport(filename , target_trans , curfilter);
 		/*返回执行成功的import_rule*/
