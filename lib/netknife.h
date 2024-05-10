@@ -353,6 +353,7 @@ void err_node(void * node , char * banner);
 unsigned long hash_string(const char * str);
 unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
+int transcmp(char * t1 , char * t2 );
 #endif
 
 

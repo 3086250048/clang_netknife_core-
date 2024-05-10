@@ -1,3 +1,5 @@
 trans test{
-	@(netknife.test) exclude r"^dis";
+	@(netknife.test)->test exclude r"^dis";
+	@(netknife.test)->a;
+	@(netknife.test)->b;
 }

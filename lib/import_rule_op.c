@@ -307,8 +307,8 @@ struct rule *  filter_rule(struct rule * rule){
 
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
-	if(file_stack_count>1 && !import_state  && strcmp(target_trans , ALL_TRANS)!=0  ) return  NULL;
-	if(file_stack_count ==  1 || !strcmp(target_trans,ALL_TRANS)  || !strcmp(cur_trans ,target_trans) ){
+	if(file_stack_count>1 && !import_state  && !transcmp(target_trans , ALL_TRANS)  ) return  NULL;
+	if(file_stack_count ==  1 || transcmp(target_trans,ALL_TRANS)  || transcmp(cur_trans ,target_trans) ){
 		/*被执行的import_rule添加进import_rule_chain*/
 		struct import_rule * cur_import =  join_import_rule(file_name , import_name , lineno,filter );
 		char * filename ;	

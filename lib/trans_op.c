@@ -39,11 +39,16 @@ void print_trans(struct trans * trans){
 	print_import_rule(trans->import_rule_chain);
 }
 
+int transcmp(char * t1 , char * t2){
+	if(!t1 || !t2 )return 0;
+	if(strcmp(t1,t2) == 0) return 1;
+	return 0;
+}
 
 struct trans *  trans_reduce()
 {
 	if(file_stack_count > 1 && !target_trans) return NULL;
-	if(file_stack_count > 1 && strcmp(cur_trans,target_trans)!=0  && strcmp(target_trans,ALL_TRANS)!=0) return NULL;	
+	if(file_stack_count > 1 && !transcmp(target_trans , cur_trans )  && !transcmp(target_trans , cur_trans) ) return NULL;	
 	if(popimport()){
 		import_state = 1;
 		if(file_stack_count == 1 ){start_trans = cur_trans;}
@@ -56,7 +61,7 @@ struct trans *  trans_reduce()
 			import_state = 0;
 			struct trans * t= join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			start_trans = NULL;
-			if(strcmp(target_trans,ALL_TRANS)!=0)target_trans = NULL;
+			if(!transcmp(target_trans,ALL_TRANS))target_trans = NULL;
 			print_trans(t);
 			printf("\n");
 			return t ;
@@ -67,7 +72,7 @@ struct trans *  trans_reduce()
 			printf("\n");
 			return t ;
 		}
-		if(!strcmp(target_trans,ALL_TRANS)){
+		if(transcmp(target_trans,ALL_TRANS)){
 			struct trans * t= join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			print_trans(t);
 			printf("\n");
