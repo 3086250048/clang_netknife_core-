@@ -132,17 +132,17 @@ extern char * target_trans;
 extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int file_stack_count;
-extern struct filter *  curfilter;
+extern struct filter_stack *  curfilter;
 extern struct buffer * buffer_root;
 extern struct import_trans * cur_import_trans;
 extern char * start_trans;
 extern int import_state ;
 
+extern  struct buffer * rule_chain ;
+extern  struct buffer * comment_chain ;
 
 int newfile(char * fb);
 int popfile(void);
-int newfilter(struct filter *);
-int popfilter(void);
 
 void init();
 char * trim(char * str);
@@ -336,11 +336,17 @@ void join_buf( char * filename , char * buf_name , int buf_type  , void * buf);
 struct  buf * get_buf( char * filename , char * buf_name , int buf_type);
 
 
+struct filter_stack{
+	struct filter * filter ;
+	struct filter_stack * next ;
+
+};
+
 //import_trans_stack 
 struct import_trans{
 	char * filename;
 	char * target_trans;
-	struct filter * filter;
+	struct filter_stack  * filter_stack ;
 	struct  import_trans  * prev;
 };
 int newimport(char * filename , char * target_trans, struct filter * filter );
@@ -354,6 +360,7 @@ unsigned long hash_string(const char * str);
 unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
+
 #endif
 
 

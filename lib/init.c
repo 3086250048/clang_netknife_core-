@@ -10,13 +10,15 @@ struct bufstack * curbs=NULL;
 char * curfilename;
 int file_stack_count=0; 
 //import相关
-struct filter * curfilter=NULL;
+struct filter_stack  * curfilter=NULL;
 char * cur_trans=NULL ;
 char * target_trans=NULL;
 struct import_trans *  cur_import_trans=NULL;
 char * start_trans = NULL;
 int import_trans_count = 0;
 int import_state = 0;
+struct buffer * rule_chain = NULL;
+struct buffer * comment_chain = NULL;
 //状态机
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));

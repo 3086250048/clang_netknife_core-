@@ -40,6 +40,7 @@ printf("\n");
 
 	if(file_stack_count > 1 && import_state){
 		err("import_trans_state","no imported trans found");
+		exit(1);
 	}  
 	if(file_stack_count == 1){
 		return 0;

@@ -1,5 +1,4 @@
 trans test{
-	@(netknife.test)->test exclude r"^dis";
-	@(netknife.test)->a;
-	@(netknife.test)->b;
+	@(netknife.test)->b include 31 to "查看";
+
 }

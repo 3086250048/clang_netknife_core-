@@ -13,17 +13,22 @@ trans cisco_to_huawei {
 	neignbor 192.168.100.1 connectinterface loopback 0 \n
 	;
 
-	@(netknife2) include r"^check" , r"^1dis" ;
+	@(netknife2) -> n2 include r"^check" , r"^1dis" ;
 	ospf =100> bgp;
 }
 
 
 trans a{
+
 	display ip int b => show ip int b ;
+
 }
 
 trans b {
+	"查看"
 	this is b => show b ;
+	"查看结束"
+	31行 => 3111;
 }
 
 

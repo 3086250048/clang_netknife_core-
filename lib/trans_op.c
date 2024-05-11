@@ -45,10 +45,37 @@ int transcmp(char * t1 , char * t2){
 	return 0;
 }
 
+void t_join_rule_table (){
+	struct buffer * tmp  = rule_chain ;
+	while( tmp ){
+			struct rule * rule = (struct rule *)tmp->buffer;
+			rule = filter_rule(rule );
+			if(rule){
+				join_rule_table(rule);
+			}
+			tmp = tmp->next ;
+	}
+	while(rule_chain){
+	struct buffer * r_tmp = rule_chain ;
+	rule_chain=rule_chain->next ;
+	free(r_tmp);
+	}
+
+	while(comment_chain){
+	struct buffer * c_tmp = comment_chain;
+	comment_chain  = comment_chain->next;
+	free(c_tmp);
+	}
+
+}
+
 struct trans *  trans_reduce()
 {
 	if(file_stack_count > 1 && !target_trans) return NULL;
 	if(file_stack_count > 1 && !transcmp(target_trans , cur_trans )  && !transcmp(target_trans , cur_trans) ) return NULL;	
+
+	t_join_rule_table(); 
+	
 	if(popimport()){
 		import_state = 1;
 		if(file_stack_count == 1 ){start_trans = cur_trans;}
@@ -57,12 +84,12 @@ struct trans *  trans_reduce()
 		}
 	}else{
 		if(transcmp(target_trans , ALL_TRANS)) return NULL;
-		char * trans ;
 		if( import_state ){	
-			import_state = 0;
+			import_state = 0;	
 			struct trans * t= join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
 			start_trans = NULL;
 			target_trans = NULL;
+			curfilter = NULL;
 			print_trans(t);
 			printf("\n");
 			return t ;

@@ -108,23 +108,38 @@ int popfile(void){
 	return 1;
 }
 
+struct filter_stack * append_filter_stack(struct filter_stack * root , struct filter * filter ){
+		struct filter_stack * tmp  = malloc(sizeof(struct filter_stack ));
+		tmp->filter= filter ;
+		tmp->next = root;
+		root=tmp ;
+		return root ;
+
+}
+
+
 int newimport(char * filename , char * target_trans, struct filter * filter ){
 	struct import_trans * cur = malloc(sizeof(struct import_trans));
 	if(!cur){ perror("malloc err");exit(1);}
 	cur->filename = filename;
 	cur->target_trans = target_trans;
-	cur->filter=filter;
+	if(cur_import_trans){
+		cur->filter_stack = append_filter_stack(cur_import_trans->filter_stack,filter);
+	}else{
+		cur->filter_stack = append_filter_stack(NULL,filter);
+	}
 	cur->prev=cur_import_trans;
 	cur_import_trans=cur;
 	return 1;
 }
+
 
 int popimport(){
 	if(!cur_import_trans) return 0;
 	struct import_trans * tmp = cur_import_trans;
 	curfilename = cur_import_trans->filename;
 	target_trans = cur_import_trans->target_trans;
-	curfilter = cur_import_trans->filter;
+	curfilter = cur_import_trans->filter_stack;
 	cur_import_trans = cur_import_trans->prev;
 	free(tmp);
 	return 1;
