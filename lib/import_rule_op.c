@@ -9,6 +9,7 @@ static struct import_rule * import_rule_root = NULL;
 
 struct range * join_range(struct range * root , char * regx ,int s_lineno ,int d_lineno ,char * s_comment,char * d_comment )
 {
+	if(ACCEPT){
 	struct range * tmp = malloc(sizeof(struct range));
 	tmp->node_type = RANGE_NODE;
 	tmp->regx = regx;
@@ -19,6 +20,7 @@ struct range * join_range(struct range * root , char * regx ,int s_lineno ,int d
 	tmp->next = root;
 	root = tmp;
 	return root ;
+	}
 }
 
 
@@ -52,12 +54,14 @@ void stderr_print_range(struct range * range_root){
 }
 
 struct filter * join_filter(struct filter * root , int node_type ,struct range * range){
+		if(ACCEPT){
 		struct filter *  tmp = malloc(sizeof(struct filter));
 		tmp->node_type = node_type ;
 		tmp->range=range;
 		tmp->next = root;
 		root = tmp;
 		return root;
+		}
 }
 
 void print_filter(struct filter * filter_root){
@@ -74,6 +78,7 @@ void print_filter(struct filter * filter_root){
 
 
 struct  import_rule * join_import_rule(char * file_name ,char * import_name , int lineno,struct filter * filter ){
+	if(ACCEPT){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT_NODE;
 	tmp->lineno = lineno ;
@@ -83,6 +88,7 @@ struct  import_rule * join_import_rule(char * file_name ,char * import_name , in
 	tmp->next = import_rule_root ;
 	import_rule_root = tmp ;
 	return  tmp ;
+	}
 }
 
 
@@ -320,8 +326,34 @@ struct rule *  filter_rule(struct rule * rule){
 		
 }
 
+struct import_info * join_import_info(char * file_name , char * import_name , int  lineno , struct filter * filter  ){
+	struct import_info  *  tmp = malloc(sizeof(struct import_info));
+	tmp->file_name = file_name;
+   	tmp->import_name = import_name ; 
+	tmp->lineno = lineno ;
+	tmp->filter = filter ;	
+	return tmp ;
+}
+
+void record_import(char * filename,struct import_info * import_info){
+ 	char  * outfile  = filename  ; 
+ 	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
+ 	FILE * f = fopen(filename,"w");
+	fprintf(f,"Push>>>\n");
+ 	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
+ 	fprintf(f,"Import| lineno:%d target_file:%s target_trans:%s\n",import_info->file_name,import_info->import_name);
+	fprintf(f,"Filter| ")
+ 	fprintf(f,"<<<\n");
+	fclose(f);
+}
+
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
+	if(ACCEPT){	
+		struct import_info * import_info = join_import_info(file_name , import_name , lineno , filter );
+		Add(&import_info_tmp_tab , curfilename , cur_trans , IMPORT_NODE , import_info );
+		
+	}	
 }
 
 

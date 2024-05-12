@@ -15,8 +15,12 @@ char * target_trans=NULL;
 struct import_trans *  cur_import_trans=NULL;
 char * start_trans = NULL;
 int import_state = 0;
+/*buffer*/
 struct stack  * token_stack   = NULL;
 struct table  * comment_tmp_tab   = NULL;
+struct table  * import_info_tmp_tab =NULL;
+struct table  * import_info_tab = NULL;
+
 //初始化
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));

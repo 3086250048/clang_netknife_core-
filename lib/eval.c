@@ -148,3 +148,11 @@ int popimport(){
 }
 
 
+int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  ){
+	if(file_stack_count == 1) return 1;
+	if(transcmp(cur_trans,target_trans)) return 1;
+	if(transcmp(target_trans,ALL_TRANS)) return 1;
+}
+
+
+

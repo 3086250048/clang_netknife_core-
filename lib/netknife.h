@@ -49,6 +49,7 @@ enum type {
 #define MAX_HASH 9999
 #define MAX_STACK 999
 #define ALL_TRANS "ALL_TRANS"
+#define STEPOUT "step.out"
 
 /*lex.c 中的一些定义*/
 extern int yylineno;
@@ -239,7 +240,13 @@ struct import_rule {
 	struct import_rule *  next ;
 };
 
+struct import_info  {
+	char * file_name; 
+	char * import_name;
+	int lineno ;
+	struct filter * filter ;
 
+};
 
 
 //添加range表达式
@@ -351,9 +358,8 @@ unsigned long hash_string(const char * str);
 unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
-
-struct 
-
+int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  );
+#define ACCEPT accept(file_stack_count , cur_trans , target_trans);
 
 #endif
 
