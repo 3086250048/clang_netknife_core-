@@ -138,8 +138,8 @@ extern struct import_trans * cur_import_trans;
 extern char * start_trans;
 extern int import_state ;
 
-extern  struct buffer * rule_chain ;
-extern  struct buffer * comment_chain ;
+extern  struct  stack  * token_stack ;
+extern  struct  table  * comment_tmp_tab ;
 
 int newfile(char * fb);
 int popfile(void);
@@ -305,42 +305,33 @@ void  * get_netknife_node(char * filename , int  node_type, char * node_name );
 //netknife规约
 struct netknife * netknife_reduce( void * node);
 
-struct buffer{
-	int node_type ;
+
+/*buffer 操作*/
+struct stack {
 	char * filename ; //文件名称
-	int  buffer_type; // 缓存类型
-    char * buffer_name; // 缓存名称
-	void * buffer  ;// 缓存根节点地址
-	struct buffer * prev ;
-	struct buffer * next ;
+	int    type; // 缓存类型
+    char * name; // 缓存名称
+	void * buffer   ;// 缓存根节点地址
+	struct stack * prev ;
+	struct stack * next ;
 };
 
-struct buf{
-	int node_type ;
+struct table {
 	char * filename ; //文件名称
-	int  buf_type; // 缓存类型
-    char * buf_name; // 缓存名称
-	void * buf  ;// 缓存根节点地址
-	struct buf * dup_buf;
+	int    type; // 缓存类型
+    char * name; // 缓存名称
+	void * buffer   ;// 缓存根节点地址
+	struct table  * dup_buffer;
 };
-//添加到buffer 
-void  join_buffer_chain(char * filename ,char * buffer_name ,int buffer_type ,void * buffer);
-//获取buffer_chain 的根地址
-struct buffer * get_buffer(); 
-//添加到指定的buffer
-struct buffer * assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer);
+
+struct stack * Push ( struct  stack ** root, char * filename , char * name , int type ,  void * buffer);
+struct stack * Top(struct stack ** root);
+void   stack * Pop(struct stack ** root);
+struct table * Add( struct table ** root , char * filename , char * name , int type , void * buffer);
+struct table * Get( struct table * root , char * filename , char * name , int type);
+struct table * Clear(struct table ** root);
 
 
-//全局hash表
-void join_buf( char * filename , char * buf_name , int buf_type  , void * buf);
-struct  buf * get_buf( char * filename , char * buf_name , int buf_type);
-
-
-struct filter_stack{
-	struct filter * filter ;
-	struct filter_stack * next ;
-
-};
 
 //import_trans_stack 
 struct import_trans{
@@ -360,6 +351,9 @@ unsigned long hash_string(const char * str);
 unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
+
+struct 
+
 
 #endif
 

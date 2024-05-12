@@ -32,21 +32,6 @@ printf("\n");
 #endif
 }
 <<EOF>> { 
-	if(transcmp(target_trans,ALL_TRANS)){
-		struct trans * t= join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
-		print_trans(t);
-		printf("\n");
-	}
-
-	if(file_stack_count > 1 && import_state){
-		err("import_trans_state","no imported trans found");
-		exit(1);
-	}  
-	if(file_stack_count == 1){
-		return 0;
-	}else{
-		popfile();
-	}
 }
 
 <READY>[ \t] { }

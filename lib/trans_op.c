@@ -66,42 +66,13 @@ void t_join_rule_table (){
 	comment_chain  = comment_chain->next;
 	free(c_tmp);
 	}
+	
+	popfile();
 
 }
 
 struct trans *  trans_reduce()
 {
-	if(file_stack_count > 1 && !target_trans) return NULL;
-	if(file_stack_count > 1 && !transcmp(target_trans , cur_trans )  && !transcmp(target_trans , cur_trans) ) return NULL;	
-
-	t_join_rule_table(); 
-	
-	if(popimport()){
-		import_state = 1;
-		if(file_stack_count == 1 ){start_trans = cur_trans;}
-		if(newfile(curfilename)){
-			yyparse();
-		}
-	}else{
-		if(transcmp(target_trans , ALL_TRANS)) return NULL;
-		if( import_state ){	
-			import_state = 0;	
-			struct trans * t= join_trans(start_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
-			start_trans = NULL;
-			target_trans = NULL;
-			curfilter = NULL;
-			print_trans(t);
-			printf("\n");
-			return t ;
-		}
-		if(file_stack_count == 1){
-			struct trans * t= join_trans(cur_trans,yylineno,get_rule_table(),get_comment_table(),get_import_rule());
-			print_trans(t);
-			printf("\n");
-			return t ;
-		}
-		return NULL;
-	}	
 }
 
 

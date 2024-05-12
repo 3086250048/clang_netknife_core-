@@ -3,97 +3,96 @@
 #include "netknife.h"
 #include <stdio.h>
 
-struct buffer * buffer_root = NULL;
 
-struct buffer *  assign_join_buffer_chain( struct buffer * root, char * filename , char * buffer_name , int buffer_type ,  void * buffer){
-		if(filename==NULL || buffer_name  == NULL || buffer== NULL )err("assign_join_buffer_chain","element is NULL");
-		struct buffer * tmp =malloc(sizeof(struct buffer));
-		tmp->node_type = BUFFER_NODE;
+struct stack *  Push ( struct  stack ** root, char * filename , char * name , int type ,  void * buffer){
+		struct stack  * tmp =malloc(sizeof(struct stack));
 		tmp->filename = filename;
-		tmp->buffer_type = buffer_type;
-		tmp->buffer_name = buffer_name;
+		tmp->type = type;
+		tmp->name = name;
 		tmp->buffer = buffer ;
 		tmp->next = NULL;
 		tmp->prev = NULL;
-		if(root == NULL){
-			root = tmp;
-			return root;
+		if( *root == NULL){
+			*root = tmp;
+			return tmp;
 		}
-		root->prev = tmp;
-		tmp->next = root;
-		root = tmp;
-		return root;
+		*root->prev = tmp;
+		tmp->next = *root;
+		*root = tmp;
+		return tmp;
 }
 
-void join_buffer_chain( char * filename , char * buffer_name , int buffer_type ,  void * buffer){
-		if(filename==NULL || buffer_name  == NULL || buffer== NULL )  err("join_buffer_chain","element is NULL");
-		struct buffer * tmp =malloc(sizeof(struct buffer));
-		tmp->node_type = BUFFER_NODE;
-		tmp->filename = filename;
-		tmp->buffer_type = buffer_type;
-		tmp->buffer_name = buffer_name;
-		tmp->buffer = buffer ;
-		tmp->next = NULL;
-		tmp->prev = NULL;
-		if(buffer_root == NULL){
-			buffer_root = tmp;
-			return ;
+struct stack * Top(struct stack ** root){
+		if(*root){
+			return *root;
 		}
-		buffer_root->prev = tmp;
-		tmp->next = buffer_root;
-		buffer_root = tmp;
 }
 
-struct buffer * get_buffer(){
-	struct buffer * tmp = buffer_root ;
-	buffer_root = NULL;
-	return tmp;
+void   stack * Pop(struct stack ** root){
+		struct stack * tmp = *root; 
+		if(tmp){
+		free(tmp);
+		*root=*root->next ;
+		}
 }
 
-unsigned long buf_index_hash(const char * filename, int  buf_type ,const char * buf_name){
+
+unsigned long buffer_index_hash(const char * filename, int  type ,const char * name){
     unsigned long combined_hash = hash_string(filename);
-    combined_hash = combine_hashes(combined_hash, hash_string(buf_name));
-    combined_hash = combine_hashes(combined_hash, buf_type);
+    combined_hash = combine_hashes(combined_hash, hash_string(name));
+    combined_hash = combine_hashes(combined_hash, type);
     return combined_hash;
 }
 
 
-void join_buf( char * filename , char * buf_name , int buf_type , void * buf){
-		
-	unsigned int hash = buf_index_hash(filename,buf_type,buf_name)%MAX_HASH;
-	struct buf * tmp = &buf_tab[hash];
+struct table *  Add( struct table ** root , char * filename , char * name , int type , void * buffer){	
+	if(!*root){
+	 	*root = calloc(MAX_HASH,sizeof(struct table));	
+	}
+	unsigned int hash = buffer_index_hash(filename,type,name)%MAX_HASH;
+	struct table * tmp = &root[hash];
 	if(tmp->node_type != BUF_NODE){
-		tmp->node_type =BUF_NODE;
     	tmp->filename = filename;
-		tmp->buf_name = buf_name;
-		tmp->buf_type = buf_type;
-		tmp->buf = buf;
-		tmp->dup_buf = NULL;
+		tmp->name = name;
+		tmp->type = type;
+		tmp->buffer = buffer;
+		tmp->dup_buffer = NULL;
+		return tmp;
 	}else{
-		struct buf * tail = tmp ;
-		struct buf * dup = malloc(sizeof(struct buf));
-		while(tail->dup_buf){
-			tail = tail->dup_buf;
+		struct table * tail = tmp ;
+		struct table  * dup = malloc(sizeof(struct table));
+		while(tail->dup_buffer){
+			tail = tail->dup_buffer;
 		}
-		dup->node_type =BUF_NODE;
     	dup->filename = filename;
-		dup->buf_name = buf_name;
-		dup->buf_type = buf_type;
-		dup->buf = buf;
-		dup->dup_buf = NULL;	
-		tail->dup_buf = dup;
+		dup->name = name;
+		dup->type = type;
+		dup->buffer = buffer;
+		dup->dup_buffer = NULL;	
+		tail->dup_buffer = dup;
+		return dup ;
 	}
 	
 }
 
-struct buf * get_buf( char * filename , char * buf_name , int buf_type){
-	unsigned int hash = buf_index_hash(filename,buf_type,buf_name)%MAX_HASH;
-	struct buf * tmp = &buf_tab[hash];
-	if(tmp->node_type == BUF_NODE){
+struct table * Clear(struct table ** root){
+	 int i ;
+	 struct table * r = *root ;
+	 free(r);
+	 *root  = calloc(MAX_HASH,sizeof(struct table));
+}
+
+struct  table * Get( struct table * root , char * filename , char * name , int type){
+	unsigned int hash = buffer_index_hash(filename,type,name)%MAX_HASH;
+	struct table * tmp = &root[hash];
+	if(tmp->type){
 		return tmp;
 	}else{
 		err("get_buf","buf no has this entry");
 	}
 }
+
+
+
 
 

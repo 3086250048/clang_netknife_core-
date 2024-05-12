@@ -1,4 +1,5 @@
 trans test{
-	@(netknife.test)->b include 31 to "查看";
-
+	@(netknife.test)->cisco_to_huawei  include  "查看" to "查看结束" exclude r"^set"; 
+	display ip  int b =100> show ip int b ;
 }
+

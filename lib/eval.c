@@ -118,15 +118,17 @@ struct filter_stack * append_filter_stack(struct filter_stack * root , struct fi
 }
 
 
+
 int newimport(char * filename , char * target_trans, struct filter * filter ){
 	struct import_trans * cur = malloc(sizeof(struct import_trans));
 	if(!cur){ perror("malloc err");exit(1);}
 	cur->filename = filename;
 	cur->target_trans = target_trans;
-	if(cur_import_trans){
-		cur->filter_stack = append_filter_stack(cur_import_trans->filter_stack,filter);
-	}else{
+	if(import_state == 0 ){
 		cur->filter_stack = append_filter_stack(NULL,filter);
+	}
+	if(cur_import_trans ==1 ){	
+		cur->filter_stack = append_filter_stack(curfilter,filter);
 	}
 	cur->prev=cur_import_trans;
 	cur_import_trans=cur;
