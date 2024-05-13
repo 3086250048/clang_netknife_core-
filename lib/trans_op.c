@@ -73,6 +73,32 @@ void t_join_rule_table (){
 
 struct trans *  trans_reduce()
 {
+	if(ACCEPT){
+		struct buffer * top = Top(&token_stack);	
+		if(top->type == RULE_NODE){
+			struct rule * rule = top->buffer;
+				
+		}
+		if(top->type == IMPORT_NODE){
+			
+			struct import_info * import_info = top->buffer; 
+			if()
+
+			struct filter * plfilter = Top(&PreLevelFilterStack)->buffer; 
+			struct filter * filter = import_info->filter;
+			while(filter->next){
+				filter=filter->next;
+			}
+			filter->next = plfilter ;
+			Push(&PreLevelFilterStack,curfilename,cur_trans,filter);	
+			curfilter = filter ;
+			
+
+			
+			}	
+		}
+	}
+
 }
 
 

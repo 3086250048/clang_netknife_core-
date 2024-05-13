@@ -342,7 +342,21 @@ void record_import(char * filename,struct import_info * import_info){
 	fprintf(f,"Push>>>\n");
  	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
  	fprintf(f,"Import| lineno:%d target_file:%s target_trans:%s\n",import_info->file_name,import_info->import_name);
-	fprintf(f,"Filter| ")
+	while(import_info->filter){
+		struct filter * filter = import_info->filter ;
+		if(filter->node_type == INCLUDE_NODE){
+		fprintf(f,"Filter| type:include ");
+		}else{
+		fprintf(f,"Filter| type:exclude ");
+		}	
+		while(filter->range){
+		struct range * range = filter->range ;
+		fprintf(f,"regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
+		range=range->next;
+		}
+		filter=filter->next;
+	}
+	
  	fprintf(f,"<<<\n");
 	fclose(f);
 }
@@ -350,9 +364,21 @@ void record_import(char * filename,struct import_info * import_info){
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter ){
 	if(ACCEPT){	
-		struct import_info * import_info = join_import_info(file_name , import_name , lineno , filter );
-		Add(&import_info_tmp_tab , curfilename , cur_trans , IMPORT_NODE , import_info );
-		
+		char * filename ,* target_trans ;
+		if(!file_name)filename = curfilename ;
+		if(!import_name)target_trans = ALL_TRANS;	
+		if(!filter) {
+			filter = malloc(sizeof(struct filter));
+			filter->node_type = SKIP_NODE;
+		}
+		struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter );
+		Push(&token_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
+		#ifdef OUTSTEP
+		#ifdef OUTFILE 
+			record_import(OUTFILE,import_info);
+		#endif
+			record_import(STEPOUT,import_info);
+		#endif		
 	}	
 }
 

@@ -138,6 +138,7 @@ extern struct buffer * buffer_root;
 extern struct import_trans * cur_import_trans;
 extern char * start_trans;
 extern int import_state ;
+extern struct filter * PreLevelFilter;
 
 extern  struct  stack  * token_stack ;
 extern  struct  table  * comment_tmp_tab ;

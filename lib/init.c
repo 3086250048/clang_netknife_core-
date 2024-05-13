@@ -9,17 +9,16 @@ struct bufstack * curbs=NULL;
 char * curfilename;
 int file_stack_count=0; 
 //import相关
-struct filter_stack  * curfilter=NULL;
+struct filter * curfilter=NULL;
 char * cur_trans=NULL ;
 char * target_trans=NULL;
 struct import_trans *  cur_import_trans=NULL;
 char * start_trans = NULL;
 int import_state = 0;
+struct stack * PreLevelFilterStack  = NULL;
 /*buffer*/
 struct stack  * token_stack   = NULL;
 struct table  * comment_tmp_tab   = NULL;
-struct table  * import_info_tmp_tab =NULL;
-struct table  * import_info_tab = NULL;
 
 //初始化
 void init(){
