@@ -161,7 +161,7 @@ void swap_number(int * a , int * b){
 
 int get_comment_lineno(char * c){
 	struct table  * tab  =  Get(comment_tmp_tab, curfilename , c , COMMENT_NODE  );
-	if(tab->node_type){
+	if(tab->type){
 		struct comment * comment = tab->buffer ;
 		return comment->lineno ;
 	}

@@ -45,31 +45,6 @@ int transcmp(char * t1 , char * t2){
 	return 0;
 }
 
-void t_join_rule_table (){
-	struct buffer * tmp  = rule_chain ;
-	while( tmp ){
-			struct rule * rule = (struct rule *)tmp->buffer;
-			rule = filter_rule(rule );
-			if(rule){
-				join_rule_table(rule);
-			}
-			tmp = tmp->next ;
-	}
-	while(rule_chain){
-	struct buffer * r_tmp = rule_chain ;
-	rule_chain=rule_chain->next ;
-	free(r_tmp);
-	}
-
-	while(comment_chain){
-	struct buffer * c_tmp = comment_chain;
-	comment_chain  = comment_chain->next;
-	free(c_tmp);
-	}
-	
-	popfile();
-
-}
 
 struct trans *  trans_reduce()
 {
@@ -86,25 +61,25 @@ struct trans *  trans_reduce()
 		struct import_info * import_info = Top(&import_stack)->buffer;
 		import_info = Filter(import_info);
 		if(import_info){
-			join_import_rule(import_info->filename,import_info->import_name , import_info->lineno , import_info->filter);
+			join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
 			struct filter * plfilter = Top(&PreLevelFilterStack)->buffer; 
 			struct filter * filter = import_info->filter;
 			while(filter->next){
 				filter=filter->next;
 			}	
 			filter->next = plfilter ;
-			Push(&PreLevelFilterStack,curfilename,cur_trans,filter);	
+			Push(&PreLevelFilterStack,curfilename,cur_trans,import_info->filter->node_type ,import_info->filter);	
 			curfilter = filter ;		
 			if(file_stack_count ==1 ){ start_trans = cur_trans; }
 			if( newfile(import_info->file_name) ){
 				yyparse();	
 			}
 		}else{
-			if(start_trans){
-				join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
+			if(start_trans ){
 				start_trans=NULL;
+				 return  join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
 			}else{
-				join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	
+				 return join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	
 			}		
 		}
 	}	

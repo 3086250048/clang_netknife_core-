@@ -34,7 +34,7 @@ printf("\n");
 <<EOF>> { 
 	if(file_stack_count == 1) return 0;
 	if(start_trans){
-		err();
+		err("import_trans_state","no imported trans found");
 		exit(1);
 	}
 	popfile();

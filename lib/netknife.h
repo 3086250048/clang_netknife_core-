@@ -133,12 +133,12 @@ extern char * target_trans;
 extern struct bufstack * curbs ;
 extern char * curfilename ;
 extern int file_stack_count;
-extern struct filter_stack *  curfilter;
+extern struct filter  *  curfilter;
 extern struct buffer * buffer_root;
 extern struct import_trans * cur_import_trans;
 extern char * start_trans;
 extern int import_state ;
-extern struct filter * PreLevelFilter;
+extern struct stack * PreLevelFilterStack;
 
 extern  struct  stack  * rule_stack ;
 extern  struct  stack  * import_stack ;
@@ -287,7 +287,6 @@ struct trans * join_trans(
 	char * name , 
 	int lineno , 
 	struct rule_table * rule_tab ,
-	struct comment_table * comment_tab ,
 	struct import_rule * import_rule_chain 
 );
 
@@ -335,7 +334,7 @@ struct table {
 
 struct stack * Push ( struct  stack ** root, char * filename , char * name , int type ,  void * buffer);
 struct stack * Top(struct stack ** root);
-void   stack * Pop(struct stack ** root);
+void  Pop(struct stack ** root);
 struct table * Add( struct table ** root , char * filename , char * name , int type , void * buffer);
 struct table * Get( struct table * root , char * filename , char * name , int type);
 struct table * Clear(struct table ** root);
@@ -361,7 +360,7 @@ unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
 int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  );
-#define ACCEPT accept(file_stack_count , cur_trans , target_trans);
+#define ACCEPT accept(file_stack_count , cur_trans , target_trans)
 
 #endif
 

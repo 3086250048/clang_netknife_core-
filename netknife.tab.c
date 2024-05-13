@@ -1276,7 +1276,7 @@ yyreduce:
 
   case 23: /* range_exp: NUMBER  */
 #line 68 "netknife.y"
-                   { (yyval.ran)=join_range(NULL,NULL,(yyvsp[0].d),0,NULL,NULL); }
+                   { (yyval.ran)=join_range(NULL,NULL,(yyvsp[0].d),0,NULL,NULL);  }
 #line 1281 "netknife.tab.c"
     break;
 
