@@ -26,6 +26,7 @@ struct stack * Top(struct stack ** root){
 		if(*root){
 			return *root;
 		}
+		return NULL;
 }
 
 void   stack * Pop(struct stack ** root){
@@ -45,10 +46,11 @@ unsigned long buffer_index_hash(const char * filename, int  type ,const char * n
 }
 
 
-struct table *  Add( struct table ** root , char * filename , char * name , int type , void * buffer){	
+struct table *  Add( struct table ** root , char * filename , char * name , int type  , void * buffer){	
 	if(!*root){
 	 	*root = calloc(MAX_HASH,sizeof(struct table));	
 	}
+	if()
 	unsigned int hash = buffer_index_hash(filename,type,name)%MAX_HASH;
 	struct table * tmp = &root[hash];
 	if(tmp->node_type != BUF_NODE){
@@ -76,7 +78,6 @@ struct table *  Add( struct table ** root , char * filename , char * name , int 
 }
 
 struct table * Clear(struct table ** root){
-	 int i ;
 	 struct table * r = *root ;
 	 free(r);
 	 *root  = calloc(MAX_HASH,sizeof(struct table));

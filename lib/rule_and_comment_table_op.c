@@ -118,7 +118,7 @@ void record_rule(char * filename,struct rule * rule){
 struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 	 if(ACCEPT){
 		struct rule * rule = join_rule(trim(s),trim(d),yylineno , priority);
-	 	Push(&token_stack,curfilename,cur_trans,RULE_NODE , rule  );
+	 	Push(&rule_stack,curfilename,cur_trans,RULE_NODE , rule  );
       #ifdef OUTSTEP
 	   #ifdef OUTFILE 
 		record_rule(OUTFILE,rule);	
@@ -144,7 +144,7 @@ void record_comment(char * filename,struct comment * comment){
 struct comment_table * comment_table_reduce(char * c){		
 	if(ACCEPT){
 		struct comment * comment = join_comment(trim(c),yylineno);
-		Add(&comment_tmp_tab, curfilename , cur_trans , COMMENT_NODE , comment  );
+		Add(&comment_tmp_tab, curfilename ,c , COMMENT_NODE , comment  );
 		#ifdef OUTSTEP
 			#ifdef OUTFILE
 			record_comment(OUTFILE,comment);		

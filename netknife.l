@@ -32,6 +32,13 @@ printf("\n");
 #endif
 }
 <<EOF>> { 
+	if(file_stack_count == 1) return 0;
+	if(start_trans){
+		err();
+		exit(1);
+	}
+	popfile();
+	Pop(&PreLevelFilterStack);
 }
 
 <READY>[ \t] { }

@@ -65,7 +65,7 @@ filter_exp : INCLUDE range_exp { $$ = join_filter(NULL,INCLUDE_NODE,$2);}
 		   | filter_exp INCLUDE range_exp  { $$ = join_filter($1,INCLUDE_NODE,$3);}
 		   | filter_exp EXCLUDE range_exp  { $$ = join_filter($1,EXCLUDE_NODE,$3);}
 
-range_exp : NUMBER { $$=join_range(NULL,NULL,$1,0,NULL,NULL); }
+range_exp : NUMBER { $$=join_range(NULL,NULL,$1,0,NULL,NULL);  }
   | const_comment_exp  {$$ = join_range(NULL,NULL,0,0,$1,NULL); }
   | REGX_START index_string_exp REGX_END  {$$ = join_range(NULL,trim($2),0,0,NULL,NULL); }
   | NUMBER  TO NUMBER  {$$=join_range(NULL,NULL,$1,$3,NULL,NULL);}

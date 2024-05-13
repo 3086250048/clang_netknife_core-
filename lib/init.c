@@ -17,7 +17,8 @@ char * start_trans = NULL;
 int import_state = 0;
 struct stack * PreLevelFilterStack  = NULL;
 /*buffer*/
-struct stack  * token_stack   = NULL;
+struct stack  * rule_stack   = NULL;
+struct stack  * import_stack = NULL;
 struct table  * comment_tmp_tab   = NULL;
 
 //初始化

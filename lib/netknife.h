@@ -140,7 +140,8 @@ extern char * start_trans;
 extern int import_state ;
 extern struct filter * PreLevelFilter;
 
-extern  struct  stack  * token_stack ;
+extern  struct  stack  * rule_stack ;
+extern  struct  stack  * import_stack ;
 extern  struct  table  * comment_tmp_tab ;
 
 int newfile(char * fb);
@@ -242,6 +243,7 @@ struct import_rule {
 };
 
 struct import_info  {
+	int node_type ;
 	char * file_name; 
 	char * import_name;
 	int lineno ;
@@ -261,8 +263,7 @@ struct import_rule * get_import_rule();
 //import_rule 规约
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter );
 //过滤rule
-struct rule *  filter_rule(struct rule * rule);
-
+void * Filter(void * buffer);
 
 //打印range
 void print_range(struct range * range_root);
