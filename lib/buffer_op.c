@@ -16,7 +16,7 @@ struct stack *  Push ( struct  stack ** root, char * filename , char * name , in
 			*root = tmp;
 			return tmp;
 		}
-		*root->prev = tmp;
+		(*root)->prev = tmp;
 		tmp->next = *root;
 		*root = tmp;
 		return tmp;
@@ -29,11 +29,11 @@ struct stack * Top(struct stack ** root){
 		return NULL;
 }
 
-void   stack * Pop(struct stack ** root){
+void   Pop(struct stack ** root){
 		struct stack * tmp = *root; 
 		if(tmp){
 		free(tmp);
-		*root=*root->next ;
+		*root=(*root)->next ;
 		}
 }
 
@@ -50,10 +50,9 @@ struct table *  Add( struct table ** root , char * filename , char * name , int 
 	if(!*root){
 	 	*root = calloc(MAX_HASH,sizeof(struct table));	
 	}
-	if()
 	unsigned int hash = buffer_index_hash(filename,type,name)%MAX_HASH;
-	struct table * tmp = &root[hash];
-	if(tmp->node_type != BUF_NODE){
+	struct table * tmp = &(*root)[hash];
+	if(!tmp->buffer ){
     	tmp->filename = filename;
 		tmp->name = name;
 		tmp->type = type;

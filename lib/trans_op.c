@@ -51,35 +51,68 @@ struct trans *  trans_reduce()
 	if(ACCEPT){
 		while(Top(&rule_stack)){
 			struct rule * rule = Top(&rule_stack)->buffer;	
+			#ifdef OUTSTEP
+			#ifdef OUTFILE 
+			record_rule(OUTFILE,rule,"Top");
+			#endif
+			record_rule(STEPOUT,rule,"Top");
+			#endif		
 			rule = Filter(rule);
 			if(rule){
 				join_rule_table(rule);
+			#ifdef OUTSTEP
+			#ifdef OUTFILE 
+			record_rule(OUTFILE,rule,"Join");
+			#endif
+			record_rule(STEPOUT,rule,"Join");
+			#endif	
 			}	
 			Pop(&rule_stack);
+			#ifdef OUTSTEP
+			#ifdef OUTFILE 
+			record_rule(OUTFILE,rule,"Pop");
+			#endif
+			record_rule(STEPOUT,rule,"Pop");
+			#endif	
 		}
 	
 		struct import_info * import_info = Top(&import_stack)->buffer;
-		import_info = Filter(import_info);
-		if(import_info){
-			join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
-			struct filter * plfilter = Top(&PreLevelFilterStack)->buffer; 
-			struct filter * filter = import_info->filter;
-			while(filter->next){
-				filter=filter->next;
-			}	
-			filter->next = plfilter ;
-			Push(&PreLevelFilterStack,curfilename,cur_trans,import_info->filter->node_type ,import_info->filter);	
-			curfilter = filter ;		
-			if(file_stack_count ==1 ){ start_trans = cur_trans; }
-			if( newfile(import_info->file_name) ){
-				yyparse();	
+		if(import_info){	
+			/*import_stack栈内不为空时*/
+			import_info = Filter(import_info);
+			if(import_info){
+				/*import_info 语句满足上一个import语句的过滤条件*/
+				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
+				struct filter * plfilter = Top(&PreLevelFilterStack)->buffer; 
+				struct filter * filter = import_info->filter;
+				while(filter->next){
+					filter=filter->next;
+				}	
+				filter->next = plfilter ;
+				Push(&PreLevelFilterStack,curfilename,cur_trans,import_info->filter->node_type ,import_info->filter);	
+				curfilter = import_info->filter ;		
+				target_trans = import_info->import_name ;
+				if(file_stack_count ==1 ){ start_trans = cur_trans; }
+				if( newfile(import_info->file_name) ){
+					yyparse();	
+				}
 			}
 		}else{
+			/*import_stack栈内为空时*/
 			if(start_trans ){
-				start_trans=NULL;
-				 return  join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
+				/*trans中包含import语句*/
+				if(!transcmp(target_trans,ALL_TRANS) ) {
+				/*目标trans不为ALL_TRANS*/
+					start_trans=NULL;
+					 struct trans * t =join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
+					 print_trans(t);
+					 return NULL;
+				}
 			}else{
-				 return join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	
+				/*trans中不包含import语句*/
+				 struct trans *  t= join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	
+				 print_trans(t);
+				 return NULL;
 			}		
 		}
 	}	

@@ -33,12 +33,19 @@ printf("\n");
 }
 <<EOF>> { 
 	if(file_stack_count == 1) return 0;
-	if(start_trans){
+	if(start_trans && !transcmp(target_trans,ALL_TRANS)){
 		err("import_trans_state","no imported trans found");
 		exit(1);
 	}
-	popfile();
 	Pop(&PreLevelFilterStack);
+	Pop(&import_stack);
+	struct import_info * import_info = Top(&import_stack)->buffer;
+	if(!import_info && start_trans && transcmp(target_trans,ALL_TRANS)){
+		start_trans=NULL;
+		struct trans * t = join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
+		print_trans(t);
+	}	
+	popfile();
 }
 
 <READY>[ \t] { }

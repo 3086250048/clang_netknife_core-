@@ -104,11 +104,11 @@ void print_comment_table_entry(struct comment_table * comment_tab){
 	}	
 }
 
-void record_rule(char * filename,struct rule * rule){
+void record_rule(char * filename,struct rule * rule ,char * action ){
  	char  * outfile  = filename  ; 
  	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
  	FILE * f = fopen(filename,"w");
-	fprintf(f,"Push>>>\n");
+	fprintf(f,"%s>>>\n",action);
  	fprintf(f,"Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
  	fprintf(f,"Rule| lineno:%d priority:%d s:%s d:%s\n",rule->lineno,rule->priority,rule->s , rule->d);
  	fprintf(f,"<<<\n");
@@ -121,9 +121,9 @@ struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 	 	Push(&rule_stack,curfilename,cur_trans,RULE_NODE , rule  );
       #ifdef OUTSTEP
 	   #ifdef OUTFILE 
-		record_rule(OUTFILE,rule);	
+		record_rule(OUTFILE,rule,"Push");	
 	   #endif 
-		record_rule(STEPOUT,rule);
+		record_rule(STEPOUT,rule,"Push");
 		#endif 
 
 	 }

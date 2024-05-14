@@ -361,6 +361,8 @@ void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
 int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  );
 #define ACCEPT accept(file_stack_count , cur_trans , target_trans)
+void record_rule(char * filename,struct rule * rule ,char * action );
+
 
 #endif
 

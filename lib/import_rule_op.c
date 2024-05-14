@@ -170,7 +170,8 @@ int get_comment_lineno(char * c){
 
 void include_handle(struct stack * include_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno ,char * str){
 		/*判断rule是否符合include_filter*/
-		while(struct stack * stack = Top(&include_stack)){
+		struct stack * stack ;
+		while( stack = Top(&include_stack)){
 				*exist_flag = 1;
 				struct range * range = stack->buffer;
 				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
@@ -217,8 +218,9 @@ void include_handle(struct stack * include_stack ,int * result_flag  , int * exi
 }
 
 void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno , char * str){
-			while(struct stack * stack = Top(&exclude_range_buf)){
-				exist_flaag = 1;
+			struct stack * stack ;
+			while( stack = Top(&exclude_stack)){
+				*exist_flag = 1;
 				struct range * range = stack->buffer;
 				int mode = bitmap(range->regx,range->s_lineno,range->d_lineno,range->s_comment ,range->d_comment);
 				
@@ -267,12 +269,12 @@ struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude
 		int include_match_result = 0;	
 		int exist_include_filter =0;
 		struct range * inc_match_range = NULL;
-		include_handle( include_stack , &include_mathc_result,&exist_include_filter ,&inc_match_range , rule->lineno , rule->s);
+		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , rule->lineno , rule->s);
 		/*判断rule是否符合exclude_filter*/
 		int exclude_match_result = 0;	
 		int exist_exclude_filter = 0;
 		struct range * exc_match_range = NULL;
-		exclude_handle( exclude_stack , &exclude_mathc_result,&exist_exclude_filter ,&exc_match_range , rule->lineno, rule->s );
+		exclude_handle( exclude_stack , &exclude_match_result,&exist_exclude_filter ,&exc_match_range , rule->lineno, rule->s );
 	
 		/*filter 结果判断*/
 		if( exist_include_filter && !exist_exclude_filter){
@@ -306,26 +308,26 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 		append_string(&import_raw , import_info->file_name);
 		append_string(&import_raw , import_info->import_name);
 
-		include_handle( include_stack , &include_mathc_result,&exist_include_filter ,&inc_match_range , import_info->lineno , import_raw);
+		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , import_info->lineno , import_raw);
 		/*判断rule是否符合exclude_filter*/
 		int exclude_match_result = 0;	
 		int exist_exclude_filter = 0;
 		struct range * exc_match_range = NULL;
-		exclude_handle( exclude_stack , &exclude_mathc_result,&exist_exclude_filter ,&exc_match_range , import_info->lineno, import_raw );
+		exclude_handle( exclude_stack , &exclude_match_result,&exist_exclude_filter ,&exc_match_range , import_info->lineno, import_raw );
 	
 		/*filter 结果判断*/
 		if( exist_include_filter && !exist_exclude_filter){
-			if(include_match_result) return rule ;
+			if(include_match_result) return import_info;
 			return NULL;
 		}
 		if(!exist_include_filter && exist_exclude_filter){
-			if(!exclude_match_result) return rule ;
+			if(!exclude_match_result) return import_info ;
 			return NULL;
 		}
 		if(exist_include_filter && exist_exclude_filter){	
-			if(include_match_result && !exclude_match_result  )return rule;
+			if(include_match_result && !exclude_match_result  )return import_info ;
 			if(!include_match_result && exclude_match_result)return NULL;
-			if(!include_match_result && !exclude_match_result) return rule ;
+			if(!include_match_result && !exclude_match_result) return import_info ;
 			if(include_match_result && exclude_match_result ){
 				err("filter","filter rule conflict");
 				err_node(inc_match_range,"INCLUDE");
@@ -339,7 +341,7 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 void *  Filter(void * buffer){
 	int has_range =0;
 	/*如果不存在filter则直接退出*/
-	if(!curfilter )return rule; 
+	if(!curfilter )return buffer ; 
 	struct filter  * filter = curfilter;		
 	/*合并filter中的range*/
 	struct stack  * include_stack=NULL ;
@@ -352,10 +354,8 @@ void *  Filter(void * buffer){
 		struct range * range = filter->range;
 		while(range){
 			has_range =1;
-			if(filter->node_type == INCLUDE_NODE )
-			include_range_buf = Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
-			if(filter->node_type == EXCLUDE_NODE) 
-			exclude_range_buf = Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
+			if(filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
+			if(filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
 			range=range->next;
 			}
 			filter = filter->next;
