@@ -75,15 +75,21 @@ struct trans *  trans_reduce()
 			record_rule(STEPOUT,rule,"Pop");
 			#endif	
 		}
-	
-		struct import_info * import_info = Top(&import_stack)->buffer;
-		if(import_info){	
+		
+
+		if(Top(&import_stack)){	
+			struct import_info * import_info = Top(&import_stack)->buffer;
 			/*import_stack栈内不为空时*/
 			import_info = Filter(import_info);
 			if(import_info){
 				/*import_info 语句满足上一个import语句的过滤条件*/
 				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
-				struct filter * plfilter = Top(&PreLevelFilterStack)->buffer; 
+				struct filter * plfilter; 
+				if(Top(&PreLevelFilterStack)){
+				   plfilter = Top(&PreLevelFilterStack)->buffer; 
+				}else{
+					plfilter = NULL;	
+				}
 				struct filter * filter = import_info->filter;
 				while(filter->next){
 					filter=filter->next;

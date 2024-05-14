@@ -413,8 +413,16 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 	if(ACCEPT){	
 
 		char * filename ,* target_trans ;
-		if(!file_name)filename = curfilename ;
-		if(!import_name)target_trans = ALL_TRANS;	
+		if(!file_name){
+				filename = curfilename ;
+		}else{
+				filename = file_name;
+		}
+		if(!import_name){
+				target_trans = ALL_TRANS;	
+		}else{
+			target_trans = import_name;
+		}
 		if(!filter) {
 			filter = malloc(sizeof(struct filter));
 			filter->node_type = SKIP_NODE;

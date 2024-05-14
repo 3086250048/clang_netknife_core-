@@ -39,8 +39,7 @@ printf("\n");
 	}
 	Pop(&PreLevelFilterStack);
 	Pop(&import_stack);
-	struct import_info * import_info = Top(&import_stack)->buffer;
-	if(!import_info && start_trans && transcmp(target_trans,ALL_TRANS)){
+	if(!Top(&import_stack) && start_trans && transcmp(target_trans,ALL_TRANS)){
 		start_trans=NULL;
 		struct trans * t = join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
 		print_trans(t);

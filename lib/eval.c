@@ -108,17 +108,7 @@ int popfile(void){
 	return 1;
 }
 
-struct filter_stack * append_filter_stack(struct filter_stack * root , struct filter * filter ){
-		struct filter_stack * tmp  = malloc(sizeof(struct filter_stack ));
-		tmp->filter= filter ;
-		tmp->next = root;
-		root=tmp ;
-		return root ;
-
-}
-
-
-
+/*
 int newimport(char * filename , char * target_trans, struct filter * filter ){
 	struct import_trans * cur = malloc(sizeof(struct import_trans));
 	if(!cur){ perror("malloc err");exit(1);}
@@ -147,7 +137,7 @@ int popimport(){
 	return 1;
 }
 
-
+*/
 int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  ){
 	if(file_stack_count == 1) return 1;
 	if(transcmp(cur_trans,target_trans)) return 1;
