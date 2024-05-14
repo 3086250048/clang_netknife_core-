@@ -7,6 +7,6 @@ ALL:libnetknife.a
 libnetknife.a:${dst1}
 		ar rcs  $@ $^  
 %.o:%.c
-	gcc -c $< -o $@ -g
+	gcc -c $< -o $@ -DOUTSTEP -g
 
 

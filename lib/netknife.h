@@ -362,7 +362,8 @@ int transcmp(char * t1 , char * t2 );
 int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  );
 #define ACCEPT accept(file_stack_count , cur_trans , target_trans)
 void record_rule(char * filename,struct rule * rule ,char * action );
-
+void record_import(char * filename,struct import_info * import_info,char * action );
+void record_filter(char * filename,struct filter  * filter ,char * action );
 
 #endif
 

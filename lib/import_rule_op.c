@@ -302,11 +302,10 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 		int include_match_result = 0;	
 		int exist_include_filter =0;
 		struct range * inc_match_range = NULL;
-		char * import_raw;
-		
-		append_string(&import_raw , "@");
+		char * import_raw = malloc(1) ;	
+		strcpy(import_raw,"@");
 		append_string(&import_raw , import_info->file_name);
-		append_string(&import_raw , import_info->import_name);
+	 	append_string(&import_raw , import_info->import_name);
 
 		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , import_info->lineno , import_raw);
 		/*判断rule是否符合exclude_filter*/
@@ -382,15 +381,20 @@ struct import_info * join_import_info(char * file_name , char * import_name , in
 	return tmp ;
 }
 
-void record_import(char * filename,struct import_info * import_info){
+void record_import(char * filename,struct import_info * import_info,char * action ){
  	char  * outfile  = filename  ; 
  	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
- 	FILE * f = fopen(filename,"w");
-	fprintf(f,"Push>>>\n");
+ 	FILE * f = fopen(filename,"a");
+	fprintf(f,"%s>>>\n",action);
+	fprintf(f,"Object| import_stack\n");
  	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
  	fprintf(f,"Import| lineno:%d target_file:%s target_trans:%s\n",import_info->file_name,import_info->import_name);
 	while(import_info->filter){
 		struct filter * filter = import_info->filter ;
+		if(filter ->node_type == SKIP_NODE){
+			filter=filter->next;
+			continue;
+		}
 		if(filter->node_type == INCLUDE_NODE){
 		fprintf(f,"Filter| type:include ");
 		}else{
@@ -399,6 +403,35 @@ void record_import(char * filename,struct import_info * import_info){
 		while(filter->range){
 		struct range * range = filter->range ;
 		fprintf(f,"regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
+		range=range->next;
+		}
+		filter=filter->next;
+	}
+	
+ 	fprintf(f,"<<<\n");
+	fclose(f);
+}
+
+void record_filter(char * filename,struct filter  * filter ,char * action ){
+ 	char  * outfile  = filename  ; 
+ 	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
+ 	FILE * f = fopen(filename,"a");
+	fprintf(f,"%s>>>\n",action);
+	fprintf(f,"Object|  PreLevelFilterStack\n");
+ 	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
+	while(filter){
+		if(filter ->node_type == SKIP_NODE){
+			filter=filter->next;
+			continue;
+		}
+		if(filter->node_type == INCLUDE_NODE){
+		fprintf(f,"Filter| type:include ");
+		}else{
+		fprintf(f,"Filter| type:exclude ");
+		}	
+		while(filter->range){
+		struct range * range = filter->range ;
+		fprintf(f,"Range |regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
 		range=range->next;
 		}
 		filter=filter->next;
@@ -431,9 +464,9 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 		Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
 		#ifdef OUTSTEP
 		#ifdef OUTFILE 
-			record_import(OUTFILE,import_info);
+			record_import(OUTFILE,import_info,"Push");
 		#endif
-			record_import(STEPOUT,import_info);
+			record_import(STEPOUT,import_info,"Push");
 		#endif		
 	}	
 }
