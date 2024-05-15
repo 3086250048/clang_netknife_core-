@@ -2,5 +2,12 @@ trans n2 {
 check ip resource => display ip int b ; "test1"
 check ip resource => display ip int b ; "test1"
 display ip int b 1 => show ip int b;
-@(netknife3)->n3 include r"^set" ;
+@(netknife3);
+
+}
+
+trans n22 {
+check ip resource => display ip int b ; "test1"
+check ip resource => display ip int b ; "test1"
+display ip int b 1 => show ip int b;
 }

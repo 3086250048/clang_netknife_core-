@@ -37,12 +37,17 @@ printf("\n");
 		err("import_trans_state","no imported trans found");
 		exit(1);
 	}
+	if(transcmp(target_trans,ALL_TRANS)){
+		if(!Top(&import_stack)){
+			struct trans * t = join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
+			start_trans=NULL;
+			print_trans(t);
+		}else{
+			excute_import();
+		}
+	}
 	Pop(&PreLevelFilterStack);
-	if(!Top(&import_stack) && start_trans && transcmp(target_trans,ALL_TRANS)){
-		struct trans * t = join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
-		start_trans=NULL;
-		print_trans(t);
-	}	
+
 	popfile();
 }
 

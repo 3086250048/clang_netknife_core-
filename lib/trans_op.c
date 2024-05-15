@@ -46,6 +46,83 @@ int transcmp(char * t1 , char * t2){
 }
 
 
+void excute_import(){
+	/*import_stack栈内不为空时*/
+	
+	struct import_info * import_info = Top(&import_stack)->buffer;
+	#ifdef OUTSTEP
+	#ifdef OUTFILE 
+	record_import(OUTFILE,import_info,"Top");
+	#endif
+	record_import(STEPOUT,import_info,"Top");
+	#endif		
+
+	import_info = Filter(import_info);
+	if(import_info){
+		/*import_info 语句满足上一个import语句的过滤条件*/
+		join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
+		#ifdef OUTSTEP
+		#ifdef OUTFILE 
+		record_import(OUTFILE,import_info,"Join");
+		#endif
+		record_import(STEPOUT,import_info,"Join");
+		#endif		
+		struct filter * plfilter = NULL; 
+		if(Top(&PreLevelFilterStack)){
+		   plfilter = Top(&PreLevelFilterStack)->buffer; 
+			#ifdef OUTSTEP
+			#ifdef OUTFILE 
+			record_filter(OUTFILE,plfilter,"Top");
+			#endif
+			record_filter(STEPOUT,plfilter,"Top");
+			#endif	
+		}
+		
+		struct filter * filter = import_info->filter ;
+		struct filter * filter_dup=NULL ;
+		/*复制链表*/
+		while(filter){
+			struct range * range = filter->range;
+			struct range * range_dup=NULL ;
+			while(range){
+				range_dup = join_range(range_dup , range->regx,range->s_lineno,range->d_lineno,range->s_comment,range->d_comment);	
+				range=range->next;
+			}	
+			filter_dup=join_filter(filter_dup,filter->node_type , range_dup	);
+			filter=filter->next;
+		}
+
+		if(filter_dup){
+			/*如果import存在filter*/
+			while(filter_dup->next){
+				filter_dup=filter_dup->next;
+			}	
+			filter_dup->next = plfilter ;
+		}
+
+		
+		if(filter_dup){
+			/*如果经过PreLevelFilterStack叠加后的filter不为空*/
+			Push(&PreLevelFilterStack,curfilename,cur_trans,filter_dup->node_type ,filter_dup);	
+			#ifdef OUTSTEP
+			#ifdef OUTFILE 
+			record_filter(OUTFILE,filter_dup,"Push");
+			#endif
+			record_filter(STEPOUT,filter_dup,"Push");
+			#endif	
+		}
+
+		curfilter = filter_dup ;		
+		target_trans = import_info->import_name ;
+		if(file_stack_count ==1 ){ start_trans = cur_trans; }
+		if( newfile(import_info->file_name) ){
+
+			Pop(&import_stack);
+			yyparse();	
+		}
+	}
+}
+
 struct trans *  trans_reduce()
 {
 	if(ACCEPT){
@@ -77,82 +154,8 @@ struct trans *  trans_reduce()
 		}
 		
 
-		if(Top(&import_stack)){	
-
-			/*import_stack栈内不为空时*/
-			
-			struct import_info * import_info = Top(&import_stack)->buffer;
-			#ifdef OUTSTEP
-			#ifdef OUTFILE 
-			record_import(OUTFILE,import_info,"Top");
-			#endif
-			record_import(STEPOUT,import_info,"Top");
-			#endif		
-
-			import_info = Filter(import_info);
-			if(import_info){
-				/*import_info 语句满足上一个import语句的过滤条件*/
-				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
-				#ifdef OUTSTEP
-				#ifdef OUTFILE 
-				record_import(OUTFILE,import_info,"Join");
-				#endif
-				record_import(STEPOUT,import_info,"Join");
-				#endif		
-				struct filter * plfilter = NULL; 
-				if(Top(&PreLevelFilterStack)){
-				   plfilter = Top(&PreLevelFilterStack)->buffer; 
-					#ifdef OUTSTEP
-					#ifdef OUTFILE 
-					record_filter(OUTFILE,plfilter,"Top");
-					#endif
-					record_filter(STEPOUT,plfilter,"Top");
-					#endif	
-				}
-				
-				struct filter * filter = import_info->filter ;
-				struct filter * filter_dup=NULL ;
-				/*复制链表*/
-				while(filter){
-					struct range * range = filter->range;
-					struct range * range_dup=NULL ;
-					while(range){
-						range_dup = join_range(range_dup , range->regx,range->s_lineno,range->d_lineno,range->s_comment,range->d_comment);	
-						range=range->next;
-					}	
-					filter_dup=join_filter(filter_dup,filter->node_type , range_dup	);
-					filter=filter->next;
-				}
-
-				if(filter_dup){
-					/*如果import存在filter*/
-					while(filter_dup->next){
-						filter_dup=filter_dup->next;
-					}	
-					filter_dup->next = plfilter ;
-				}
-
-				
-				if(filter_dup){
-					/*如果经过PreLevelFilterStack叠加后的filter不为空*/
-					Push(&PreLevelFilterStack,curfilename,cur_trans,filter_dup->node_type ,filter_dup);	
-					#ifdef OUTSTEP
-					#ifdef OUTFILE 
-					record_filter(OUTFILE,filter_dup,"Push");
-					#endif
-					record_filter(STEPOUT,filter_dup,"Push");
-					#endif	
-				}
-
-				curfilter = filter_dup ;		
-				target_trans = import_info->import_name ;
-				if(file_stack_count ==1 ){ start_trans = cur_trans; }
-				if( newfile(import_info->file_name) ){
-
-					Pop(&import_stack);
-					yyparse();	
-				}
-			}
+		if(Top(&import_stack) && !transcmp(target_trans , ALL_TRANS )){	
+			excute_import();
 		}else{
 			/*import_stack栈内为空时*/
 			if(start_trans ){
@@ -172,6 +175,7 @@ struct trans *  trans_reduce()
 			}		
 		}
 	}	
+	return NULL;
 }
 
 

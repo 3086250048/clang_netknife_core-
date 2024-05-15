@@ -4,6 +4,6 @@ trans test{
 	display ip  int b =100> show ip int b ;
 	display ip  int b =100> show ip int b ;
 	display ip  int b =100> show ip int b ;
-	@(netknife2) include r"@"  exclude r"^d" exclude r"^set"  include r"^set";
+	@(netknife2) include r"@"  exclude r"^d" exclude r"^set"  ;
 }
 

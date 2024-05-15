@@ -364,7 +364,7 @@ int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  );
 void record_rule(char * filename,struct rule * rule ,char * action );
 void record_import(char * filename,struct import_info * import_info,char * action );
 void record_filter(char * filename,struct filter  * filter ,char * action );
-
+void excute_import();
 #endif
 
 
