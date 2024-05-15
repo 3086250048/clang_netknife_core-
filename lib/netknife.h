@@ -244,6 +244,8 @@ struct import_rule {
 
 struct import_info  {
 	int node_type ;
+	int in_file_stack_count;
+	char * in_file_name ;
 	char * file_name; 
 	char * import_name;
 	int lineno ;

@@ -77,7 +77,7 @@ void print_filter(struct filter * filter_root){
 }
 
 
-struct  import_rule * join_import_rule(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
+struct  import_rule * join_import_rule(char * file_name ,char * import_name , int lineno,struct filter * filter   ){
 	if(ACCEPT){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT_NODE;
@@ -374,6 +374,8 @@ void *  Filter(void * buffer){
 struct import_info * join_import_info(char * file_name , char * import_name , int  lineno , struct filter * filter ){
 	struct import_info  *  tmp = malloc(sizeof(struct import_info));
 	tmp->node_type = IMPORT_NODE;
+	tmp->in_file_stack_count = file_stack_count; 
+	tmp->in_file_name = curfilename;
 	tmp->file_name = file_name;
    	tmp->import_name = import_name ; 
 	tmp->lineno = lineno ;
@@ -420,9 +422,11 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 	while(filter){
 		if(filter->node_type == INCLUDE_NODE){
 		fprintf(f,"Filter| type:include \n");
-		}else{
+		}else if(filter->node_type == EXCLUDE_NODE){
 		fprintf(f,"Filter| type:exclude \n");
-		}	
+		}else{
+		fprintf(f,"Filter| type:skip \n");
+		}
 		struct range * range = filter->range ;
 		while(range){
 		fprintf(f,"Range | regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->regx,range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);

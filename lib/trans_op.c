@@ -48,8 +48,13 @@ int transcmp(char * t1 , char * t2){
 
 void excute_import(){
 	/*import_stack栈内不为空时*/
-	
 	struct import_info * import_info = Top(&import_stack)->buffer;
+	struct import_info * pre_import_info = NULL ;
+	if( Top(&import_stack)->next){
+		 pre_import_info =  Top(&import_stack)->next->buffer ;
+	}
+
+
 	#ifdef OUTSTEP
 	#ifdef OUTFILE 
 	record_import(OUTFILE,import_info,"Top");
@@ -91,33 +96,55 @@ void excute_import(){
 			filter_dup=join_filter(filter_dup,filter->node_type , range_dup	);
 			filter=filter->next;
 		}
+		
+		struct filter * filter_dd = filter_dup;
 
-		if(filter_dup){
+		if(filter_dd){
 			/*如果import存在filter*/
-			while(filter_dup->next){
-				filter_dup=filter_dup->next;
+			while(filter_dd->next){
+				filter_dd=filter_dd->next;
 			}	
-			filter_dup->next = plfilter ;
+			filter_dd->next = plfilter ;
 		}
 
-		
-		if(filter_dup){
-			/*如果经过PreLevelFilterStack叠加后的filter不为空*/
-			Push(&PreLevelFilterStack,curfilename,cur_trans,filter_dup->node_type ,filter_dup);	
-			#ifdef OUTSTEP
-			#ifdef OUTFILE 
-			record_filter(OUTFILE,filter_dup,"Push");
-			#endif
-			record_filter(STEPOUT,filter_dup,"Push");
-			#endif	
+
+		int import_offset = 0;
+		if(pre_import_info){
+			import_offset = import_info->in_file_stack_count -  pre_import_info->in_file_stack_count;
+		}else{
+			import_offset = 1;  
+		}
+		if( import_offset > 0 ){	
+			if(filter_dup){
+				/*如果经过PreLevelFilterStack叠加后的filter不为空*/
+				Push(&PreLevelFilterStack,curfilename,cur_trans,filter_dup->node_type ,filter_dup);	
+				#ifdef OUTSTEP
+				#ifdef OUTFILE 
+				record_filter(OUTFILE,filter_dup,"Push");
+				#endif
+				record_filter(STEPOUT,filter_dup,"Push");
+				#endif	
+			}else{
+				filter_dup = malloc(sizeof(struct filter *));
+				filter_dup->node_type = SKIP_NODE;
+				filter_dup->range = NULL;
+				filter_dup->next = NULL;
+				Push(&PreLevelFilterStack,curfilename,cur_trans,filter_dup->node_type ,filter_dup);	
+				#ifdef OUTSTEP
+				#ifdef OUTFILE 
+				record_filter(OUTFILE,filter_dup,"Push");
+				#endif
+				record_filter(STEPOUT,filter_dup,"Push");
+				#endif	   
+			}
 		}
 
 		curfilter = filter_dup ;		
 		target_trans = import_info->import_name ;
 		if(file_stack_count ==1 ){ start_trans = cur_trans; }
 		if( newfile(import_info->file_name) ){
-
 			Pop(&import_stack);
+			Pop(&PreLevelFilterStack);
 			yyparse();	
 		}
 	}
@@ -155,18 +182,18 @@ struct trans *  trans_reduce()
 		
 
 		if(Top(&import_stack) && !transcmp(target_trans , ALL_TRANS )){	
+			/*import_stack 栈内不为空,且当前目标target_trans不为ALL_TRANS*/
 			excute_import();
-		}else{
-			/*import_stack栈内为空时*/
+		}
+
+		if(!Top(&import_stack) && !transcmp(target_trans,ALL_TRANS)){
+			/*import_stack 栈内为空,且当前目标target_trans不为ALL_TRANS*/
 			if(start_trans ){
 				/*trans中包含import语句*/
-				if(!transcmp(target_trans,ALL_TRANS) ) {
-				/*目标trans不为ALL_TRANS*/
 					 struct trans * t =join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
 					start_trans=NULL;
 					 print_trans(t);
 					 return NULL;
-				}
 			}else{
 				/*trans中不包含import语句*/
 				 struct trans *  t= join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	

@@ -1,5 +1,7 @@
 trans n3 {
 set ip gt 192.168.2.21 => undo_ipsource ; "dis"
-cddddheck_ip_source => undo_ipsource ;
-checddddk_ip_source => undo_ipsource ;
+set ip gt 192.168.2.21 => undo_ipsource ; "dis"
+set ip gt 192.168.2.21 => undo_ipsource ; "dis"
+set ip gt 192.168.2.21 => undo_ipsource ; "dis"
+set ip gt 192.168.2.21 => undo_ipsource ; "dis"
 }

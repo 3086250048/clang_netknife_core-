@@ -3,11 +3,10 @@
 #include <string.h>
 #define A ""
 int main() {
-	char * a =  A;
-	printf("%d\n",strlen(a));
-	FILE * s = fopen(a , "w" );
-	fprintf(s,"hello");
-
+	int a = 10;
+	int b = a;
+	a =100;
+	printf("%d\n",b);
 
 }
 

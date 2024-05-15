@@ -7,7 +7,16 @@ display ip int b 1 => show ip int b;
 }
 
 trans n22 {
-check ip resource => display ip int b ; "test1"
-check ip resource => display ip int b ; "test1"
-display ip int b 1 => show ip int b;
+aaaaacheck ip resource => display ip int b ; "test1"
+aaaaaacheck ip resource => display ip int b ; "test1"
+@(netknife3);
+aaaaaadisplay ip int b 1 => show ip int b;
+}
+
+
+trans n222 {
+	password => shdawda;
+	password => shdawda;
+	password => shdawda;
+	password => shdawda;
 }

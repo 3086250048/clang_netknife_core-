@@ -60,6 +60,7 @@ void err(char * state , char * err){
 }
 
 int newfile(char * fn ){
+	
 	if(file_stack_count >= MAX_STACK ){
 		err("newfile","too many file stacks");
 		exit(1);
