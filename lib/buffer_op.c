@@ -89,6 +89,7 @@ struct  table * Get( struct table * root , char * filename , char * name , int t
 		return tmp;
 	}else{
 		err("get_buf","buf no has this entry");
+		exit(1);
 	}
 }
 

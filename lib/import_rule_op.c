@@ -382,6 +382,7 @@ struct import_info * join_import_info(char * file_name , char * import_name , in
 }
 
 void record_import(char * filename,struct import_info * import_info,char * action ){
+	if(import_info)return;
  	char  * outfile  = filename  ; 
  	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
  	FILE * f = fopen(filename,"a");
@@ -389,30 +390,27 @@ void record_import(char * filename,struct import_info * import_info,char * actio
 	fprintf(f,"Object| import_stack\n");
  	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
  	fprintf(f,"Import| lineno:%d target_file:%s target_trans:%s\n",import_info->file_name,import_info->import_name);
-	while(import_info->filter){
-		struct filter * filter = import_info->filter ;
-		if(filter ->node_type == SKIP_NODE){
-			filter=filter->next;
-			continue;
-		}
+	struct filter * filter  = import_info->filter ;
+	while(filter){
 		if(filter->node_type == INCLUDE_NODE){
-		fprintf(f,"Filter| type:include ");
+		fprintf(f,"Filter| type:include \n");
 		}else{
-		fprintf(f,"Filter| type:exclude ");
+		fprintf(f,"Filter| type:exclude \n");
 		}	
-		while(filter->range){
 		struct range * range = filter->range ;
-		fprintf(f,"regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
+		while(range){
+		fprintf(f," Range| regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->regx,range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
 		range=range->next;
 		}
 		filter=filter->next;
 	}
 	
- 	fprintf(f,"<<<\n");
+ 	fprintf(f,"<<<\n\n");
 	fclose(f);
 }
 
 void record_filter(char * filename,struct filter  * filter ,char * action ){
+	if(!filter)return ;
  	char  * outfile  = filename  ; 
  	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
  	FILE * f = fopen(filename,"a");
@@ -420,24 +418,20 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 	fprintf(f,"Object|  PreLevelFilterStack\n");
  	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
 	while(filter){
-		if(filter ->node_type == SKIP_NODE){
-			filter=filter->next;
-			continue;
-		}
 		if(filter->node_type == INCLUDE_NODE){
-		fprintf(f,"Filter| type:include ");
+		fprintf(f,"Filter| type:include \n");
 		}else{
-		fprintf(f,"Filter| type:exclude ");
+		fprintf(f,"Filter| type:exclude \n");
 		}	
-		while(filter->range){
 		struct range * range = filter->range ;
-		fprintf(f,"Range |regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
+		while(range){
+		fprintf(f,"Range | regx:%s s_lineno:%d d_lineno:%s s_comment:%s d_comment:%s\n",range->regx,range->s_lineno , range->d_lineno , range->s_comment , range->d_comment);
 		range=range->next;
 		}
 		filter=filter->next;
 	}
 	
- 	fprintf(f,"<<<\n");
+ 	fprintf(f,"<<<\n\n");
 	fclose(f);
 }
 
@@ -455,10 +449,6 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 				target_trans = ALL_TRANS;	
 		}else{
 			target_trans = import_name;
-		}
-		if(!filter) {
-			filter = malloc(sizeof(struct filter));
-			filter->node_type = SKIP_NODE;
 		}
 		struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
 		Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );

@@ -105,6 +105,7 @@ void print_comment_table_entry(struct comment_table * comment_tab){
 }
 
 void record_rule(char * filename,struct rule * rule ,char * action ){
+	if(!rule)return;
  	char  * outfile  = filename  ; 
  	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
  	FILE * f = fopen(filename,"a");
@@ -112,7 +113,7 @@ void record_rule(char * filename,struct rule * rule ,char * action ){
 	fprintf(f,"Object| rule_stack\n");
  	fprintf(f,"  Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
  	fprintf(f,"  Rule| lineno:%d priority:%d s:%s d:%s\n",rule->lineno,rule->priority,rule->s , rule->d);
- 	fprintf(f,"<<<\n");
+ 	fprintf(f,"<<<\n\n");
 	fclose(f);
 }
 
@@ -130,6 +131,7 @@ struct rule_table * rule_table_reduce( char * s ,char * d ,int priority ){
 }
 
 void record_comment(char * filename,struct comment * comment){
+	if(!comment)return ;
 	char  * outfile  = filename  ; 
 	if(strlen(filename) == 0 ){ err("OUTSTEP状态","OUTSTEP的宏定义错误") ; exit(1);}
 	FILE * f = fopen(filename,"a");
@@ -137,7 +139,7 @@ void record_comment(char * filename,struct comment * comment){
 	fprintf(f," Object| comment_tmp_tab\n");
 	fprintf(f,"   Info| file:%s trans:%s level:%d\n",curfilename ,cur_trans,file_stack_count);
 	fprintf(f,"Comment| lineno:%d c:%s\n",comment->lineno , comment->c);
-	fprintf(f,"<<<\n");
+	fprintf(f,"<<<\n\n");
 	fclose(f);
 }
 
