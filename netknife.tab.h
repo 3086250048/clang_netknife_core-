@@ -84,7 +84,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 8 "netknife.y"
+#line 9 "netknife.y"
 
 int d;
 char * s;
