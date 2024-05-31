@@ -152,64 +152,22 @@ void excute_import(){
 
 struct trans *  trans_reduce()
 {
-	if(ACCEPT){
-		while(Top(&rule_stack)){
-			struct rule * rule = Top(&rule_stack)->buffer;	
-			#ifdef OUTSTEP
-			#ifdef OUTFILE 
-			record_rule(OUTFILE,rule,"Top");
-			#endif
-			record_rule(STEPOUT,rule,"Top");
-			#endif		
-			rule = Filter(rule);
-			if(rule){
-				join_rule_table(rule);
-			#ifdef OUTSTEP
-			#ifdef OUTFILE 
-			record_rule(OUTFILE,rule,"Join");
-			#endif
-			record_rule(STEPOUT,rule,"Join");
-			#endif	
-			}	
-			Pop(&rule_stack);
-			#ifdef OUTSTEP
-			#ifdef OUTFILE 
-			record_rule(OUTFILE,rule,"Pop");
-			#endif
-			record_rule(STEPOUT,rule,"Pop");
-			#endif	
-		}
-		
+	/*filter 处理*/
+	if(Top(&import_stack)){	
+		struct import_info * import_info = Top(&import_stack)->buffer;
+		Pop(&import_stack);
+		excute_import();
+	}
 
-		if(Top(&import_stack) && !transcmp(target_trans , ALL_TRANS )){	
-			/*import_stack 栈内不为空,且当前目标target_trans不为ALL_TRANS*/
-			excute_import();
-		}
+	/*rule 处理*/
+	while(Top(&rule_stack)){
+		struct rule * rule = Top(&rule_stack)->buffer;	
+		rule = Filter(rule);
+		if(rule) join_rule_table(rule);
+		Pop(&rule_stack);
+	}
 
-		if(!Top(&import_stack) && !transcmp(target_trans,ALL_TRANS)){
-			/*import_stack 栈内为空,且当前目标target_trans不为ALL_TRANS*/
-			if(start_trans ){
-				/*trans中包含import语句*/
-					 struct trans * t =join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
-					start_trans=NULL;
-					 print_trans(t);
-					 return NULL;
-			}
-			
-			if(file_stack_count > 1 ){
-				popfile();
-			}
-
-			if(file_stack_count == 1)
-			{
-				/*trans中不包含import语句*/
-				 struct trans *  t= join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	
-				 print_trans(t);
-				 return NULL;
-			}		
-		}
-	}	
-	return NULL;
+	struct trans * t =join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
 }
 
 

@@ -89,18 +89,17 @@ int newfile(char * fn ){
 int popfile(void){
 	struct bufstack * bs = curbs;
 	struct bufstack * prevbs;
-		
-	if(!bs) return 0;
+	
+	if(!bs ) return 0 ;	
+
 	//删除当前文件信息
 	yy_delete_buffer(bs->bs);
 	fclose(bs->f);
 	//切换为上一个文件
 	prevbs = bs->prev;
 	free(bs);
-	if(!prevbs){
-	--file_stack_count;
-		return 0;
-	}
+	if(!prevbs) return 0;
+	
 	yy_switch_to_buffer(prevbs->bs);
 	curbs = prevbs;
 	yylineno = curbs->lineno;

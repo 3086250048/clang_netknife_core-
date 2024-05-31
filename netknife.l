@@ -32,22 +32,9 @@ printf("\n");
 #endif
 }
 <<EOF>> { 
-	if(file_stack_count == 1) return 0;
-	if(start_trans && !transcmp(target_trans,ALL_TRANS)){
-		err("import_trans_state","no imported trans found");
-		exit(1);
-	}
-	if(start_trans &&  transcmp(target_trans,ALL_TRANS)){
-		if(!Top(&import_stack)){
-			struct trans * t = join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
-			start_trans=NULL;
-			print_trans(t);
-			popfile();
-		}else{
-			excute_import();
-		}
-	}else{
-		popfile();
+	if(!popfile()){
+
+		 return 0 ;  
 	}
 }
 
