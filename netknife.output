@@ -53,9 +53,10 @@ Grammar
 
    40 index_string_exp: STRING
    41                 | LINE_BREAK
-   42                 | index_string_exp STRING
-   43                 | index_string_exp EMPTY
-   44                 | index_string_exp LINE_BREAK
+   42                 | EMPTY
+   43                 | index_string_exp STRING
+   44                 | index_string_exp EMPTY
+   45                 | index_string_exp LINE_BREAK
 
 
 Terminals, with rules where they appear
@@ -63,9 +64,9 @@ Terminals, with rules where they appear
     $end (0) 0
     error (256)
     NUMBER <d> (258) 22 25 27 28 31 32 33 34 39
-    STRING <s> (259) 5 12 13 16 17 40 42
-    EMPTY <s> (260) 43
-    LINE_BREAK <s> (261) 41 44
+    STRING <s> (259) 5 12 13 16 17 40 43
+    EMPTY <s> (260) 42 44
+    LINE_BREAK <s> (261) 41 45
     TRANS (262) 5
     IMPORT (263) 12 13 14 15 16 17
     COMMENT_START (264) 37
@@ -121,8 +122,8 @@ Nonterminals, with rules where they appear
         on left: 38 39
         on right: 6 9
     index_string_exp <s> (36)
-        on left: 40 41 42 43 44
-        on right: 14 15 16 17 24 29 36 37 38 39 42 43 44
+        on left: 40 41 42 43 44 45
+        on right: 14 15 16 17 24 29 36 37 38 39 43 44 45
 
 
 State 0
@@ -208,21 +209,23 @@ State 7
    39               | • index_string_exp EQ NUMBER GT index_string_exp SEM
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING         shift, and go to state 8
-    LINE_BREAK     shift, and go to state 9
-    IMPORT         shift, and go to state 10
-    COMMENT_START  shift, and go to state 11
-    RBRACE         shift, and go to state 12
+    EMPTY          shift, and go to state 9
+    LINE_BREAK     shift, and go to state 10
+    IMPORT         shift, and go to state 11
+    COMMENT_START  shift, and go to state 12
+    RBRACE         shift, and go to state 13
 
-    trans_body_exp         go to state 13
-    import_rule_chain_exp  go to state 14
-    comment_table_exp      go to state 15
-    rule_table_exp         go to state 16
-    index_string_exp       go to state 17
+    trans_body_exp         go to state 14
+    import_rule_chain_exp  go to state 15
+    comment_table_exp      go to state 16
+    rule_table_exp         go to state 17
+    index_string_exp       go to state 18
 
 
 State 8
@@ -234,12 +237,19 @@ State 8
 
 State 9
 
+   42 index_string_exp: EMPTY •
+
+    $default  reduce using rule 42 (index_string_exp)
+
+
+State 10
+
    41 index_string_exp: LINE_BREAK •
 
     $default  reduce using rule 41 (index_string_exp)
 
 
-State 10
+State 11
 
    12 import_rule_chain_exp: IMPORT • STRING SEM
    13                      | IMPORT • STRING filter_exp SEM
@@ -248,33 +258,35 @@ State 10
    16                      | IMPORT • LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM
    17                      | IMPORT • LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM
 
-    STRING  shift, and go to state 18
-    LBRACE  shift, and go to state 19
+    STRING  shift, and go to state 19
+    LBRACE  shift, and go to state 20
 
 
-State 11
+State 12
 
    37 comment_table_exp: COMMENT_START • index_string_exp COMMENT_END
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
 
-    index_string_exp  go to state 20
+    index_string_exp  go to state 21
 
 
-State 12
+State 13
 
     3 trans_exp: trans_name_exp LBRACE RBRACE •
 
     $default  reduce using rule 3 (trans_exp)
 
 
-State 13
+State 14
 
     4 trans_exp: trans_name_exp LBRACE trans_body_exp • RBRACE
     9 trans_body_exp: trans_body_exp • rule_table_exp
@@ -291,58 +303,60 @@ State 13
    39               | • index_string_exp EQ NUMBER GT index_string_exp SEM
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING         shift, and go to state 8
-    LINE_BREAK     shift, and go to state 9
-    IMPORT         shift, and go to state 10
-    COMMENT_START  shift, and go to state 11
-    RBRACE         shift, and go to state 21
+    EMPTY          shift, and go to state 9
+    LINE_BREAK     shift, and go to state 10
+    IMPORT         shift, and go to state 11
+    COMMENT_START  shift, and go to state 12
+    RBRACE         shift, and go to state 22
 
-    import_rule_chain_exp  go to state 22
-    comment_table_exp      go to state 23
-    rule_table_exp         go to state 24
-    index_string_exp       go to state 17
+    import_rule_chain_exp  go to state 23
+    comment_table_exp      go to state 24
+    rule_table_exp         go to state 25
+    index_string_exp       go to state 18
 
 
-State 14
+State 15
 
     8 trans_body_exp: import_rule_chain_exp •
 
     $default  reduce using rule 8 (trans_body_exp)
 
 
-State 15
+State 16
 
     7 trans_body_exp: comment_table_exp •
 
     $default  reduce using rule 7 (trans_body_exp)
 
 
-State 16
+State 17
 
     6 trans_body_exp: rule_table_exp •
 
     $default  reduce using rule 6 (trans_body_exp)
 
 
-State 17
+State 18
 
    38 rule_table_exp: index_string_exp • EQ GT index_string_exp SEM
    39               | index_string_exp • EQ NUMBER GT index_string_exp SEM
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
 
-    STRING      shift, and go to state 25
-    EMPTY       shift, and go to state 26
-    LINE_BREAK  shift, and go to state 27
-    EQ          shift, and go to state 28
+    STRING      shift, and go to state 26
+    EMPTY       shift, and go to state 27
+    LINE_BREAK  shift, and go to state 28
+    EQ          shift, and go to state 29
 
 
-State 18
+State 19
 
    12 import_rule_chain_exp: IMPORT STRING • SEM
    13                      | IMPORT STRING • filter_exp SEM
@@ -351,14 +365,14 @@ State 18
    20           | • filter_exp INCLUDE range_exp
    21           | • filter_exp EXCLUDE range_exp
 
-    INCLUDE  shift, and go to state 29
-    EXCLUDE  shift, and go to state 30
-    SEM      shift, and go to state 31
+    INCLUDE  shift, and go to state 30
+    EXCLUDE  shift, and go to state 31
+    SEM      shift, and go to state 32
 
-    filter_exp  go to state 32
+    filter_exp  go to state 33
 
 
-State 19
+State 20
 
    14 import_rule_chain_exp: IMPORT LBRACE • index_string_exp RBRACE SEM
    15                      | IMPORT LBRACE • index_string_exp RBRACE filter_exp SEM
@@ -366,88 +380,90 @@ State 19
    17                      | IMPORT LBRACE • index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
 
-    index_string_exp  go to state 33
-
-
-State 20
-
-   37 comment_table_exp: COMMENT_START index_string_exp • COMMENT_END
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
-
-    STRING       shift, and go to state 25
-    EMPTY        shift, and go to state 26
-    LINE_BREAK   shift, and go to state 27
-    COMMENT_END  shift, and go to state 34
+    index_string_exp  go to state 34
 
 
 State 21
+
+   37 comment_table_exp: COMMENT_START index_string_exp • COMMENT_END
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
+
+    STRING       shift, and go to state 26
+    EMPTY        shift, and go to state 27
+    LINE_BREAK   shift, and go to state 28
+    COMMENT_END  shift, and go to state 35
+
+
+State 22
 
     4 trans_exp: trans_name_exp LBRACE trans_body_exp RBRACE •
 
     $default  reduce using rule 4 (trans_exp)
 
 
-State 22
+State 23
 
    11 trans_body_exp: trans_body_exp import_rule_chain_exp •
 
     $default  reduce using rule 11 (trans_body_exp)
 
 
-State 23
+State 24
 
    10 trans_body_exp: trans_body_exp comment_table_exp •
 
     $default  reduce using rule 10 (trans_body_exp)
 
 
-State 24
+State 25
 
     9 trans_body_exp: trans_body_exp rule_table_exp •
 
     $default  reduce using rule 9 (trans_body_exp)
 
 
-State 25
-
-   42 index_string_exp: index_string_exp STRING •
-
-    $default  reduce using rule 42 (index_string_exp)
-
-
 State 26
 
-   43 index_string_exp: index_string_exp EMPTY •
+   43 index_string_exp: index_string_exp STRING •
 
     $default  reduce using rule 43 (index_string_exp)
 
 
 State 27
 
-   44 index_string_exp: index_string_exp LINE_BREAK •
+   44 index_string_exp: index_string_exp EMPTY •
 
     $default  reduce using rule 44 (index_string_exp)
 
 
 State 28
 
-   38 rule_table_exp: index_string_exp EQ • GT index_string_exp SEM
-   39               | index_string_exp EQ • NUMBER GT index_string_exp SEM
+   45 index_string_exp: index_string_exp LINE_BREAK •
 
-    NUMBER  shift, and go to state 35
-    GT      shift, and go to state 36
+    $default  reduce using rule 45 (index_string_exp)
 
 
 State 29
+
+   38 rule_table_exp: index_string_exp EQ • GT index_string_exp SEM
+   39               | index_string_exp EQ • NUMBER GT index_string_exp SEM
+
+    NUMBER  shift, and go to state 36
+    GT      shift, and go to state 37
+
+
+State 30
 
    18 filter_exp: INCLUDE • range_exp
    22 range_exp: • NUMBER
@@ -466,15 +482,15 @@ State 29
    35          | • range_exp COMMA const_comment_exp TO const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 37
-    REGX_START                  shift, and go to state 38
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 38
+    REGX_START                  shift, and go to state 39
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    range_exp          go to state 40
-    const_comment_exp  go to state 41
+    range_exp          go to state 41
+    const_comment_exp  go to state 42
 
 
-State 30
+State 31
 
    19 filter_exp: EXCLUDE • range_exp
    22 range_exp: • NUMBER
@@ -493,119 +509,125 @@ State 30
    35          | • range_exp COMMA const_comment_exp TO const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 37
-    REGX_START                  shift, and go to state 38
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 38
+    REGX_START                  shift, and go to state 39
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    range_exp          go to state 42
-    const_comment_exp  go to state 41
+    range_exp          go to state 43
+    const_comment_exp  go to state 42
 
 
-State 31
+State 32
 
    12 import_rule_chain_exp: IMPORT STRING SEM •
 
     $default  reduce using rule 12 (import_rule_chain_exp)
 
 
-State 32
+State 33
 
    13 import_rule_chain_exp: IMPORT STRING filter_exp • SEM
    20 filter_exp: filter_exp • INCLUDE range_exp
    21           | filter_exp • EXCLUDE range_exp
 
-    INCLUDE  shift, and go to state 43
-    EXCLUDE  shift, and go to state 44
-    SEM      shift, and go to state 45
+    INCLUDE  shift, and go to state 44
+    EXCLUDE  shift, and go to state 45
+    SEM      shift, and go to state 46
 
 
-State 33
+State 34
 
    14 import_rule_chain_exp: IMPORT LBRACE index_string_exp • RBRACE SEM
    15                      | IMPORT LBRACE index_string_exp • RBRACE filter_exp SEM
    16                      | IMPORT LBRACE index_string_exp • RBRACE HYPHEN GT STRING SEM
    17                      | IMPORT LBRACE index_string_exp • RBRACE HYPHEN GT STRING filter_exp SEM
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
 
-    STRING      shift, and go to state 25
-    EMPTY       shift, and go to state 26
-    LINE_BREAK  shift, and go to state 27
-    RBRACE      shift, and go to state 46
+    STRING      shift, and go to state 26
+    EMPTY       shift, and go to state 27
+    LINE_BREAK  shift, and go to state 28
+    RBRACE      shift, and go to state 47
 
 
-State 34
+State 35
 
    37 comment_table_exp: COMMENT_START index_string_exp COMMENT_END •
 
     $default  reduce using rule 37 (comment_table_exp)
 
 
-State 35
+State 36
 
    39 rule_table_exp: index_string_exp EQ NUMBER • GT index_string_exp SEM
 
-    GT  shift, and go to state 47
+    GT  shift, and go to state 48
 
 
-State 36
+State 37
 
    38 rule_table_exp: index_string_exp EQ GT • index_string_exp SEM
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
 
-    index_string_exp  go to state 48
+    index_string_exp  go to state 49
 
 
-State 37
+State 38
 
    22 range_exp: NUMBER •  [INCLUDE, EXCLUDE, COMMA, SEM]
    25          | NUMBER • TO NUMBER
    27          | NUMBER • TO const_comment_exp
 
-    TO  shift, and go to state 49
+    TO  shift, and go to state 50
 
     $default  reduce using rule 22 (range_exp)
 
 
-State 38
+State 39
 
    24 range_exp: REGX_START • index_string_exp REGX_END
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
-
-    index_string_exp  go to state 50
-
-
-State 39
-
-   36 const_comment_exp: TRANS_IMPORT_COMMENT_START • index_string_exp TRANS_IMPORT_COMMENT_END
-   40 index_string_exp: • STRING
-   41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
-
-    STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
 
     index_string_exp  go to state 51
 
 
 State 40
+
+   36 const_comment_exp: TRANS_IMPORT_COMMENT_START • index_string_exp TRANS_IMPORT_COMMENT_END
+   40 index_string_exp: • STRING
+   41                 | • LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
+
+    STRING      shift, and go to state 8
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
+
+    index_string_exp  go to state 52
+
+
+State 41
 
    18 filter_exp: INCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
    29 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
@@ -616,23 +638,23 @@ State 40
    34          | range_exp • COMMA const_comment_exp TO NUMBER
    35          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
-    COMMA  shift, and go to state 52
+    COMMA  shift, and go to state 53
 
     $default  reduce using rule 18 (filter_exp)
 
 
-State 41
+State 42
 
    23 range_exp: const_comment_exp •  [INCLUDE, EXCLUDE, COMMA, SEM]
    26          | const_comment_exp • TO const_comment_exp
    28          | const_comment_exp • TO NUMBER
 
-    TO  shift, and go to state 53
+    TO  shift, and go to state 54
 
     $default  reduce using rule 23 (range_exp)
 
 
-State 42
+State 43
 
    19 filter_exp: EXCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
    29 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
@@ -643,12 +665,12 @@ State 42
    34          | range_exp • COMMA const_comment_exp TO NUMBER
    35          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
-    COMMA  shift, and go to state 52
+    COMMA  shift, and go to state 53
 
     $default  reduce using rule 19 (filter_exp)
 
 
-State 43
+State 44
 
    20 filter_exp: filter_exp INCLUDE • range_exp
    22 range_exp: • NUMBER
@@ -667,15 +689,15 @@ State 43
    35          | • range_exp COMMA const_comment_exp TO const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 37
-    REGX_START                  shift, and go to state 38
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 38
+    REGX_START                  shift, and go to state 39
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    range_exp          go to state 54
-    const_comment_exp  go to state 41
+    range_exp          go to state 55
+    const_comment_exp  go to state 42
 
 
-State 44
+State 45
 
    21 filter_exp: filter_exp EXCLUDE • range_exp
    22 range_exp: • NUMBER
@@ -694,22 +716,22 @@ State 44
    35          | • range_exp COMMA const_comment_exp TO const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 37
-    REGX_START                  shift, and go to state 38
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 38
+    REGX_START                  shift, and go to state 39
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    range_exp          go to state 55
-    const_comment_exp  go to state 41
+    range_exp          go to state 56
+    const_comment_exp  go to state 42
 
 
-State 45
+State 46
 
    13 import_rule_chain_exp: IMPORT STRING filter_exp SEM •
 
     $default  reduce using rule 13 (import_rule_chain_exp)
 
 
-State 46
+State 47
 
    14 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE • SEM
    15                      | IMPORT LBRACE index_string_exp RBRACE • filter_exp SEM
@@ -720,81 +742,83 @@ State 46
    20           | • filter_exp INCLUDE range_exp
    21           | • filter_exp EXCLUDE range_exp
 
-    INCLUDE  shift, and go to state 29
-    EXCLUDE  shift, and go to state 30
-    SEM      shift, and go to state 56
-    HYPHEN   shift, and go to state 57
+    INCLUDE  shift, and go to state 30
+    EXCLUDE  shift, and go to state 31
+    SEM      shift, and go to state 57
+    HYPHEN   shift, and go to state 58
 
-    filter_exp  go to state 58
-
-
-State 47
-
-   39 rule_table_exp: index_string_exp EQ NUMBER GT • index_string_exp SEM
-   40 index_string_exp: • STRING
-   41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
-
-    STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
-
-    index_string_exp  go to state 59
+    filter_exp  go to state 59
 
 
 State 48
 
-   38 rule_table_exp: index_string_exp EQ GT index_string_exp • SEM
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
+   39 rule_table_exp: index_string_exp EQ NUMBER GT • index_string_exp SEM
+   40 index_string_exp: • STRING
+   41                 | • LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
-    STRING      shift, and go to state 25
-    EMPTY       shift, and go to state 26
-    LINE_BREAK  shift, and go to state 27
-    SEM         shift, and go to state 60
+    STRING      shift, and go to state 8
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
+
+    index_string_exp  go to state 60
 
 
 State 49
+
+   38 rule_table_exp: index_string_exp EQ GT index_string_exp • SEM
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
+
+    STRING      shift, and go to state 26
+    EMPTY       shift, and go to state 27
+    LINE_BREAK  shift, and go to state 28
+    SEM         shift, and go to state 61
+
+
+State 50
 
    25 range_exp: NUMBER TO • NUMBER
    27          | NUMBER TO • const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 61
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 62
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    const_comment_exp  go to state 62
-
-
-State 50
-
-   24 range_exp: REGX_START index_string_exp • REGX_END
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
-
-    STRING      shift, and go to state 25
-    EMPTY       shift, and go to state 26
-    LINE_BREAK  shift, and go to state 27
-    REGX_END    shift, and go to state 63
+    const_comment_exp  go to state 63
 
 
 State 51
 
-   36 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp • TRANS_IMPORT_COMMENT_END
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
+   24 range_exp: REGX_START index_string_exp • REGX_END
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
 
-    STRING                    shift, and go to state 25
-    EMPTY                     shift, and go to state 26
-    LINE_BREAK                shift, and go to state 27
-    TRANS_IMPORT_COMMENT_END  shift, and go to state 64
+    STRING      shift, and go to state 26
+    EMPTY       shift, and go to state 27
+    LINE_BREAK  shift, and go to state 28
+    REGX_END    shift, and go to state 64
 
 
 State 52
+
+   36 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp • TRANS_IMPORT_COMMENT_END
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
+
+    STRING                    shift, and go to state 26
+    EMPTY                     shift, and go to state 27
+    LINE_BREAK                shift, and go to state 28
+    TRANS_IMPORT_COMMENT_END  shift, and go to state 65
+
+
+State 53
 
    29 range_exp: range_exp COMMA • REGX_START index_string_exp REGX_END
    30          | range_exp COMMA • const_comment_exp
@@ -805,26 +829,26 @@ State 52
    35          | range_exp COMMA • const_comment_exp TO const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 65
-    REGX_START                  shift, and go to state 66
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 66
+    REGX_START                  shift, and go to state 67
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    const_comment_exp  go to state 67
+    const_comment_exp  go to state 68
 
 
-State 53
+State 54
 
    26 range_exp: const_comment_exp TO • const_comment_exp
    28          | const_comment_exp TO • NUMBER
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 68
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 69
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    const_comment_exp  go to state 69
+    const_comment_exp  go to state 70
 
 
-State 54
+State 55
 
    20 filter_exp: filter_exp INCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
    29 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
@@ -835,12 +859,12 @@ State 54
    34          | range_exp • COMMA const_comment_exp TO NUMBER
    35          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
-    COMMA  shift, and go to state 52
+    COMMA  shift, and go to state 53
 
     $default  reduce using rule 20 (filter_exp)
 
 
-State 55
+State 56
 
    21 filter_exp: filter_exp EXCLUDE range_exp •  [INCLUDE, EXCLUDE, SEM]
    29 range_exp: range_exp • COMMA REGX_START index_string_exp REGX_END
@@ -851,196 +875,198 @@ State 55
    34          | range_exp • COMMA const_comment_exp TO NUMBER
    35          | range_exp • COMMA const_comment_exp TO const_comment_exp
 
-    COMMA  shift, and go to state 52
+    COMMA  shift, and go to state 53
 
     $default  reduce using rule 21 (filter_exp)
 
 
-State 56
+State 57
 
    14 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE SEM •
 
     $default  reduce using rule 14 (import_rule_chain_exp)
 
 
-State 57
+State 58
 
    16 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN • GT STRING SEM
    17                      | IMPORT LBRACE index_string_exp RBRACE HYPHEN • GT STRING filter_exp SEM
 
-    GT  shift, and go to state 70
+    GT  shift, and go to state 71
 
 
-State 58
+State 59
 
    15 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE filter_exp • SEM
    20 filter_exp: filter_exp • INCLUDE range_exp
    21           | filter_exp • EXCLUDE range_exp
 
-    INCLUDE  shift, and go to state 43
-    EXCLUDE  shift, and go to state 44
-    SEM      shift, and go to state 71
-
-
-State 59
-
-   39 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp • SEM
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
-
-    STRING      shift, and go to state 25
-    EMPTY       shift, and go to state 26
-    LINE_BREAK  shift, and go to state 27
-    SEM         shift, and go to state 72
+    INCLUDE  shift, and go to state 44
+    EXCLUDE  shift, and go to state 45
+    SEM      shift, and go to state 72
 
 
 State 60
+
+   39 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp • SEM
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
+
+    STRING      shift, and go to state 26
+    EMPTY       shift, and go to state 27
+    LINE_BREAK  shift, and go to state 28
+    SEM         shift, and go to state 73
+
+
+State 61
 
    38 rule_table_exp: index_string_exp EQ GT index_string_exp SEM •
 
     $default  reduce using rule 38 (rule_table_exp)
 
 
-State 61
+State 62
 
    25 range_exp: NUMBER TO NUMBER •
 
     $default  reduce using rule 25 (range_exp)
 
 
-State 62
+State 63
 
    27 range_exp: NUMBER TO const_comment_exp •
 
     $default  reduce using rule 27 (range_exp)
 
 
-State 63
+State 64
 
    24 range_exp: REGX_START index_string_exp REGX_END •
 
     $default  reduce using rule 24 (range_exp)
 
 
-State 64
+State 65
 
    36 const_comment_exp: TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END •
 
     $default  reduce using rule 36 (const_comment_exp)
 
 
-State 65
+State 66
 
    31 range_exp: range_exp COMMA NUMBER •  [INCLUDE, EXCLUDE, COMMA, SEM]
    32          | range_exp COMMA NUMBER • TO NUMBER
    33          | range_exp COMMA NUMBER • TO const_comment_exp
 
-    TO  shift, and go to state 73
+    TO  shift, and go to state 74
 
     $default  reduce using rule 31 (range_exp)
 
 
-State 66
+State 67
 
    29 range_exp: range_exp COMMA REGX_START • index_string_exp REGX_END
    40 index_string_exp: • STRING
    41                 | • LINE_BREAK
-   42                 | • index_string_exp STRING
-   43                 | • index_string_exp EMPTY
-   44                 | • index_string_exp LINE_BREAK
+   42                 | • EMPTY
+   43                 | • index_string_exp STRING
+   44                 | • index_string_exp EMPTY
+   45                 | • index_string_exp LINE_BREAK
 
     STRING      shift, and go to state 8
-    LINE_BREAK  shift, and go to state 9
+    EMPTY       shift, and go to state 9
+    LINE_BREAK  shift, and go to state 10
 
-    index_string_exp  go to state 74
+    index_string_exp  go to state 75
 
 
-State 67
+State 68
 
    30 range_exp: range_exp COMMA const_comment_exp •  [INCLUDE, EXCLUDE, COMMA, SEM]
    34          | range_exp COMMA const_comment_exp • TO NUMBER
    35          | range_exp COMMA const_comment_exp • TO const_comment_exp
 
-    TO  shift, and go to state 75
+    TO  shift, and go to state 76
 
     $default  reduce using rule 30 (range_exp)
 
 
-State 68
+State 69
 
    28 range_exp: const_comment_exp TO NUMBER •
 
     $default  reduce using rule 28 (range_exp)
 
 
-State 69
+State 70
 
    26 range_exp: const_comment_exp TO const_comment_exp •
 
     $default  reduce using rule 26 (range_exp)
 
 
-State 70
+State 71
 
    16 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT • STRING SEM
    17                      | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT • STRING filter_exp SEM
 
-    STRING  shift, and go to state 76
+    STRING  shift, and go to state 77
 
 
-State 71
+State 72
 
    15 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE filter_exp SEM •
 
     $default  reduce using rule 15 (import_rule_chain_exp)
 
 
-State 72
+State 73
 
    39 rule_table_exp: index_string_exp EQ NUMBER GT index_string_exp SEM •
 
     $default  reduce using rule 39 (rule_table_exp)
 
 
-State 73
+State 74
 
    32 range_exp: range_exp COMMA NUMBER TO • NUMBER
    33          | range_exp COMMA NUMBER TO • const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 77
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 78
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    const_comment_exp  go to state 78
-
-
-State 74
-
-   29 range_exp: range_exp COMMA REGX_START index_string_exp • REGX_END
-   42 index_string_exp: index_string_exp • STRING
-   43                 | index_string_exp • EMPTY
-   44                 | index_string_exp • LINE_BREAK
-
-    STRING      shift, and go to state 25
-    EMPTY       shift, and go to state 26
-    LINE_BREAK  shift, and go to state 27
-    REGX_END    shift, and go to state 79
+    const_comment_exp  go to state 79
 
 
 State 75
+
+   29 range_exp: range_exp COMMA REGX_START index_string_exp • REGX_END
+   43 index_string_exp: index_string_exp • STRING
+   44                 | index_string_exp • EMPTY
+   45                 | index_string_exp • LINE_BREAK
+
+    STRING      shift, and go to state 26
+    EMPTY       shift, and go to state 27
+    LINE_BREAK  shift, and go to state 28
+    REGX_END    shift, and go to state 80
+
+
+State 76
 
    34 range_exp: range_exp COMMA const_comment_exp TO • NUMBER
    35          | range_exp COMMA const_comment_exp TO • const_comment_exp
    36 const_comment_exp: • TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END
 
-    NUMBER                      shift, and go to state 80
-    TRANS_IMPORT_COMMENT_START  shift, and go to state 39
+    NUMBER                      shift, and go to state 81
+    TRANS_IMPORT_COMMENT_START  shift, and go to state 40
 
-    const_comment_exp  go to state 81
+    const_comment_exp  go to state 82
 
 
-State 76
+State 77
 
    16 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING • SEM
    17                      | IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING • filter_exp SEM
@@ -1049,67 +1075,67 @@ State 76
    20           | • filter_exp INCLUDE range_exp
    21           | • filter_exp EXCLUDE range_exp
 
-    INCLUDE  shift, and go to state 29
-    EXCLUDE  shift, and go to state 30
-    SEM      shift, and go to state 82
+    INCLUDE  shift, and go to state 30
+    EXCLUDE  shift, and go to state 31
+    SEM      shift, and go to state 83
 
-    filter_exp  go to state 83
+    filter_exp  go to state 84
 
 
-State 77
+State 78
 
    32 range_exp: range_exp COMMA NUMBER TO NUMBER •
 
     $default  reduce using rule 32 (range_exp)
 
 
-State 78
+State 79
 
    33 range_exp: range_exp COMMA NUMBER TO const_comment_exp •
 
     $default  reduce using rule 33 (range_exp)
 
 
-State 79
+State 80
 
    29 range_exp: range_exp COMMA REGX_START index_string_exp REGX_END •
 
     $default  reduce using rule 29 (range_exp)
 
 
-State 80
+State 81
 
    34 range_exp: range_exp COMMA const_comment_exp TO NUMBER •
 
     $default  reduce using rule 34 (range_exp)
 
 
-State 81
+State 82
 
    35 range_exp: range_exp COMMA const_comment_exp TO const_comment_exp •
 
     $default  reduce using rule 35 (range_exp)
 
 
-State 82
+State 83
 
    16 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING SEM •
 
     $default  reduce using rule 16 (import_rule_chain_exp)
 
 
-State 83
+State 84
 
    17 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp • SEM
    20 filter_exp: filter_exp • INCLUDE range_exp
    21           | filter_exp • EXCLUDE range_exp
 
-    INCLUDE  shift, and go to state 43
-    EXCLUDE  shift, and go to state 44
-    SEM      shift, and go to state 84
+    INCLUDE  shift, and go to state 44
+    EXCLUDE  shift, and go to state 45
+    SEM      shift, and go to state 85
 
 
-State 84
+State 85
 
    17 import_rule_chain_exp: IMPORT LBRACE index_string_exp RBRACE HYPHEN GT STRING filter_exp SEM •
 

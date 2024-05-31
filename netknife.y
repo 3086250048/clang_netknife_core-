@@ -85,6 +85,7 @@ range_exp : NUMBER { $$=join_range(NULL,NULL,$1,0,NULL,NULL);  }
 const_comment_exp : TRANS_IMPORT_COMMENT_START index_string_exp TRANS_IMPORT_COMMENT_END { $$=trim($2); }
 
 comment_table_exp : COMMENT_START index_string_exp COMMENT_END {comment_table_reduce($2);};
+				 
 
 rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {rule_table_reduce($1,$4,0);}
 	           | index_string_exp EQ NUMBER GT index_string_exp SEM {rule_table_reduce($1,$5,$3);}
@@ -92,6 +93,7 @@ rule_table_exp : index_string_exp EQ GT index_string_exp SEM  {rule_table_reduce
 
 index_string_exp : STRING {$$=$1;}
 		 | LINE_BREAK { $$=$1;}
+		 | EMPTY { $$=$1 ;}
 		 | index_string_exp STRING { append_string(&$1,$2);$$=$1 ;}
 		 | index_string_exp EMPTY  { append_string(&$1,$2);$$=$1 ;}
 		 | index_string_exp LINE_BREAK { append_string(&$1,$2);$$=$1; }

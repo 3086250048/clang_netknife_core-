@@ -194,7 +194,14 @@ struct trans *  trans_reduce()
 					start_trans=NULL;
 					 print_trans(t);
 					 return NULL;
-			}else{
+			}
+			
+			if(file_stack_count > 1 ){
+				popfile();
+			}
+
+			if(file_stack_count == 1)
+			{
 				/*trans中不包含import语句*/
 				 struct trans *  t= join_trans(cur_trans,yylineno , get_rule_table(),get_import_rule());	
 				 print_trans(t);

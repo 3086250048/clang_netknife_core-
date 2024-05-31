@@ -42,12 +42,13 @@ printf("\n");
 			struct trans * t = join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
 			start_trans=NULL;
 			print_trans(t);
-		}else{
 			popfile();
+		}else{
 			excute_import();
 		}
+	}else{
+		popfile();
 	}
-	popfile();
 }
 
 <READY>[ \t] { }
