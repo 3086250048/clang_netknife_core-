@@ -32,10 +32,7 @@ printf("\n");
 #endif
 }
 <<EOF>> { 
-	if(!popfile()){
-
-		 return 0 ;  
-	}
+	if(!popfile()) { yyterminate();}
 }
 
 <READY>[ \t] { }

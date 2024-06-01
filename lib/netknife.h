@@ -137,7 +137,6 @@ extern struct filter  *  curfilter;
 extern struct buffer * buffer_root;
 extern struct import_trans * cur_import_trans;
 extern char * start_trans;
-extern int import_state ;
 extern struct stack * PreLevelFilterStack;
 
 extern  struct  stack  * rule_stack ;
@@ -361,8 +360,8 @@ unsigned long hash_string(const char * str);
 unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
-int accept(int file_stack_count  ,  char * cur_trans , char * target_trans  );
-#define ACCEPT accept(file_stack_count , cur_trans , target_trans)
+int accept_state(int file_stack_count  ,  char * cur_trans , char * target_trans  );
+#define ACCEPT accept_state(file_stack_count , cur_trans , target_trans)
 void record_rule(char * filename,struct rule * rule ,char * action );
 void record_import(char * filename,struct import_info * import_info,char * action );
 void record_filter(char * filename,struct filter  * filter ,char * action );

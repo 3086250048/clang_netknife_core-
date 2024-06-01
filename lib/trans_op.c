@@ -150,24 +150,74 @@ void excute_import(){
 	}
 }
 
+
+int accept_state(int file_stack_count  ,  char * cur_trans , char * target_trans  ){
+	
+	if(file_stack_count == 1) return 1;
+	if(transcmp(cur_trans,target_trans)) return 1;
+	if(transcmp(target_trans,ALL_TRANS)) return 1;
+}
+
+int alltrans_state(char * target_trans ){
+	if(transcmp(target_trans,ALL_TRANS)) return 1;
+}
+
+int sptrans_state(char * cur_trans , char * target_trans ){
+	if(transcmp(cur_trans,target_trans) ) return 1;
+}
+
+
+int import_state(){
+	if(Top(&import_stack)){ return 1; }
+}
+
+#define AL_TRANS alltrans_state( target_trans)
+#define AP_TRANS sptrans_state(cur_trans , target_trans)
+#define IMPORT import_state() 
+#define SET_START_TRANS  if(file_stack_count == 1) start_trans = cur_trans
+#define RESET_START_TRANS start_trans = NULL
+#define SET_TARGET_TRANS target_trans = import_info->import_name  
 struct trans *  trans_reduce()
 {
-	/*filter 处理*/
-	if(Top(&import_stack)){	
-		struct import_info * import_info = Top(&import_stack)->buffer;
-		Pop(&import_stack);
-		excute_import();
-	}
+	if(ACCEPT){
+		while(Top(&rule_stack)){
+				struct rule * rule = Top(&rule_stack)->buffer;	
+				//	rule = Filter(rule);
+				if(rule) join_rule_table(rule);
+				Pop(&rule_stack);
+			}
 
-	/*rule 处理*/
-	while(Top(&rule_stack)){
-		struct rule * rule = Top(&rule_stack)->buffer;	
-		rule = Filter(rule);
-		if(rule) join_rule_table(rule);
-		Pop(&rule_stack);
-	}
+		if(IMPORT ){	
+			if(AL_TRANS) return NULL;
 
-	struct trans * t =join_trans(start_trans,yylineno,get_rule_table(),get_import_rule());	
+			
+			struct import_info * import_info = Top(&import_stack)->buffer;
+			//	import_info = Filter(import_info);
+			
+			SET_START_TRANS;
+			SET_TARGET_TRANS;
+			
+			if(import_info) join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
+			if(newfile(import_info->file_name)){	
+				Pop(&import_stack);
+				yyparse();
+			}
+		}else{
+			
+			if(file_stack_count == 1){
+				struct trans * t = join_trans(cur_trans , yylineno , get_rule_table(), get_import_rule()); 
+				print_trans(t);	
+			}
+
+			if(AP_TRANS){
+				printf(start_trans);
+				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
+				RESET_START_TRANS;
+				print_trans(t);
+			}
+			
+		}
+	}
 }
 
 

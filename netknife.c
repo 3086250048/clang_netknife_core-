@@ -19,7 +19,7 @@ int main(int  argc ,char ** argv ){
 			  yyparse();
 		  return 0;
 		}else{
-			if(newfile(strdup(argv[1]))){
+			if(newfile(argv[1])){
 				yyparse();
 			}else{
 				return 0;

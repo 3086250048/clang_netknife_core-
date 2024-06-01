@@ -1,6 +1,5 @@
 trans n2 {
 check ip resource => display ip int b ; "test1"
-"@(netknife3) -> n3;"
 }
 
 trans n22 {
