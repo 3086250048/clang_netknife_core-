@@ -78,7 +78,6 @@ void print_filter(struct filter * filter_root){
 
 
 struct  import_rule * join_import_rule(char * file_name ,char * import_name , int lineno,struct filter * filter   ){
-	if(ACCEPT){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT_NODE;
 	tmp->lineno = lineno ;
@@ -88,7 +87,6 @@ struct  import_rule * join_import_rule(char * file_name ,char * import_name , in
 	tmp->next = import_rule_root ;
 	import_rule_root = tmp ;
 	return  tmp ;
-	}
 }
 
 

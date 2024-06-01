@@ -171,14 +171,12 @@ int import_state(){
 	if(Top(&import_stack)){ return 1; }
 }
 
-#define AL_TRANS alltrans_state( target_trans)
-#define AP_TRANS sptrans_state(cur_trans , target_trans)
-#define IMPORT import_state() 
 #define SET_START_TRANS  if(file_stack_count == 1) start_trans = cur_trans
 #define RESET_START_TRANS start_trans = NULL
 #define SET_TARGET_TRANS target_trans = import_info->import_name  
 struct trans *  trans_reduce()
 {
+
 	if(ACCEPT){
 		while(Top(&rule_stack)){
 				struct rule * rule = Top(&rule_stack)->buffer;	
@@ -187,7 +185,7 @@ struct trans *  trans_reduce()
 				Pop(&rule_stack);
 			}
 
-		if(IMPORT ){	
+		if(IMPORT_STATE ){	
 			if(AL_TRANS) return NULL;
 
 			
@@ -201,19 +199,21 @@ struct trans *  trans_reduce()
 			if(newfile(import_info->file_name)){	
 				Pop(&import_stack);
 				yyparse();
+				return NULL;
 			}
 		}else{
 			
 			if(file_stack_count == 1){
 				struct trans * t = join_trans(cur_trans , yylineno , get_rule_table(), get_import_rule()); 
 				print_trans(t);	
+				return NULL;
 			}
 
 			if(AP_TRANS){
-				printf(start_trans);
 				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				RESET_START_TRANS;
 				print_trans(t);
+				return NULL;
 			}
 			
 		}

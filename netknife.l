@@ -31,7 +31,16 @@ yylval.s=strdup(yytext );return STRING;}
 printf("\n");
 #endif
 }
-<<EOF>> { 
+<<EOF>> {
+	if( AL_TRANS){
+
+	}
+
+	if(!AL_TRANS && start_trans){
+		err("import_trans_state","no match target trans");
+		exit(1);
+	} 
+	if(file_stack_count == 1 ){ yyterminate();}
 	if(!popfile()) { yyterminate();}
 }
 

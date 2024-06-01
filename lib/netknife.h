@@ -360,8 +360,16 @@ unsigned long hash_string(const char * str);
 unsigned long combine_hashes(unsigned long hash1, unsigned long hash2) ;
 void append_string(char **dest, const char *src) ;
 int transcmp(char * t1 , char * t2 );
+
 int accept_state(int file_stack_count  ,  char * cur_trans , char * target_trans  );
 #define ACCEPT accept_state(file_stack_count , cur_trans , target_trans)
+int alltrans_state(char * target_trans);
+#define AL_TRANS alltrans_state( target_trans)
+int sptrans_state(char * cur_trans , char * target_trans);
+#define AP_TRANS sptrans_state(cur_trans , target_trans)
+int import_state();
+#define IMPORT_STATE import_state() 
+
 void record_rule(char * filename,struct rule * rule ,char * action );
 void record_import(char * filename,struct import_info * import_info,char * action );
 void record_filter(char * filename,struct filter  * filter ,char * action );
