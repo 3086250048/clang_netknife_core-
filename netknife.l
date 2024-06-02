@@ -37,7 +37,7 @@ printf("\n");
 		
 		if(IMPORT_STATE){
 			struct import_info * import_info = Top(&import_stack)->buffer  ;
-			//import_info = Filter(import_info);
+			import_info = Filter(import_info);
 			SET_TARGET_TRANS;
 			if(import_info) join_import_rule(import_info->file_name , import_info->import_name , import_info->lineno , import_info->filter);
 			if(newfile(import_info->file_name)){

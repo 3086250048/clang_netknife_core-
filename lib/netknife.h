@@ -33,7 +33,9 @@ enum type {
 	S_COMMENT_ONLY = 23 ,
 	LINENO_ONLY = 24 ,
 	COMMENT_ONLY =25 ,
-	LINENO_AND_COMMENT=26
+	LINENO_AND_COMMENT=26,
+	
+	FILTER_ENTRY_NODE 
 };
 
 
@@ -143,6 +145,7 @@ extern struct stack * PreLevelFilterStack;
 extern  struct  stack  * rule_stack ;
 extern  struct  stack  * import_stack ;
 extern  struct  table  * comment_tmp_tab ;
+extern  struct  table  * filter_entry_tab ;
 
 int newfile(char * fb);
 int popfile(void);
@@ -251,6 +254,14 @@ struct import_info  {
 	int lineno ;
 	struct filter * filter ;
 
+};
+
+struct filter_entry {
+	char * file_name ;
+	char * trans_name ;
+	char * target_file; 
+	char * target_trans;
+	struct filter * filter ;
 };
 
 
@@ -380,6 +391,9 @@ void record_rule(char * filename,struct rule * rule ,char * action );
 void record_import(char * filename,struct import_info * import_info,char * action );
 void record_filter(char * filename,struct filter  * filter ,char * action );
 void excute_import();
+
+
+
 #endif
 
 

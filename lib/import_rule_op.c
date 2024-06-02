@@ -381,6 +381,24 @@ struct import_info * join_import_info(char * file_name , char * import_name , in
 	return tmp ;
 }
 
+struct filter_entry * join_filter_entry(char * file_name , char * trans_name , char * target_file ,char * target_trans , struct filter * filter  ){
+	struct filter_entry * tmp = malloc(sizeof(struct filter_entry))	;
+	tmp->file_name = file_name ; 
+	tmp->trans_name = trans_name ; 
+	tmp->target_file = target_file ;
+	tmp->target_trans = target_trans ; 
+	if(!filter){
+		filter = malloc(sizeof(struct filter ));
+		filter->node_type = SKIP_NODE;
+		filter->range = NULL;
+		filter->next = NULL;
+	}
+	tmp->filter = filter ;
+	return tmp ;
+}
+
+
+
 void record_import(char * filename,struct import_info * import_info,char * action ){
 	if(import_info)return;
  	char  * outfile  = filename  ; 
@@ -452,6 +470,11 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 		}else{
 			target_trans = import_name;
 		}
+
+		
+		struct filter_entry * filter_entry =  join_filter_entry(curfilename  , cur_trans , filename  ,target_trans ,  filter );
+		Add(&filter_entry_tab , filter_entry->target_file , filter_entry->target_trans , FILTER_ENTRY_NODE , filter_entry );
+
 		struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
 		Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
 		#ifdef OUTSTEP

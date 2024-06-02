@@ -175,19 +175,28 @@ struct trans *  trans_reduce()
 {
 
 	if(ACCEPT){
+
+		/* 
+		 *当前 trans 使用  Filter 制作
+		 */
+		
+		Get
+
 		while(Top(&rule_stack)){
 				struct rule * rule = Top(&rule_stack)->buffer;	
-				//	rule = Filter(rule);
+				rule = Filter(rule);
 				if(rule) join_rule_table(rule);
 				Pop(&rule_stack);
 			}
 
 		if(IMPORT_STATE ){	
+
 			if(AL_TRANS) return NULL;
 
 			
 			struct import_info * import_info = Top(&import_stack)->buffer;
-			//	import_info = Filter(import_info);
+			import_info = Filter(import_info);
+							
 			SET_START_FILE;	
 			SET_START_TRANS;
 			SET_TARGET_TRANS;
@@ -215,13 +224,4 @@ struct trans *  trans_reduce()
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
 

@@ -19,6 +19,7 @@ struct stack * PreLevelFilterStack  = NULL;
 /*buffer*/
 struct stack  * rule_stack   = NULL;
 struct stack  * import_stack = NULL;
+struct table  * filter_entry_tab = NULL ;
 struct table  * comment_tmp_tab   = NULL;
 
 //初始化
