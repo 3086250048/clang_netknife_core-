@@ -45,7 +45,14 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 
 struct netknife * netknife_reduce( void  * node){
 		if(!node)return NULL ;
-		return  join_netknife_table(curfilename ,(struct trans *)node);
+		if(start_file){
+			struct netknife * n =  join_netknife_table(start_file ,(struct trans *)node);
+			RESET_START_FILE ;
+			return n;
+		}else{
+			struct netknife * n =  join_netknife_table(curfilename ,(struct trans *)node);
+			return n;
+		}
 }  
 
 

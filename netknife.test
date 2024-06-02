@@ -13,7 +13,7 @@ trans cisco_to_huawei {
 	neignbor 192.168.100.1 connectinterface loopback 0 \n
 	;
 	
-	@(netknife2)->n2 ;   
+	@(netknife2);   
 
 	ospf =100> bgp;
 }

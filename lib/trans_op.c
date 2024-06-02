@@ -171,9 +171,6 @@ int import_state(){
 	if(Top(&import_stack)){ return 1; }
 }
 
-#define SET_START_TRANS  if(file_stack_count == 1) start_trans = cur_trans
-#define RESET_START_TRANS start_trans = NULL
-#define SET_TARGET_TRANS target_trans = import_info->import_name  
 struct trans *  trans_reduce()
 {
 
@@ -191,7 +188,7 @@ struct trans *  trans_reduce()
 			
 			struct import_info * import_info = Top(&import_stack)->buffer;
 			//	import_info = Filter(import_info);
-			
+			SET_START_FILE;	
 			SET_START_TRANS;
 			SET_TARGET_TRANS;
 			
@@ -199,21 +196,20 @@ struct trans *  trans_reduce()
 			if(newfile(import_info->file_name)){	
 				Pop(&import_stack);
 				yyparse();
-				return NULL;
 			}
 		}else{
 			
 			if(file_stack_count == 1){
 				struct trans * t = join_trans(cur_trans , yylineno , get_rule_table(), get_import_rule()); 
 				print_trans(t);	
-				return NULL;
+				return t;
 			}
 
 			if(AP_TRANS  ){
 				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				RESET_START_TRANS;
 				print_trans(t);
-				return NULL;
+				return t;
 			}
 			
 		}

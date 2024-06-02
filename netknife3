@@ -7,4 +7,8 @@ set ip gt 192.168.3333.21 => undo_ipsource ; "dis"
 }
 
 
-trans neee {}
+trans neee { 
+	
+	uuuuuuuu =999> shiadd d;
+
+}

@@ -14,6 +14,7 @@ char * cur_trans=NULL ;
 char * target_trans=NULL;
 struct import_trans *  cur_import_trans=NULL;
 char * start_trans = NULL;
+char * start_file = NULL;
 struct stack * PreLevelFilterStack  = NULL;
 /*buffer*/
 struct stack  * rule_stack   = NULL;

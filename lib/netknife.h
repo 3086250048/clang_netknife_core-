@@ -137,6 +137,7 @@ extern struct filter  *  curfilter;
 extern struct buffer * buffer_root;
 extern struct import_trans * cur_import_trans;
 extern char * start_trans;
+extern char * start_file; 
 extern struct stack * PreLevelFilterStack;
 
 extern  struct  stack  * rule_stack ;
@@ -370,6 +371,11 @@ int sptrans_state(char * cur_trans , char * target_trans);
 int import_state();
 #define IMPORT_STATE import_state() 
 
+#define SET_START_TRANS  if(file_stack_count == 1) start_trans = cur_trans
+#define RESET_START_TRANS start_trans = NULL
+#define SET_TARGET_TRANS target_trans = import_info->import_name  
+#define SET_START_FILE  if(file_stack_count == 1) start_file = curfilename 
+#define RESET_START_FILE  start_file = NULL
 void record_rule(char * filename,struct rule * rule ,char * action );
 void record_import(char * filename,struct import_info * import_info,char * action );
 void record_filter(char * filename,struct filter  * filter ,char * action );

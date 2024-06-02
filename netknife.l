@@ -32,16 +32,36 @@ printf("\n");
 #endif
 }
 <<EOF>> {
-	if( AL_TRANS){
 
+	if( AL_TRANS && start_trans){
+		
+		if(IMPORT_STATE){
+			struct import_info * import_info = Top(&import_stack)->buffer  ;
+			//import_info = Filter(import_info);
+			SET_TARGET_TRANS;
+			if(import_info) join_import_rule(import_info->file_name , import_info->import_name , import_info->lineno , import_info->filter);
+			if(newfile(import_info->file_name)){
+				Pop(&import_stack);
+				yyparse();
+			}
+		}else{
+			struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
+			RESET_START_TRANS;
+			print_trans(t);
+			join_netknife_table(start_file , t );
+			RESET_START_FILE;				
+		}
+		
 	}
 
 	if(!AL_TRANS && start_trans){
 		err("import_trans_state","no match target trans");
 		exit(1);
 	} 
+
 	if(file_stack_count == 1 ){ yyterminate();}
 	if(!popfile()) {yyterminate();}
+	
 }
 
 <READY>[ \t] { }

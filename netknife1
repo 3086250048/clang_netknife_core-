@@ -1,8 +1,8 @@
 trans test{
 	display ip  int b =100> show ip int b ;
-	@(netknife2)-> n2  ;  
+	@(netknife2)  ;  
 	show test int  b => shiad ; 
-	@(netknife3)-> n3 ;
+	@test1;
 }
 trans test1{
 	this is test1 =200> this is not test1  ;
@@ -12,7 +12,6 @@ trans test1{
 
 trans test2{
 	this is test2 => sobejfoifn ; 
-@test;
 }
 
 
