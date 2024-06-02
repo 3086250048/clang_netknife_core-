@@ -6,6 +6,13 @@ trans test{
 }
 trans test1{
 	this is test1 =200> this is not test1  ;
+	@test2 ; 
+}
+
+
+trans test2{
+	this is test2 => sobejfoifn ; 
+@test;
 }
 
 

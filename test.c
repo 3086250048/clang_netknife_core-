@@ -3,10 +3,14 @@
 #include <string.h>
 #define A ""
 int main() {
-	int a = 10;
-	int b = a;
-	a =100;
-	printf("%d\n",b);
+		FILE * f = fopen("netknife1","r");
+		if(!f){ printf("error\n");}
+		f = fopen("netknife1","r");
 
+		if(!f){ printf("error\n");}
+ 		f = fopen("netknife1","r");
+
+		if(!f){ printf("error\n");}
+ 		f = fopen("netknife1","r");
 }
 

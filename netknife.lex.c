@@ -930,7 +930,7 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 		exit(1);
 	} 
 	if(file_stack_count == 1 ){ yyterminate();}
-	if(!popfile()) { yyterminate();}
+	if(!popfile()) {yyterminate();}
 }
 	YY_BREAK
 case 7:

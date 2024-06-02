@@ -1,12 +1,13 @@
 trans n2 {
 check ip resource => display ip int b ; "test1"
+@n22 ;
+check ip resource => display ip int b ; "test1"
 }
 
 trans n22 {
 aaaaacheck ip resource => display ip int b ; "test1"
 aaaaaacheck ip resource => display ip int b ; "test1"
-" @(netknife3);"
-@(netknfie2)->n2;
+ @(netknife3)->n3;
 aaaaaadisplay ip int b 1 => show ip int b;
 }
 

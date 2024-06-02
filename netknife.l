@@ -41,7 +41,7 @@ printf("\n");
 		exit(1);
 	} 
 	if(file_stack_count == 1 ){ yyterminate();}
-	if(!popfile()) { yyterminate();}
+	if(!popfile()) {yyterminate();}
 }
 
 <READY>[ \t] { }

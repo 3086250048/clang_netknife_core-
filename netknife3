@@ -1,6 +1,10 @@
 trans n3 {
 set ip gt 192.168.2.21 => undo_ipsource ; "dis"
+@n33;
 }
 trans n33 {
-set ip gt 192.168.2.21 => undo_ipsource ; "dis"
+set ip gt 192.168.3333.21 => undo_ipsource ; "dis"
 }
+
+
+trans neee {}

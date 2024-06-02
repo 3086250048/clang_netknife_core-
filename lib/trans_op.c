@@ -154,8 +154,8 @@ void excute_import(){
 int accept_state(int file_stack_count  ,  char * cur_trans , char * target_trans  ){
 	
 	if(file_stack_count == 1) return 1;
-	if(transcmp(cur_trans,target_trans)) return 1;
-	if(transcmp(target_trans,ALL_TRANS)) return 1;
+	if(transcmp(cur_trans,target_trans) && start_trans ) return 1;
+	if(transcmp(target_trans,ALL_TRANS) && start_trans ) return 1;
 }
 
 int alltrans_state(char * target_trans ){
@@ -209,7 +209,7 @@ struct trans *  trans_reduce()
 				return NULL;
 			}
 
-			if(AP_TRANS){
+			if(AP_TRANS  ){
 				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				RESET_START_TRANS;
 				print_trans(t);
