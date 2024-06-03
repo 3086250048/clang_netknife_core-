@@ -81064,3 +81064,633 @@ Object| rule_stack
   Rule| lineno:14 priority:0 s:this is test2 d:sobejfoifn
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:8 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:14 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:8 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:14 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:8 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:14 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:8 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:14 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:13 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:13 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:13 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:13 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:13 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:13 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:2 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test level:1
+  Rule| lineno:3 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:7 priority:200 s:this is test1 d:this is not test1
+<<<
+

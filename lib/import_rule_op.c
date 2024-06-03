@@ -338,34 +338,51 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 void *  Filter(void * buffer){
 	int has_range =0;
 	/*如果不存在filter则直接退出*/
-	if(!curfilter )return buffer ; 
-	struct filter  * filter = curfilter;		
-	/*合并filter中的range*/
-	struct stack  * include_stack=NULL ;
-	struct stack  * exclude_stack = NULL;
-	while(filter){
-		if(filter->node_type == SKIP_NODE){
-			filter   = filter->next;			
-			continue ;
+	
+	/*if(!curfilter )return buffer ; 
+	 *struct filter  * filter = curfilter;		
+	 * */
+	if(!Get(filter_entry_tab , curfilename , cur_trans , FILTER_ENTRY_NODE)) return buffer ; 
+	
+	char * file_name = curfilename ; 
+   	char * trans_name = cur_trans  ; 
+	while(Get(filter_entry_tab , file_name , trans_name,FILTER_ENTRY_NODE)){
+		struct table * tab = Get(filter_entry_tab , file_name  , trans_name ,FILTER_ENTRY_NODE );
+		while( tab->dup_buffer ){
+			tab = tab->dup_buffer;
 		}
-		struct range * range = filter->range;
-		while(range){
-			has_range =1;
-			if(filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
-			if(filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
-			range=range->next;
+		struct filter_entry * fe = tab->buffer  ;
+		struct filter * filter = fe->filter  ;
+		file_name = fe->file_name ; 
+	   	trans_name = fe->trans_name ; 	
+		
+		/*合并filter中的range*/
+		struct stack  * include_stack=NULL ;
+		struct stack  * exclude_stack = NULL;
+		while(filter){
+			if(filter->node_type == SKIP_NODE){
+				filter   = filter->next;			
+				continue ;
+			}
+			struct range * range = filter->range;
+			while(range){
+				has_range =1;
+				if(filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
+				if(filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
+				range=range->next;
 			}
 			filter = filter->next;
 		}
 		/*判断rule是否符合include_filter*/
-		if(!has_range) return buffer ;
-
-	if( *((int *)buffer) == IMPORT_NODE ){
-		return filter_import(include_stack, exclude_stack ,buffer);	
+		if(!has_range) continue ;
+		if( *((int *)buffer) == IMPORT_NODE ){
+			return  filter_import(include_stack, exclude_stack ,buffer);	
+		}
+		if( *((int*)buffer) == RULE_NODE ){
+			buffer =   filter_rule(include_stack , exclude_stack ,buffer);	
+		}
 	}
-	if( *((int*)buffer) == RULE_NODE ){
-		return filter_rule(include_stack , exclude_stack ,buffer);	
-	}
+	return buffer ;
 } 
 
 

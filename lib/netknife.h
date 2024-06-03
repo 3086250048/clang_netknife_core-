@@ -384,6 +384,7 @@ int import_state();
 
 #define SET_START_TRANS  if(file_stack_count == 1) start_trans = cur_trans
 #define RESET_START_TRANS start_trans = NULL
+#define RESET_TARGET_TRANS target_trans = NULL
 #define SET_TARGET_TRANS target_trans = import_info->import_name  
 #define SET_START_FILE  if(file_stack_count == 1) start_file = curfilename 
 #define RESET_START_FILE  start_file = NULL

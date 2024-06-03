@@ -176,12 +176,6 @@ struct trans *  trans_reduce()
 
 	if(ACCEPT){
 
-		/* 
-		 *当前 trans 使用  Filter 制作
-		 */
-		
-		Get
-
 		while(Top(&rule_stack)){
 				struct rule * rule = Top(&rule_stack)->buffer;	
 				rule = Filter(rule);
@@ -196,15 +190,22 @@ struct trans *  trans_reduce()
 			
 			struct import_info * import_info = Top(&import_stack)->buffer;
 			import_info = Filter(import_info);
-							
-			SET_START_FILE;	
-			SET_START_TRANS;
-			SET_TARGET_TRANS;
+			if(import_info){					
+				SET_START_FILE;	
+				SET_START_TRANS;
+				SET_TARGET_TRANS;
 			
-			if(import_info) join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
-			if(newfile(import_info->file_name)){	
-				Pop(&import_stack);
-				yyparse();
+				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
+				if(newfile(import_info->file_name)){	
+					Pop(&import_stack);
+					yyparse();
+				}
+			}else{
+				struct trans * t  = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
+				RESET_START_TRANS;
+				RESET_TARGET_TRANS;
+				print_trans(t);
+				return t;
 			}
 		}else{
 			
@@ -215,6 +216,7 @@ struct trans *  trans_reduce()
 			}
 
 			if(AP_TRANS  ){
+
 				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				RESET_START_TRANS;
 				print_trans(t);

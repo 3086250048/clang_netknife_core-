@@ -1,8 +1,7 @@
 trans test{
 	display ip  int b =100> show ip int b ;
-	@(netknife2)  ;  
 	show test int  b => shiad ; 
-	@test1;
+	@test1 include r"^this";
 }
 trans test1{
 	this is test1 =200> this is not test1  ;
