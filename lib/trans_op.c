@@ -178,7 +178,7 @@ struct trans *  trans_reduce()
 
 		while(Top(&rule_stack)){
 				struct rule * rule = Top(&rule_stack)->buffer;	
-				rule = Filter(rule);
+				//rule = Filter(rule);
 				if(rule) join_rule_table(rule);
 				Pop(&rule_stack);
 			}
@@ -189,7 +189,7 @@ struct trans *  trans_reduce()
 
 			
 			struct import_info * import_info = Top(&import_stack)->buffer;
-			import_info = Filter(import_info);
+			//import_info = Filter(import_info);
 			if(import_info){					
 				SET_START_FILE;	
 				SET_START_TRANS;
@@ -200,13 +200,14 @@ struct trans *  trans_reduce()
 					Pop(&import_stack);
 					yyparse();
 				}
-			}else{
-				struct trans * t  = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
-				RESET_START_TRANS;
-				RESET_TARGET_TRANS;
-				print_trans(t);
-				return t;
 			}
+			//else{
+				//struct trans * t  = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
+				//RESET_START_TRANS;
+				//RESET_TARGET_TRANS;
+				//print_trans(t);
+				//return t;
+			//}
 		}else{
 			
 			if(file_stack_count == 1){
@@ -219,6 +220,7 @@ struct trans *  trans_reduce()
 
 				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				RESET_START_TRANS;
+				//Clear(&filter_entry_tab);
 				print_trans(t);
 				return t;
 			}

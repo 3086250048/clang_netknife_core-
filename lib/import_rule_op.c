@@ -347,6 +347,9 @@ void *  Filter(void * buffer){
 	char * file_name = curfilename ; 
    	char * trans_name = cur_trans  ; 
 	while(Get(filter_entry_tab , file_name , trans_name,FILTER_ENTRY_NODE)){
+
+		if(!buffer ) return buffer ;
+
 		struct table * tab = Get(filter_entry_tab , file_name  , trans_name ,FILTER_ENTRY_NODE );
 		while( tab->dup_buffer ){
 			tab = tab->dup_buffer;
@@ -375,9 +378,9 @@ void *  Filter(void * buffer){
 		}
 		/*判断rule是否符合include_filter*/
 		if(!has_range) continue ;
-		if( *((int *)buffer) == IMPORT_NODE ){
-			return  filter_import(include_stack, exclude_stack ,buffer);	
-		}
+//		if( *((int *)buffer) == IMPORT_NODE ){
+//			return  filter_import(include_stack, exclude_stack ,buffer);	
+//		}
 		if( *((int*)buffer) == RULE_NODE ){
 			buffer =   filter_rule(include_stack , exclude_stack ,buffer);	
 		}

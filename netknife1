@@ -1,7 +1,7 @@
 trans test{
 	display ip  int b =100> show ip int b ;
 	show test int  b => shiad ; 
-	@test1 include r"^this";
+	@test1   ;
 }
 trans test1{
 	this is test1 =200> this is not test1  ;
@@ -11,6 +11,7 @@ trans test1{
 
 trans test2{
 	this is test2 => sobejfoifn ; 
+	tttttttt =99> ahdwad;
 }
 
 
