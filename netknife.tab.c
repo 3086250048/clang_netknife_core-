@@ -1165,7 +1165,7 @@ yyreduce:
 
   case 4: /* trans_exp: trans_name_exp LBRACE RBRACE  */
 #line 43 "netknife.y"
-                                          { (yyval.trans)=trans_reduce();}
+                                          { (yyval.trans)=trans_reduce();  }
 #line 1170 "netknife.tab.c"
     break;
 

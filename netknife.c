@@ -16,6 +16,7 @@ void yyerror(char * s ,...){
 int main(int  argc ,char ** argv ){
 		init();
 		if(argc<2){
+			 file_stack_count = 1;
 			  yyparse();
 		  return 0;
 		}else{

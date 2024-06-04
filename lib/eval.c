@@ -94,7 +94,9 @@ int popfile(void){
 
 	//删除当前文件信息
 	fclose(bs->f);
+
 	yy_delete_buffer(bs->bs);
+
 	//切换为上一个文件
 	prevbs = bs->prev;
 	free(bs);

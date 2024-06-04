@@ -19,6 +19,7 @@ struct trans * join_trans(char *  name ,int lineno , struct rule_table * rule_ta
 
 //打印trans_table表项
 void print_trans(struct trans * trans){
+	if(!trans ) return ;
 	printf("%*snode_type:TRANS_NODE\n",PRINT_TRANS_TABLE_ENTRY);
 	printf("%*strans_name:%s\n",PRINT_TRANS_TABLE_ENTRY,trans->name);
 	printf("%*slineno:%d\n",PRINT_TRANS_TABLE_ENTRY,trans->lineno);

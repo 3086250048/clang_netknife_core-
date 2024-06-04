@@ -20,6 +20,7 @@ return TRANS;}
  printf("LBRACE ");
 #endif
 BEGIN READY; return LBRACE;} 
+
 [\x80-\xFFa-zA-Z0-9_]+ {
 #ifdef ECHO_TOKEN 
  printf("STRING ");
