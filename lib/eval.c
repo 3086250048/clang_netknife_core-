@@ -65,22 +65,44 @@ int newfile(char * fn ){
 		err("newfile","too many file stacks");
 		exit(1);
 	}
-	FILE * f =	fopen(fn,"r");
+
+	FILE * f ;
+	if(fn)  f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
-	if(!f) {err("openfile","no file with the same name was found");exit(1);};
+	if(!f && fn ) {err("openfile","no file with the same name was found");exit(1);};
 	if(!bs) { perror("malloc"); exit(1);}
 
 	//记住当前状态
 	if(curbs)curbs->lineno = yylineno ;
 	bs->prev=curbs ;
 	//建立当前文件信息
-	bs->bs=yy_create_buffer(f,YY_BUF_SIZE);
-  	bs->f=f;
-	bs->filename=fn;
-	yy_switch_to_buffer(bs->bs);
+	if(fn){
+		bs->bs=yy_create_buffer(f,YY_BUF_SIZE);
+	}else{
+	//	bs->bs=YY_CURRENT_BUFFER;
+	}
+	
+	if(fn){
+  		bs->f=f;
+	}else{
+		bs->f=NULL;
+	}
+	
+	if(fn){
+		bs->filename=fn;
+	}else{
+		bs->filename="cmd";
+	}
+
+	if(fn)	yy_switch_to_buffer(bs->bs);
 	curbs=bs;
 	yylineno=1;
-	curfilename = fn;
+
+	if(fn){
+		curfilename = fn;
+	}else{
+		curfilename = "cmd";
+	}
 	++file_stack_count ;
 	return 1;
 }

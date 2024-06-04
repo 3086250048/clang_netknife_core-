@@ -238,6 +238,8 @@ struct filter {
 
 struct import_rule {	
 	int node_type ;
+	char * index_filename ; 
+	char * index_trans;
 	char * file_name ;
 	char * import_name ;
 	int lineno;

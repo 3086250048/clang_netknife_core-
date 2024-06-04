@@ -80,6 +80,8 @@ void print_filter(struct filter * filter_root){
 struct  import_rule * join_import_rule(char * file_name ,char * import_name , int lineno,struct filter * filter   ){
 	struct import_rule * tmp = malloc(sizeof(struct import_rule));
 	tmp->node_type = IMPORT_NODE;
+	tmp->index_filename = curfilename;
+	tmp->index_trans = cur_trans ;
 	tmp->lineno = lineno ;
 	tmp->file_name = file_name ;
 	tmp->import_name=import_name;
@@ -336,56 +338,48 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 
 
 void *  Filter(void * buffer){
+	if(!import_rule_root ) return buffer ;
 	int has_range =0;
-	/*如果不存在filter则直接退出*/
+	struct import_rule * root = import_rule_root ;
 	
-	/*if(!curfilter )return buffer ; 
-	 *struct filter  * filter = curfilter;		
-	 * */
-	if(!Get(filter_entry_tab , curfilename , cur_trans , FILTER_ENTRY_NODE)) return buffer ; 
+	char * pre_file = curfilename ;
+	char * pre_trans = cur_trans ;
+
+	/*合并filter中的range*/
+	struct stack  * include_stack=NULL ;
+	struct stack  * exclude_stack = NULL;
 	
-	char * file_name = curfilename ; 
-   	char * trans_name = cur_trans  ; 
-	while(Get(filter_entry_tab , file_name , trans_name,FILTER_ENTRY_NODE)){
-
-		if(!buffer ) return buffer ;
-
-		struct table * tab = Get(filter_entry_tab , file_name  , trans_name ,FILTER_ENTRY_NODE );
-		while( tab->dup_buffer ){
-			tab = tab->dup_buffer;
-		}
-		struct filter_entry * fe = tab->buffer  ;
-		struct filter * filter = fe->filter  ;
-		file_name = fe->file_name ; 
-	   	trans_name = fe->trans_name ; 	
-		
-		/*合并filter中的range*/
-		struct stack  * include_stack=NULL ;
-		struct stack  * exclude_stack = NULL;
-		while(filter){
-			if(filter->node_type == SKIP_NODE){
-				filter   = filter->next;			
-				continue ;
+	while(root){	
+		if( !strcmp(pre_trans,root->import_name ) && !strcmp(pre_file , root->file_name )) {
+					pre_file = root->index_filename;
+					pre_trans = root->index_trans ;
+					struct filter * filter = root->filter  ;	
+					
+					while(filter){
+						struct range * range = filter->range;
+						while(range){
+							has_range =1;
+							if(filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
+							if(filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
+							range=range->next;
+						}		
+						filter = filter->next;
+					}
+			
 			}
-			struct range * range = filter->range;
-			while(range){
-				has_range =1;
-				if(filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
-				if(filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
-				range=range->next;
-			}
-			filter = filter->next;
+			root=root->next ;
 		}
-		/*判断rule是否符合include_filter*/
-		if(!has_range) continue ;
-//		if( *((int *)buffer) == IMPORT_NODE ){
-//			return  filter_import(include_stack, exclude_stack ,buffer);	
-//		}
+
+		if(!has_range){
+			return buffer ;
+		} 
+		if( *((int *)buffer) == IMPORT_NODE ){
+				return  filter_import(include_stack, exclude_stack ,buffer);	
+		}
 		if( *((int*)buffer) == RULE_NODE ){
-			buffer =   filter_rule(include_stack , exclude_stack ,buffer);	
+				return   filter_rule(include_stack , exclude_stack ,buffer);	
 		}
-	}
-	return buffer ;
+
 } 
 
 
@@ -492,8 +486,8 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 		}
 
 		
-		struct filter_entry * filter_entry =  join_filter_entry(curfilename  , cur_trans , filename  ,target_trans ,  filter );
-		Add(&filter_entry_tab , filter_entry->target_file , filter_entry->target_trans , FILTER_ENTRY_NODE , filter_entry );
+	//	struct filter_entry * filter_entry =  join_filter_entry(curfilename  , cur_trans , filename  ,target_trans ,  filter );
+	//	Add(&filter_entry_tab , filter_entry->target_file , filter_entry->target_trans , FILTER_ENTRY_NODE , filter_entry );
 
 		struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
 		Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );

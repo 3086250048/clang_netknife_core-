@@ -179,7 +179,7 @@ struct trans *  trans_reduce()
 
 		while(Top(&rule_stack)){
 				struct rule * rule = Top(&rule_stack)->buffer;	
-				//rule = Filter(rule);
+				rule = Filter(rule);
 				if(rule) join_rule_table(rule);
 				Pop(&rule_stack);
 			}
@@ -190,7 +190,7 @@ struct trans *  trans_reduce()
 
 			
 			struct import_info * import_info = Top(&import_stack)->buffer;
-			//import_info = Filter(import_info);
+	//		import_info = Filter(import_info);
 			if(import_info){					
 				SET_START_FILE;	
 				SET_START_TRANS;
