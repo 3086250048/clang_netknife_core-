@@ -161,6 +161,7 @@ void swap_number(int * a , int * b){
 
 int get_comment_lineno(char * c){
 	struct table  * tab  =  Get(comment_tmp_tab, curfilename , c , COMMENT_NODE  );
+	if(!tab) return -1 ;
 	if(tab->type){
 		struct comment * comment = tab->buffer ;
 		return comment->lineno ;
@@ -350,7 +351,8 @@ void *  Filter(void * buffer){
 	struct stack  * exclude_stack = NULL;
 	
 	while(root){	
-		if( !strcmp(pre_trans,root->import_name ) && !strcmp(pre_file , root->file_name )) {
+		if( (!strcmp(pre_trans,root->import_name ) && !strcmp(pre_file , root->file_name )) ||\
+			(!strcmp(ALL_TRANS,root->import_name) && !strcmp(pre_file,root->file_name)   ) ) {
 					pre_file = root->index_filename;
 					pre_trans = root->index_trans ;
 					struct filter * filter = root->filter  ;	
@@ -373,9 +375,9 @@ void *  Filter(void * buffer){
 		if(!has_range){
 			return buffer ;
 		} 
-		if( *((int *)buffer) == IMPORT_NODE ){
-				return  filter_import(include_stack, exclude_stack ,buffer);	
-		}
+	//	if( *((int *)buffer) == IMPORT_NODE ){
+	//			return  filter_import(include_stack, exclude_stack ,buffer);	
+	//	}
 		if( *((int*)buffer) == RULE_NODE ){
 				return   filter_rule(include_stack , exclude_stack ,buffer);	
 		}

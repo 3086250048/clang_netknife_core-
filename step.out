@@ -1792,3 +1792,3897 @@ Object| rule_stack
   Rule| lineno:25 priority:0 s:aaa d:aaa
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:10 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:18 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:3
+  Rule| lineno:19 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:4
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:5
+  Rule| lineno:18 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:5
+  Rule| lineno:19 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:6
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:7
+  Rule| lineno:18 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:7
+  Rule| lineno:19 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:8
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:10 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:18 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:19 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:4
+  Rule| lineno:18 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:4
+  Rule| lineno:19 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:5
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:18 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:19 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:25 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:9 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:9 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:9 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:3
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:9 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:9 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:9 priority:200 s:this is test1 d:this is not test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:1
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:2
+  Rule| lineno:23 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:cisco_to_huawei level:1
+  Rule| lineno:2 priority:0 s:ospf d:bgp
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:cisco_to_huawei level:1
+  Rule| lineno:3 priority:0 s:ospf d:bgp
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:cisco_to_huawei level:1
+  Rule| lineno:5 priority:0 s:show
+ip int b d:display
+ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:cisco_to_huawei level:1
+  Rule| lineno:14 priority:100 s:bgp 100
+peer 192.168.100.1 asnumber 101
+peer 192.168.100.1 connectinterfacae loopback 0 d:route bgp 100
+neignbor 192.168.100.1 as 100
+neignbor 192.168.100.1 connectinterface loopback 0
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:cisco_to_huawei level:1
+  Rule| lineno:18 priority:100 s:ospf d:bgp
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:a level:1
+  Rule| lineno:24 priority:0 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:b level:1
+  Rule| lineno:29 priority:0 s:this is b d:show b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:b level:1
+  Rule| lineno:30 priority:0 s:31行 d:3111
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:35 priority:0 s:1111这是test d:你好test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:36 priority:0 s:ez30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili d:qq1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:37 priority:0 s:ea30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili d:qq2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:38 priority:0 s:eb30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili d:qq3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:39 priority:0 s:ec30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:40 priority:0 s:eg30SclV3bEmdn5EFrzZo9aQ9dDTdQ0UVFdtuuSP6cgNQs9MirNWecrNyyD1gVs3VbwFVUXGqVrwOxRVr8eCmeUwvSXIvXxBWTili d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:41 priority:0 s:plV1k5CzNSRwPvKSK6krXeJgmVT8cAjfkvXy1kCnd2hLwB8ITG2Tia01UO0b7CYV6EBjemgM9HObOPJpag1QeFFoF2LhTGv2dkxk d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:42 priority:0 s:Ha9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:43 priority:0 s:Hb9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:44 priority:0 s:Hc9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:45 priority:0 s:Hd9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife.test trans:test level:1
+  Rule| lineno:46 priority:0 s:He9EpZWb7InHCRcOHWOBmhBD2MTWtErETE8pXrg4hBM151J9I4NacN26pIw52it5IDae9vo2jMRywsrzAbP0cqBAnmFjeKy1imWL d:qq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:16 priority:0 s:this is test2 d:sobejfoifn
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test2 level:2
+  Rule| lineno:17 priority:99 s:tttttttt d:ahdwad
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife1 trans:test2 level:2
+Comment| lineno:18 c:import
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:2
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:3
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:3
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:3
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:3
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:3
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:4
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:4
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:4
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:4
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:4
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:2
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:2
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:2
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:2
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:2
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:3
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:3
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:4
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:4
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:4
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:4
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:4
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:4
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:4
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:4
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:6
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:6
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:6
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:6
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:6
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:7
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:7
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:7
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:7
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:7
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:8
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:8
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:11 priority:0 s:aaa d:aaa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:3 priority:100 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:testd level:1
+  Rule| lineno:4 priority:0 s:show test int b d:shiad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:2 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:2 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n2 level:2
+  Rule| lineno:6 priority:0 s:check ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n2 level:2
+Comment| lineno:6 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:2
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:2
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:17 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:18 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:19 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n222 level:2
+  Rule| lineno:20 priority:0 s:password d:shdawda
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:3
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:10 priority:0 s:aaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:10 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:11 priority:0 s:aaaaaacheck ip resource d:display ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife2 trans:n22 level:4
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:n22 level:4
+  Rule| lineno:12 priority:0 s:aaaaaadisplay ip int b 1 d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n3 level:5
+  Rule| lineno:2 priority:0 s:set ip gt 192.168.2.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n3 level:5
+Comment| lineno:2 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:5
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:5
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:neee level:5
+  Rule| lineno:12 priority:999 s:uuuuuuuu d:shiadd d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife3 trans:n33 level:6
+  Rule| lineno:6 priority:0 s:set ip gt 192.168.3333.21 d:undo_ipsource
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife3 trans:n33 level:6
+Comment| lineno:6 c:dis
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test3 level:1
+  Rule| lineno:10 priority:0 s:aaa d:aaa
+<<<
+
