@@ -299,15 +299,16 @@ struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude
 		}
 }
 
-struct import_info * filter_import(struct stack * include_stack , struct stack * exclude_stack , struct import_info * import_info ){
+struct import_info * filter_import(struct stack * include_stack , struct stack * exclude_stack , struct import_info * import_info , char * cmp_pre_file){
 		int include_match_result = 0;	
 		int exist_include_filter =0;
 		struct range * inc_match_range = NULL;
 		char * import_raw = malloc(1) ;	
-		strcpy(import_raw,"@");
-		append_string(&import_raw , import_info->file_name);
+		strcpy(import_raw,"@");	
+		if(strcmp(import_info->file_name , cmp_pre_file)!=0){ 
+			append_string(&import_raw , import_info->file_name);
+		} 
 	 	append_string(&import_raw , import_info->import_name);
-
 		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , import_info->lineno , import_raw);
 		/*判断rule是否符合exclude_filter*/
 		int exclude_match_result = 0;	
@@ -349,10 +350,14 @@ void *  Filter(void * buffer){
 	/*合并filter中的range*/
 	struct stack  * include_stack=NULL ;
 	struct stack  * exclude_stack = NULL;
-	
+	/*给filter_import使用的参数*/
+	char *  cmp_pre_file = NULL;
+   		
+		
 	while(root){	
 		if( (!strcmp(pre_trans,root->import_name ) && !strcmp(pre_file , root->file_name )) ||\
-			(!strcmp(ALL_TRANS,root->import_name) && !strcmp(pre_file,root->file_name)   ) ) {
+			(!strcmp(ALL_TRANS,root->import_name) && !strcmp(pre_file,root->file_name)) ) {
+					if(*(int *)buffer == IMPORT_NODE){ cmp_pre_file = pre_file; }
 					pre_file = root->index_filename;
 					pre_trans = root->index_trans ;
 					struct filter * filter = root->filter  ;	
@@ -367,7 +372,7 @@ void *  Filter(void * buffer){
 						}		
 						filter = filter->next;
 					}
-			
+				if(*(int*)buffer  == IMPORT_NODE  ) break ; 
 			}
 			root=root->next ;
 		}
@@ -375,9 +380,11 @@ void *  Filter(void * buffer){
 		if(!has_range){
 			return buffer ;
 		} 
-	//	if( *((int *)buffer) == IMPORT_NODE ){
-	//			return  filter_import(include_stack, exclude_stack ,buffer);	
-	//	}
+
+		if( *((int *)buffer) == IMPORT_NODE ){
+				return  filter_import(include_stack, exclude_stack ,buffer , cmp_pre_file );	
+		}
+
 		if( *((int*)buffer) == RULE_NODE ){
 				return   filter_rule(include_stack , exclude_stack ,buffer);	
 		}

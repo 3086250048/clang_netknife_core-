@@ -2,7 +2,7 @@
 trans testd{
 	display ip  int b =100> show ip int b ;
 	show test int  b => shiad ; 
-	@(netknife2)  include r"^dis" , r"^pass" , r"^u";
+	@(netknife2)  include r"^dis" , r"^pass" , r"^u"  exclude r"@";
 }
 
 

@@ -38,7 +38,7 @@ printf("\n");
 		
 		if(IMPORT_STATE){
 			struct import_info * import_info = Top(&import_stack)->buffer  ;
-			//import_info = Filter(import_info);
+			import_info = Filter(import_info);
 			if(import_info){
 				SET_TARGET_TRANS;
 				join_import_rule(import_info->file_name , import_info->import_name , import_info->lineno , import_info->filter);
@@ -46,13 +46,17 @@ printf("\n");
 					Pop(&import_stack);
 					yyparse();
 				}
-			}//else{
-			//	struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
-			//	RESET_START_TRANS;
-			//	print_trans(t);
-			//	join_netknife_table(start_file , t );
-			//	RESET_START_FILE;				
-			//}
+			}else{
+				Pop(&import_stack);	
+				//if(Top(&import_stack) == NULL){
+				//	struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
+				//	RESET_START_TRANS;
+				//	print_trans(t);
+				//	join_netknife_table(start_file , t );
+				//	RESET_START_FILE;				
+				//}
+
+			}
 		}else{
 			struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 			RESET_START_TRANS;
