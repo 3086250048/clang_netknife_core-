@@ -4,7 +4,6 @@
 #include <stdarg.h>
 #include "netknife.h"
 
-
 void yyerror(char * s ,...){
 	va_list ap;
 	va_start(ap,s);
@@ -16,8 +15,9 @@ void yyerror(char * s ,...){
 int main(int  argc ,char ** argv ){
 		init();
 		if(argc<2){
-			 file_stack_count = 1;
-			  yyparse();
+			if(newfile("cmd")){
+				yyparse();
+			}
 		  return 0;
 		}else{
 			if(newfile(argv[1])){

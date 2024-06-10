@@ -3,6 +3,7 @@
 #include "netknife.h"
 #include <stdio.h>
 
+
 void append_string(char **dest, const char *src) {
     size_t dest_len = strlen(*dest);
     size_t src_len = strlen(src);
@@ -59,15 +60,14 @@ void err(char * state , char * err){
 	fprintf(stderr,"\n");
 }
 
-int newfile(char * fn ){
-	
+int newfile(char * fn ){	
 	if(file_stack_count >= MAX_STACK ){
 		err("newfile","too many file stacks");
 		exit(1);
 	}
 
 	FILE * f ;
-	if(fn)  f =	fopen(fn,"r");
+	if(strcmp(fn,"cmd")!=0)  f =	fopen(fn,"r");
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
 	if(!f && fn ) {err("openfile","no file with the same name was found");exit(1);};
 	if(!bs) { perror("malloc"); exit(1);}
@@ -76,29 +76,29 @@ int newfile(char * fn ){
 	if(curbs)curbs->lineno = yylineno ;
 	bs->prev=curbs ;
 	//建立当前文件信息
-	if(fn){
+	if(strcmp(fn,"cmd")!=0){
 		bs->bs=yy_create_buffer(f,YY_BUF_SIZE);
 	}else{
-	//	bs->bs=YY_CURRENT_BUFFER;
+		bs->bs=NULL;
 	}
 	
-	if(fn){
+	if(strcmp(fn,"cmd")!=0){
   		bs->f=f;
 	}else{
 		bs->f=NULL;
 	}
 	
-	if(fn){
+	if(strcmp(fn,"cmd")!=0){
 		bs->filename=fn;
 	}else{
 		bs->filename="cmd";
 	}
 
-	if(fn)	yy_switch_to_buffer(bs->bs);
+	if(strcmp(fn,"cmd")!=0)	yy_switch_to_buffer(bs->bs);
 	curbs=bs;
 	yylineno=1;
 
-	if(fn){
+	if(strcmp(fn,"cmd")!=0){
 		curfilename = fn;
 	}else{
 		curfilename = "cmd";
@@ -132,36 +132,6 @@ int popfile(void){
 	return 1;
 }
 
-/*
-int newimport(char * filename , char * target_trans, struct filter * filter ){
-	struct import_trans * cur = malloc(sizeof(struct import_trans));
-	if(!cur){ perror("malloc err");exit(1);}
-	cur->filename = filename;
-	cur->target_trans = target_trans;
-	if(import_state == 0 ){
-		cur->filter_stack = append_filter_stack(NULL,filter);
-	}
-	if(cur_import_trans ==1 ){	
-		cur->filter_stack = append_filter_stack(curfilter,filter);
-	}
-	cur->prev=cur_import_trans;
-	cur_import_trans=cur;
-	return 1;
-}
-
-
-int popimport(){
-	if(!cur_import_trans) return 0;
-	struct import_trans * tmp = cur_import_trans;
-	curfilename = cur_import_trans->filename;
-	target_trans = cur_import_trans->target_trans;
-	curfilter = cur_import_trans->filter_stack;
-	cur_import_trans = cur_import_trans->prev;
-	free(tmp);
-	return 1;
-}
-
-*/
 
 
 

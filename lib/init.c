@@ -21,10 +21,12 @@ struct stack  * rule_stack   = NULL;
 struct stack  * import_stack = NULL;
 struct table  * filter_entry_tab = NULL ;
 struct table  * comment_tmp_tab   = NULL;
+//YY_BUFFER_STATE yy_cur_buf = NULL;
 
 //初始化
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );
 netknife_tab  = calloc(MAX_HASH,sizeof(struct netknife));
+//yy_cur_buf = init_yy_buf();
 }

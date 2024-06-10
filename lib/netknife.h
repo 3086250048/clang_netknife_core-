@@ -147,7 +147,7 @@ extern  struct  stack  * import_stack ;
 extern  struct  table  * comment_tmp_tab ;
 extern  struct  table  * filter_entry_tab ;
 
-int newfile(char * fb);
+int newfile(char * fb );
 int popfile(void);
 
 void init();
@@ -395,6 +395,8 @@ void record_import(char * filename,struct import_info * import_info,char * actio
 void record_filter(char * filename,struct filter  * filter ,char * action );
 void excute_import();
 
+//YY_BUFFER_STATE init_yy_buf();
+//extern YY_BUFFER_STATE yy_cur_buf; 
 
 
 #endif

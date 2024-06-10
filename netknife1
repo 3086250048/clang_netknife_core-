@@ -1,7 +1,7 @@
 trans test1{
 	t1t1t1 => a1aa1a1;
 
-	@(netknife2)->test2  exclude r"t2" exclude r"t3"  ;
+	@(netknife2)  exclude r"t2" exclude r"t3"  ;
 }
 
 

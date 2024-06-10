@@ -4,6 +4,8 @@
 	#include <string.h>
 	#include "netknife.tab.h"
 	#include "netknife.h"
+	
+	
 %}
 
 %x READY  TRANS_RULE TRANS_PRIORITY REGX TRANS_COMMENT TRANS_RULE_COMMENT TRANS_IMPORT_COMMENT TRANS_IMPORT TRANS_IMPORT_NAME 

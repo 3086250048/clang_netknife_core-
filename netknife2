@@ -7,3 +7,9 @@ trans test33 {
 	show ip int b => dis ip int b ;
 	t3t3t3 => a3a3a3;
 }
+
+
+trans test4 {
+	just do it => okokok ;
+
+}

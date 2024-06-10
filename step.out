@@ -9322,3 +9322,153 @@ Object| rule_stack
   Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:2 priority:0 s:t1t1t1 d:a1aa1a1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test2 level:2
+  Rule| lineno:2 priority:0 s:t2t2t2 d:a2a2a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:2 priority:0 s:t1t1t1 d:a1aa1a1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test2 level:2
+  Rule| lineno:2 priority:0 s:t2t2t2 d:a2a2a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:2
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:2
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:1
+  Rule| lineno:2 priority:0 s:t1t1t1 d:a1aa1a1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test2 level:2
+  Rule| lineno:2 priority:0 s:t2t2t2 d:a2a2a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:2
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:2
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test4 level:2
+  Rule| lineno:13 priority:0 s:just do it d:okokok
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:2 priority:0 s:display ip int b d:show ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife1 trans:test1 level:2
+  Rule| lineno:2 priority:0 s:t1t1t1 d:a1aa1a1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test2 level:3
+  Rule| lineno:2 priority:0 s:t2t2t2 d:a2a2a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test4 level:3
+  Rule| lineno:13 priority:0 s:just do it d:okokok
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:4
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:4
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
