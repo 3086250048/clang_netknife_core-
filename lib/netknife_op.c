@@ -13,8 +13,8 @@ unsigned long netknife_index_hash(const char * filename ,  int child_type , cons
 struct netknife * join_netknife_table( char * filename ,  void * node){
 		char * child_name;
 		int  child_type ;
-
-		if(*((int *)node) =TRANS_NODE){
+	
+		if(*((int *)node) ==TRANS_NODE){
 		    child_name = ((struct trans *)node)->name;
 			child_type = TRANS_NODE; 	
 		}

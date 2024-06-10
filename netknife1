@@ -1,13 +1,7 @@
+trans test1{
+	t1t1t1 => a1aa1a1;
 
-trans testd{
-	display ip  int b =100> show ip int b ;
-	show test int  b => shiad ; 
-	@(netknife2)  include r"^dis" , r"^pass" , r"^u"  exclude r"@";
-}
-
-
-trans test3 {
-	aaa => aaa ;
+	@(netknife2)->test2  exclude r"t2" exclude r"t3"  ;
 }
 
 

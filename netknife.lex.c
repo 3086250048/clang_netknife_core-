@@ -926,7 +926,7 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 		
 		if(IMPORT_STATE){
 			struct import_info * import_info = Top(&import_stack)->buffer  ;
-			import_info = Filter(import_info);
+			//import_info = Filter(import_info);
 			if(import_info){
 				SET_TARGET_TRANS;
 				join_import_rule(import_info->file_name , import_info->import_name , import_info->lineno , import_info->filter);

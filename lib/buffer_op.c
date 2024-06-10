@@ -32,8 +32,8 @@ struct stack * Top(struct stack ** root){
 void   Pop(struct stack ** root){
 		struct stack * tmp = *root; 
 		if(tmp){
-		free(tmp);
 		*root=(*root)->next ;
+		free(tmp);
 		}
 }
 

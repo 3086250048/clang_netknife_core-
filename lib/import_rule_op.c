@@ -171,7 +171,7 @@ int get_comment_lineno(char * c){
 
 void include_handle(struct stack * include_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno ,char * str){
 		/*判断rule是否符合include_filter*/
-		struct stack * stack ;
+		struct stack * stack =NULL;
 		while( stack = Top(&include_stack)){
 				*exist_flag = 1;
 				struct range * range = stack->buffer;
@@ -287,9 +287,10 @@ struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude
 			return NULL;
 		}
 		if(exist_include_filter && exist_exclude_filter){	
+		
 			if(include_match_result && !exclude_match_result  )return rule;
 			if(!include_match_result && exclude_match_result)return NULL;
-			if(!include_match_result && !exclude_match_result) return rule ;
+			if(!include_match_result && !exclude_match_result) return rule;
 			if(include_match_result && exclude_match_result ){
 				err("filter","filter rule conflict");
 				err_node(inc_match_range,"INCLUDE");
@@ -303,8 +304,7 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 		int include_match_result = 0;	
 		int exist_include_filter =0;
 		struct range * inc_match_range = NULL;
-		char * import_raw = malloc(1) ;	
-		strcpy(import_raw,"@");	
+		char * import_raw = strdup("@");	
 		if(strcmp(import_info->file_name , cmp_pre_file)!=0){ 
 			append_string(&import_raw , import_info->file_name);
 		} 

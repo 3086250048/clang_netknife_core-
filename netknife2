@@ -1,24 +1,9 @@
-trans n2 {
-check ip resource => display ip int b ; "test1"
-@(netknife3);
-@n22 ;
-@(netknife3)->neee;
-check ip resource => display ip int b ; "test1"
+trans test2{
+	t2t2t2 => a2a2a2 ;
+	@test33 ;
 }
 
-trans n22 {
-aaaaacheck ip resource => display ip int b ; "test1"
-aaaaaacheck ip resource => display ip int b ; "test1"
-aaaaaadisplay ip int b 1 => show ip int b;
+trans test33 {
+	show ip int b => dis ip int b ;
+	t3t3t3 => a3a3a3;
 }
-
-
-trans n222 {
-	password => shdawda;
-	password => shdawda;
-	password => shdawda;
-	password => shdawda;
-}
-
-
-

@@ -190,7 +190,7 @@ struct trans *  trans_reduce()
 
 			
 			struct import_info * import_info = Top(&import_stack)->buffer;
-	  		import_info = Filter(import_info);
+	//  		import_info = Filter(import_info);
 			if(import_info){					
 				SET_START_FILE;	
 				SET_START_TRANS;
@@ -231,5 +231,6 @@ struct trans *  trans_reduce()
 			
 		}
 	}
+	return NULL;
 }
 
