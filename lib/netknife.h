@@ -110,6 +110,7 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 
 void yy_delete_buffer ( YY_BUFFER_STATE b  );
 void yy_switch_to_buffer ( YY_BUFFER_STATE new_buffer  );
+YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
 YY_BUFFER_STATE yy_create_buffer ( FILE *file, int size  );
 /**/
 
@@ -146,6 +147,8 @@ extern  struct  stack  * rule_stack ;
 extern  struct  stack  * import_stack ;
 extern  struct  table  * comment_tmp_tab ;
 extern  struct  table  * filter_entry_tab ;
+
+extern char * cmd_input ;
 
 int newfile(char * fb );
 int popfile(void);
@@ -398,7 +401,14 @@ void excute_import();
 //YY_BUFFER_STATE init_yy_buf();
 //extern YY_BUFFER_STATE yy_cur_buf; 
 
-
+#define SAVE_CMD \
+		if(file_stack_count == 1 && !strcmp(curfilename ,"cmd")) { \
+			if(!cmd_input){\
+				cmd_input=strdup(yytext);\
+			}else{\
+				append_string(&cmd_input,strdup(yytext));\
+			}\
+		}
 #endif
 
 

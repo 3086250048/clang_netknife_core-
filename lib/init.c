@@ -21,7 +21,8 @@ struct stack  * rule_stack   = NULL;
 struct stack  * import_stack = NULL;
 struct table  * filter_entry_tab = NULL ;
 struct table  * comment_tmp_tab   = NULL;
-//YY_BUFFER_STATE yy_cur_buf = NULL;
+
+char * cmd_input = NULL;
 
 //初始化
 void init(){

@@ -1,7 +1,17 @@
 trans test1{
 	t1t1t1 => a1aa1a1;
-
-	@(netknife2)  exclude r"t2" exclude r"t3"  ;
 }
+
+trans test2 {	
+	tt222 => da daw ;
+	@test1; 
+}
+
+trans test3 {
+
+	@(netknife2) ;
+}
+
+
 
 

@@ -3,7 +3,7 @@
 #include <string.h>
 #define A ""
 int main() {
-		FILE * f = fopen("netknife1","r");
+		FILE * f = stdin;
 		if(!f){ printf("error\n");}
 		f = fopen("netknife1","r");
 

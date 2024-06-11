@@ -67,7 +67,11 @@ int newfile(char * fn ){
 	}
 
 	FILE * f ;
-	if(strcmp(fn,"cmd")!=0)  f =	fopen(fn,"r");
+	if(strcmp(fn,"cmd")!=0) {
+			f =	fopen(fn,"r");
+	}else{
+			f = stdin;
+	}
 	struct bufstack * bs=malloc(sizeof(struct bufstack));
 	if(!f && fn ) {err("openfile","no file with the same name was found");exit(1);};
 	if(!bs) { perror("malloc"); exit(1);}
@@ -76,33 +80,18 @@ int newfile(char * fn ){
 	if(curbs)curbs->lineno = yylineno ;
 	bs->prev=curbs ;
 	//建立当前文件信息
-	if(strcmp(fn,"cmd")!=0){
+	if(file_stack_count !=0 && !strcmp(curfilename,"cmd") ){
+		bs->bs = yy_scan_string(cmd_input);
+	}else{
 		bs->bs=yy_create_buffer(f,YY_BUF_SIZE);
-	}else{
-		bs->bs=NULL;
 	}
 	
-	if(strcmp(fn,"cmd")!=0){
-  		bs->f=f;
-	}else{
-		bs->f=NULL;
-	}
-	
-	if(strcmp(fn,"cmd")!=0){
-		bs->filename=fn;
-	}else{
-		bs->filename="cmd";
-	}
-
-	if(strcmp(fn,"cmd")!=0)	yy_switch_to_buffer(bs->bs);
+  	bs->f=f;
+	bs->filename=fn;
+	yy_switch_to_buffer(bs->bs);
 	curbs=bs;
 	yylineno=1;
-
-	if(strcmp(fn,"cmd")!=0){
-		curfilename = fn;
-	}else{
-		curfilename = "cmd";
-	}
+	curfilename = fn;
 	++file_stack_count ;
 	return 1;
 }
@@ -115,7 +104,7 @@ int popfile(void){
 	if(!bs ) return 0 ;	
 
 	//删除当前文件信息
-	fclose(bs->f);
+	if( strcmp(bs->filename,"cmd")!=0)fclose(bs->f);
 
 	yy_delete_buffer(bs->bs);
 
