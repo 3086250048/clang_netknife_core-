@@ -202,8 +202,8 @@ struct trans *  trans_reduce()
 					yyparse();
 				}
 			}
-			else{
-				Pop(&import_stack);	
+			//else{
+			//	Pop(&import_stack);	
 				//if(Top(&import_stack) == NULL){
 				//	struct trans * t  = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				//	RESET_START_TRANS;
@@ -211,7 +211,7 @@ struct trans *  trans_reduce()
 				//	print_trans(t);
 				//	return t;
 				//}
-			}
+			//}
 		}else{
 			
 			if(file_stack_count == 1){

@@ -937,8 +937,8 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 					Pop(&import_stack);
 					yyparse();
 				}
-			}else{
-				Pop(&import_stack);	
+			}//else{
+				//	Pop(&import_stack);	
 				//if(Top(&import_stack) == NULL){
 				//	struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				//	RESET_START_TRANS;
@@ -947,7 +947,7 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 				//	RESET_START_FILE;				
 				//}
 
-			}
+			//}
 		}else{
 			struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 			RESET_START_TRANS;

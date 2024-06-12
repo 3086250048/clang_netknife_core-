@@ -80,7 +80,7 @@ int newfile(char * fn ){
 	if(curbs)curbs->lineno = yylineno ;
 	bs->prev=curbs ;
 	//建立当前文件信息
-	if(file_stack_count !=0 && !strcmp(curfilename,"cmd") ){
+	if(file_stack_count !=0 &&  !strcmp(fn,"cmd") ){
 		bs->bs = yy_scan_string(cmd_input);
 	}else{
 		bs->bs=yy_create_buffer(f,YY_BUF_SIZE);
@@ -104,7 +104,9 @@ int popfile(void){
 	if(!bs ) return 0 ;	
 
 	//删除当前文件信息
-	if( strcmp(bs->filename,"cmd")!=0)fclose(bs->f);
+	if( strcmp(bs->filename,"cmd")!=0){
+			fclose(bs->f);
+	}
 
 	yy_delete_buffer(bs->bs);
 

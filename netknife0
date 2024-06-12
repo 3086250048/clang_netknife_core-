@@ -1,0 +1,4 @@
+trans t1 {
+@(netknife1)->test1  ;
+}
+
