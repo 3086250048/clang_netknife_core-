@@ -39,7 +39,10 @@ struct netknife  * netknife;
 
 netknife_exp : {$$=NULL;}
 		| netknife_exp trans_exp { $$ = netknife_reduce($2);}
+		| netknife_exp import_rule_chain_exp  { $$=NULL;}
 		;
+
+
 trans_exp : trans_name_exp LBRACE RBRACE  { $$=trans_reduce();  }
           | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce();}
   		  ;

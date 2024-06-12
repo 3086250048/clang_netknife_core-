@@ -22,6 +22,11 @@ SAVE_CMD ;return TRANS;}
 #endif
  SAVE_CMD ;BEGIN READY; return LBRACE;} 
 
+@ { SAVE_CMD;goto_global =1 ;flex_state = OTHER_STATE ;BEGIN TRANS_IMPORT;return IMPORT; }
+
+
+
+
 [\x80-\xFFa-zA-Z0-9_]+ {
 #ifdef ECHO_TOKEN 
  printf("STRING ");
@@ -86,7 +91,16 @@ printf("\n");
 printf("\n");
 #endif
 }
-<READY>. {  unput(yytext[0]);BEGIN TRANS_RULE;}
+<READY>. {
+	 unput(yytext[0]);
+	 if(goto_global){
+		flex_state = GLOBAL_STATE;
+		goto_global = 0 ;
+		BEGIN 0 ; 
+	}else{
+		BEGIN TRANS_RULE;
+	}
+}
 
 
 <TRANS_COMMENT>\" { SAVE_CMD;BEGIN 0;}
@@ -230,7 +244,14 @@ SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("SEM ");
 #endif
-BEGIN READY ;return SEM;}
+if(goto_global){
+	goto_global = 0;
+	BEGIN 0;
+	return SEM;
+}else{
+	BEGIN READY ;return SEM;
+}
+}
 <TRANS_IMPORT>- {
 SAVE_CMD;
 #ifdef ECHO_TOKEN

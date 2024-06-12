@@ -33,9 +33,11 @@ enum type {
 	S_COMMENT_ONLY = 23 ,
 	LINENO_ONLY = 24 ,
 	COMMENT_ONLY =25 ,
-	LINENO_AND_COMMENT=26,
-	
-	FILTER_ENTRY_NODE 
+	LINENO_AND_COMMENT=26,	
+	FILTER_ENTRY_NODE = 27 ,
+	/*flex 状态*/
+	GLOBAL_STATE = 28, 
+	OTHER_STATE = 29 
 };
 
 
@@ -149,6 +151,9 @@ extern  struct  table  * comment_tmp_tab ;
 extern  struct  table  * filter_entry_tab ;
 
 extern char * cmd_input ;
+extern int goto_global ;
+extern int flex_state ;
+extern struct trans *  cur_use_trans ;
 
 int newfile(char * fb );
 int popfile(void);

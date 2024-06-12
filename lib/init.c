@@ -23,6 +23,9 @@ struct table  * filter_entry_tab = NULL ;
 struct table  * comment_tmp_tab   = NULL;
 
 char * cmd_input = NULL;
+int goto_global = 0 ;
+int flex_state = GLOBAL_STATE ;
+struct trans * cur_use_trans = NULL; 
 
 //初始化
 void init(){

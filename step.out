@@ -22870,3 +22870,69 @@ Object| rule_stack
   Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t1 level:1
+  Rule| lineno:2 priority:0 s:shajkdwa d:awdw daw da wa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:1
+  Rule| lineno:5 priority:0 s:da awd aw ad d:wd a wa d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t3 level:1
+  Rule| lineno:8 priority:0 s:ospf area 0 d:dhaw d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t10 level:1
+  Rule| lineno:17 priority:0 s:ooo d:0000
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t1 level:2
+  Rule| lineno:2 priority:0 s:shajkdwa d:awdw daw da wa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t1 level:1
+  Rule| lineno:2 priority:0 s:999 d:121
+<<<
+

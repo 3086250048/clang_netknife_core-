@@ -1,4 +1,6 @@
 trans t1 {
-@(netknife1)->test1  ;
+	show => display ;
 }
+
+@t1 ;
 

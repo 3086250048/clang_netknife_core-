@@ -9,7 +9,7 @@ static struct import_rule * import_rule_root = NULL;
 
 struct range * join_range(struct range * root , char * regx ,int s_lineno ,int d_lineno ,char * s_comment,char * d_comment )
 {
-	if(ACCEPT){
+	if(ACCEPT || flex_state != GLOBAL_STATE ){
 	struct range * tmp = malloc(sizeof(struct range));
 	tmp->node_type = RANGE_NODE;
 	tmp->regx = regx;
@@ -54,7 +54,7 @@ void stderr_print_range(struct range * range_root){
 }
 
 struct filter * join_filter(struct filter * root , int node_type ,struct range * range){
-		if(ACCEPT){
+		if(ACCEPT || flex_state != GLOBAL_STATE){
 		struct filter *  tmp = malloc(sizeof(struct filter));
 		tmp->node_type = node_type ;
 		tmp->range=range;
@@ -480,8 +480,7 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
-	if(ACCEPT){	
-
+		
 		char * filename ,* target_trans ;
 		if(!file_name){
 				filename = curfilename ;
@@ -494,19 +493,24 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 			target_trans = import_name;
 		}
 
-		
-	//	struct filter_entry * filter_entry =  join_filter_entry(curfilename  , cur_trans , filename  ,target_trans ,  filter );
-	//	Add(&filter_entry_tab , filter_entry->target_file , filter_entry->target_trans , FILTER_ENTRY_NODE , filter_entry );
 
-		struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
-		Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
-		#ifdef OUTSTEP
-		#ifdef OUTFILE 
-			record_import(OUTFILE,import_info,"Push");
-		#endif
-			record_import(STEPOUT,import_info,"Push");
-		#endif		
-	}	
+
+	if(flex_state != GLOBAL_STATE  ){
+			flex_state = GLOBAL_STATE;
+			cur_use_trans = get_netknife_node(filename, TRANS_NODE , target_trans);		
+			print_trans(cur_use_trans);
+	}else {	
+			if(ACCEPT){	
+				struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
+				Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
+				#ifdef OUTSTEP
+				#ifdef OUTFILE 
+					record_import(OUTFILE,import_info,"Push");
+				#endif
+					record_import(STEPOUT,import_info,"Push");
+				#endif		
+			}	
+	}
 }
 
 
