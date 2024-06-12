@@ -22936,3 +22936,243 @@ Object| rule_stack
   Rule| lineno:2 priority:0 s:999 d:121
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:input.txt trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:input.txt trans:t2 level:1
+  Rule| lineno:5 priority:0 s:ospf area 0 d:dhaw d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:1
+  Rule| lineno:5 priority:0 s:ospf area 0 d:dhaw d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:2
+  Rule| lineno:5 priority:0 s:ospf area 0 d:dhaw d
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t4 level:1
+  Rule| lineno:13 priority:0 s:area 0 d:area 999
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:1
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:1
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:2
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t4 level:1
+  Rule| lineno:15 priority:0 s:9999 d:da w ad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:2
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:1
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:1
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:2
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t4 level:1
+  Rule| lineno:15 priority:0 s:9999 d:da w ad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:2
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:1
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:1
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:2
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t4 level:1
+  Rule| lineno:15 priority:0 s:9999 d:da w ad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:2
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:3
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t1 level:1
+  Rule| lineno:2 priority:0 s:show d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:1
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:1
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:2
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t4 level:1
+  Rule| lineno:15 priority:0 s:9999 d:da w ad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t3 level:2
+  Rule| lineno:9 priority:0 s:dddd d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife0 trans:t2 level:3
+  Rule| lineno:5 priority:0 s:aaaa d:display
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t1 level:1
+  Rule| lineno:2 priority:0 s:11 d:ll
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:1
+  Rule| lineno:5 priority:0 s:22 d:zz
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t3 level:1
+  Rule| lineno:8 priority:0 s:33 d:kk
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:2
+  Rule| lineno:5 priority:0 s:22 d:zz
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t4 level:1
+  Rule| lineno:12 priority:0 s:44 d:aa
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:2
+  Rule| lineno:5 priority:0 s:22 d:zz
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t3 level:3
+  Rule| lineno:8 priority:0 s:33 d:kk
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:t2 level:4
+  Rule| lineno:5 priority:0 s:22 d:zz
+<<<
+

@@ -1,0 +1,6 @@
+trans t1 {
+        show ip int b => display ip int b ;
+}
+trans t2 {
+        ospf area 0 => dhaw d ;
+}

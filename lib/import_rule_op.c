@@ -478,29 +478,32 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 	fclose(f);
 }
 
+#define INIT_IMPORT_PARAM\
+ char * filename ,* target_trans;\
+		if(!file_name){\
+				filename = curfilename ;\
+		}else{\
+				filename = file_name;\
+		}\
+		if(!import_name){\
+				target_trans = ALL_TRANS;\
+		}else{\
+			target_trans = import_name;\
+		}
+
+
+
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
-		
-		char * filename ,* target_trans ;
-		if(!file_name){
-				filename = curfilename ;
-		}else{
-				filename = file_name;
-		}
-		if(!import_name){
-				target_trans = ALL_TRANS;	
-		}else{
-			target_trans = import_name;
-		}
-
-
 
 	if(flex_state != GLOBAL_STATE  ){
+			INIT_IMPORT_PARAM;
 			flex_state = GLOBAL_STATE;
 			cur_use_trans = get_netknife_node(filename, TRANS_NODE , target_trans);		
 			print_trans(cur_use_trans);
 	}else {	
 			if(ACCEPT){	
+				INIT_IMPORT_PARAM;
 				struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
 				Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
 				#ifdef OUTSTEP

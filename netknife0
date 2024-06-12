@@ -1,6 +1,17 @@
 trans t1 {
 	show => display ;
 }
+trans t2 {
+	aaaa => display ;
+}
 
-@t1 ;
+trans t3 {
+	dddd => display ;
+	@t2;
+}
 
+
+trans t4 {
+	9999 =>da w  ad;
+	@t3;
+}
