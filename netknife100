@@ -3,9 +3,17 @@ trans test {
 	display ip int b => show ip int b ;
 }
 
+@test;
 trans test1 {
 	show ip int b => display ip int b ;
 	display ip int b => show ip int b ;
 	sca => daw ;
 }
 
+@test1;
+
+trans test3 {
+	dadwaw awda  => da wa ;
+	dadwaw awda  => da wa ;
+	dadwaw awda  => da wa ;
+}

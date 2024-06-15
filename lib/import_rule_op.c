@@ -505,7 +505,8 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
 
-	if(flex_state != GLOBAL_STATE  ){
+	if(flex_state != GLOBAL_STATE   ){
+			if(file_stack_count != 1 ) return NULL;
 			int has_range = 0 ;
 			INIT_IMPORT_PARAM;
 
