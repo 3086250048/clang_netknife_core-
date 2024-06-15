@@ -23818,3 +23818,39 @@ Object| rule_stack
   Rule| lineno:3 priority:0 s:dis d:show
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test2 level:1
+  Rule| lineno:6 priority:0 s:show ip int b d:qqqq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:2
+  Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test3 level:1
+  Rule| lineno:11 priority:0 s:oooo d:df ad
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test2 level:2
+  Rule| lineno:6 priority:0 s:show ip int b d:qqqq
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:3
+  Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
+<<<
+

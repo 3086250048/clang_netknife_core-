@@ -518,11 +518,20 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 		INIT_FILTER_PARAM;
 		EXTRACT_FILTER;
 		struct rule * r = (cur_use_trans->rule_tab)[i].r;
+		struct rule_table *  tmp =  &(cur_use_trans->rule_tab)[i];
 		if(r){
 			if(!has_range){
-				join_tmp_rule_table(r);
+				while(tmp){ 
+					join_tmp_rule_table(tmp->r);
+					tmp=tmp->dup_r;
+				}
 			}else{
-				if( filter_rule(include_stack , exclude_stack ,r) )join_tmp_rule_table(r);
+				if( filter_rule(include_stack , exclude_stack ,r) ){
+						while(tmp){
+							join_tmp_rule_table(r);
+							tmp=tmp->dup_r;
+						}
+				}
 			}
 		}
 	}
