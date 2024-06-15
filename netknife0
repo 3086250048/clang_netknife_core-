@@ -13,5 +13,33 @@ trans t3 {
 
 trans t4 {
 	9999 =>da w  ad;
-	@t3;
+	@t3 include r"^disp";
 }
+
+link l2_14U {	
+	ssh@t1 172.16.100.254 u"admin"  p"test" ;
+	telnet@t2 172.16.200.254 u"admin"  p"test";
+	
+	
+}
+
+link l3_14U {
+	ssh 192.168.60.1-100 u"admin" p"test";	     
+	@l2_14u include r"^telnet";
+}
+
+func down_interface(a,b,c){
+	ssh 192.168.20.21 u"admin" p"test" ;	
+	@t1;
+	配置基础登录方式;
+	初始化接口地址;
+	@@;
+	restart ;
+	
+	
+}
+
+down_interface(192.168.100.1,dis);
+
+
+

@@ -7,6 +7,31 @@ unsigned long index_string_hash(const char * index_string){
 	return hash_string(index_string);
 }
 
+struct rule_table * join_tmp_rule_table(struct rule * r ){
+	struct rule_table  * tmp = &tmp_rule_tab[index_string_hash(r->s)%MAX_HASH];
+	    if(tmp->r != NULL){
+			struct rule_table * tail = tmp;
+			struct rule_table * dup = malloc(sizeof(struct rule_table));
+			dup->node_type = RULE_TABLE_ENTRY_NODE;
+			dup->r = r ;
+			dup->dup_r  = NULL;
+			
+			while(tail->dup_r){
+				tail=tail->dup_r;
+			}
+			tail->dup_r = dup; 
+			
+			return tmp;
+		}
+		if(tmp->r == NULL){
+			tmp->node_type = RULE_TABLE_ENTRY_NODE;
+			tmp->r = r;
+		   	tmp->dup_r = NULL;
+			return tmp;	
+		}
+}
+
+
 //添加rule到表中
 struct rule_table * join_rule_table(struct rule * r){
 	struct rule_table  * tmp = &rule_tab[index_string_hash(r->s)%MAX_HASH];
@@ -77,6 +102,14 @@ struct rule_table *  get_rule_table(){
 	 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table) );
 	 return tmp ; 
 }
+
+struct rule_table *  get_tmp_rule_table(){
+	 struct rule_table * tmp =tmp_rule_tab;
+	 tmp_rule_tab = calloc(MAX_HASH,sizeof(struct rule_table) );
+	 return tmp ; 
+}
+
+
 
 //获取comment_table地址,重新分配空间给comment_tab
 struct comment_table * get_comment_table(){

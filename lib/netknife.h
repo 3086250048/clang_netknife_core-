@@ -129,6 +129,7 @@ struct bufstack{
 
 
 extern struct rule_table * rule_tab ;
+extern struct rule_table * tmp_rule_tab;
 extern struct comment_table * comment_tab ;
 extern struct trans * trans_tab ;
 extern struct netknife * netknife_tab;
@@ -154,6 +155,7 @@ extern char * cmd_input ;
 extern int goto_global ;
 extern int flex_state ;
 extern struct trans *  cur_use_trans ;
+extern struct trans * after_filter_trans ;
 
 int newfile(char * fb );
 int popfile(void);
@@ -200,8 +202,8 @@ struct comment_table{
 
 //添加rule到表中
 struct rule_table * join_rule_table(struct rule * r);
-//二次添加rule到rule_tab表中
-struct rule_table * assign_join_rule_table(struct rule_table * root,struct rule * r);
+//添加rule到tmp_rule_tab中
+struct rule_table * join_tmp_rule_table(struct rule * r);
 //rule_table 规约
 struct rule_table * rule_table_reduce(char *s , char * d , int priority);
 
@@ -219,6 +221,7 @@ struct rule_table *  get_rule_table_entry(struct rule_table * rule_tab ,char  * 
 struct comment_table * get_comment_table_entry(struct comment_table * comment_tab ,char * c);
 //获取rule_table地址,重新分配空间给rule_tab
 struct rule_table *  get_rule_table();
+struct rule_table *  get_tmp_rule_table();
 //获取comment_table地址,重新分配空间给comment_tab
 struct comment_table * get_comment_table();
 //打印rule_table 表项

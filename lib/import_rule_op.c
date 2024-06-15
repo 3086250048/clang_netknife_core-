@@ -338,6 +338,22 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 		}
 }
 
+#define INIT_FILTER_PARAM \
+	struct stack  * include_stack=NULL;\
+	struct stack  * exclude_stack=NULL;
+#define EXTRACT_FILTER\
+	while(tmp_filter){\
+		struct range * range = tmp_filter->range;\
+		while(range){\
+			has_range =1;\
+			if(tmp_filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range);\
+			if(tmp_filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range);\
+			range=range->next;\
+		}\
+		tmp_filter = tmp_filter->next;\
+	}\
+
+
 
 void *  Filter(void * buffer){
 	if(!import_rule_root ) return buffer ;
@@ -348,8 +364,7 @@ void *  Filter(void * buffer){
 	char * pre_trans = cur_trans ;
 
 	/*合并filter中的range*/
-	struct stack  * include_stack=NULL ;
-	struct stack  * exclude_stack = NULL;
+	INIT_FILTER_PARAM;
 	/*给filter_import使用的参数*/
 	char *  cmp_pre_file = NULL;
    		
@@ -360,19 +375,9 @@ void *  Filter(void * buffer){
 					if(*(int *)buffer == IMPORT_NODE){ cmp_pre_file = pre_file; }
 					pre_file = root->index_filename;
 					pre_trans = root->index_trans ;
-					struct filter * filter = root->filter  ;	
-					
-					while(filter){
-						struct range * range = filter->range;
-						while(range){
-							has_range =1;
-							if(filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range); 
-							if(filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range); 
-							range=range->next;
-						}		
-						filter = filter->next;
-					}
-				if(*(int*)buffer  == IMPORT_NODE  ) break ; 
+					struct filter * tmp_filter = root->filter  ;	
+					EXTRACT_FILTER;
+					if(*(int*)buffer  == IMPORT_NODE  ) break ; 
 			}
 			root=root->next ;
 		}
@@ -490,17 +495,42 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 		}else{\
 			target_trans = import_name;\
 		}
-
-
+/*
+ * INIT_FILTER :
+ * 			include_stack  
+ * 			exclude_stack 
+ *
+ */
 
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
 
 	if(flex_state != GLOBAL_STATE  ){
+			int has_range = 0 ;
 			INIT_IMPORT_PARAM;
+
 			flex_state = GLOBAL_STATE;
 			cur_use_trans = get_netknife_node(filename, TRANS_NODE , target_trans);		
-			print_trans(cur_use_trans);
+	/*全局@时根据filter过滤取得最终要使用的rule_tab*/
+	for(int i=0;i<MAX_HASH;i++){
+		struct filter * tmp_filter = filter;
+		INIT_FILTER_PARAM;
+		EXTRACT_FILTER;
+		struct rule * r = (cur_use_trans->rule_tab)[i].r;
+		if(r){
+			if(!has_range){
+				join_tmp_rule_table(r);
+			}else{
+				if( filter_rule(include_stack , exclude_stack ,r) )join_tmp_rule_table(r);
+			}
+		}
+	}
+
+	after_filter_trans = malloc(sizeof(struct trans) );
+	memcpy(after_filter_trans , cur_use_trans , sizeof(struct trans));
+	after_filter_trans->rule_tab = get_tmp_rule_table();
+	print_trans(after_filter_trans);
+
 	}else {	
 			if(ACCEPT){	
 				INIT_IMPORT_PARAM;

@@ -1,0 +1,11 @@
+trans test {
+	show ip int b => display ip int b ;
+	display ip int b => show ip int b ;
+}
+
+trans test1 {
+	show ip int b => display ip int b ;
+	display ip int b => show ip int b ;
+	sca => daw ;
+}
+
