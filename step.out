@@ -23854,3 +23854,207 @@ Object| rule_stack
   Rule| lineno:2 priority:0 s:show ip int b d:display ip int b
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test2 level:2
+  Rule| lineno:2 priority:0 s:t2t2t2 d:a2a2a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:2
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:2
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test4 level:2
+  Rule| lineno:13 priority:0 s:just do it d:okokok
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:7 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife2 trans:test33 level:3
+  Rule| lineno:8 priority:0 s:t3t3t3 d:a3a3a3
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:dada w
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:dawkd
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:3 priority:0 s:sho ip int b d:dis ip int b
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:3 priority:0 s:show d:dis
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:3 priority:0 s:show d:dis
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test2 level:1
+Comment| lineno:8 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test2 level:1
+  Rule| lineno:9 priority:0 s:show ip int b d:dis ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test2 level:1
+  Rule| lineno:10 priority:0 s:check d:show
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test2 level:1
+Comment| lineno:11 c:test1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test2 level:1
+  Rule| lineno:12 priority:0 s:bbb d:aa
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test3 level:1
+Comment| lineno:19 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test3 level:1
+  Rule| lineno:20 priority:0 s:dha d:da dw
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test3 level:1
+Comment| lineno:21 c:test
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:3 priority:0 s:dhaidw d:a dwa
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:4 c:resr
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife100 trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife100 trans:test level:1
+  Rule| lineno:3 priority:0 s:dshodw d:daw d
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife100 trans:test level:1
+Comment| lineno:4 c:test
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:3 priority:0 s:dad d:aw d
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:4 c:test
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:2 c:test
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:cmd trans:test level:1
+  Rule| lineno:4 priority:0 s:aw d:d:
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:cmd trans:test level:1
+Comment| lineno:5 c:test
+<<<
+

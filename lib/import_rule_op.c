@@ -188,9 +188,9 @@ void include_handle(struct stack * include_stack ,int * result_flag  , int * exi
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int lineno = get_comment_lineno(range->s_comment);
-					if(lineno== -1){  err("get_comment_lineno","this comment does not exist"); exit(1);}
-					if(lineno == lineno) { *match_range =range; *result_flag=1; break;}	
+					int s_c = get_comment_lineno(range->s_comment);
+					if(s_c== -1){  err("get_comment_lineno","this comment does not exist"); exit(1);}
+					if(s_c == lineno) { *match_range =range; *result_flag=1; break;}	
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){
@@ -236,9 +236,9 @@ void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * ex
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int lineno = get_comment_lineno(range->s_comment);
-					if(lineno== -1){  err("get_comment_lineno","this comment does not exist");exit(1); }
-					if(lineno == lineno) { *match_range = range; *result_flag=1; break;}	
+					int s_c = get_comment_lineno(range->s_comment);
+					if(s_c== -1){  err("get_comment_lineno","this comment does not exist");exit(1); }
+					if(s_c == lineno) { *match_range = range; *result_flag=1; break;}	
 				}	
 				/*lineno*/
 				if( mode == LINENO_ONLY){

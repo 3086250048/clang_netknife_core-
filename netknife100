@@ -1,19 +1,6 @@
 trans test {
-	show ip int b => display ip int b ;
-	display ip int b => show ip int b ;
+"test"
+dshodw => daw d;
+"test" 
 }
-
-@test;
-trans test1 {
-	show ip int b => display ip int b ;
-	display ip int b => show ip int b ;
-	sca => daw ;
-}
-
-@test1;
-
-trans test3 {
-	dadwaw awda  => da wa ;
-	dadwaw awda  => da wa ;
-	dadwaw awda  => da wa ;
-}
+@test include "test" to "test";
