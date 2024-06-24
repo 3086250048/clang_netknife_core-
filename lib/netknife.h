@@ -37,7 +37,9 @@ enum type {
 	FILTER_ENTRY_NODE = 27 ,
 	/*flex 状态*/
 	GLOBAL_STATE = 28, 
-	OTHER_STATE = 29 
+	OTHER_STATE = 29 ,
+	
+	COMMENT_INFO_NODE
 };
 
 
@@ -417,6 +419,13 @@ void excute_import();
 				append_string(&cmd_input,strdup(yytext));\
 			}\
 		}
+
+struct comment_info {
+	char * file_name ;
+	char * trans_name;
+	struct comment * c;	
+};
+
 #endif
 
 

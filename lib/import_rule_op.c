@@ -159,17 +159,30 @@ void swap_number(int * a , int * b){
 }
 
 
-int get_comment_lineno(char * c){
-	struct table  * tab  =  Get(comment_tmp_tab, curfilename , c , COMMENT_NODE  );
+int get_comment_lineno(char * c,char * target_trans){
+	int lineno =0;
+	if(!comment_tmp_tab) return -1;
+	struct table  * tab  =  Get(comment_tmp_tab, curfilename , c , COMMENT_INFO_NODE  );
+	struct comment_info * c_info ;
 	if(!tab) return -1 ;
-	if(tab->type){
-		struct comment * comment = tab->buffer ;
-		return comment->lineno ;
+	while(tab){
+		c_info = tab->buffer;
+		if(tab->type==COMMENT_INFO_NODE){
+			if(!strcmp(target_trans,ALL_TRANS)) {
+				lineno = c_info->c->lineno;
+				return lineno;
+			}
+			if(!strcmp(c_info->trans_name,target_trans)){
+				lineno = c_info->c->lineno ;
+				return lineno ;
+			}
+		}
+		tab=tab->dup_buffer;	
 	}
 	return -1;
 }
 
-void include_handle(struct stack * include_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno ,char * str){
+void include_handle(struct stack * include_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno ,char * str,char *target_trans ){
 		/*判断rule是否符合include_filter*/
 		struct stack * stack =NULL;
 		while( stack = Top(&include_stack)){
@@ -188,8 +201,8 @@ void include_handle(struct stack * include_stack ,int * result_flag  , int * exi
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int s_c = get_comment_lineno(range->s_comment);
-					if(s_c== -1){  err("get_comment_lineno","this comment does not exist"); exit(1);}
+					int s_c = get_comment_lineno(range->s_comment,target_trans);
+					if(s_c== -1 && strcmp(target_trans,ALL_TRANS)!=0){  err("get_comment_lineno","this comment does not exist"); exit(1);}
 					if(s_c == lineno) { *match_range =range; *result_flag=1; break;}	
 				}	
 				/*lineno*/
@@ -199,17 +212,17 @@ void include_handle(struct stack * include_stack ,int * result_flag  , int * exi
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
-					int s_c = get_comment_lineno( range->s_comment);
-					int d_c = get_comment_lineno( range->d_comment);
-					if(s_c==-1 || d_c==-1){  err("get_comment_lineno","this comment does not exist"); exit(1);}
+					int s_c = get_comment_lineno( range->s_comment,target_trans);
+					int d_c = get_comment_lineno( range->d_comment,target_trans);
+					if((s_c==-1 || d_c==-1 )&& strcmp(target_trans,ALL_TRANS)!=0 ){  err("get_comment_lineno","this comment does not exist"); exit(1);}
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(  lineno >= s_c && lineno <= d_c){ *match_range =range; *result_flag=1;break;}
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
 					
-					int s_c = get_comment_lineno( range->s_comment);
-					if(s_c==-1){  err("get_comment_lineno","this comment does not exist");exit(1); }
+					int s_c = get_comment_lineno( range->s_comment,target_trans);
+					if(s_c==-1 &&  strcmp(target_trans,ALL_TRANS)!=0){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					int s_lineno = range->s_lineno ;
 					if( s_lineno > s_c) swap_number(&s_lineno,&s_c);
 					if(  lineno >= s_lineno && lineno <=s_c){ *match_range =range; *result_flag=1; break;}
@@ -218,7 +231,7 @@ void include_handle(struct stack * include_stack ,int * result_flag  , int * exi
 			}
 }
 
-void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno , char * str){
+void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * exist_flag , struct range ** match_range , int lineno , char * str,char * target_trans){
 			struct stack * stack ;
 			while( stack = Top(&exclude_stack)){
 				*exist_flag = 1;
@@ -236,8 +249,8 @@ void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * ex
 				/*s_comment*/
 				if( mode == S_COMMENT_ONLY )
 				{
-					int s_c = get_comment_lineno(range->s_comment);
-					if(s_c== -1){  err("get_comment_lineno","this comment does not exist");exit(1); }
+					int s_c = get_comment_lineno(range->s_comment,target_trans);
+					if(s_c== -1 &&  strcmp(target_trans,ALL_TRANS)!=0 ){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					if(s_c == lineno) { *match_range = range; *result_flag=1; break;}	
 				}	
 				/*lineno*/
@@ -247,17 +260,17 @@ void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * ex
 				}
 				/*comment*/
 				if( mode == COMMENT_ONLY){
-					int s_c = get_comment_lineno( range->s_comment);
-					int d_c = get_comment_lineno( range->d_comment);
-					if(s_c==-1 || d_c==-1){  err("get_comment_lineno","this comment does not exist");exit(1); }
+					int s_c = get_comment_lineno( range->s_comment,target_trans);
+					int d_c = get_comment_lineno( range->d_comment,target_trans);
+					if((s_c==-1 || d_c==-1) &&  strcmp(target_trans,ALL_TRANS)!=0){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					if(s_c > d_c) swap_number(&s_c,&d_c);
 					if(  lineno >= s_c && lineno <= d_c){ *match_range = range; *result_flag=1; break;}
 				}	
 				/*lineno and comment */
 				if( mode == LINENO_AND_COMMENT ){
 					
-					int s_c = get_comment_lineno( range->s_comment);
-					if(s_c==-1){  err("get_comment_lineno","this comment does not exist");exit(1); }
+					int s_c = get_comment_lineno( range->s_comment,target_trans);
+					if(s_c==-1 &&  strcmp(target_trans,ALL_TRANS)!=0){  err("get_comment_lineno","this comment does not exist");exit(1); }
 					int s_lineno = range->s_lineno ;
 					if( s_lineno > s_c) swap_number(&s_lineno,&s_c);
 					if(  lineno >= s_lineno && lineno <=s_c){ *match_range = range; *result_flag=1; break ;}
@@ -266,16 +279,16 @@ void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * ex
 			}
 }
 /*将buffer中的数据根据filter过滤*/
-struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude_stack  , struct rule * rule){
+struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude_stack, struct rule * rule,char * traget_trans){
 		int include_match_result = 0;	
 		int exist_include_filter =0;
 		struct range * inc_match_range = NULL;
-		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , rule->lineno , rule->s);
+		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , rule->lineno , rule->s,target_trans);
 		/*判断rule是否符合exclude_filter*/
 		int exclude_match_result = 0;	
 		int exist_exclude_filter = 0;
 		struct range * exc_match_range = NULL;
-		exclude_handle( exclude_stack , &exclude_match_result,&exist_exclude_filter ,&exc_match_range , rule->lineno, rule->s );
+		exclude_handle( exclude_stack , &exclude_match_result,&exist_exclude_filter ,&exc_match_range , rule->lineno, rule->s ,target_trans);
 	
 		/*filter 结果判断*/
 		if( exist_include_filter && !exist_exclude_filter){
@@ -309,12 +322,12 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 			append_string(&import_raw , import_info->file_name);
 		} 
 	 	append_string(&import_raw , import_info->import_name);
-		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , import_info->lineno , import_raw);
+		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , import_info->lineno , import_raw,NULL);
 		/*判断rule是否符合exclude_filter*/
 		int exclude_match_result = 0;	
 		int exist_exclude_filter = 0;
 		struct range * exc_match_range = NULL;
-		exclude_handle( exclude_stack , &exclude_match_result,&exist_exclude_filter ,&exc_match_range , import_info->lineno, import_raw );
+		exclude_handle( exclude_stack , &exclude_match_result,&exist_exclude_filter ,&exc_match_range , import_info->lineno, import_raw ,NULL);
 	
 		/*filter 结果判断*/
 		if( exist_include_filter && !exist_exclude_filter){
@@ -391,7 +404,7 @@ void *  Filter(void * buffer){
 		}
 
 		if( *((int*)buffer) == RULE_NODE ){
-				return   filter_rule(include_stack , exclude_stack ,buffer);	
+				return   filter_rule(include_stack , exclude_stack ,buffer , target_trans);	
 		}
 
 } 
@@ -509,8 +522,8 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 			if(file_stack_count != 1 ) return NULL;
 			int has_range = 0 ;
 			INIT_IMPORT_PARAM;
-
 			flex_state = GLOBAL_STATE;
+	/*这个函数中的target_trans都是局部变量*/
 			cur_use_trans = get_netknife_node(filename, TRANS_NODE , target_trans);		
 	/*全局@时根据filter过滤取得最终要使用的rule_tab*/
 	for(int i=0;i<MAX_HASH;i++){
@@ -526,7 +539,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 					tmp=tmp->dup_r;
 				}
 			}else{
-				if( filter_rule(include_stack , exclude_stack ,r) ){
+				if( filter_rule(include_stack , exclude_stack ,r,target_trans) ){
 						while(tmp){
 							join_tmp_rule_table(r);
 							tmp=tmp->dup_r;

@@ -63,7 +63,6 @@ struct table *  Add( struct table ** root , char * filename , char * name , int 
 		struct table * tail = tmp ;
 		struct table  * dup = malloc(sizeof(struct table));
 		while(tail->dup_buffer){
-			printf("11\n");
 			tail = tail->dup_buffer;
 		}
     	dup->filename = filename;

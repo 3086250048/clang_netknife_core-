@@ -180,7 +180,11 @@ void record_comment(char * filename,struct comment * comment){
 struct comment_table * comment_table_reduce(char * c){		
 	if(ACCEPT){
 		struct comment * comment = join_comment(trim(c),yylineno);
-		Add(&comment_tmp_tab, curfilename ,c , COMMENT_NODE , comment  );
+		struct comment_info * c_info = malloc(sizeof(struct comment_info));
+		c_info->c = comment ;
+		c_info->file_name = curfilename ; 
+		c_info->trans_name = cur_trans;
+		Add(&comment_tmp_tab, curfilename , c , COMMENT_INFO_NODE , c_info );
 		#ifdef OUTSTEP
 			#ifdef OUTFILE
 			record_comment(OUTFILE,comment);		
