@@ -4,11 +4,5 @@ trans test1{
 	c1=>d1 ;
 	@(netknife99) exclude "a2" to "a3" ;
 }
-
-
-@test1  include "a2" to "a3" ;
-
-
-
-
+@test1  exclude "a2" to "a3" ;
 

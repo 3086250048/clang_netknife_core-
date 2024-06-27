@@ -566,10 +566,9 @@ char *yytext;
 	#include "netknife.tab.h"
 	#include "netknife.h"
 	
-	
-#line 571 "netknife.lex.c"
- 
-#line 573 "netknife.lex.c"
+#line 570 "netknife.lex.c"
+  
+#line 572 "netknife.lex.c"
 
 #define INITIAL 0
 #define READY 1
@@ -795,9 +794,9 @@ YY_DECL
 		}
 
 	{
-#line 12 "netknife.l"
+#line 11 "netknife.l"
 
-#line 801 "netknife.lex.c"
+#line 800 "netknife.lex.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -866,7 +865,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "netknife.l"
+#line 12 "netknife.l"
 { 
 #ifdef ECHO_TOKEN
   printf("TRANS ");
@@ -875,12 +874,12 @@ SAVE_CMD ;return TRANS;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "netknife.l"
+#line 17 "netknife.l"
 {  SAVE_CMD ;BEGIN TRANS_COMMENT ;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "netknife.l"
+#line 18 "netknife.l"
 { 
 #ifdef ECHO_TOKEN 
  printf("LBRACE ");
@@ -889,12 +888,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 25 "netknife.l"
+#line 24 "netknife.l"
 { SAVE_CMD;goto_global =1 ;flex_state = OTHER_STATE ;BEGIN TRANS_IMPORT;return IMPORT; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 30 "netknife.l"
+#line 29 "netknife.l"
 {
 #ifdef ECHO_TOKEN 
  printf("STRING ");
@@ -903,13 +902,13 @@ SAVE_CMD ;yylval.s=strdup(yytext );return STRING;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "netknife.l"
+#line 34 "netknife.l"
 { SAVE_CMD;} 
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 36 "netknife.l"
+#line 35 "netknife.l"
 { 
 SAVE_CMD ;
 #ifdef ECHO_TOKEN
@@ -927,7 +926,7 @@ case YY_STATE_EOF(TRANS_RULE_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT):
 case YY_STATE_EOF(TRANS_IMPORT_NAME):
-#line 42 "netknife.l"
+#line 41 "netknife.l"
 {
 
 	if( AL_TRANS && start_trans){
@@ -976,13 +975,13 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 88 "netknife.l"
+#line 87 "netknife.l"
 { SAVE_CMD; }
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 89 "netknife.l"
+#line 88 "netknife.l"
 { SAVE_CMD;
 #ifdef ECHO_TOKEN 
 printf("\n");
@@ -991,7 +990,7 @@ printf("\n");
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 94 "netknife.l"
+#line 93 "netknife.l"
 {
 	 unput(yytext[0]);
 	 if(goto_global){
@@ -1454,7 +1453,7 @@ YY_RULE_SETUP
 #line 376 "netknife.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1458 "netknife.lex.c"
+#line 1457 "netknife.lex.c"
 
 	case YY_END_OF_BUFFER:
 		{
