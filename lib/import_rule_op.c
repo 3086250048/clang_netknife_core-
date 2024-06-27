@@ -502,16 +502,16 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 }
 
 #define INIT_IMPORT_PARAM\
- char * filename ,* target_trans;\
+ char * filename ,* i_target_trans;\
 		if(!file_name){\
 				filename = curfilename ;\
 		}else{\
 				filename = file_name;\
 		}\
 		if(!import_name){\
-				target_trans = ALL_TRANS;\
+				i_target_trans = ALL_TRANS;\
 		}else{\
-			target_trans = import_name;\
+			i_target_trans = import_name;\
 		}
 /*
  * INIT_FILTER :
@@ -529,7 +529,26 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 			INIT_IMPORT_PARAM;
 			flex_state = GLOBAL_STATE;
 	/*这个函数中的target_trans都是局部变量*/
-			cur_use_trans = get_netknife_node(filename, TRANS_NODE , target_trans);		
+			cur_use_trans = get_netknife_node(filename, TRANS_NODE , i_target_trans);			
+			if(!cur_use_trans){	
+				struct import_info * import_info = join_import_info(filename , i_target_trans , lineno , filter);
+				Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
+				cur_trans = "cmd";
+				SET_START_FILE;	
+				SET_START_TRANS;
+				SET_TARGET_TRANS;	
+				import_info = Top(&import_stack)->buffer;
+				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
+				if(newfile(import_info->file_name)){	
+					Pop(&import_stack);
+					yyparse();
+				}	
+				cur_use_trans = get_netknife_node(filename, TRANS_NODE , i_target_trans);			
+				if(!cur_use_trans){
+					err("get_netknife_node","netknife_table no has this entry");
+					return NULL;
+				}
+			}
 	/*全局@时根据filter过滤取得最终要使用的rule_tab*/
 	for(int i=0;i<MAX_HASH;i++){
 		struct filter * tmp_filter = filter;
@@ -544,7 +563,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 					tmp=tmp->dup_r;
 				}
 			}else{
-				if( filter_rule(include_stack , exclude_stack ,r,target_trans) ){
+				if( filter_rule(include_stack , exclude_stack ,r,i_target_trans) ){
 						while(tmp){
 							join_tmp_rule_table(r);
 							tmp=tmp->dup_r;
@@ -562,7 +581,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 	}else {	
 			if(ACCEPT){	
 				INIT_IMPORT_PARAM;
-				struct import_info * import_info = join_import_info(filename , target_trans , lineno , filter);
+				struct import_info * import_info = join_import_info(filename ,i_target_trans , lineno , filter);
 				Push(&import_stack , curfilename , cur_trans , IMPORT_NODE , import_info );
 				#ifdef OUTSTEP
 				#ifdef OUTFILE 

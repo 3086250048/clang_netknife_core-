@@ -20,6 +20,18 @@ struct netknife * join_netknife_table( char * filename ,  void * node){
 		}
 		unsigned int hash = netknife_index_hash(filename,child_type,child_name)%MAX_HASH;
 		struct netknife *  tmp = &netknife_tab[hash];
+
+		/*全局@特殊设置*/
+		if(!strcmp(child_name,"cmd") && child_type == TRANS_NODE && !strcmp(filename,"cmd") ){
+			tmp->node_type = NETKNIFE_NODE;
+			tmp->filename = filename ;
+			tmp->child_type = child_type;
+		   	tmp->child_name = child_name ;
+			tmp->child_tab = node ;	
+			return tmp ;
+
+		}
+
 		if(tmp->node_type != NETKNIFE_NODE ){
 			tmp->node_type = NETKNIFE_NODE;
 			tmp->filename = filename ;
@@ -38,7 +50,8 @@ void  * get_netknife_node(char * filename , int child_type , char * child_name){
 		if(tmp->node_type == NETKNIFE_NODE){
 				return tmp->child_tab;
 		}else{
-			err("get_netknife_node","netknife_table no has this entry");
+			return NULL;
+		//	err("get_netknife_node","netknife_table no has this entry");
 		}	
 }
 

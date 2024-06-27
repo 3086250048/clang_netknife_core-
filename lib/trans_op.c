@@ -182,7 +182,7 @@ struct trans *  trans_reduce()
 				rule = Filter(rule);
 				if(rule) join_rule_table(rule);
 				Pop(&rule_stack);
-			}
+		}
 
 		if(IMPORT_STATE ){	
 

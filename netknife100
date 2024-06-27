@@ -6,9 +6,7 @@ trans test1{
 }
 
 
-
-
-
+@test1  include "a2" to "a3" ;
 
 
 

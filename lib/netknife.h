@@ -27,17 +27,18 @@ enum type {
 	EOF_NODE = 19 ,
 	/*特殊节点类型*/
 	SKIP_NODE = 20,
+	CLEAR_NODE = 21 ,
 	/*过滤所匹配的规则*/
-	REGX_ONLY = 21,
-	S_LINENO_ONLY =22,
-	S_COMMENT_ONLY = 23 ,
-	LINENO_ONLY = 24 ,
-	COMMENT_ONLY =25 ,
-	LINENO_AND_COMMENT=26,	
-	FILTER_ENTRY_NODE = 27 ,
+	REGX_ONLY = 22,
+	S_LINENO_ONLY =23,
+	S_COMMENT_ONLY = 24 ,
+	LINENO_ONLY = 25 ,
+	COMMENT_ONLY =26 ,
+	LINENO_AND_COMMENT=27,	
+	FILTER_ENTRY_NODE = 28 ,
 	/*flex 状态*/
-	GLOBAL_STATE = 28, 
-	OTHER_STATE = 29 ,
+	GLOBAL_STATE = 29, 
+	OTHER_STATE = 30 ,
 	
 	COMMENT_INFO_NODE
 };
@@ -399,10 +400,11 @@ int import_state();
 #define IMPORT_STATE import_state() 
 
 #define SET_START_TRANS  if(file_stack_count == 1) start_trans = cur_trans
-#define RESET_START_TRANS start_trans = NULL
-#define RESET_TARGET_TRANS target_trans = NULL
 #define SET_TARGET_TRANS target_trans = import_info->import_name  
 #define SET_START_FILE  if(file_stack_count == 1) start_file = curfilename 
+
+#define RESET_START_TRANS start_trans = NULL
+#define RESET_TARGET_TRANS target_trans = NULL
 #define RESET_START_FILE  start_file = NULL
 void record_rule(char * filename,struct rule * rule ,char * action );
 void record_import(char * filename,struct import_info * import_info,char * action );
