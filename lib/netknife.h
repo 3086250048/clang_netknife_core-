@@ -256,6 +256,7 @@ struct import_rule {
 	char * file_name ;
 	char * import_name ;
 	int lineno;
+	int file_stack_count ;
 	struct filter * filter ;
 	struct import_rule *  next ;
 };

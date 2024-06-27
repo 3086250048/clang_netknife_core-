@@ -2,8 +2,15 @@ trans test1{
 	a1=>b1 ;
 	b1=>c1 ;
 	c1=>d1 ;
-	@(netknife99) exclude "a2" to "a3";
-	@(netknife99) include "a2" to "a3";
+	@(netknife99) exclude "a2" to "a3" ;
 }
+
+
+
+
+
+
+
+
 
 

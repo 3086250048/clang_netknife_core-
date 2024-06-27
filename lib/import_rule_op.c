@@ -82,6 +82,7 @@ struct  import_rule * join_import_rule(char * file_name ,char * import_name , in
 	tmp->node_type = IMPORT_NODE;
 	tmp->index_filename = curfilename;
 	tmp->index_trans = cur_trans ;
+	tmp->file_stack_count = file_stack_count ;
 	tmp->lineno = lineno ;
 	tmp->file_name = file_name ;
 	tmp->import_name=import_name;
@@ -280,7 +281,7 @@ void  exclude_handle(struct stack * exclude_stack ,int * result_flag  , int * ex
 }
 /*将buffer中的数据根据filter过滤*/
 struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude_stack, struct rule * rule,char * traget_trans){
-		int include_match_result = 0;	
+		int  include_match_result = 0;	
 		int exist_include_filter =0;
 		struct range * inc_match_range = NULL;
 		include_handle( include_stack , &include_match_result,&exist_include_filter ,&inc_match_range , rule->lineno , rule->s,target_trans);
@@ -372,10 +373,10 @@ void *  Filter(void * buffer){
 	if(!import_rule_root ) return buffer ;
 	int has_range =0;
 	struct import_rule * root = import_rule_root ;
-	
+	int first_import = 1;	
 	char * pre_file = curfilename ;
 	char * pre_trans = cur_trans ;
-
+	int pre_file_stack_count = 0;
 	/*合并filter中的range*/
 	INIT_FILTER_PARAM;
 	/*给filter_import使用的参数*/
@@ -385,12 +386,16 @@ void *  Filter(void * buffer){
 	while(root){	
 		if( (!strcmp(pre_trans,root->import_name ) && !strcmp(pre_file , root->file_name )) ||\
 			(!strcmp(ALL_TRANS,root->import_name) && !strcmp(pre_file,root->file_name)) ) {
-					if(*(int *)buffer == IMPORT_NODE){ cmp_pre_file = pre_file; }
+				if(root->file_stack_count > pre_file_stack_count  || first_import ){
+					first_import = 0 ;
+				//	if(*(int *)buffer == IMPORT_NODE){ cmp_pre_file = pre_file; }
 					pre_file = root->index_filename;
 					pre_trans = root->index_trans ;
+					pre_file_stack_count = root->file_stack_count ;
 					struct filter * tmp_filter = root->filter  ;	
 					EXTRACT_FILTER;
 					if(*(int*)buffer  == IMPORT_NODE  ) break ; 
+				}
 			}
 			root=root->next ;
 		}
