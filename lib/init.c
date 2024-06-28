@@ -29,6 +29,7 @@ struct trans * cur_use_trans = NULL;
 struct rule_table * tmp_rule_tab = NULL;
 struct trans *  after_filter_trans = NULL;
 
+
 //初始化
 void init(){
 rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));

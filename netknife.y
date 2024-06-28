@@ -40,7 +40,7 @@ struct netknife  * netknife;
 netknife_exp : {$$=NULL;}
 		| netknife_exp trans_exp { $$ = netknife_reduce($2);}
 		| netknife_exp import_rule_chain_exp  { $$=NULL;}
-		| netknife_exp index_string_exp  { }
+		| netknife_exp index_string_exp  SEM  {   excute_ssh_command($2);   }
 		;
 
 

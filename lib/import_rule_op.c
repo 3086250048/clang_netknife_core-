@@ -541,7 +541,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
 				if(newfile(import_info->file_name)){	
 					Pop(&import_stack);
-					yyparse();
+					 yyparse();
 				}	
 				cur_use_trans = get_netknife_node(filename, TRANS_NODE , i_target_trans);			
 				if(!cur_use_trans){

@@ -20,6 +20,12 @@ SAVE_CMD ;return TRANS;}
  printf("LBRACE ");
 #endif
  SAVE_CMD ;BEGIN READY; return LBRACE;} 
+; {
+#ifdef ECHO_TOKEN 
+ printf("SEM");
+#endif
+ SAVE_CMD ;return SEM;
+}
 
 @ { SAVE_CMD;goto_global =1 ;flex_state = OTHER_STATE ;BEGIN TRANS_IMPORT;return IMPORT; }
 

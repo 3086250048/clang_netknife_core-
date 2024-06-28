@@ -160,6 +160,7 @@ extern int flex_state ;
 extern struct trans *  cur_use_trans ;
 extern struct trans * after_filter_trans ;
 
+
 int newfile(char * fb );
 int popfile(void);
 
@@ -428,6 +429,8 @@ struct comment_info {
 	char * trans_name;
 	struct comment * c;	
 };
+void excute_ssh_command(char * raw);
+
 
 #endif
 
