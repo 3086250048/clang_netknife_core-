@@ -94,7 +94,9 @@ SAVE_CMD;
 		}else{
 			struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 			RESET_START_TRANS;
-			print_trans(t);
+			if(!sp_yyparse){
+				print_trans(t);
+			}
 			join_netknife_table(start_file , t );
 			RESET_START_FILE;				
 //			Clear(&filter_entry_tab);

@@ -61,6 +61,43 @@ struct netknife * netknife_reduce( void  * node){
 		if(start_file){
 			struct netknife * n =  join_netknife_table(start_file ,(struct trans *)node);
 			RESET_START_FILE ;
+			/*
+			 * 作用:if中的代码只有在cmd模式下,直接@trans时会生效(不在其他trans中引用) 
+			 * 原因:import_rule_reduce 中 yyparse函数执行完成后无法继续执行后续的代码 
+			 */
+			if(sp_yyparse){
+					sp_yyparse  = 0 ;
+					int has_range = 0;
+					cur_use_trans = get_netknife_node(sp_yyparse_filename, TRANS_NODE , sp_yyparse_target_trans);			
+					/*全局@时根据filter过滤取得最终要使用的rule_tab*/
+					for(int i=0;i<MAX_HASH;i++){
+						struct filter * tmp_filter = sp_yyparse_filter;
+						INIT_FILTER_PARAM;
+						EXTRACT_FILTER;
+						struct rule * r = (cur_use_trans->rule_tab)[i].r;
+						struct rule_table *  tmp =  &(cur_use_trans->rule_tab)[i];
+						if(r){
+							if(!has_range){
+								while(tmp){ 
+									join_tmp_rule_table(tmp->r);
+									tmp=tmp->dup_r;
+								}
+							}else{
+								if( filter_rule(include_stack , exclude_stack ,r,target_trans) ){
+										while(tmp){
+											join_tmp_rule_table(r);
+											tmp=tmp->dup_r;
+										}
+								}
+							}
+						}
+					}
+
+					after_filter_trans = malloc(sizeof(struct trans) );
+					memcpy(after_filter_trans , cur_use_trans , sizeof(struct trans));
+					after_filter_trans->rule_tab = get_tmp_rule_table();
+					print_trans(after_filter_trans);
+			}
 			return n;
 		}else{
 			struct netknife * n =  join_netknife_table(curfilename ,(struct trans *)node);

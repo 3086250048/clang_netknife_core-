@@ -352,22 +352,6 @@ struct import_info * filter_import(struct stack * include_stack , struct stack *
 		}
 }
 
-#define INIT_FILTER_PARAM \
-	struct stack  * include_stack=NULL;\
-	struct stack  * exclude_stack=NULL;
-#define EXTRACT_FILTER\
-	while(tmp_filter){\
-		struct range * range = tmp_filter->range;\
-		while(range){\
-			has_range =1;\
-			if(tmp_filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range);\
-			if(tmp_filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range);\
-			range=range->next;\
-		}\
-		tmp_filter = tmp_filter->next;\
-	}\
-
-
 
 void *  Filter(void * buffer){
 	if(!import_rule_root ) return buffer ;
@@ -540,14 +524,16 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 				import_info = Top(&import_stack)->buffer;
 				join_import_rule(import_info->file_name,import_info->import_name , import_info->lineno , import_info->filter);
 				if(newfile(import_info->file_name)){	
+
+					sp_yyparse= 1 ;
+					sp_yyparse_filter = filter ;
+					sp_yyparse_filename = filename ;
+					sp_yyparse_target_trans = i_target_trans ;
+
 					Pop(&import_stack);
-					 yyparse();
+					yyparse();
+
 				}	
-				cur_use_trans = get_netknife_node(filename, TRANS_NODE , i_target_trans);			
-				if(!cur_use_trans){
-					err("get_netknife_node","netknife_table no has this entry");
-					return NULL;
-				}
 			}
 	/*全局@时根据filter过滤取得最终要使用的rule_tab*/
 	for(int i=0;i<MAX_HASH;i++){

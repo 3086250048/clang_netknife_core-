@@ -225,7 +225,9 @@ struct trans *  trans_reduce()
 				struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 				RESET_START_TRANS;
 				//Clear(&filter_entry_tab);
+				if(!sp_yyparse){
 				print_trans(t);
+				}
 				return t;
 			}
 			

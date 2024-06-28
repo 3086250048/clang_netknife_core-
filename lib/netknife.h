@@ -159,7 +159,10 @@ extern int goto_global ;
 extern int flex_state ;
 extern struct trans *  cur_use_trans ;
 extern struct trans * after_filter_trans ;
-
+extern int sp_yyparse ;
+extern struct filter * sp_yyparse_filter ; 
+extern char * sp_yyparse_target_trans ;
+extern char * sp_yyparse_filename ;
 
 int newfile(char * fb );
 int popfile(void);
@@ -431,6 +434,21 @@ struct comment_info {
 };
 void excute_ssh_command(char * raw);
 
+struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude_stack, struct rule * rule,char * traget_trans);
+#define INIT_FILTER_PARAM \
+	struct stack  * include_stack=NULL;\
+	struct stack  * exclude_stack=NULL;
+#define EXTRACT_FILTER\
+	while(tmp_filter){\
+		struct range * range = tmp_filter->range;\
+		while(range){\
+			has_range =1;\
+			if(tmp_filter->node_type == INCLUDE_NODE ) Push(&include_stack,"RANGE","INCLUDE",RANGE_NODE,range);\
+			if(tmp_filter->node_type == EXCLUDE_NODE) Push(&exclude_stack,"RANGE","EXCLUDE",RANGE_NODE,range);\
+			range=range->next;\
+		}\
+		tmp_filter = tmp_filter->next;\
+	}\
 
 #endif
 

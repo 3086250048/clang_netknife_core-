@@ -29,6 +29,11 @@ struct trans * cur_use_trans = NULL;
 struct rule_table * tmp_rule_tab = NULL;
 struct trans *  after_filter_trans = NULL;
 
+int sp_yyparse = 0 ;
+struct filter *  sp_yyparse_filter = NULL; 
+char * sp_yyparse_target_trans = NULL;
+char * sp_yyparse_filename = NULL;
+
 
 //初始化
 void init(){
