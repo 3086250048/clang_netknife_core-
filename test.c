@@ -14,3 +14,9 @@ int main() {
  		f = fopen("netknife1","r");
 }
 
+[\x80-\xFFa-zA-Z0-9_]+ {
+#ifdef ECHO_TOKEN 
+ printf("STRING ");
+#endif
+SAVE_CMD ;yylval.s=strdup(yytext );return STRING;} 
+

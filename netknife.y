@@ -40,14 +40,16 @@ struct netknife  * netknife;
 netknife_exp : {$$=NULL;}
 		| netknife_exp trans_exp { $$ = netknife_reduce($2);}
 		| netknife_exp import_rule_chain_exp  { $$=NULL;}
-		| netknife_exp index_string_exp  SEM  {   excute_ssh_command($2);   }
+		| netknife_exp index_string_exp  SEM  {   excute_ssh_command(trim($2));   }
 		;
 
 
-trans_exp : trans_name_exp LBRACE RBRACE  { $$=trans_reduce();  }
+trans_exp : trans_name_exp EMPTY LBRACE RBRACE  { $$=trans_reduce();  }
+		  | trans_name_exp LBRACE RBRACE  {  $$=trans_reduce();  }
           | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce();}
+          | trans_name_exp EMPTY LBRACE trans_body_exp RBRACE {$$=trans_reduce();}
   		  ;
-trans_name_exp : TRANS STRING { cur_trans=$2;$$=$2;}
+trans_name_exp : TRANS EMPTY STRING { cur_trans=$3;$$=$3;}
 
 trans_body_exp : rule_table_exp{$$=NULL;} 
 	   | comment_table_exp {$$=NULL;} 
@@ -99,7 +101,7 @@ index_string_exp : STRING {$$=$1;}
 		 | LINE_BREAK { $$=$1;}
 		 | EMPTY { $$=$1 ;}
 		 | index_string_exp STRING { append_string(&$1,$2);$$=$1 ;}
-		 | index_string_exp EMPTY  { append_string(&$1,$2);$$=$1 ;}
+		 | index_string_exp EMPTY  { append_string(&$1,$2);$$=$1 ; }
 		 | index_string_exp LINE_BREAK { append_string(&$1,$2);$$=$1; }
 		 ;
 

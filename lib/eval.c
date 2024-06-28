@@ -134,9 +134,11 @@ void excute_ssh_command(char * raw ){
 	int i;
 	if(tmp){
 		for(i=0;i<MAX_HASH;i++){
+			if(tmp[i].r){
 			if(!strcmp(raw,tmp[i].r->s)){
 					str = tmp[i].r->d;
 					break;
+			}
 			}
 		}
 	}

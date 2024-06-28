@@ -27,23 +27,45 @@ SAVE_CMD ;return TRANS;}
  SAVE_CMD ;return SEM;
 }
 
-@ { SAVE_CMD;goto_global =1 ;flex_state = OTHER_STATE ;BEGIN TRANS_IMPORT;return IMPORT; }
-
-
-
-
-[\x80-\xFFa-zA-Z0-9_]+ {
-#ifdef ECHO_TOKEN 
- printf("STRING ");
+@ { SAVE_CMD;
+goto_global =1 ;
+flex_state = OTHER_STATE ;
+BEGIN TRANS_IMPORT; 
+#ifdef ECHO_TOKEN
+printf("IMPORT ");
 #endif
-SAVE_CMD ;yylval.s=strdup(yytext );return STRING;} 
-. { SAVE_CMD;} 
+return IMPORT;
+}
+
+[ \t]+ { 
+SAVE_CMD;
+#ifdef ECHO_TOKEN
+printf("EMPTY ");
+#endif
+yylval.s=strdup(" ");return EMPTY;
+}
+
+\\n { 
+SAVE_CMD;
+#ifdef ECHO_TOKEN
+ printf("LINE_BREAK ");
+#endif
+yylval.s=strdup("\n"); return LINE_BREAK;}
 \n { 
 SAVE_CMD ;
 #ifdef ECHO_TOKEN
 printf("\n");
 #endif
 }
+
+[^ @{;\t\n"]+ { 
+SAVE_CMD;
+#ifdef ECHO_TOKEN
+ printf("STRING ");
+#endif 
+ yylval.s=strdup(yytext) ;return STRING; } 
+ 
+
 <<EOF>> {
 
 	if( AL_TRANS && start_trans){

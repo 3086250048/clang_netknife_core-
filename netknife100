@@ -3,6 +3,12 @@ trans test1{
 	b1=>c1 ;
 	c1=>d1 ;
 	@(netknife99) exclude "a2" to "a3" ;
+	show ip int b=> display ip int b ;
+	ospf 100 \n 
+	area 10 \n
+	net 192.168.1.100 0.0.0.0 \n
+	=>
+	route ospf 100 \n
+	net 192.168.1.100 0.0.0.0 area 10 \n ;	
 }
-@test1  exclude "a2" to "a3" ;
-
+@test1  ;

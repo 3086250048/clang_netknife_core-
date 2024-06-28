@@ -374,8 +374,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 57
-#define YY_END_OF_BUFFER 58
+#define YY_NUM_RULES 58
+#define YY_END_OF_BUFFER 59
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -383,21 +383,21 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[112] =
+static const flex_int16_t yy_accept[115] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-       58,    7,    8,    2,    6,    4,    5,    6,    3,   11,
-        9,   10,   50,   48,   52,   46,   45,   43,   51,   44,
-       50,   49,   55,   56,   53,   54,   24,   23,   22,   13,
-       12,   16,   15,   17,   14,   20,   19,   21,   18,   41,
-       40,   42,   33,   38,   32,   36,   30,   35,   37,   39,
-       39,   39,   39,   39,   26,   27,   25,    6,    6,   50,
-       48,   47,   53,   24,   23,   16,   15,   20,   19,   30,
-       39,   39,   39,   34,   31,   26,   27,    6,   39,   39,
+       59,    9,    6,    8,    2,    4,    5,    9,    9,    3,
+       12,   10,   11,   51,   49,   53,   47,   46,   44,   52,
+       45,   51,   50,   56,   57,   54,   55,   25,   24,   23,
+       14,   13,   17,   16,   18,   15,   21,   20,   22,   19,
+       42,   41,   43,   34,   39,   33,   37,   31,   36,   38,
+       40,   40,   40,   40,   40,   27,   28,   26,    9,    6,
+        7,    9,   51,   49,   48,   54,   25,   24,   17,   16,
+       21,   20,   31,   40,   40,   40,   35,   32,   27,   28,
 
-        6,   39,   39,    1,   39,   39,   39,   39,   29,   28,
-        0
+        9,   40,   40,    9,   40,   40,    1,   40,   40,   40,
+       40,   30,   29,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -435,116 +435,128 @@ static const YY_CHAR yy_ec[256] =
 static const YY_CHAR yy_meta[31] =
     {   0,
         1,    2,    3,    4,    1,    5,    1,    1,    6,    7,
-        7,    7,    7,    6,    1,    6,    6,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    6,    1,    7
+        8,    8,    7,    6,    1,    6,    6,    6,    6,    6,
+        6,    6,    6,    6,    6,    6,    6,    6,    9,    8
     } ;
 
-static const flex_int16_t yy_base[127] =
+static const flex_int16_t yy_base[131] =
     {   0,
-        0,    0,   29,   31,   33,   62,   38,   46,   36,   49,
-      222,  221,   57,   65,   76,   79,   92,    0,   82,   84,
-      224,  227,  227,  227,    0,  227,  227,  199,  227,  227,
-      227,  227,    0,  220,  227,  227,  227,  227,  227,  227,
-      199,  227,  227,  227,  211,  227,    0,  217,  227,  227,
-      227,    0,  216,  227,  227,    0,  215,  227,  227,  227,
-      227,  227,  227,  227,  227,  227,  207,  227,  227,    0,
-      187,  192,  209,  187,    0,   54,  227,    0,  192,    0,
-      205,    0,  193,    0,  199,    0,  198,    0,  193,  185,
-        0,  176,  171,  227,    0,    0,   68,  164,  161,  160,
+        0,   28,    3,    5,   56,   85,    8,    9,   12,   20,
+      104,  103,   31,   42,   45,   48,  115,    0,   34,   59,
+      106,    0,  103,  280,  280,  280,  280,   82,   79,  280,
+      280,  280,  280,    0,  100,  280,  280,  280,  280,  280,
+      280,   79,  280,  280,  280,   90,  280,    0,   92,  280,
+      280,  280,    0,   91,  280,  280,    0,   90,  280,  280,
+      280,  280,  280,  280,  280,  280,  280,   82,  280,  280,
+        0,   62,   63,   80,   60,    0,   25,  280,    0,   80,
+        0,   65,    0,   78,    0,   70,    0,   76,    0,   75,
+        0,   74,   66,    0,   57,   56,  280,    0,    0,   53,
 
-      155,   64,   62,    0,   58,   44,   35,   33,    0,    0,
-      227,  122,  129,  136,  143,  150,  157,  164,  171,   36,
-      178,  184,  191,  198,   33,  205
+       50,   49,   43,   38,   26,   15,    0,   21,    7,    4,
+        0,    0,    0,  280,  145,  154,  163,  172,  181,  190,
+      199,  208,  217,  226,  234,  243,  252,  261,    3,  270
     } ;
 
-static const flex_int16_t yy_def[127] =
+static const flex_int16_t yy_def[131] =
     {   0,
-      111,    1,  112,  112,  113,  113,  114,  114,  115,  115,
-      116,  116,  117,  117,  118,  118,  111,   17,  119,  119,
-      111,  111,  111,  111,  120,  111,  111,  120,  111,  111,
-      111,  111,  121,  111,  111,  111,  111,  111,  111,  111,
-      121,  111,  111,  111,  111,  111,  122,  111,  111,  111,
-      111,  123,  111,  111,  111,  124,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  125,  111,  111,  125,
-      125,  125,  125,  125,  126,  111,  111,  120,  120,  121,
-      111,  121,  111,  122,  111,  123,  111,  124,  111,  125,
-      125,  125,  125,  111,  125,  126,  111,  120,  125,  125,
+      115,  115,  116,  116,  117,  117,  118,  118,  119,  119,
+      120,  120,  121,  121,  122,  122,  114,   17,  123,  123,
+      114,  124,  114,  114,  114,  114,  114,  124,  124,  114,
+      114,  114,  114,  125,  114,  114,  114,  114,  114,  114,
+      114,  125,  114,  114,  114,  114,  114,  126,  114,  114,
+      114,  114,  127,  114,  114,  114,  128,  114,  114,  114,
+      114,  114,  114,  114,  114,  114,  114,  129,  114,  114,
+      129,  129,  129,  129,  129,  130,  114,  114,  124,  114,
+      124,  124,  125,  114,  125,  114,  126,  114,  127,  114,
+      128,  114,  129,  129,  129,  129,  114,  129,  130,  114,
 
-      120,  125,  125,  120,  125,  125,  125,  125,  125,  125,
-        0,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111
+      124,  129,  129,  124,  129,  129,  124,  129,  129,  129,
+      129,  129,  129,    0,  114,  114,  114,  114,  114,  114,
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114
     } ;
 
-static const flex_int16_t yy_nxt[258] =
+static const flex_int16_t yy_nxt[311] =
     {   0,
-       22,   22,   23,   24,   22,   22,   22,   22,   25,   26,
-       22,   22,   27,   25,   22,   25,   25,   25,   25,   25,
-       25,   25,   25,   25,   25,   28,   25,   25,   29,   22,
-       31,   32,   31,   32,   34,   35,   36,   48,   91,   49,
-       44,   78,   37,   38,   39,   40,   45,   41,   44,   46,
-       48,  110,   49,  109,   45,   97,   97,   46,   53,   54,
-       55,  108,   42,   34,   35,   36,   53,   54,   55,   97,
-       97,   37,   38,   39,   40,  107,   41,   57,   58,   59,
-       57,   58,   59,   76,   76,   76,   76,   77,  106,   77,
-      105,   42,   60,   61,   62,   63,   64,   60,   65,   66,
+      114,   23,   24,   25,   32,   33,   32,   33,   94,   26,
+       45,   45,   27,   49,   28,   50,   46,   46,  113,   47,
+       47,   49,  112,   50,  111,   29,  100,  100,   30,   23,
+       24,   25,   54,   55,   56,   77,   77,   26,  110,   78,
+       27,  109,   28,   54,   55,   56,   58,   59,   60,   58,
+       59,   60,  108,   29,  100,  100,   30,   35,   36,   37,
+       77,   77,  107,  106,   78,   38,   39,   40,   41,  105,
+       42,  104,  103,  102,   93,   92,   90,   88,   86,   84,
+      101,   80,   98,   97,   96,   43,   35,   36,   37,   95,
+       93,   92,   90,   88,   38,   39,   40,   41,   86,   42,
 
-       67,   68,   60,   69,   60,   70,   60,   70,   70,   70,
-       71,   72,   70,   70,   70,   73,   70,   74,   70,   70,
-       60,   60,   30,   30,   30,   30,   30,   30,   30,   33,
-       33,   33,   33,   33,   33,   33,   43,   43,   43,   43,
-       43,   43,   43,   47,   47,   47,   47,   47,   47,   47,
-       50,   50,   50,   50,   50,   50,   50,   52,   52,   52,
-       52,   52,   52,   52,   56,   56,   56,   56,   56,   56,
-       56,   75,   75,   75,   75,   75,   75,   75,   80,  104,
-      103,  102,   80,   80,   84,  101,   84,  100,   84,   84,
-       84,   86,   99,   90,   89,   86,   86,   86,   88,   87,
+       85,   84,   82,   81,   80,  114,   52,   52,  114,  114,
+      114,  114,  114,  114,   43,   61,   62,   63,   64,   65,
+       61,   66,   67,   68,   69,   61,   70,   61,   71,   61,
+       71,   71,   71,   72,   73,   71,   71,   71,   74,   71,
+       75,   71,   71,   61,   61,   22,   22,   22,   22,   22,
+       22,   22,   22,   22,   31,   31,   31,   31,   31,   31,
+       31,   31,   31,   34,   34,   34,   34,   34,   34,   34,
+       34,   34,   44,   44,   44,   44,   44,   44,   44,   44,
+       44,   48,   48,   48,   48,   48,   48,   48,   48,   48,
+       51,   51,   51,   51,   51,   51,   51,   51,   51,   53,
 
-       85,   83,   88,   88,   88,   96,   81,   98,   96,   95,
-       96,   96,   94,   93,   92,   90,   89,   87,   85,   83,
-       82,   81,   79,  111,   51,   51,   21,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111
+       53,   53,   53,   53,   53,   53,   53,   53,   57,   57,
+       57,   57,   57,   57,   57,   57,   57,   76,   76,   76,
+       76,   76,   76,   76,   76,   76,   79,  114,  114,  114,
+       79,   79,  114,   79,   83,  114,  114,  114,   83,   83,
+      114,  114,   83,   87,  114,   87,  114,   87,   87,   87,
+       87,   87,   89,  114,  114,  114,   89,   89,   89,   89,
+       89,   91,  114,  114,  114,   91,   91,   91,   91,   91,
+       99,  114,  114,   99,  114,   99,   99,   99,   99,   21,
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114,
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114,
+
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114
     } ;
 
-static const flex_int16_t yy_chk[258] =
+static const flex_int16_t yy_chk[311] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        3,    3,    4,    4,    5,    5,    5,    9,  125,    9,
-        7,  120,    5,    5,    5,    5,    7,    5,    8,    7,
-       10,  108,   10,  107,    8,   76,   76,    8,   13,   13,
-       13,  106,    5,    6,    6,    6,   14,   14,   14,   97,
-       97,    6,    6,    6,    6,  105,    6,   15,   15,   15,
-       16,   16,   16,   19,   19,   20,   20,   19,  103,   20,
-      102,    6,   17,   17,   17,   17,   17,   17,   17,   17,
+        0,    1,    1,    1,    3,    3,    4,    4,  129,    1,
+        7,    8,    1,    9,    1,    9,    7,    8,  111,    7,
+        8,   10,  110,   10,  109,    1,   77,   77,    1,    2,
+        2,    2,   13,   13,   13,   19,   19,    2,  108,   19,
+        2,  106,    2,   14,   14,   14,   15,   15,   15,   16,
+       16,   16,  105,    2,  100,  100,    2,    5,    5,    5,
+       20,   20,  104,  103,   20,    5,    5,    5,    5,  102,
+        5,  101,   96,   95,   93,   92,   90,   88,   86,   84,
+       82,   80,   75,   74,   73,    5,    6,    6,    6,   72,
+       68,   58,   54,   49,    6,    6,    6,    6,   46,    6,
 
+       42,   35,   29,   28,   23,   21,   12,   11,    0,    0,
+        0,    0,    0,    0,    6,   17,   17,   17,   17,   17,
        17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
        17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
-       17,   17,  112,  112,  112,  112,  112,  112,  112,  113,
-      113,  113,  113,  113,  113,  113,  114,  114,  114,  114,
-      114,  114,  114,  115,  115,  115,  115,  115,  115,  115,
-      116,  116,  116,  116,  116,  116,  116,  117,  117,  117,
-      117,  117,  117,  117,  118,  118,  118,  118,  118,  118,
-      118,  119,  119,  119,  119,  119,  119,  119,  121,  101,
-      100,   99,  121,  121,  122,   98,  122,   93,  122,  122,
-      122,  123,   92,   90,   89,  123,  123,  123,  124,   87,
+       17,   17,   17,   17,   17,  115,  115,  115,  115,  115,
+      115,  115,  115,  115,  116,  116,  116,  116,  116,  116,
+      116,  116,  116,  117,  117,  117,  117,  117,  117,  117,
+      117,  117,  118,  118,  118,  118,  118,  118,  118,  118,
+      118,  119,  119,  119,  119,  119,  119,  119,  119,  119,
+      120,  120,  120,  120,  120,  120,  120,  120,  120,  121,
 
-       85,   83,  124,  124,  124,  126,   81,   79,  126,   74,
-      126,  126,   73,   72,   71,   67,   57,   53,   48,   45,
-       41,   34,   28,   21,   12,   11,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111,  111,  111,  111,
-      111,  111,  111,  111,  111,  111,  111
+      121,  121,  121,  121,  121,  121,  121,  121,  122,  122,
+      122,  122,  122,  122,  122,  122,  122,  123,  123,  123,
+      123,  123,  123,  123,  123,  123,  124,    0,    0,    0,
+      124,  124,    0,  124,  125,    0,    0,    0,  125,  125,
+        0,    0,  125,  126,    0,  126,    0,  126,  126,  126,
+      126,  126,  127,    0,    0,    0,  127,  127,  127,  127,
+      127,  128,    0,    0,    0,  128,  128,  128,  128,  128,
+      130,    0,    0,  130,    0,  130,  130,  130,  130,  114,
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114,
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114,
+
+      114,  114,  114,  114,  114,  114,  114,  114,  114,  114
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[58] =
+static const flex_int32_t yy_rule_can_match_eol[59] =
     {   0,
-0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,     };
+0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 
+    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -567,9 +579,9 @@ char *yytext;
 	#include "netknife.tab.h"
 	#include "netknife.h"
 	
-#line 571 "netknife.lex.c"
+#line 583 "netknife.lex.c"
   
-#line 573 "netknife.lex.c"
+#line 585 "netknife.lex.c"
 
 #define INITIAL 0
 #define READY 1
@@ -797,7 +809,7 @@ YY_DECL
 	{
 #line 11 "netknife.l"
 
-#line 801 "netknife.lex.c"
+#line 813 "netknife.lex.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -824,13 +836,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 112 )
+				if ( yy_current_state >= 115 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 227 );
+		while ( yy_base[yy_current_state] != 280 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -900,32 +912,57 @@ YY_RULE_SETUP
 case 5:
 YY_RULE_SETUP
 #line 30 "netknife.l"
-{ SAVE_CMD;goto_global =1 ;flex_state = OTHER_STATE ;BEGIN TRANS_IMPORT;return IMPORT; }
+{ SAVE_CMD;
+goto_global =1 ;
+flex_state = OTHER_STATE ;
+BEGIN TRANS_IMPORT; 
+#ifdef ECHO_TOKEN
+printf("IMPORT ");
+#endif
+return IMPORT;
+}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "netknife.l"
-{
-#ifdef ECHO_TOKEN 
- printf("STRING ");
+#line 40 "netknife.l"
+{ 
+SAVE_CMD;
+#ifdef ECHO_TOKEN
+printf("EMPTY ");
 #endif
-SAVE_CMD ;yylval.s=strdup(yytext );return STRING;} 
+yylval.s=strdup(" ");return EMPTY;
+}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 40 "netknife.l"
-{ SAVE_CMD;} 
+#line 48 "netknife.l"
+{ 
+SAVE_CMD;
+#ifdef ECHO_TOKEN
+ printf("LINE_BREAK ");
+#endif
+yylval.s=strdup("\n"); return LINE_BREAK;}
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 41 "netknife.l"
+#line 54 "netknife.l"
 { 
 SAVE_CMD ;
 #ifdef ECHO_TOKEN
 printf("\n");
 #endif
 }
+	YY_BREAK
+case 9:
+YY_RULE_SETUP
+#line 61 "netknife.l"
+{ 
+SAVE_CMD;
+#ifdef ECHO_TOKEN
+ printf("STRING ");
+#endif 
+ yylval.s=strdup(yytext) ;return STRING; } 
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(READY):
@@ -937,7 +974,7 @@ case YY_STATE_EOF(TRANS_RULE_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT):
 case YY_STATE_EOF(TRANS_IMPORT_NAME):
-#line 47 "netknife.l"
+#line 69 "netknife.l"
 {
 
 	if( AL_TRANS && start_trans){
@@ -984,24 +1021,24 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 	
 }
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 93 "netknife.l"
+#line 115 "netknife.l"
 { SAVE_CMD; }
 	YY_BREAK
-case 10:
-/* rule 10 can match eol */
+case 11:
+/* rule 11 can match eol */
 YY_RULE_SETUP
-#line 94 "netknife.l"
+#line 116 "netknife.l"
 { SAVE_CMD;
 #ifdef ECHO_TOKEN 
 printf("\n");
 #endif
 }
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 99 "netknife.l"
+#line 121 "netknife.l"
 {
 	 unput(yytext[0]);
 	 if(goto_global){
@@ -1013,15 +1050,15 @@ YY_RULE_SETUP
 	}
 }
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
-#line 112 "netknife.l"
+#line 134 "netknife.l"
 { SAVE_CMD;BEGIN 0;}
 	YY_BREAK
-case 13:
-/* rule 13 can match eol */
+case 14:
+/* rule 14 can match eol */
 YY_RULE_SETUP
-#line 113 "netknife.l"
+#line 135 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1029,9 +1066,9 @@ printf("\n");
 #endif
 }
 	YY_BREAK
-case 14:
+case 15:
 YY_RULE_SETUP
-#line 120 "netknife.l"
+#line 142 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1039,9 +1076,9 @@ SAVE_CMD;
 #endif
 BEGIN READY ;return COMMENT_END;}
 	YY_BREAK
-case 15:
+case 16:
 YY_RULE_SETUP
-#line 126 "netknife.l"
+#line 148 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN 
@@ -1049,9 +1086,9 @@ SAVE_CMD;
 #endif
  yylval.s=strdup(" ");return EMPTY; }
 	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
-#line 132 "netknife.l"
+#line 154 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1059,10 +1096,10 @@ SAVE_CMD;
 #endif 
  yylval.s=strdup(yytext) ;return STRING; } 
 	YY_BREAK
-case 17:
-/* rule 17 can match eol */
+case 18:
+/* rule 18 can match eol */
 YY_RULE_SETUP
-#line 138 "netknife.l"
+#line 160 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1070,9 +1107,9 @@ SAVE_CMD;
 #endif
 }
 	YY_BREAK
-case 18:
+case 19:
 YY_RULE_SETUP
-#line 145 "netknife.l"
+#line 167 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1080,9 +1117,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_IMPORT; return TRANS_IMPORT_COMMENT_END;}
 	YY_BREAK
-case 19:
+case 20:
 YY_RULE_SETUP
-#line 151 "netknife.l"
+#line 173 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1090,9 +1127,9 @@ printf("EMPTY ");
 #endif
 yylval.s=strdup(" ");return EMPTY;}
 	YY_BREAK
-case 20:
+case 21:
 YY_RULE_SETUP
-#line 157 "netknife.l"
+#line 179 "netknife.l"
 {  
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1100,10 +1137,10 @@ printf("STRING ");
 #endif
 yylval.s= strdup(yytext) ;return STRING ; } 
 	YY_BREAK
-case 21:
-/* rule 21 can match eol */
+case 22:
+/* rule 22 can match eol */
 YY_RULE_SETUP
-#line 163 "netknife.l"
+#line 185 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1111,9 +1148,9 @@ SAVE_CMD;
 #endif
 }
 	YY_BREAK
-case 22:
+case 23:
 YY_RULE_SETUP
-#line 171 "netknife.l"
+#line 193 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1121,9 +1158,9 @@ printf("REGX_END ");
 #endif
 BEGIN TRANS_IMPORT;return REGX_END;}
 	YY_BREAK
-case 23:
+case 24:
 YY_RULE_SETUP
-#line 177 "netknife.l"
+#line 199 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1131,10 +1168,10 @@ SAVE_CMD;
 #endif
 yylval.s=strdup(" ");return EMPTY; }
 	YY_BREAK
-case 24:
-/* rule 24 can match eol */
+case 25:
+/* rule 25 can match eol */
 YY_RULE_SETUP
-#line 183 "netknife.l"
+#line 205 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1142,9 +1179,9 @@ SAVE_CMD;
 #endif
 yylval.s=strdup(yytext) ;return STRING ; } 
 	YY_BREAK
-case 25:
+case 26:
 YY_RULE_SETUP
-#line 190 "netknife.l"
+#line 212 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1152,9 +1189,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_IMPORT ;return RBRACE; }
 	YY_BREAK
-case 26:
+case 27:
 YY_RULE_SETUP
-#line 196 "netknife.l"
+#line 218 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1162,17 +1199,17 @@ SAVE_CMD;
 #endif
 yylval.s= strdup(yytext) ;return STRING ; } 
 	YY_BREAK
-case 27:
-/* rule 27 can match eol */
+case 28:
+/* rule 28 can match eol */
 YY_RULE_SETUP
-#line 202 "netknife.l"
+#line 224 "netknife.l"
 {
 SAVE_CMD;
 }
 	YY_BREAK
-case 28:
+case 29:
 YY_RULE_SETUP
-#line 206 "netknife.l"
+#line 228 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1180,9 +1217,9 @@ SAVE_CMD;
 #endif
 return INCLUDE;}
 	YY_BREAK
-case 29:
+case 30:
 YY_RULE_SETUP
-#line 212 "netknife.l"
+#line 234 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1190,9 +1227,9 @@ SAVE_CMD;
 #endif
 return EXCLUDE;}
 	YY_BREAK
-case 30:
+case 31:
 YY_RULE_SETUP
-#line 218 "netknife.l"
+#line 240 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1200,9 +1237,9 @@ SAVE_CMD;
 #endif
 yylval.d=atoi(yytext);return NUMBER;}
 	YY_BREAK
-case 31:
+case 32:
 YY_RULE_SETUP
-#line 224 "netknife.l"
+#line 246 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1210,9 +1247,9 @@ SAVE_CMD;
 #endif
 return TO;}
 	YY_BREAK
-case 32:
+case 33:
 YY_RULE_SETUP
-#line 230 "netknife.l"
+#line 252 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1220,9 +1257,9 @@ SAVE_CMD;
 #endif
 return COMMA;}
 	YY_BREAK
-case 33:
+case 34:
 YY_RULE_SETUP
-#line 236 "netknife.l"
+#line 258 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1230,9 +1267,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_IMPORT_COMMENT;return  TRANS_IMPORT_COMMENT_START;}
 	YY_BREAK
-case 34:
+case 35:
 YY_RULE_SETUP
-#line 242 "netknife.l"
+#line 264 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1240,9 +1277,9 @@ SAVE_CMD;
 #endif
 BEGIN REGX;return REGX_START;}
 	YY_BREAK
-case 35:
+case 36:
 YY_RULE_SETUP
-#line 248 "netknife.l"
+#line 270 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1257,9 +1294,9 @@ if(goto_global){
 }
 }
 	YY_BREAK
-case 36:
+case 37:
 YY_RULE_SETUP
-#line 261 "netknife.l"
+#line 283 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1267,9 +1304,9 @@ SAVE_CMD;
 #endif
 return HYPHEN; }
 	YY_BREAK
-case 37:
+case 38:
 YY_RULE_SETUP
-#line 267 "netknife.l"
+#line 289 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1277,9 +1314,9 @@ SAVE_CMD;
 #endif
 return GT ;} 
 	YY_BREAK
-case 38:
+case 39:
 YY_RULE_SETUP
-#line 273 "netknife.l"
+#line 295 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1287,9 +1324,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_IMPORT_NAME ;return LBRACE;}
 	YY_BREAK
-case 39:
+case 40:
 YY_RULE_SETUP
-#line 279 "netknife.l"
+#line 301 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1297,31 +1334,31 @@ SAVE_CMD;
 #endif
 yylval.s=strdup(yytext) ;return STRING ; } 
 	YY_BREAK
-case 40:
+case 41:
 YY_RULE_SETUP
-#line 285 "netknife.l"
+#line 307 "netknife.l"
 {
 SAVE_CMD;
 } 
 	YY_BREAK
-case 41:
+case 42:
 YY_RULE_SETUP
-#line 288 "netknife.l"
+#line 310 "netknife.l"
 { 
 SAVE_CMD;
 }
 	YY_BREAK
-case 42:
-/* rule 42 can match eol */
+case 43:
+/* rule 43 can match eol */
 YY_RULE_SETUP
-#line 291 "netknife.l"
+#line 313 "netknife.l"
 {
 SAVE_CMD;
 printf("\n");}
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 295 "netknife.l"
+#line 317 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1329,9 +1366,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_PRIORITY;return EQ;}
 	YY_BREAK
-case 44:
+case 45:
 YY_RULE_SETUP
-#line 301 "netknife.l"
+#line 323 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1339,9 +1376,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_IMPORT;return IMPORT;}
 	YY_BREAK
-case 45:
+case 46:
 YY_RULE_SETUP
-#line 307 "netknife.l"
+#line 329 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1349,9 +1386,9 @@ SAVE_CMD;
 #endif
 BEGIN READY ;return SEM;}
 	YY_BREAK
-case 46:
+case 47:
 YY_RULE_SETUP
-#line 313 "netknife.l"
+#line 335 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1359,9 +1396,9 @@ SAVE_CMD;
 #endif
 BEGIN TRANS_RULE_COMMENT;return COMMENT_START;}
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 319 "netknife.l"
+#line 341 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1369,9 +1406,9 @@ SAVE_CMD;
 #endif
 yylval.s=strdup("\n"); return LINE_BREAK;}
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 325 "netknife.l"
+#line 347 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1379,9 +1416,9 @@ SAVE_CMD;
 #endif
 yylval.s=strdup(" ");return EMPTY; }
 	YY_BREAK
-case 49:
+case 50:
 YY_RULE_SETUP
-#line 331 "netknife.l"
+#line 353 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1389,9 +1426,9 @@ SAVE_CMD;
 #endif
 BEGIN 0;return RBRACE;}
 	YY_BREAK
-case 50:
+case 51:
 YY_RULE_SETUP
-#line 337 "netknife.l"
+#line 359 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1399,17 +1436,17 @@ SAVE_CMD;
 #endif
 yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
-case 51:
+case 52:
 YY_RULE_SETUP
-#line 343 "netknife.l"
+#line 365 "netknife.l"
 {
 SAVE_CMD;
 }
 	YY_BREAK
-case 52:
-/* rule 52 can match eol */
+case 53:
+/* rule 53 can match eol */
 YY_RULE_SETUP
-#line 346 "netknife.l"
+#line 368 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1417,9 +1454,9 @@ SAVE_CMD;
 #endif
 }
 	YY_BREAK
-case 53:
+case 54:
 YY_RULE_SETUP
-#line 353 "netknife.l"
+#line 375 "netknife.l"
 {
 
 SAVE_CMD;
@@ -1428,9 +1465,9 @@ SAVE_CMD;
 #endif
 yylval.d=atoi(yytext);return NUMBER;}
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 360 "netknife.l"
+#line 382 "netknife.l"
 {
 
 SAVE_CMD;
@@ -1439,18 +1476,18 @@ SAVE_CMD;
 #endif
 BEGIN READY;return GT;}
 	YY_BREAK
-case 55:
+case 56:
 YY_RULE_SETUP
-#line 367 "netknife.l"
+#line 389 "netknife.l"
 {
 
 SAVE_CMD;
 }
 	YY_BREAK
-case 56:
-/* rule 56 can match eol */
+case 57:
+/* rule 57 can match eol */
 YY_RULE_SETUP
-#line 371 "netknife.l"
+#line 393 "netknife.l"
 { 
 
 SAVE_CMD;
@@ -1459,12 +1496,12 @@ printf("\n");
 #endif
 }
 	YY_BREAK
-case 57:
+case 58:
 YY_RULE_SETUP
-#line 382 "netknife.l"
+#line 404 "netknife.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1468 "netknife.lex.c"
+#line 1505 "netknife.lex.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1759,7 +1796,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 112 )
+			if ( yy_current_state >= 115 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1787,11 +1824,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 112 )
+		if ( yy_current_state >= 115 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 111);
+	yy_is_jam = (yy_current_state == 114);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2479,7 +2516,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 382 "netknife.l"
+#line 404 "netknife.l"
 
 
 
