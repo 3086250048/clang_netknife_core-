@@ -111407,3 +111407,96 @@ Add>>>
 Comment| lineno:17 c:a3
 <<<
 
+Push>>>
+Object| rule_stack
+  Info| file:netknife100 trans:test1 level:2
+  Rule| lineno:2 priority:0 s:a1 d:b1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife100 trans:test1 level:2
+  Rule| lineno:3 priority:0 s:b1 d:c1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife100 trans:test1 level:2
+  Rule| lineno:4 priority:0 s:c1 d:d1
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife100 trans:test1 level:2
+  Rule| lineno:6 priority:0 s:show ip int b d:display ip int b
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife100 trans:test1 level:2
+  Rule| lineno:12 priority:0 s:ospf 100
+area 10
+net 192.168.1.100 0.0.0.0 d:route ospf 100
+net 192.168.1.100 0.0.0.0 area 10
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife99 trans:test2 level:3
+Comment| lineno:2 c:a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife99 trans:test2 level:3
+  Rule| lineno:3 priority:0 s:a2 d:b2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife99 trans:test2 level:3
+  Rule| lineno:4 priority:0 s:b2 d:c2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife99 trans:test2 level:3
+  Rule| lineno:5 priority:0 s:c2 d:d2
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife99 trans:test2 level:3
+Comment| lineno:6 c:a3
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife99 trans:test3 level:3
+Comment| lineno:13 c:a2
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife99 trans:test3 level:3
+  Rule| lineno:14 priority:0 s:a3 d:b3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife99 trans:test3 level:3
+  Rule| lineno:15 priority:0 s:b3 d:c3
+<<<
+
+Push>>>
+Object| rule_stack
+  Info| file:netknife99 trans:test3 level:3
+  Rule| lineno:16 priority:0 s:c3 d:d3
+<<<
+
+Add>>>
+ Object| comment_tmp_tab
+   Info| file:netknife99 trans:test3 level:3
+Comment| lineno:17 c:a3
+<<<
+

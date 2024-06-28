@@ -83,7 +83,7 @@ struct netknife * netknife_reduce( void  * node){
 									tmp=tmp->dup_r;
 								}
 							}else{
-								if( filter_rule(include_stack , exclude_stack ,r,target_trans) ){
+								if( filter_rule(include_stack , exclude_stack ,r,sp_yyparse_target_trans) ){
 										while(tmp){
 											join_tmp_rule_table(r);
 											tmp=tmp->dup_r;

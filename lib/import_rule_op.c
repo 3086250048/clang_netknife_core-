@@ -528,7 +528,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 					sp_yyparse= 1 ;
 					sp_yyparse_filter = filter ;
 					sp_yyparse_filename = filename ;
-					sp_yyparse_target_trans = i_target_trans ;
+					sp_yyparse_target_trans = "cmd" ;
 
 					Pop(&import_stack);
 					yyparse();
