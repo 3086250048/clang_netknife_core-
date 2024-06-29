@@ -906,15 +906,16 @@ YY_RULE_SETUP
 #ifdef ECHO_TOKEN 
  printf("SEM");
 #endif
- SAVE_CMD ;return SEM;
+  ;return SEM;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 30 "netknife.l"
-{ SAVE_CMD;
-goto_global =1 ;
-flex_state = OTHER_STATE ;
+{ 
+//goto_global =1 ;
+//flex_state = OTHER_STATE ;
+sp_import = 1 ;
 BEGIN TRANS_IMPORT; 
 #ifdef ECHO_TOKEN
 printf("IMPORT ");
@@ -924,7 +925,7 @@ return IMPORT;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 40 "netknife.l"
+#line 41 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -935,9 +936,8 @@ yylval.s=strdup(" ");return EMPTY;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 48 "netknife.l"
+#line 49 "netknife.l"
 { 
-SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("LINE_BREAK ");
 #endif
@@ -958,7 +958,6 @@ case 9:
 YY_RULE_SETUP
 #line 61 "netknife.l"
 { 
-SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("STRING ");
 #endif 
@@ -974,7 +973,7 @@ case YY_STATE_EOF(TRANS_RULE_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT_COMMENT):
 case YY_STATE_EOF(TRANS_IMPORT):
 case YY_STATE_EOF(TRANS_IMPORT_NAME):
-#line 69 "netknife.l"
+#line 68 "netknife.l"
 {
 
 	if( AL_TRANS && start_trans){
@@ -1006,9 +1005,10 @@ case YY_STATE_EOF(TRANS_IMPORT_NAME):
 			if(!sp_yyparse){
 				print_trans(t);
 			}
-			join_netknife_table(start_file , t );
-			RESET_START_FILE;				
-//			Clear(&filter_entry_tab);
+			netknife_reduce(t);
+			//join_netknife_table(start_file , t );
+			//RESET_START_FILE;				
+			//Clear(&filter_entry_tab);
 		}
 		
 	}
@@ -1043,24 +1043,30 @@ YY_RULE_SETUP
 #line 123 "netknife.l"
 {
 	 unput(yytext[0]);
-	 if(goto_global){
-		flex_state = GLOBAL_STATE;
-		goto_global = 0 ;
-		BEGIN 0 ; 
-	}else{
+	 //if(goto_global){
+	//	flex_state = GLOBAL_STATE;
+	//	goto_global = 0 ;
+	//	BEGIN 0 ; 
+	//}else{
+		printf("sp_import:%d\n",sp_import);
 		BEGIN TRANS_RULE;
-	}
+	//}
+//	if(sp_import){
+//		BEGIN 0;
+//	}else{
+//		BEGIN TRANS_RULE;
+//	}
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 136 "netknife.l"
+#line 142 "netknife.l"
 { SAVE_CMD;BEGIN 0;}
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 137 "netknife.l"
+#line 143 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1070,7 +1076,7 @@ printf("\n");
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 144 "netknife.l"
+#line 150 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1080,7 +1086,7 @@ BEGIN READY ;return COMMENT_END;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 150 "netknife.l"
+#line 156 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN 
@@ -1090,7 +1096,7 @@ SAVE_CMD;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 156 "netknife.l"
+#line 162 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1101,7 +1107,7 @@ SAVE_CMD;
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 162 "netknife.l"
+#line 168 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1111,7 +1117,7 @@ SAVE_CMD;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 169 "netknife.l"
+#line 175 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1121,7 +1127,7 @@ BEGIN TRANS_IMPORT; return TRANS_IMPORT_COMMENT_END;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 175 "netknife.l"
+#line 181 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1131,7 +1137,7 @@ yylval.s=strdup(" ");return EMPTY;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 181 "netknife.l"
+#line 187 "netknife.l"
 {  
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1142,7 +1148,7 @@ yylval.s= strdup(yytext) ;return STRING ; }
 case 22:
 /* rule 22 can match eol */
 YY_RULE_SETUP
-#line 187 "netknife.l"
+#line 193 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1152,7 +1158,7 @@ SAVE_CMD;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 195 "netknife.l"
+#line 201 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1162,7 +1168,7 @@ BEGIN TRANS_IMPORT;return REGX_END;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 201 "netknife.l"
+#line 207 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1173,7 +1179,7 @@ yylval.s=strdup(" ");return EMPTY; }
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 207 "netknife.l"
+#line 213 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1183,7 +1189,7 @@ yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 214 "netknife.l"
+#line 220 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1193,7 +1199,7 @@ BEGIN TRANS_IMPORT ;return RBRACE; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 220 "netknife.l"
+#line 226 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1204,14 +1210,14 @@ yylval.s= strdup(yytext) ;return STRING ; }
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 226 "netknife.l"
+#line 232 "netknife.l"
 {
 SAVE_CMD;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 230 "netknife.l"
+#line 236 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1221,7 +1227,7 @@ return INCLUDE;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 236 "netknife.l"
+#line 242 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1231,7 +1237,7 @@ return EXCLUDE;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 242 "netknife.l"
+#line 248 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1241,7 +1247,7 @@ yylval.d=atoi(yytext);return NUMBER;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 248 "netknife.l"
+#line 254 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1251,7 +1257,7 @@ return TO;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 254 "netknife.l"
+#line 260 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1261,7 +1267,7 @@ return COMMA;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 260 "netknife.l"
+#line 266 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1271,7 +1277,7 @@ BEGIN TRANS_IMPORT_COMMENT;return  TRANS_IMPORT_COMMENT_START;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 266 "netknife.l"
+#line 272 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1281,14 +1287,14 @@ BEGIN REGX;return REGX_START;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 272 "netknife.l"
+#line 278 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("SEM ");
 #endif
-if(goto_global){
-	goto_global = 0;
+if(sp_import ){
+	//goto_global = 0;
 	BEGIN 0;
 	return SEM;
 }else{
@@ -1298,7 +1304,7 @@ if(goto_global){
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 285 "netknife.l"
+#line 291 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1308,7 +1314,7 @@ return HYPHEN; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 291 "netknife.l"
+#line 297 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1318,7 +1324,7 @@ return GT ;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 297 "netknife.l"
+#line 303 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1328,7 +1334,7 @@ BEGIN TRANS_IMPORT_NAME ;return LBRACE;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 303 "netknife.l"
+#line 309 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1338,14 +1344,14 @@ yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 309 "netknife.l"
+#line 315 "netknife.l"
 {
 SAVE_CMD;
 } 
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 312 "netknife.l"
+#line 318 "netknife.l"
 { 
 SAVE_CMD;
 }
@@ -1353,14 +1359,14 @@ SAVE_CMD;
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 315 "netknife.l"
+#line 321 "netknife.l"
 {
 SAVE_CMD;
 printf("\n");}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 319 "netknife.l"
+#line 325 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1370,7 +1376,7 @@ BEGIN TRANS_PRIORITY;return EQ;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 325 "netknife.l"
+#line 331 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1380,7 +1386,7 @@ BEGIN TRANS_IMPORT;return IMPORT;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 331 "netknife.l"
+#line 337 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1390,7 +1396,7 @@ BEGIN READY ;return SEM;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 337 "netknife.l"
+#line 343 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1400,7 +1406,7 @@ BEGIN TRANS_RULE_COMMENT;return COMMENT_START;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 343 "netknife.l"
+#line 349 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1410,7 +1416,7 @@ yylval.s=strdup("\n"); return LINE_BREAK;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 349 "netknife.l"
+#line 355 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1420,7 +1426,7 @@ yylval.s=strdup(" ");return EMPTY; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 355 "netknife.l"
+#line 361 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1430,7 +1436,7 @@ BEGIN 0;return RBRACE;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 361 "netknife.l"
+#line 367 "netknife.l"
 { 
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1440,7 +1446,7 @@ yylval.s=strdup(yytext) ;return STRING ; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 367 "netknife.l"
+#line 373 "netknife.l"
 {
 SAVE_CMD;
 }
@@ -1448,7 +1454,7 @@ SAVE_CMD;
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
-#line 370 "netknife.l"
+#line 376 "netknife.l"
 {
 SAVE_CMD;
 #ifdef ECHO_TOKEN
@@ -1458,7 +1464,7 @@ SAVE_CMD;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 377 "netknife.l"
+#line 383 "netknife.l"
 {
 
 SAVE_CMD;
@@ -1469,7 +1475,7 @@ yylval.d=atoi(yytext);return NUMBER;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 384 "netknife.l"
+#line 390 "netknife.l"
 {
 
 SAVE_CMD;
@@ -1480,7 +1486,7 @@ BEGIN READY;return GT;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 391 "netknife.l"
+#line 397 "netknife.l"
 {
 
 SAVE_CMD;
@@ -1489,7 +1495,7 @@ SAVE_CMD;
 case 57:
 /* rule 57 can match eol */
 YY_RULE_SETUP
-#line 395 "netknife.l"
+#line 401 "netknife.l"
 { 
 
 SAVE_CMD;
@@ -1500,10 +1506,10 @@ printf("\n");
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 406 "netknife.l"
+#line 412 "netknife.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1507 "netknife.lex.c"
+#line 1513 "netknife.lex.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2518,7 +2524,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 406 "netknife.l"
+#line 412 "netknife.l"
 
 
 

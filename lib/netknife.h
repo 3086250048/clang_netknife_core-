@@ -155,8 +155,9 @@ extern  struct  table  * comment_tmp_tab ;
 extern  struct  table  * filter_entry_tab ;
 
 extern char * cmd_input ;
-extern int goto_global ;
-extern int flex_state ;
+//extern int goto_global ;
+//extern int flex_state ;
+extern int sp_import ;
 extern struct trans *  cur_use_trans ;
 extern struct trans * after_filter_trans ;
 extern int sp_yyparse ;

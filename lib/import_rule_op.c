@@ -9,7 +9,8 @@ static struct import_rule * import_rule_root = NULL;
 
 struct range * join_range(struct range * root , char * regx ,int s_lineno ,int d_lineno ,char * s_comment,char * d_comment )
 {
-	if(ACCEPT || flex_state != GLOBAL_STATE ){
+	//if(ACCEPT || flex_state != GLOBAL_STATE ){
+	if(ACCEPT || sp_import){
 	struct range * tmp = malloc(sizeof(struct range));
 	tmp->node_type = RANGE_NODE;
 	tmp->regx = regx;
@@ -54,7 +55,8 @@ void stderr_print_range(struct range * range_root){
 }
 
 struct filter * join_filter(struct filter * root , int node_type ,struct range * range){
-		if(ACCEPT || flex_state != GLOBAL_STATE){
+		//if(ACCEPT || flex_state != GLOBAL_STATE){
+		if(ACCEPT || sp_import ){
 		struct filter *  tmp = malloc(sizeof(struct filter));
 		tmp->node_type = node_type ;
 		tmp->range=range;
@@ -507,11 +509,13 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
 
-	if(flex_state != GLOBAL_STATE   ){
+	//if(flex_state != GLOBAL_STATE   ){
+	if( sp_import  ){
 			if(file_stack_count != 1 ) return NULL;
 			int has_range = 0 ;
 			INIT_IMPORT_PARAM;
-			flex_state = GLOBAL_STATE;
+			//flex_state = GLOBAL_STATE;
+			sp_import = 0;
 	/*这个函数中的target_trans都是局部变量*/
 			cur_use_trans = get_netknife_node(filename, TRANS_NODE , i_target_trans);			
 			if(!cur_use_trans){	
@@ -527,7 +531,7 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 
 					sp_yyparse= 1 ;
 					sp_yyparse_filter = filter ;
-					sp_yyparse_filename = filename ;
+					sp_yyparse_filename = "cmd" ;
 					sp_yyparse_target_trans = "cmd" ;
 
 					Pop(&import_stack);

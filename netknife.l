@@ -24,12 +24,13 @@ SAVE_CMD ;return TRANS;}
 #ifdef ECHO_TOKEN 
  printf("SEM");
 #endif
- SAVE_CMD ;return SEM;
+  ;return SEM;
 }
 
-@ { SAVE_CMD;
-goto_global =1 ;
-flex_state = OTHER_STATE ;
+@ { 
+//goto_global =1 ;
+//flex_state = OTHER_STATE ;
+sp_import = 1 ;
 BEGIN TRANS_IMPORT; 
 #ifdef ECHO_TOKEN
 printf("IMPORT ");
@@ -46,7 +47,6 @@ yylval.s=strdup(" ");return EMPTY;
 }
 
 \\n { 
-SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("LINE_BREAK ");
 #endif
@@ -59,7 +59,6 @@ printf("\n");
 }
 
 [^ @{;\t\n"]+ { 
-SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("STRING ");
 #endif 
@@ -97,9 +96,10 @@ SAVE_CMD;
 			if(!sp_yyparse){
 				print_trans(t);
 			}
-			join_netknife_table(start_file , t );
-			RESET_START_FILE;				
-//			Clear(&filter_entry_tab);
+			netknife_reduce(t);
+			//join_netknife_table(start_file , t );
+			//RESET_START_FILE;				
+			//Clear(&filter_entry_tab);
 		}
 		
 	}
@@ -122,13 +122,19 @@ printf("\n");
 }
 <READY>. {
 	 unput(yytext[0]);
-	 if(goto_global){
-		flex_state = GLOBAL_STATE;
-		goto_global = 0 ;
-		BEGIN 0 ; 
-	}else{
+	 //if(goto_global){
+	//	flex_state = GLOBAL_STATE;
+	//	goto_global = 0 ;
+	//	BEGIN 0 ; 
+	//}else{
+		printf("sp_import:%d\n",sp_import);
 		BEGIN TRANS_RULE;
-	}
+	//}
+//	if(sp_import){
+//		BEGIN 0;
+//	}else{
+//		BEGIN TRANS_RULE;
+//	}
 }
 
 
@@ -274,8 +280,8 @@ SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("SEM ");
 #endif
-if(goto_global){
-	goto_global = 0;
+if(sp_import ){
+	//goto_global = 0;
 	BEGIN 0;
 	return SEM;
 }else{

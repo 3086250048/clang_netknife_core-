@@ -23,8 +23,10 @@ struct table  * filter_entry_tab = NULL ;
 struct table  * comment_tmp_tab   = NULL;
 
 char * cmd_input = NULL;
-int goto_global = 0 ;
-int flex_state = GLOBAL_STATE ;
+//int goto_global = 0 ;
+//int flex_state = GLOBAL_STATE ;
+int sp_import = 0;
+
 struct trans * cur_use_trans = NULL; 
 struct rule_table * tmp_rule_tab = NULL;
 struct trans *  after_filter_trans = NULL;
