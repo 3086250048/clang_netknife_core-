@@ -511,11 +511,11 @@ struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , 
 
 	//if(flex_state != GLOBAL_STATE   ){
 	if( sp_import  ){
+			sp_import = 0;
 			if(file_stack_count != 1 ) return NULL;
 			int has_range = 0 ;
 			INIT_IMPORT_PARAM;
 			//flex_state = GLOBAL_STATE;
-			sp_import = 0;
 	/*这个函数中的target_trans都是局部变量*/
 			cur_use_trans = get_netknife_node(filename, TRANS_NODE , i_target_trans);			
 			if(!cur_use_trans){	

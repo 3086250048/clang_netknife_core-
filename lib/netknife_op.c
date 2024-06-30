@@ -61,6 +61,7 @@ struct netknife * netknife_reduce( void  * node){
 		if(start_file){
 			struct netknife * n =  join_netknife_table(start_file ,(struct trans *)node);
 			RESET_START_FILE ;
+			RESET_TARGET_TRANS;
 			/*
 			 * 作用:if中的代码只有在cmd模式下,直接@trans时会生效(不在其他trans中引用) 
 			 * 原因:import_rule_reduce 中 yyparse函数执行完成后无法继续执行后续的代码 

@@ -6,9 +6,9 @@ trans test1{
 	show ip int b=> display ip int b ;
 	ospf 100 \n 
 	area 10 \n
-	net 192.168.1.100 0.0.0.0 \n
+	net 192.168.1.100 0.0.0.0 
 	=>
 	route ospf 100 \n
-	net 192.168.1.100 0.0.0.0 area 10 \n ;	
+	net 192.168.1.100 0.0.0.0 area 10 ;	
 }
 @test1  ;

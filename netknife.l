@@ -27,6 +27,14 @@ SAVE_CMD ;return TRANS;}
   ;return SEM;
 }
 
+"}" { 
+#ifdef ECHO_TOKEN 
+ printf("RBRACE ");
+#endif
+ SAVE_CMD ;return RBRACE;} 
+
+
+
 @ { 
 //goto_global =1 ;
 //flex_state = OTHER_STATE ;
@@ -58,7 +66,7 @@ printf("\n");
 #endif
 }
 
-[^ @{;\t\n"]+ { 
+[^ @{};\t\n"]+ { 
 #ifdef ECHO_TOKEN
  printf("STRING ");
 #endif 
@@ -93,6 +101,7 @@ printf("\n");
 		}else{
 			struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 			RESET_START_TRANS;
+	//		struct trans * t = trans_reduce();
 			if(!sp_yyparse){
 				print_trans(t);
 			}
@@ -127,7 +136,6 @@ printf("\n");
 	//	goto_global = 0 ;
 	//	BEGIN 0 ; 
 	//}else{
-		printf("sp_import:%d\n",sp_import);
 		BEGIN TRANS_RULE;
 	//}
 //	if(sp_import){
@@ -283,8 +291,10 @@ SAVE_CMD;
 if(sp_import ){
 	//goto_global = 0;
 	BEGIN 0;
+	printf("BEGIN GLOBAL");
 	return SEM;
 }else{
+	printf("BEGIN READY");
 	BEGIN READY ;return SEM;
 }
 }
