@@ -1,7 +1,9 @@
 trans test1{
+	"a"
 	a1=>b1 ;
 	b1=>c1 ;
 	c1=>d1 ;
+"c"
 	@(netknife99) exclude "a2" to "a3" ;
 	show ip int b=> display ip int b ;
 	ospf 100 \n 
