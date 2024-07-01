@@ -9,7 +9,6 @@ static struct import_rule * import_rule_root = NULL;
 
 struct range * join_range(struct range * root , char * regx ,int s_lineno ,int d_lineno ,char * s_comment,char * d_comment )
 {
-	//if(ACCEPT || flex_state != GLOBAL_STATE ){
 	if(ACCEPT || sp_import){
 	struct range * tmp = malloc(sizeof(struct range));
 	tmp->node_type = RANGE_NODE;
@@ -55,7 +54,6 @@ void stderr_print_range(struct range * range_root){
 }
 
 struct filter * join_filter(struct filter * root , int node_type ,struct range * range){
-		//if(ACCEPT || flex_state != GLOBAL_STATE){
 		if(ACCEPT || sp_import ){
 		struct filter *  tmp = malloc(sizeof(struct filter));
 		tmp->node_type = node_type ;
@@ -486,26 +484,6 @@ void record_filter(char * filename,struct filter  * filter ,char * action ){
  	fprintf(f,"<<<\n\n");
 	fclose(f);
 }
-
-#define INIT_IMPORT_PARAM\
- char * filename ,* i_target_trans;\
-		if(!file_name){\
-				filename = curfilename ;\
-		}else{\
-				filename = file_name;\
-		}\
-		if(!import_name){\
-				i_target_trans = ALL_TRANS;\
-		}else{\
-			i_target_trans = import_name;\
-		}
-/*
- * INIT_FILTER :
- * 			include_stack  
- * 			exclude_stack 
- *
- */
-
 
 struct  import_rule * import_rule_reduce(char * file_name ,char * import_name , int lineno,struct filter * filter  ){
 

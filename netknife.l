@@ -36,8 +36,7 @@ SAVE_CMD ;return TRANS;}
 
 
 @ { 
-//goto_global =1 ;
-//flex_state = OTHER_STATE ;
+SAVE_CMD;
 sp_import = 1 ;
 BEGIN TRANS_IMPORT; 
 #ifdef ECHO_TOKEN
@@ -67,6 +66,7 @@ printf("\n");
 }
 
 [^ @{};\t\n"]+ { 
+SAVE_CMD;
 #ifdef ECHO_TOKEN
  printf("STRING ");
 #endif 
@@ -101,13 +101,10 @@ printf("\n");
 		}else{
 			struct trans * t = join_trans(start_trans , yylineno , get_rule_table(), get_import_rule()); 
 			RESET_START_TRANS;
-	//		struct trans * t = trans_reduce();
 			if(!sp_yyparse){
 				print_trans(t);
 			}
 			netknife_reduce(t);
-			//join_netknife_table(start_file , t );
-			//RESET_START_FILE;				
 			//Clear(&filter_entry_tab);
 		}
 		
@@ -116,6 +113,10 @@ printf("\n");
 	if(!AL_TRANS && start_trans){
 		err("import_trans_state","no match target trans");
 		exit(1);
+	//	get_rule_table();
+	//	get_import_rule();
+	//	sp_yyparse = 0 ;
+		
 	} 
 
 	if(file_stack_count == 1 ){ yyterminate();}
@@ -130,19 +131,8 @@ printf("\n");
 #endif
 }
 <READY>. {
-	 unput(yytext[0]);
-	 //if(goto_global){
-	//	flex_state = GLOBAL_STATE;
-	//	goto_global = 0 ;
-	//	BEGIN 0 ; 
-	//}else{
-		BEGIN TRANS_RULE;
-	//}
-//	if(sp_import){
-//		BEGIN 0;
-//	}else{
-//		BEGIN TRANS_RULE;
-//	}
+	unput(yytext[0]);
+	BEGIN TRANS_RULE;
 }
 
 
@@ -291,10 +281,8 @@ SAVE_CMD;
 if(sp_import ){
 	//goto_global = 0;
 	BEGIN 0;
-	printf("BEGIN GLOBAL");
 	return SEM;
 }else{
-	printf("BEGIN READY");
 	BEGIN READY ;return SEM;
 }
 }

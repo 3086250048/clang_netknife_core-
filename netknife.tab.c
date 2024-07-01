@@ -1207,7 +1207,7 @@ yyreduce:
 
   case 9: /* trans_exp: trans_name_exp EMPTY LBRACE trans_body_exp RBRACE  */
 #line 50 "netknife.y"
-                                                              { printf("trans_exp_reduce!!!\n") ;(yyval.trans)=trans_reduce();}
+                                                              { (yyval.trans)=trans_reduce();}
 #line 1212 "netknife.tab.c"
     break;
 

@@ -155,8 +155,6 @@ extern  struct  table  * comment_tmp_tab ;
 extern  struct  table  * filter_entry_tab ;
 
 extern char * cmd_input ;
-//extern int goto_global ;
-//extern int flex_state ;
 extern int sp_import ;
 extern struct trans *  cur_use_trans ;
 extern struct trans * after_filter_trans ;
@@ -436,9 +434,11 @@ struct comment_info {
 void excute_ssh_command(char * raw);
 
 struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude_stack, struct rule * rule,char * traget_trans);
+
 #define INIT_FILTER_PARAM \
 	struct stack  * include_stack=NULL;\
 	struct stack  * exclude_stack=NULL;
+
 #define EXTRACT_FILTER\
 	while(tmp_filter){\
 		struct range * range = tmp_filter->range;\
@@ -450,6 +450,20 @@ struct rule *  filter_rule(struct stack * include_stack , struct stack * exclude
 		}\
 		tmp_filter = tmp_filter->next;\
 	}\
+
+#define INIT_IMPORT_PARAM\
+ char * filename ,* i_target_trans;\
+		if(!file_name){\
+				filename = curfilename ;\
+		}else{\
+				filename = file_name;\
+		}\
+		if(!import_name){\
+				i_target_trans = ALL_TRANS;\
+		}else{\
+			i_target_trans = import_name;\
+		}
+
 
 #endif
 

@@ -23,8 +23,6 @@ struct table  * filter_entry_tab = NULL ;
 struct table  * comment_tmp_tab   = NULL;
 
 char * cmd_input = NULL;
-//int goto_global = 0 ;
-//int flex_state = GLOBAL_STATE ;
 int sp_import = 0;
 
 struct trans * cur_use_trans = NULL; 
@@ -43,5 +41,4 @@ rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 tmp_rule_tab = calloc(MAX_HASH,sizeof(struct rule_table));
 comment_tab = calloc(MAX_HASH ,sizeof(struct comment_table) );
 netknife_tab  = calloc(MAX_HASH,sizeof(struct netknife));
-//yy_cur_buf = init_yy_buf();
 }

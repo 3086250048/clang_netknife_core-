@@ -47,7 +47,7 @@ netknife_exp : {$$=NULL;}
 trans_exp : trans_name_exp EMPTY LBRACE RBRACE  { $$=trans_reduce();  }
 		  | trans_name_exp LBRACE RBRACE  {  $$=trans_reduce();  }
           | trans_name_exp LBRACE trans_body_exp RBRACE {$$=trans_reduce();}
-          | trans_name_exp EMPTY LBRACE trans_body_exp RBRACE { printf("trans_exp_reduce!!!\n") ;$$=trans_reduce();}
+          | trans_name_exp EMPTY LBRACE trans_body_exp RBRACE { $$=trans_reduce();}
   		  ;
 trans_name_exp : TRANS EMPTY STRING { cur_trans=$3;$$=$3;}
 
